@@ -14,8 +14,11 @@
         </div>
       </div>
       <div class="col-auto">
-        <button class="btn btn-warning me-2" @click="showModal = true">Add</button>
+        <button class="btn btn-warning me-2" @click="showModal = true">Booking here</button>
         <button class="btn btn-light text-danger">
+          <div class="notification">
+            <i class="bi bi-1-circle-fill"></i>
+          </div>
           <i class="bi bi-bell"></i>
         </button>
       </div>
@@ -25,16 +28,44 @@
     <div class="row">
       <div class="col-md-4 mb-3" v-for="(item, index) in user_create" :key="index">
         <div class="card">
-          <div class="d-flex justify-content-center mt-2">
-            <h3>Product</h3>
+          <div class="d-flex justify-content-center bg-orange">
+            <h3>New Booking</h3>
           </div>
-          <div class="card-body">
-            <p class="card-title">Sender: {{ item.sender }}</p>
-            <p class="card-text">Receiver: {{ item.receiver }}</p>
-            <p class="card-text">From: {{ item.from }}</p>
-            <p class="card-text">To: {{ item.to }}</p>
-            <p class="card-text">Product Type: {{ item.product_type }}</p>
-            <p class="card-text">Company: {{ item.company }}</p>
+          <div class="information d-flex">
+            <div class="card-body">
+              <div class="d-flex gap-3">
+                <i class="bi bi-telephone-forward-fill"></i>
+                <p class="card-title">Sender: {{ item.sender }}</p>
+              </div>
+              <div class="d-flex gap-3">
+                <i class="bi bi-telephone-inbound-fill"></i>
+                <p class="card-text">Receiver: {{ item.receiver }}</p>
+              </div>
+              <div class="d-flex gap-3">
+                <i class="bi bi-geo-alt-fill"></i>
+                <p class="card-text">From: {{ item.from }}</p>
+              </div>
+              <div class="d-flex gap-3">
+                <i class="bi bi-geo-alt-fill"></i>
+                <p class="card-text">To: {{ item.to }}</p>
+              </div>
+              <div class="d-flex gap-3">
+                <i class="bi bi-bag-fill"></i>
+                <p class="card-text">Product Type: {{ item.product_type }}</p>
+              </div>
+              <div class="d-flex gap-3">
+                <i class="bi bi-buildings"></i>
+                <p class="card-text">Company: {{ item.company }}</p>
+              </div>
+            </div>
+            <div class="norma_user">
+              <img
+                src="https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/501_maradona.jpg"
+                class="rounded-circle"
+                width="90"
+                height="90"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -238,5 +269,19 @@ export default {
 }
 .modal-content {
   background: #2a2726;
+}
+.notification {
+  position: fixed;
+  top: 120px;
+  right:39px;
+}
+.norma_user {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bg-orange{
+  border-radius: 5px 5px 0px 0px;
 }
 </style>

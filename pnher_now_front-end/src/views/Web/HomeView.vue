@@ -1,3 +1,6 @@
+<script setup lang="ts" >
+import WebLayout from '@/Components/Layouts/WebLayout.vue'
+</script>
 
 <template>
   <WebLayout
@@ -11,11 +14,3 @@
     </div>
   </WebLayout>
 </template>
-<script>
-import WebLayout from '@/Components/Layouts/WebLayout.vue';
-export default {
-  components: {
-    WebLayout,
-  },
-}
-</script>
