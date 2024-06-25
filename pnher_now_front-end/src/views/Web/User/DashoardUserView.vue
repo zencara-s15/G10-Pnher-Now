@@ -106,7 +106,7 @@ const partners = ref([
 
 .partner-list {
   width: 100%;
-  background-color: red;
+  background-color: rgba(248, 80, 87, 1);
   border-radius: 5px;
   padding: 20px;
 }
@@ -121,5 +121,11 @@ const partners = ref([
 .container {
   background: pink;
   height: 100vh;
+}
+input{
+  background: rgba(208, 9, 17, 0.2);
+}
+span {
+  background: rgba(208, 9, 17, 0.5);
 }
 </style>
