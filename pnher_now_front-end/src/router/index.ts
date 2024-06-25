@@ -22,6 +22,11 @@ const router = createRouter({
       component: () => import('../views/Admin/Auth/LoginView.vue')
     },
     {
+      path: '/logout',
+      name: 'logout',
+      component: () => import('../views/Admin/Auth/LoginView.vue')
+    },
+    {
       path: '/',
       name: 'home',
       component: () => import('../views/Web/HomeView.vue')
@@ -30,12 +35,17 @@ const router = createRouter({
       path: '/post',
       name: 'post',
       component: () => import('../views/Web/Post/ListView.vue')
+    },
+    {
+      path: '/product',
+      name: 'product',
+      component: () => import('../views/Web/User/ProductUser.vue')
     }
   ]
 })
 
 router.beforeEach(async (to, from, next) => {
-  const publicPages = ['/login']
+  const publicPages = ['/login','logout']
   const authRequired = !publicPages.includes(to.path)
   const store = useAuthStore()
 

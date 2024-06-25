@@ -1,8 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css' // Import Bootstrap CSS
 import './assets/main.css'
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import 'bootstrap-icons/font/bootstrap-icons.css'; // Import Bootstrap Icons
+import { library } from '@fortawesome/fontawesome-svg-core'; // FontAwesome core library
+// import { fas } from '@fortawesome/free-solid-svg-icons'; // Solid icons
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'; // FontAwesome component
 
 import App from './App.vue'
 import router from './router'
@@ -11,6 +15,8 @@ import 'element-plus/dist/index.css'
 import axios from './plugins/axios'
 import 'uno.css'
 import { configure } from 'vee-validate'
+
+// library.add(fas);
 
 const app = createApp(App)
 

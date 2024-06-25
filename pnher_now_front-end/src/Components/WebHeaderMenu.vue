@@ -31,11 +31,31 @@ import { Icon } from '@iconify/vue'
         class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
         >Reports</a
       >
+      <a
+        href="/product"
+        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
+        >Product</a
+      >
     </nav>
 
     <!-- Sign In -->
-    <div>
+
+    <!-- <div>
       <div class="px-4 py-2 rounded font-semibold">Sign In</div>
+    </div> -->
+
+    <!-- Log Out -->
+
+    <div>
+      <div class="px-4 py-2 rounded font-semibold">
+        <a
+          href="/Logout"
+          class="font-bold text-slate-700 rounded-full flex items-center justify-center bg-danger"
+          style="width: 40px; height: 40px; display: inline-flex"
+        >
+        <i class="bi bi-box-arrow-right text-white"></i>
+        </a>
+      </div>
     </div>
   </header>
 </template>
