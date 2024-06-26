@@ -93,7 +93,6 @@ class AuthController extends Controller
         ]);
     
         $user->assignRole('user');
-        // Log::info('User registered successfully: ');
         return response()->json([
             'message' => 'User registered successfully',
             'user' => $user,
@@ -118,14 +117,12 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Assign a default role to the newly created user
         $user->assignRole('deliverer');
 
         return response()->json([
             'message' => 'You have registered as a deliverer successfully',
             'user' => $user,
             'roles' => $user->getRoleNames(),
-            // 'permissions' => $user->getAllPermissions()
         ]);
     }
 }
