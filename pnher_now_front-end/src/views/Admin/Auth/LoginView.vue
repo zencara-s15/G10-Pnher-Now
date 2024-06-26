@@ -1,69 +1,143 @@
-<!-- src/components/Login.vue -->
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-100">
-    <el-card class="w-full max-w-md shadow-lg">
-      <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
-      <el-form @submit="onSubmit">
-        <el-form-item :error="emailError">
-          <el-input placeholder="Email Address" v-model="email" size="large" />
-        </el-form-item>
+  <div class="container mx-auto px-4 py-4 flex justify-center items-center">
+    <div class="w-full max-w-10/12 bg-white shadow-md rounded flex shadow-lg shadow-indigo-500/40">
+      <div class="w-full max-w-md px-8 pt-6 pb-8 mb-4 md:w-1/2">
+        <div class="text-center font-bold text-xl mb-8">Sign Up</div>
+        <form @submit.prevent="handleSubmit">
+          <div class="mb-4">
+            <label for="name" class="block text-gray-700 text-sm font-bold mb-2"> Your Name </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="name"
+              type="text"
+              placeholder="Name"
+              v-model="name"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
+              Your Email
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="email"
+              type="email"
+              placeholder="Email"
+              v-model="email"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="password" class="block text-gray-700 text-sm font-bold mb-2">
+              Password
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="password"
+              type="password"
+              placeholder="Password"
+              v-model="password"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="confirmPassword" class="block text-gray-700 text-sm font-bold mb-2">
+              Repeat your password
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+              v-model="confirmPassword"
+            />
+          </div>
+          <div class="mb-6">
+            <input
+              type="checkbox"
+              id="terms"
+              v-model="terms"
+              class="w-h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-opacity-50"
+            />
+            <label for="terms" class="text-gray-700 text-sm font-bold ml-2">
+              I agree to all statements in
+              <a href="#" class="text-blue-600 hover:text-blue-800"> Forgot Password </a>
+            </label>
+          </div>
+          <div class="flex items-center justify-between">
+            <button
+              class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              LOGIN
+            </button>
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              @click="showModal = true"
+              type="button"
+            >
+              REGISTER
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="hidden md:flex md:w-1/2">
+        <img src="https://static.vecteezy.com/system/resources/previews/023/743/925/non_2x/scooter-with-delivery-man-flat-cartoon-character-fast-courier-restaurant-food-service-mail-delivery-service-a-postal-employee-the-determination-of-geolocation-using-electronic-device-free-png.png" alt="Signup Image" class="w-full h-full rounded-r object-cover">
+      </div>
+    </div>
 
-        <el-form-item :error="nameError" class="mt-8">
-          <el-input placeholder="Password" v-model="password" size="large" type="password" />
-        </el-form-item>
-
-        <div>
-          <el-button
-            size="large"
-            class="mt-3 w-full"
-            :disabled="isSubmitting"
-            type="primary"
-            native-type="submit"
-            >Submit</el-button
-          >
+    <!-- Modal -->
+    <div v-if="showModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+      <div class="bg-white rounded-lg p-6 w-1/3">
+        <h2 class="text-xl font-bold mb-4">Select Role</h2>
+        <div class="flex flex-column justify-around">
+          <button @click="navigateTo('user')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold  my-3 py-2 px-4 rounded">
+            User
+          </button>
+          <button @click="navigateTo('delivery')" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Delivery
+          </button>
         </div>
-      </el-form>
-    </el-card>
+        <div class="flex justify-end mt-4">
+          <button @click="showModal = false" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import axiosInstance from '@/plugins/axios'
-import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-const formSchema = yup.object({
-  password: yup.string().required().label('Password'),
-  email: yup.string().required().email().label('Email address')
-})
-
-const { handleSubmit, isSubmitting } = useForm({
-  initialValues: {
-    password: '',
-    email: ''
+<script>
+export default {
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      terms: false,
+      showModal: false
+    }
   },
-  validationSchema: formSchema
-})
-
-const onSubmit = handleSubmit(async (values) => {
-  try {
-    const { data } = await axiosInstance.post('/login', values)
-    localStorage.setItem('access_token', data.access_token)
-    router.push('/')
-  } catch (error) {
-    console.warn('Error')
+  methods: {
+    handleSubmit() {
+      // Add form validation and submission logic here
+      console.log('Submitted!')
+    },
+    navigateTo(role) {
+      // Handle navigation to different registration forms based on the role
+      this.showModal = false
+      if (role === 'user') {
+        // Navigate to user registration form
+        window.location.href = 'register/user';
+      } else if (role === 'delivery') {
+        // Navigate to delivery registration form
+        window.location.href = '/register/delivery';
+      }
+    }
   }
-})
-
-const { value: password, errorMessage: nameError } = useField('password')
-const { value: email, errorMessage: emailError } = useField('email')
+}
 </script>
 
 <style scoped>
-.min-h-screen {
-  min-height: 100vh;
-}
+/* Add any additional Tailwind CSS styles here */
 </style>

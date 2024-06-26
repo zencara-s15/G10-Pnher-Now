@@ -30,7 +30,23 @@ const router = createRouter({
       path: '/post',
       name: 'post',
       component: () => import('../views/Web/Post/ListView.vue')
-    }
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: () => import('../views/Admin/Auth/LoginView.vue')
+    },
+    {
+      path: '/register/user',
+      name: 'register',
+      component: () => import('../views/Admin/Auth/RegisterUserView.vue')
+    },
+    {
+      path: '/register/delivery',
+      name: 'register',
+      component: () => import('../views/Admin/Auth/RegisterDeliveryView.vue')
+    },
+
   ]
 })
 
