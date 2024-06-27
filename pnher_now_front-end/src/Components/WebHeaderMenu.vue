@@ -11,37 +11,43 @@ import { Icon } from '@iconify/vue'
     </div>
 
     <!-- Menu Items -->
-    <nav class="flex justify-center space-x-10">
+    <nav class="d-flex justify-content-center">
       <a
         href="/post"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Post</a
+        class="font-weight-bold px-3 py-2 text-secondary rounded-lg text-decoration-none hover-text-red"
       >
+        POST
+      </a>
       <a
         href="/team"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Team</a
+        class="font-weight-bold px-3 py-2 text-secondary rounded-lg text-decoration-none hover-text-red"
       >
+        TEAM
+      </a>
       <a
         href="/projects"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Projects</a
+        class="font-weight-bold px-3 py-2 text-secondary rounded-lg text-decoration-none hover-text-red"
       >
+        PROJECT
+      </a>
       <a
         href="/reports"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Reports</a
+        class="font-weight-bold px-3 py-2 text-secondary rounded-lg text-decoration-none hover-text-red"
       >
+        REPORT
+      </a>
       <a
         href="/product"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Product</a
+        class="font-weight-bold px-3 py-2 text-secondary rounded-lg text-decoration-none hover-text-red"
       >
+        PRODUCT
+      </a>
       <a
         href="/history_user"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >User history</a
+        class="font-weight-bold px-3 py-2 text-secondary rounded-lg text-decoration-none hover-text-red"
       >
+        HISTORY USER
+      </a>
     </nav>
 
     <!-- Log Out and User Profile -->
@@ -80,8 +86,11 @@ import { Icon } from '@iconify/vue'
   </header>
 </template>
 
-<style>
+<style scoped>
 .user {
   padding-left: 50px;
+}
+.hover-text-red:hover {
+  color: red !important;
 }
 </style>
