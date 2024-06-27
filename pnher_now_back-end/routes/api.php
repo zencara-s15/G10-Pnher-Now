@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\Supervisor\CompanyController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -37,5 +38,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/me', [AuthController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Company 
+    Route::prefix('companies')->group(function () {
+        Route::get('/list', [CompanyController::class, 'index']);
+        Route::post('/create', [CompanyController::class, 'store']);
+        Route::get('/{company}', [CompanyController::class, 'show']);
+        Route::put('/{company}', [CompanyController::class, 'update']);
+        Route::delete('/{company}', [CompanyController::class, 'destroy']);
+    });
 
 });
