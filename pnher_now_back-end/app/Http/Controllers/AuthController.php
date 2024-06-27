@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -16,7 +17,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email'     => 'required|string|max:255',
             'password'  => 'required|string'
-          ]);
+        ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
@@ -39,15 +40,113 @@ class AuthController extends Controller
             'token_type'    => 'Bearer'
         ]);
     }
-    
+
     public function index(Request $request)
     {
         $user = $request->user();
         // $permissions = $user->getAllPermissions();
-        // $roles = $user->getRoleNames();
+        $roles = $user->getRoleNames();
         return response()->json([
             'message' => 'Login success',
-            'data' =>$user,
+            'data' => $user,
+            'role' => $roles
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+        $user->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
+    }
+
+    public function get_users(Request $request)
+    {
+        $user = User::latest()->get();
+        // $permissions = $user->getAllPermissions();
+        $roles = $user->getRoleNames();
+        return response()->json([
+            // 'message' => 'Login success',
+            'data' => $user,
+            'roles' => $roles
+        ]);
+    }
+
+    public function user_register(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+            'address' => 'required|string|max:255',
+            'date_of_birth' => 'nullable|date',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $profilePath = null;
+        if ($request->hasFile('profile')) {
+            $profilePath = $request->file('profile')->store('profiles', 'public');
+        }
+
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth,
+            'profile'=>$profilePath
+        ]);
+
+        $user->assignRole('user');
+
+        return response()->json([
+            'message' => 'User registered successfully',
+            'user' => $user,
+        ]);
+    }
+
+    public function deliverer_register(Request $request): JsonResponse
+    {
+        // Update to use 'first_name' and 'last_name'
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $profilePath = null;
+        if ($request->hasFile('profile')) {
+            $profilePath = $request->file('profile')->store('profiles', 'public');
+        }
+
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth,
+            'profile'=>$request-> $profilePath
+        ]);
+
+        $user->assignRole('deliverer');
+
+        return response()->json([
+            'message' => 'You have registered as a deliverer successfully',
+            'user' => $user,
+            'roles' => $user->getRoleNames(),
         ]);
     }
 }
