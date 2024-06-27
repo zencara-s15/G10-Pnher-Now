@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="col-auto">
-        <button class="btn btn-warning me-2" @click="showModal = true">Booking here</button>
+        <button class="btn btn-warning me-2" @click="showModal = true">Booking Now</button>
         <button class="btn btn-light text-danger">
           <div class="notification">
             <i class="bi bi-1-circle-fill"></i>
@@ -23,48 +23,81 @@
         </button>
       </div>
     </div>
-
     <!-- Card Section -->
     <div class="row">
       <div class="col-md-4 mb-3" v-for="(item, index) in user_create" :key="index">
         <div class="card">
-          <div class="d-flex justify-content-center bg-orange">
+          <div class="d-flex justify-content-center bg-danger text-white border">
             <h3>New Booking</h3>
           </div>
-          <div class="information d-flex">
+          <div class="d-flex">
             <div class="card-body">
-              <div class="d-flex gap-3">
+              <div class="d-flex">
+                <h3>Sender</h3>
+                <i class="bi bi-arrow-right-circle-fill"></i>
+              </div>
+              <div class="d-flex gap-1">
                 <i class="bi bi-telephone-forward-fill"></i>
                 <p class="card-title">Sender: {{ item.sender }}</p>
               </div>
-              <div class="d-flex gap-3">
-                <i class="bi bi-telephone-inbound-fill"></i>
-                <p class="card-text">Receiver: {{ item.receiver }}</p>
-              </div>
-              <div class="d-flex gap-3">
-                <i class="bi bi-geo-alt-fill"></i>
-                <p class="card-text">From: {{ item.from }}</p>
-              </div>
-              <div class="d-flex gap-3">
+              <div class="d-flex gap-1">
                 <i class="bi bi-geo-alt-fill"></i>
                 <p class="card-text">To: {{ item.to }}</p>
               </div>
-              <div class="d-flex gap-3">
-                <i class="bi bi-bag-fill"></i>
-                <p class="card-text">Product Type: {{ item.product_type }}</p>
+              <div class="d-flex gap-1">
+                <i class="bi bi-geo-alt-fill"></i>
+                <p class="card-text">District: {{ item.toDistrict }}</p>
               </div>
-              <div class="d-flex gap-3">
+              <div class="d-flex gap-1">
+                <i class="bi bi-map-fill"></i>
+                <p class="card-text">ToCommune: {{ item.toCommune }}</p>
+              </div>
+              <div class="d-flex gap-1">
+                <i class="bi bi-shop"></i>
+                <p class="card-text">ToBranch: {{ item.toBranch }}</p>
+              </div>
+              <div class="d-flex gap-1">
+                <i class="bi bi-bag-fill"></i>
+                <p class="card-text">Type: {{ item.product_type }}</p>
+              </div>
+              <div class="d-flex gap-1">
                 <i class="bi bi-buildings"></i>
                 <p class="card-text">Company: {{ item.company }}</p>
               </div>
             </div>
-            <div class="norma_user">
-              <img
-                src="https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/501_maradona.jpg"
-                class="rounded-circle"
-                width="90"
-                height="90"
-              />
+            <div class="card-body">
+              <div class="d-flex">
+                <h3>Receiver</h3>
+                <i class="bi bi-arrow-left-circle-fill"></i>
+              </div>
+              <div class="d-flex gap-1">
+                <i class="bi bi-telephone-inbound-fill"></i>
+                <p class="card-text">Receiver: {{ item.receiver }}</p>
+              </div>
+              <div class="d-flex gap-1">
+                <i class="bi bi-geo-alt-fill"></i>
+                <p class="card-text">From: {{ item.from }}</p>
+              </div>
+              <div class="d-flex gap-1">
+                <i class="bi bi-geo-alt-fill"></i>
+                <p class="card-text">District: {{ item.fromDistrict }}</p>
+              </div>
+              <div class="d-flex gap-1">
+                <i class="bi bi-map-fill"></i>
+                <p class="card-text">fromCommune: {{ item.fromCommune }}</p>
+              </div>
+              <div class="d-flex gap-1">
+                <i class="bi bi-shop"></i>
+                <p class="card-text">fromBranch: {{ item.fromBranch }}</p>
+              </div>
+              <div class="d-flex gap-1">
+                <i class="bi bi-bag-fill"></i>
+                <p class="card-text">Type: {{ item.product_type }}</p>
+              </div>
+              <div class="d-flex gap-1">
+                <i class="bi bi-buildings"></i>
+                <p class="card-text">Company: {{ item.company }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -89,60 +122,148 @@
         </div>
         <div class="modal-body">
           <form @submit.prevent="addItem">
-            <div class="form-group">
-              <label for="sender" class="text-danger">Phone Sender</label>
-              <input type="text" v-model="sender" class="form-control" id="sender" required />
-            </div>
-            <div class="form-group">
-              <label for="receiver" class="text-danger">Phone Receiver</label>
-              <input type="text" v-model="receiver" class="form-control" id="receiver" required />
-            </div>
-            <div>
-              <div class="form-group">
-                <label for="from" class="text-danger">From</label>
-                <select v-model="from" class="form-control" id="from" required>
-                  <option value="" disabled>Select your location</option>
-                  <option v-for="province in provinces" :key="province" :value="province">
-                    {{ province }}
-                  </option>
-                </select>
+            <div class="row">
+              <!-- Sender Information -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="sender" class="text-danger">Phone Sender</label>
+                  <input type="text" v-model="sender" class="form-control" id="sender" required />
+                </div>
+                <div class="form-group">
+                  <label for="from" class="text-danger">From</label>
+                  <select v-model="from" class="form-control" id="from">
+                    <option value="" disabled>Select your location</option>
+                    <option v-for="province in provinces" :key="province" :value="province">
+                      {{ province }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="fromDistrict" class="text-danger">From District</label>
+                  <select v-model="fromDistrict" class="form-control" id="fromDistrict">
+                    <option value="" disabled>Select your district</option>
+                    <option v-for="district in districts" :key="district" :value="district">
+                      {{ district }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="fromCommune" class="text-danger">From Commune</label>
+                  <select v-model="fromCommune" class="form-control" id="fromCommune" required>
+                    <option value="" disabled>Select your commune</option>
+                    <option v-for="commune in communes" :key="commune" :value="commune">
+                      {{ commune }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="fromBranch" class="text-danger">From Branch</label>
+                  <select v-model="fromBranch" class="form-control" id="fromBranch" required>
+                    <option value="" disabled>Select your branch</option>
+                    <option v-for="branch in branches" :key="branch" :value="branch">
+                      {{ branch }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="product_type" class="text-danger">Product Type</label>
+                  <select v-model="product_type" class="form-control" id="product_type" required>
+                    <option value="" disabled>Select type of Product</option>
+                    <option
+                      v-for="product_type in product_types"
+                      :key="product_type"
+                      :value="product_type"
+                    >
+                      {{ product_type }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="company" class="text-danger">Choose Company</label>
+                  <select v-model="company" class="form-control" id="company" required>
+                    <option value="" disabled>Select Company</option>
+                    <option v-for="company in companies" :key="company" :value="company">
+                      {{ company }}
+                    </option>
+                  </select>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="to" class="text-danger">To</label>
-                <select v-model="to" class="form-control" id="to" required>
-                  <option value="" disabled>Select your goal</option>
-                  <option v-for="province in provinces" :key="province" :value="province">
-                    {{ province }}
-                  </option>
-                </select>
+              <!-- Receiver Information -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="receiver" class="text-danger">Phone Receiver</label>
+                  <input
+                    type="text"
+                    v-model="receiver"
+                    class="form-control"
+                    id="receiver"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="to" class="text-danger">To</label>
+                  <select v-model="to" class="form-control" id="to">
+                    <option value="" disabled>Select your goal</option>
+                    <option v-for="province in provinces" :key="province" :value="province">
+                      {{ province }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="toDistrict" class="text-danger">To District</label>
+                  <select v-model="toDistrict" class="form-control" id="toDistrict">
+                    <option value="" disabled>Select your district</option>
+                    <option v-for="district in districts" :key="district" :value="district">
+                      {{ district }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="toCommune" class="text-danger">To Commune</label>
+                  <select v-model="toCommune" class="form-control" id="toCommune" required>
+                    <option value="" disabled>Select your commune</option>
+                    <option v-for="commune in communes" :key="commune" :value="commune">
+                      {{ commune }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="toBranch" class="text-danger">To Branch</label>
+                  <select v-model="toBranch" class="form-control" id="toBranch" required>
+                    <option value="" disabled>Select your branch</option>
+                    <option v-for="branch in branches" :key="branch" :value="branch">
+                      {{ branch }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="product_type" class="text-danger">Product Type</label>
+                  <select v-model="product_type" class="form-control" id="product_type" required>
+                    <option value="" disabled>Select type of Product</option>
+                    <option
+                      v-for="product_type in product_types"
+                      :key="product_type"
+                      :value="product_type"
+                    >
+                      {{ product_type }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="company" class="text-danger">Choose Company</label>
+                  <select v-model="company" class="form-control" id="company" required>
+                    <option value="" disabled>Select Company</option>
+                    <option v-for="company in companies" :key="company" :value="company">
+                      {{ company }}
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
             <div class="form-group">
-              <label for="product_type" class="text-danger">Product Type</label>
-              <select v-model="product_type" class="form-control" id="product_type" required>
-                <option value="" disabled>Select type of Product</option>
-                <option
-                  v-for="product_type in product_types"
-                  :key="product_type"
-                  :value="product_type"
-                >
-                  {{ product_type }}
-                </option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="company" class="text-danger">Choose Company</label>
-              <select v-model="company" class="form-control" id="company" required>
-                <option value="" disabled>Select Company</option>
-                <option v-for="company in companies" :key="company" :value="company">
-                  {{ company }}
-                </option>
-              </select>
-            </div>
-            <div>
-              <div class="flex gap-53">
-                <button type="submit" class="btn bg-white mt-4">Pay By Sender</button>
-                <button type="submit" class="btn bg-white mt-4">Pay BY Receiver</button>
+              <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn bg-white">Pay By Sender</button>
+                <button type="submit" class="btn bg-white">Pay By Receiver</button>
               </div>
             </div>
           </form>
@@ -165,7 +286,13 @@ export default {
       sender: '',
       receiver: '',
       from: '',
+      fromDistrict: '',
+      fromCommune: '',
+      fromBranch: '',
       to: '',
+      toDistrict: '',
+      toCommune: '',
+      toBranch: '',
       product_type: '',
       company: '',
 
@@ -176,7 +303,7 @@ export default {
           from: 'PP',
           to: 'Kampot',
           product_type: 'decaying',
-          company: 'Vireak Buntham'
+          company: 'VRk Buntham'
         },
         {
           sender: '088739393',
@@ -184,13 +311,22 @@ export default {
           from: 'PP',
           to: 'Takeaw',
           product_type: 'not decaying',
-          company: 'Vireak Buntham'
+          company: 'VRK Buntham'
+        },
+        {
+          sender: '088739393',
+          receiver: '088343434',
+          from: 'PP',
+          to: 'Takeaw',
+          product_type: 'not decaying',
+          company: 'VRK Buntham'
         }
       ],
       product_types: ['decaying', 'not decaying'],
       companies: ['Vireak Buntham', 'Capitol', 'J&T express', 'ZTO express', 'other'],
-      from: '',
-      to: '',
+      communes: ['Khom1', 'Khom2', 'khom3', 'khom4', 'khom5', 'khom6'],
+      districts: ['District1', 'District2', 'District3', 'District4', 'District5', 'District6'],
+      branches: ['branch1', 'branch2', 'branch3', 'branch4', 'branch5', 'branch5'],
       provinces: [
         'Banteay Meanchey',
         'Battambang',
@@ -229,6 +365,12 @@ export default {
         from: this.from,
         to: this.to,
         product_type: this.product_type,
+        toCommune: this.toCommune,
+        fromCommune: this.fromCommune,
+        toDistrict: this.toDistrict,
+        fromDistrict: this.fromDistrict,
+        fromBranch: this.fromBranch,
+        toBranch: this.toBranch,
         company: this.company
       })
       this.sender = ''
@@ -237,9 +379,135 @@ export default {
       this.to = ''
       this.product_type = ''
       this.company = ''
+      this.commune = ''
+      this.district = ''
       this.showModal = false
     }
+
+    // updateDistricts(location) {
+    //   if (location === 'from') {
+    //     // Example logic to update districts based on selected 'from' province
+    //     switch (this.from) {
+    //       case 'Phnom Penh':
+    //         this.fromDistricts = ['District 1', 'District 2', 'District 3']
+    //         break
+    //       case 'Kampot':
+    //         this.fromDistricts = ['District A', 'District B', 'District C']
+    //         break
+    //       // Add more cases as needed
+    //       default:
+    //         this.fromDistricts = []
+    //         break
+    //     }
+    //     this.fromDistrict = '' // Reset district selection
+    //     this.fromCommune = '' // Reset commune selection
+    //   } else if (location === 'to') {
+    //     // Example logic to update districts based on selected 'to' province
+    //     switch (this.to) {
+    //       case 'Phnom Penh':
+    //         this.toDistricts = ['District 1', 'District 2', 'District 3']
+    //         break
+    //       case 'Kampot':
+    //         this.toDistricts = ['District A', 'District B', 'District C']
+    //         break
+    //       // Add more cases as needed
+    //       default:
+    //         this.toDistricts = []
+    //         break
+    //     }
+    //     this.toDistrict = '' // Reset district selection
+    //     this.toCommune = '' // Reset commune selection
+    //   }
+    // },
+
+    // updateCommunes(location) {
+    //   if (location === 'from') {
+    //     // Example logic to update communes based on selected 'from' district
+    //     switch (this.fromDistrict) {
+    //       case 'District 1':
+    //         this.fromCommunes = ['Commune A', 'Commune B', 'Commune C']
+    //         break
+    //       case 'District 2':
+    //         this.fromCommunes = ['Commune D', 'Commune E', 'Commune F']
+    //         break
+    //       // Add more cases as needed
+    //       default:
+    //         this.fromCommunes = []
+    //         break
+    //     }
+    //     this.fromCommune = '' // Reset commune selection
+    //   } else if (location === 'to') {
+    //     // Example logic to update communes based on selected 'to' district
+    //     switch (this.toDistrict) {
+    //       case 'District 1':
+    //         this.toCommunes = ['Commune A', 'Commune B', 'Commune C']
+    //         break
+    //       case 'District 2':
+    //         this.toCommunes = ['Commune D', 'Commune E', 'Commune F']
+    //         break
+    //       // Add more cases as needed
+    //       default:
+    //         this.toCommunes = []
+    //         break
+    //     }
+    //     this.toCommune = '' // Reset commune selection
+    //   }
+    // }
   }
+
+  // computed: {
+  //   fromDistricts() {
+  //     // Example computed property for dynamically populating district options based on 'from' province
+  //     switch (this.from) {
+  //       case 'Phnom Penh':
+  //         return ['District 1', 'District 2', 'District 3']
+  //       case 'Kampot':
+  //         return ['District A', 'District B', 'District C']
+  //       // Add more cases as needed
+  //       default:
+  //         return []
+  //     }
+  //   },
+
+  //   toDistricts() {
+  //     // Example computed property for dynamically populating district options based on 'to' province
+  //     switch (this.to) {
+  //       case 'Phnom Penh':
+  //         return ['District 1', 'District 2', 'District 3']
+  //       case 'Kampot':
+  //         return ['District A', 'District B', 'District C']
+  //       // Add more cases as needed
+  //       default:
+  //         return []
+  //     }
+  //   },
+
+  //   fromCommunes() {
+  //     // Example computed property for dynamically populating commune options based on 'from' district
+  //     switch (this.fromDistrict) {
+  //       case 'District 1':
+  //         return ['Commune A', 'Commune B', 'Commune C']
+  //       case 'District 2':
+  //         return ['Commune D', 'Commune E', 'Commune F']
+  //       // Add more cases as needed
+  //       default:
+  //         return []
+  //     }
+  //   },
+
+  //   toCommunes() {
+  //     // Example computed property for dynamically populating commune options based on 'to' district
+  //     switch (this.toDistrict) {
+  //       case 'District 1':
+  //         return ['Commune A', 'Commune B', 'Commune C']
+  //       case 'District 2':
+  //         return ['Commune D', 'Commune E', 'Commune F']
+  //       // Add more cases as needed
+  //       default:
+  //         return []
+  //     }
+  //   }
+  // }
 }
 </script>
 
@@ -273,15 +541,16 @@ export default {
 .notification {
   position: fixed;
   top: 120px;
-  right:39px;
+  right: 37px;
 }
 .norma_user {
-  width: 200px;
-  display: flex;
+  width: 228px;
+  border-left: 1px solid black;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
-.bg-orange{
+.border {
   border-radius: 5px 5px 0px 0px;
 }
 </style>
