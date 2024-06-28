@@ -17,17 +17,28 @@ class DeliveryBaggageController extends Controller
     public function GetPost()
     {
         // Retrieve all delivery baggage with their associated posts and users
-        $deliveryBaggage = Delivery_Baggage::with('post.user')->get();
+        $deliveryBaggage = Delivery_Baggage::with('post.user', 'post.baggage')->get();
 
         // Extract relevant data
         $deliveryBaggageWithUserData = $deliveryBaggage->map(function ($item) {
             return [
                 'id' => $item->id,
-                'post_id' => $item->post ? $item->post->id : null,
-                'post_title' => $item->post ? $item->post->title : null,
-                'user_name' => $item->post && $item->post->user ? $item->post->user->name : null,
-                'user_email' => $item->post && $item->post->user ? $item->post->user->email : null,
-                'baggage' => $item->post && $item->post->baggage()->pluck('baggage')->toArray(),
+                'post_id' => optional($item->post)->id,
+                'post_title' => optional($item->post)->title,
+                'user_name' => optional(optional($item->post)->user)->name,
+                'user_email' => optional(optional($item->post)->user)->email,
+                'baggage' => $item->post->baggage->map(function ($baggage) {
+                    return [
+                        'baggage_id' => $baggage->id,
+                        'type' => $baggage->type,
+                        'weight' => $baggage->weight,
+                        'receiver_phone' => $baggage->receiver_phone,
+                        'sending_address' => $baggage->sending_address,
+                        'company' => $baggage->company,
+                        'receiving_address' => $baggage->receiving_address,
+                        'status' => $baggage->status,
+                    ];
+                })->toArray(),
                 'status' => $item->status,
             ];
         });
@@ -61,9 +72,44 @@ class DeliveryBaggageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function GetDelivery(string $id)
     {
-        //
+        // Retrieve delivery baggage with their associated posts, users, and baggage by ID
+        $deliveryBaggage = Delivery_Baggage::with('post.user', 'post.baggage')
+            ->where('id', $id)
+            ->get();
+
+        // Check if delivery baggage with the specified ID exists
+        if ($deliveryBaggage->isEmpty()) {
+            return Response::json(['error' => 'Delivery baggage not found.'], 404);
+        }
+
+        // Extract relevant data
+        $deliveryBaggageWithUserData = $deliveryBaggage->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'post_id' => optional($item->post)->id,
+                'post_title' => optional($item->post)->title,
+                'user_name' => optional(optional($item->post)->user)->name,
+                'user_email' => optional(optional($item->post)->user)->email,
+                'baggage' => $item->post->baggage->map(function ($baggage) {
+                    return [
+                        'baggage_id' => $baggage->id,
+                        'type' => $baggage->type,
+                        'weight' => $baggage->weight,
+                        'receiver_phone' => $baggage->receiver_phone,
+                        'sending_address' => $baggage->sending_address,
+                        'company' => $baggage->company,
+                        'receiving_address' => $baggage->receiving_address,
+                        'status' => $baggage->status,
+                    ];
+                })->toArray(),
+                'status' => $item->status,
+            ];
+        });
+
+        // Return JSON response
+        return Response::json(['data' => $deliveryBaggageWithUserData]);
     }
 
     /**

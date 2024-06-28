@@ -51,10 +51,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/delivery_baggage', [DeliveryBaggageController::class, 'GetPost']);
     Route::post('/delivery_baggage', [DeliveryBaggageController::class,'PostDelivery']);
+    Route::get('/delivery_baggage', [DeliveryBaggageController::class, 'GetPost']);
+    Route::get('/delivery_baggage/{id}', [DeliveryBaggageController::class, 'GetDelivery']);
 });
 
 
