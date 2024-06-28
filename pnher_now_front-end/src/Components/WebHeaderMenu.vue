@@ -35,6 +35,17 @@ import { Icon } from '@iconify/vue'
 
     <!-- Sign In -->
     <div>
+      <div>
+      <div class="px-4 py-2 rounded font-semibold">
+        <a
+          href="/Logout"
+          class="font-bold text-slate-700 rounded-full flex items-center justify-center bg-danger"
+          style="width: 40px; height: 40px; display: inline-flex"
+        >
+        <i class="bi bi-box-arrow-right text-white"></i>
+        </a>
+      </div>
+    </div>
       <div class="px-4 py-2 rounded font-semibold">Sign In</div>
     </div>
   </header>
