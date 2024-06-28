@@ -37,5 +37,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/me', [AuthController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
-
+    Route::put('/change_password', [AuthController::class, 'change_password']);
+    
 });

@@ -25,7 +25,9 @@ class User extends Authenticatable
         'password',
         'address',
         'date_of_birth',
-        'profile'
+        'profile',
+        'current_password',
+        'new_password'
     ];
 
     /**
@@ -46,4 +48,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function updatePassword(string $currentPassword, string $newPassword): bool
+    {
+        $currentHashedPassword = User::where('id', $this->id)->value('password');
+        if (!password_verify($currentPassword, $currentHashedPassword)) {
+            return false; // Current password is incorrect
+        }
+        // Hash the new password
+        $newHashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+        // Update the user's password in the database
+        return $this->update([
+            'password' => $newHashedPassword,
+        ]);
+    }
 }
