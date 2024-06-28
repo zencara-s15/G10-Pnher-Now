@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\API\Baggage\BaggageController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthController;
@@ -37,5 +39,23 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/me', [AuthController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Baggage
+    Route::prefix('baggage')->group(function () {
+        Route::post('/create', [BaggageController::class, 'createBaggage']);
+        Route::put('/edit/{id}', [BaggageController::class, 'editBaggage']);
+        Route::delete('/delete/{id}', [BaggageController::class, 'deleteBaggage']);
+        Route::get('/list', [BaggageController::class, 'listBaggages']);
+        Route::get('/show/{id}', [BaggageController::class, 'showBaggage']);
+        
+    });
+
+    Route::prefix('post')->group(function(){
+        Route::get('/list', [PostController::class, 'index']);
+        Route::post('/create', [PostController::class, 'createPost']);
+        Route::post('/edit/{id}', [PostController::class, 'editPost']);
+        Route::delete('/delete/{id}', [PostController::class, 'deletePost']);
+        Route::get('/show/{id}', [PostController::class,'showPost']);
+    });
 
 });
