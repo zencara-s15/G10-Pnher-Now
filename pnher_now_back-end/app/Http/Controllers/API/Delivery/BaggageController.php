@@ -13,8 +13,8 @@ class BaggageController extends Controller
      */
     public function BaggageList()
     {
-        // Retrieve all baggage
-        $baggage = Baggage::all();
+        // Retrieve all baggage with deliveryStatus relationship loaded
+        $baggage = Baggage::with('deliveryStatus:id,name')->get();
 
         // Return a JSON response
         return response()->json(['success' => 'Baggage retrieved successfully!', 'baggage' => $baggage], 200);
@@ -34,7 +34,8 @@ class BaggageController extends Controller
             'company' => 'required|string|max:255',
             'receiving_address' => 'required|string|max:255',
             'status' => 'required|boolean',
-            'post_id' => 'required|exists:posts,id'
+            'post_id' => 'required|exists:posts,id',
+            'delivery_status_id' => 'required|exists:delivery_status,id',
         ]);
 
         // Prepare the data for insertion
@@ -50,9 +51,13 @@ class BaggageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function GetBaggageById(string $id)
     {
-        //
+        // Retrieve baggage with delivery status relationship loaded by ID
+        $baggage = Baggage::with('deliveryStatus:id,name')->find($id);
+
+        // Return a JSON response
+        return response()->json(['success' => 'Baggage retrieved successfully!', 'baggage' => $baggage], 200);
     }
 
     /**
