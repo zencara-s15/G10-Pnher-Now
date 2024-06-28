@@ -47,13 +47,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-<<<<<<< HEAD
     // Baggage
     
-=======
     public function branches()
     {
         return $this->hasMany(\App\Models\Supervisor\Branch::class, 'user_id');
     }
->>>>>>> e713f039c0a7b4f5e73bb8eba7d7b4c7cc8b86e7
 }

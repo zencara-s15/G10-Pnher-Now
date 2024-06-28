@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Baggage extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     protected $fillable = [
         'type',
         'weight',
         'receiver_phone',
         'sending_address',
         'receiver_address',
-        'post_id'
+        'post_id',
+        'company'
     ];
 
     public function post(){
@@ -29,7 +30,8 @@ class Baggage extends Model
             'receiver_phone',
             'sending_address',
             'receiver_address',
-            'post_id'
+            'post_id',
+            'company'
         );
         $baggage = self::updateOrCreate(['id' => $id], $data);
         return $baggage;

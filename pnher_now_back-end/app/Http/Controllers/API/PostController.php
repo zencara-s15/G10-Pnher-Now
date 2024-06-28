@@ -28,6 +28,7 @@ class PostController extends Controller
                 'title' => $posts->title,
                 'description' => $posts->description,
                 'publish' => $posts->publish,
+                'company' => $posts->company,
                 'baggage_id' => $posts->baggage_id,
                 'baggages' => $posts->baggage->map(function ($baggages){
                     return [
@@ -52,6 +53,7 @@ class PostController extends Controller
                 'title' =>'required|string|max: 255',
                 'description' =>'required|string|max: 255',
                 'publish'=> 'boolean',
+                'company'=> 'required|string|max: 255',
                 'baggage_id' =>'nullable|array',
             ]
             );
