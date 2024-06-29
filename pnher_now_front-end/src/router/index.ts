@@ -35,6 +35,16 @@ const router = createRouter({
       path: '/post',
       name: 'post',
       component: () => import('../views/Web/Post/ListView.vue')
+    },
+    {
+      path: '/product',
+      name: 'product',
+      component: () => import('../views/Web/User/ProductUser.vue')
+    },
+    {
+      path: '/history_user',
+      name: 'history_user',
+      component: () => import('../views/Web/User/HistoryUser.vue')
     }
   ]
 })
