@@ -26,11 +26,16 @@ const router = createRouter({
       name: 'home',
       component: () => import('../views/Web/HomeView.vue')
     },
-    {
-      path: '/post',
-      name: 'post',
-      component: () => import('../views/Web/Post/ListView.vue')
-    },
+    // {
+    //   path: '/history',
+    //   name: 'history',
+    //   component: () => import('../views/Web/HistoryView.vue')
+    // },
+    // {
+    //   path: '/post',
+    //   name: 'post',
+    //   component: () => import('../views/Web/Post/ListView.vue')
+    // },
     {
       path: '/logout',
       name: 'logout',
