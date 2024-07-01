@@ -26,7 +26,18 @@ const router = createRouter({
       name: 'home',
       component: () => import('../views/Web/HomeView.vue')
     },
+    // {
+    //   path: '/history',
+    //   name: 'history',
+    //   component: () => import('../views/Web/HistoryView.vue')
+    // },
+    // {
+    //   path: '/post',
+    //   name: 'post',
+    //   component: () => import('../views/Web/Post/ListView.vue')
+    // },
     {
+<<<<<<< HEAD
       path: '/post',
       name: 'post',
       component: () => import('../views/Web/Post/ListView.vue')
@@ -37,6 +48,18 @@ const router = createRouter({
       component: () => import('../views/Web/User/DashoardUserView.vue')
     },
    
+=======
+      path: '/logout',
+      name: 'logout',
+      component: () => import('../views/Admin/Auth/LoginView.vue')
+    },
+    {
+      path: '/register/user',
+      name: 'register',
+      component: () => import('../views/Admin/Auth/RegisterUserView.vue')
+    },
+
+>>>>>>> nav
   ]
 })
 
