@@ -50,6 +50,23 @@ Route::get('/admin/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+// Supervisor
+// Delivery list
+Route::get('/supervisor/delivery-list', function () {
+    return view('supervisor.list_delivery');
+})->middleware(['auth'])->name('supervisor.delivery_list');
+
+// list instock
+
+Route::get('/supervisor/list-instock', function () {
+    return view('supervisor.list_instock');
+})->middleware(['auth'])->name('supervisor.list_instock');
+
+// Item details
+Route::get('/supervisor/item-detail', function () {
+    return view('supervisor.item_detail');
+})->middleware(['auth'])->name('supervisor.item_detail');
+
 
 
 
