@@ -105,10 +105,7 @@ class AuthController extends Controller
         ]);
 
         $user->assignRole('user');
-<<<<<<< HEAD
-=======
 
->>>>>>> e713f039c0a7b4f5e73bb8eba7d7b4c7cc8b86e7
         return response()->json([
             'message' => 'User registered successfully',
             'user' => $user,
