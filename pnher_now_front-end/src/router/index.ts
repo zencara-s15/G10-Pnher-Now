@@ -30,6 +30,36 @@ const router = createRouter({
       path: '/post',
       name: 'post',
       component: () => import('../views/Web/Post/ListView.vue')
+    },
+    {
+      path: "/deliver",
+      name: "deliver",
+      component: () => import('../views/Web/Deliver/DeliverView.vue')
+    },
+    {
+      path: "/history",
+      name: "history",
+      component: () => import('../views/Web/History/HistoryView.vue')
+    },
+    {
+      path: "/average",
+      name: "average",
+      component: () => import('../views/Web/Average/AverageView.vue')
+    },
+    {
+      path: "/processdeliver",
+      name: "processdeliver",
+      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
+    },
+    {
+      path: "/feedback",
+      name: "feedback",
+      component: () => import('../views/Web/Feedback/FeedbackView.vue')
+    },
+    {
+      path: "/request",
+      name: "request",
+      component: () => import('../views/Web/Request/RequestView.vue')
     }
   ]
 })
