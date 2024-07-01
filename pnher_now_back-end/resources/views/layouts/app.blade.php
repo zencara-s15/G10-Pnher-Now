@@ -22,6 +22,8 @@
         
             @include('layouts.sidebar')
 
+            
+
             <div class="flex-1 flex flex-col overflow-scroll">
 
                     @include('layouts.header')
