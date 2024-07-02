@@ -1,4 +1,5 @@
 <template>
+<WebLayout/>
   <div class="container">
     <!-- Part 1 -->
     <div class="row mb-3">
@@ -48,6 +49,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import WebLayout from '@/Components/Layouts/WebLayout.vue'
 
 const partners = ref([
   {
