@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     ProfileController,
     MailSettingController,
+    SupervisorController,
 };
 
 /*
@@ -59,9 +60,12 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         Route::resource('permissions','PermissionController');
         Route::resource('users','UserController');
         Route::resource('posts','PostController');
+        Route::resource('supervisor','SupervisorController');
 
         Route::get('/profile',[ProfileController::class,'index'])->name('profile');
         Route::put('/profile-update',[ProfileController::class,'update'])->name('profile.update');
         Route::get('/mail',[MailSettingController::class,'index'])->name('mail.index');
         Route::put('/mail-update/{mailsetting}',[MailSettingController::class,'update'])->name('mail.update');
+
+        
 });
