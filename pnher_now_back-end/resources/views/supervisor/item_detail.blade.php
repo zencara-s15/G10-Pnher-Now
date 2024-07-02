@@ -126,8 +126,7 @@
                                             BFC
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <span class="text-blue-400">Edit</span>
-                                            <span class="text-red-400">Red</span>
+                                            <span class="text-red-400">Send</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -150,8 +149,7 @@
                                             BFC
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <span class="text-blue-400">Edit</span>
-                                            <span class="text-red-400">Red</span>
+                                            <span class="text-blue-400">Done</span>
                                         </td>
                                     </tr>
                                 </tbody>

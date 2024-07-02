@@ -69,7 +69,6 @@ Route::get('/supervisor/item-detail', function () {
 
 
 
-
 Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
     ->group(function(){
         Route::resource('roles','RoleController');
