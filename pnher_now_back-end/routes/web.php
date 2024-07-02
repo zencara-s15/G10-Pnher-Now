@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\{
     ProfileController,
     MailSettingController,
 };
+use App\Http\Controllers\API\Chart\ChartController as ChartChartController;
 use App\Http\Controllers\ChartController;
 
 /*
@@ -65,5 +66,7 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         Route::put('/profile-update',[ProfileController::class,'update'])->name('profile.update');
         Route::get('/mail',[MailSettingController::class,'index'])->name('mail.index');
         Route::put('/mail-update/{mailsetting}',[MailSettingController::class,'update'])->name('mail.update');
+
+        Route::get('/chart', [ChartChartController::class, 'chart']);
 
 });
