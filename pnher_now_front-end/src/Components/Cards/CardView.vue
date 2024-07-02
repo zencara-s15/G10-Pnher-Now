@@ -38,37 +38,21 @@ export default {
           type: 'decying',
           weight: '2kg',
           locationSender: 'View Map'
+        },
+        {
+          name: 'Sreyluch',
+          image: 'https://tinypng.com/images/social/website.jpg',
+          numberSender: '0887049868',
+          sendTo: 'PS',
+          numberReceiver: '088998018',
+          locationReceiver: "P'sar Kravanh PS.",
+          type: 'decying',
+          weight: '2kg',
+          locationSender: 'View Map'
         }
       ]
     };
-  },
-  mounted() {
-    const loader = new Loader({
-        apiKey: 'key',
-        version: 'beta',
-        libraries: ['marker'],
-    });
-
-    loader.load().then((google) => {
-        this.googleMap = new google.maps.Map(this.$refs.map, this.mapOptions);
-        // const googleMap = new google.maps.Map(this.$refs.map, this.mapOptions);
-        // window.googleMap = new google.maps.Map(this.$refs.map, this.mapOptions);
-
-        // Marker works fine
-        new google.maps.Marker({
-            map: this.googleMap,
-            position: this.home.position,
-        })
-
-        // Works only with window.googleMap or const googleMap
-        new google.maps.marker.AdvancedMarkerView({
-            map: this.googleMap,
-            position: this.home.position,
-            content: this.buildContent(this.home),
-            title: this.home.title
-        });
-    });
-},
+  }
 };
 </script>
 
