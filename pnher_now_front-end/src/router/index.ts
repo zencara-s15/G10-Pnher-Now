@@ -22,6 +22,11 @@ const router = createRouter({
       component: () => import('../views/Admin/Auth/LoginView.vue')
     },
     {
+      path: '/logout',
+      name: 'logout',
+      component: () => import('../views/Admin/Auth/LoginView.vue')
+    },
+    {
       path: '/',
       name: 'home',
       component: () => import('../views/Web/User/ProductUser.vue')
@@ -88,7 +93,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const publicPages = ['/login']
+  const publicPages = ['/login','logout']
   const authRequired = !publicPages.includes(to.path)
   const store = useAuthStore()
 
