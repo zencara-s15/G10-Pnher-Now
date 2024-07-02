@@ -68,6 +68,10 @@ Route::get('/supervisor/item-detail', function () {
 })->middleware(['auth'])->name('supervisor.item_detail');
 
 
+Route::get('/supervisor/history', function () {
+    return view('supervisor.history');
+})->middleware(['auth'])->name('supervisor.history');;
+
 
 Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
     ->group(function(){

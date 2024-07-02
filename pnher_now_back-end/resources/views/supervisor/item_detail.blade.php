@@ -78,78 +78,96 @@
                         </div>
                         <div class="container-table mt-5 w-full">
                             <div class="p-3">
-                                <h​1 class="text-2xl">Item Details</h1>
+                                <h1 class="text-2xl"><u>Item Details</u></h1>
                             </div>
-                            <table class="ml-2">
+                            <table class="ml-2 mr-10">
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             User</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Type</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             From</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Phone Sender</th>
+                                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            To</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Phone Reciever</th>
+                                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Sender</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Reciever</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Branch</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Active</th>
+                                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Date</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Exired</th>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                             Narith
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
                                             Fruit
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
                                             Kompong Cham
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Phonm Penh
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm">
                                             086343092
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                             079573972
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
                                             BFC
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <span class="text-red-400">Send</span>
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            06.02.24
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            06.03.24
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                             Narith
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
                                             Fruit
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
                                             Kompong Cham
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Phonm Penh
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm">
                                             086343092
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                             079573972
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
                                             BFC
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <span class="text-blue-400">Done</span>
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            06.02.24
+                                        </td>
+                                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            06.03.24
                                         </td>
                                     </tr>
                                 </tbody>
