@@ -41,7 +41,9 @@
           </div>
         </div>
         <div class="md:col-span-2">
-          <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Register</button>
+          <button type="submit" class="shadow appearance-none border rounded w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Register
+          </button>
         </div>
       </form>
     </div>
@@ -138,7 +140,9 @@ export default {
       this.cameraVisible = false;
     },
     register() {
-      console.log("Form submitted", this.form, this.imagePreview);
+      // Perform registration logic here
+      // After registration logic, redirect to login page
+      this.$router.push('/login');
     }
   }
 }

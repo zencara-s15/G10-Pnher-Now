@@ -14,88 +14,80 @@
         </div>
       </div>
       <div class="col-auto">
-        <button class="btn btn-warning me-2" @click="showModal = true">Booking Now</button>
-        <button class="btn btn-light text-danger">
-          <div class="notification">
-            <i class="bi bi-1-circle-fill"></i>
-          </div>
-          <i class="bi bi-bell"></i>
-        </button>
+        <button class="btn btn-danger me-2" @click="showModal = true">Booking Now</button>
       </div>
     </div>
     <!-- Card Section -->
     <div class="row">
       <div class="col-md-4 mb-3" v-for="(item, index) in user_create" :key="index">
         <div class="card">
-          <div class="d-flex justify-content-center bg-danger text-white border">
+          <div class="d-flex justify-content-center bg-danger text-white border p-2">
             <h3>New Booking</h3>
           </div>
           <div class="d-flex">
             <div class="card-body">
               <div class="d-flex">
                 <h3>Sender</h3>
-                <i class="bi bi-arrow-right-circle-fill"></i>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-telephone-forward-fill"></i>
+                <!-- <i class="bi bi-telephone-forward-fill"></i> -->
                 <p class="card-title">Sender: {{ item.sender }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-geo-alt-fill"></i>
+                <!-- <i class="bi bi-geo-alt-fill"></i> -->
                 <p class="card-text">To: {{ item.to }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-geo-alt-fill"></i>
+                <!-- <i class="bi bi-geo-alt-fill"></i> -->
                 <p class="card-text">District: {{ item.toDistrict }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-map-fill"></i>
+                <!-- <i class="bi bi-map-fill"></i> -->
                 <p class="card-text">ToCommune: {{ item.toCommune }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-shop"></i>
+                <!-- <i class="bi bi-shop"></i> -->
                 <p class="card-text">ToBranch: {{ item.toBranch }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-bag-fill"></i>
+                <!-- <i class="bi bi-bag-fill"></i> -->
                 <p class="card-text">Type: {{ item.product_type }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-buildings"></i>
+                <!-- <i class="bi bi-buildings"></i> -->
                 <p class="card-text">Company: {{ item.company }}</p>
               </div>
             </div>
             <div class="card-body">
               <div class="d-flex">
                 <h3>Receiver</h3>
-                <i class="bi bi-arrow-left-circle-fill"></i>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-telephone-inbound-fill"></i>
+                <!-- <i class="bi bi-telephone-inbound-fill"></i> -->
                 <p class="card-text">Receiver: {{ item.receiver }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-geo-alt-fill"></i>
+                <!-- <i class="bi bi-geo-alt-fill"></i> -->
                 <p class="card-text">From: {{ item.from }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-geo-alt-fill"></i>
+                <!-- <i class="bi bi-geo-alt-fill"></i> -->
                 <p class="card-text">District: {{ item.fromDistrict }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-map-fill"></i>
+                <!-- <i class="bi bi-map-fill"></i> -->
                 <p class="card-text">fromCommune: {{ item.fromCommune }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-shop"></i>
+                <!-- <i class="bi bi-shop"></i> -->
                 <p class="card-text">fromBranch: {{ item.fromBranch }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-bag-fill"></i>
+                <!-- <i class="bi bi-bag-fill"></i> -->
                 <p class="card-text">Type: {{ item.product_type }}</p>
               </div>
               <div class="d-flex gap-1">
-                <i class="bi bi-buildings"></i>
+                <!-- <i class="bi bi-buildings"></i> -->
                 <p class="card-text">Company: {{ item.company }}</p>
               </div>
             </div>
@@ -384,130 +376,7 @@ export default {
       this.showModal = false
     }
 
-    // updateDistricts(location) {
-    //   if (location === 'from') {
-    //     // Example logic to update districts based on selected 'from' province
-    //     switch (this.from) {
-    //       case 'Phnom Penh':
-    //         this.fromDistricts = ['District 1', 'District 2', 'District 3']
-    //         break
-    //       case 'Kampot':
-    //         this.fromDistricts = ['District A', 'District B', 'District C']
-    //         break
-    //       // Add more cases as needed
-    //       default:
-    //         this.fromDistricts = []
-    //         break
-    //     }
-    //     this.fromDistrict = '' // Reset district selection
-    //     this.fromCommune = '' // Reset commune selection
-    //   } else if (location === 'to') {
-    //     // Example logic to update districts based on selected 'to' province
-    //     switch (this.to) {
-    //       case 'Phnom Penh':
-    //         this.toDistricts = ['District 1', 'District 2', 'District 3']
-    //         break
-    //       case 'Kampot':
-    //         this.toDistricts = ['District A', 'District B', 'District C']
-    //         break
-    //       // Add more cases as needed
-    //       default:
-    //         this.toDistricts = []
-    //         break
-    //     }
-    //     this.toDistrict = '' // Reset district selection
-    //     this.toCommune = '' // Reset commune selection
-    //   }
-    // },
-
-    // updateCommunes(location) {
-    //   if (location === 'from') {
-    //     // Example logic to update communes based on selected 'from' district
-    //     switch (this.fromDistrict) {
-    //       case 'District 1':
-    //         this.fromCommunes = ['Commune A', 'Commune B', 'Commune C']
-    //         break
-    //       case 'District 2':
-    //         this.fromCommunes = ['Commune D', 'Commune E', 'Commune F']
-    //         break
-    //       // Add more cases as needed
-    //       default:
-    //         this.fromCommunes = []
-    //         break
-    //     }
-    //     this.fromCommune = '' // Reset commune selection
-    //   } else if (location === 'to') {
-    //     // Example logic to update communes based on selected 'to' district
-    //     switch (this.toDistrict) {
-    //       case 'District 1':
-    //         this.toCommunes = ['Commune A', 'Commune B', 'Commune C']
-    //         break
-    //       case 'District 2':
-    //         this.toCommunes = ['Commune D', 'Commune E', 'Commune F']
-    //         break
-    //       // Add more cases as needed
-    //       default:
-    //         this.toCommunes = []
-    //         break
-    //     }
-    //     this.toCommune = '' // Reset commune selection
-    //   }
-    // }
   }
-
-  // computed: {
-  //   fromDistricts() {
-  //     // Example computed property for dynamically populating district options based on 'from' province
-  //     switch (this.from) {
-  //       case 'Phnom Penh':
-  //         return ['District 1', 'District 2', 'District 3']
-  //       case 'Kampot':
-  //         return ['District A', 'District B', 'District C']
-  //       // Add more cases as needed
-  //       default:
-  //         return []
-  //     }
-  //   },
-
-  //   toDistricts() {
-  //     // Example computed property for dynamically populating district options based on 'to' province
-  //     switch (this.to) {
-  //       case 'Phnom Penh':
-  //         return ['District 1', 'District 2', 'District 3']
-  //       case 'Kampot':
-  //         return ['District A', 'District B', 'District C']
-  //       // Add more cases as needed
-  //       default:
-  //         return []
-  //     }
-  //   },
-
-  //   fromCommunes() {
-  //     // Example computed property for dynamically populating commune options based on 'from' district
-  //     switch (this.fromDistrict) {
-  //       case 'District 1':
-  //         return ['Commune A', 'Commune B', 'Commune C']
-  //       case 'District 2':
-  //         return ['Commune D', 'Commune E', 'Commune F']
-  //       // Add more cases as needed
-  //       default:
-  //         return []
-  //     }
-  //   },
-
-  //   toCommunes() {
-  //     // Example computed property for dynamically populating commune options based on 'to' district
-  //     switch (this.toDistrict) {
-  //       case 'District 1':
-  //         return ['Commune A', 'Commune B', 'Commune C']
-  //       case 'District 2':
-  //         return ['Commune D', 'Commune E', 'Commune F']
-  //       // Add more cases as needed
-  //       default:
-  //         return []
-  //     }
-  //   }
-  // }
 }
 </script>
 
