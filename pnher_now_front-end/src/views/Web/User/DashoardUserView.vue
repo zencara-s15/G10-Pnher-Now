@@ -1,11 +1,6 @@
 <template>
-<WebLayout>
+  <WebLayout></WebLayout>
   <div class="container">
-    <!-- Part 1 -->
-    <div class="row mb-3">
-      <div class="col-12 part1">Part 1</div>
-    </div>
-    <!-- Part 2 and Part 3 -->
     <div class="row">
       <div class="col-12 col-md-8 part2 mb-3">
         <div class="search w-100 d-flex justify-content-center">
@@ -22,13 +17,11 @@
             />
           </div>
         </div>
+        <div>
+            <CardView></CardView>
+        </div>
       </div>
       <div class="col-12 col-md-4 part3">
-        <div class="icon-container d-flex justify-content-space-round align-items-center mb-3">
-          <i class="bi bi-bell"></i>
-          <i class="bi bi-chat-square-dots"></i>
-          <i class="bi bi-person-circle"></i>
-        </div>
         <div class="partner-list p-3">
           <h2 class="text-center mb-3">List of Company</h2>
           <ul class="list-unstyled">
@@ -37,7 +30,11 @@
               :key="index"
               class="d-flex align-items-center mb-2"
             >
-              <img :src="partner.image" :alt="`${partner.name} Logo`" class="partner-logo me-2" />
+              <img
+                :src="partner.image"
+                :alt="`${partner.name} Logo`"
+                class="partner-logo me-2"
+              />
               {{ partner.name }}
             </li>
           </ul>
@@ -48,9 +45,9 @@
 </template>
 
 <script setup lang="ts">
-import { Script } from 'vm'
 import { ref } from 'vue'
 import WebLayout from '@/Components/Layouts/WebLayout.vue'
+import CardView from '@/Components/Cards/CardView.vue'
 
 const partners = ref([
   {
@@ -63,13 +60,11 @@ const partners = ref([
   },
   {
     name: 'Campital',
-    image:
-      'https://media.licdn.com/dms/image/C4E0BAQHBIKulAp8BRQ/company-logo_200_200/0/1651693054138/capitalexpressus_logo?e=2147483647&v=beta&t=ghW9S5iogza2cKdUYSzD_sQOrfTGZkJBPxWznyBIUNI'
+    image: 'https://media.licdn.com/dms/image/C4E0BAQHBIKulAp8BRQ/company-logo_200_200/0/1651693054138/capitalexpressus_logo?e=2147483647&v=beta&t=ghW9S5iogza2cKdUYSzD_sQOrfTGZkJBPxWznyBIUNI'
   },
   {
     name: 'Vireak Buntham',
-    image:
-      'https://cambodia-logistics.com/wp-content/uploads/2021/06/%E0%B8%AA%E0%B9%88%E0%B8%87%E0%B8%AA%E0%B8%B4%E0%B8%99%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%81%E0%B8%B1%E0%B8%A1%E0%B8%9E%E0%B8%B9%E0%B8%8A%E0%B8%B2223-1.jpg'
+    image: 'https://cambodia-logistics.com/wp-content/uploads/2021/06/%E0%B8%AA%E0%B9%88%E0%B8%87%E0%B8%AA%E0%B8%B4%E0%B8%99%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%81%E0%B8%B1%E0%B8%A1%E0%B8%9E%E0%B8%B9%E0%B8%8A%E0%B8%B2223-1.jpg'
   }
 ])
 </script>
@@ -88,7 +83,7 @@ const partners = ref([
   background-color: #e0e0e0;
 }
 .part3 {
-  background-color: #ffcccc; 
+  background-color: #ffcccc;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -123,9 +118,10 @@ const partners = ref([
 
 .container {
   background: pink;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
 }
-input{
+input {
   background: rgba(208, 9, 17, 0.2);
 }
 span {
