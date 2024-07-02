@@ -37,7 +37,6 @@ const router = createRouter({
     //   component: () => import('../views/Web/Post/ListView.vue')
     // },
     {
-<<<<<<< HEAD
       path: '/post',
       name: 'post',
       component: () => import('../views/Web/Post/ListView.vue')
@@ -47,8 +46,8 @@ const router = createRouter({
       name: 'user_dashboard',
       component: () => import('../views/Web/User/DashoardUserView.vue')
     },
+    {
    
-=======
       path: '/logout',
       name: 'logout',
       component: () => import('../views/Admin/Auth/LoginView.vue')
@@ -59,7 +58,6 @@ const router = createRouter({
       component: () => import('../views/Admin/Auth/RegisterUserView.vue')
     },
 
->>>>>>> nav
   ]
 })
 

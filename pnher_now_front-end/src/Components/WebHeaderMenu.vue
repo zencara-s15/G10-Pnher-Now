@@ -27,7 +27,7 @@ function closeDropdown() {
       <div class="flex-grow">
         <div class="flex space-x-4 justify-center gap-x-9">
           <router-link
-            to="/dashboard"
+            to="/user/dashboard"
             class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
             active-class="text-red-500"
           >
@@ -126,45 +126,7 @@ function closeDropdown() {
         </div>
       </div>
     </div>
-<<<<<<< HEAD
-
-    <!-- Menu Items -->
-    <nav class="flex justify-center space-x-4">
-      <a
-        href="/post"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Post</a
-      >
-      <a
-        href="/team"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Team</a
-      >
-      <a
-        href="/projects"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Projects</a
-      >
-      <a
-        href="/reports"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Reports</a
-      >
-      <a
-        href="/user/dashboard"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Dashboard</a
-      >
-    </nav>
-
-    <!-- Sign In -->
-    <div>
-      <div class="px-4 py-2 rounded font-semibold">Sign In</div>
-    </div>
-  </header>
-=======
   </nav>
->>>>>>> nav
 </template>
 
 <style scoped>
