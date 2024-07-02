@@ -45,7 +45,7 @@ function closeDropdown() {
             class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
             active-class="text-red-500"
           >
-            History
+            HISTORY
           </router-link>
         </div>
       </div>
