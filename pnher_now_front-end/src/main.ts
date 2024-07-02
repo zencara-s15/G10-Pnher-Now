@@ -1,8 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.min.css' // Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import App from './App.vue'
 import router from './router'
@@ -11,6 +12,8 @@ import 'element-plus/dist/index.css'
 import axios from './plugins/axios'
 import 'uno.css'
 import { configure } from 'vee-validate'
+
+// library.add(fas);
 
 const app = createApp(App)
 

@@ -22,20 +22,69 @@ const router = createRouter({
       component: () => import('../views/Admin/Auth/LoginView.vue')
     },
     {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/Web/HomeView.vue')
+      path: '/logout',
+      name: 'logout',
+      component: () => import('../views/Admin/Auth/LoginView.vue')
     },
     {
-      path: '/post',
-      name: 'post',
-      component: () => import('../views/Web/Post/ListView.vue')
-    }
+      path: '/',
+      name: 'home',
+      component: () => import('../views/Web/User/ProductUser.vue')
+    },
+    
+    {
+      path: '/logout',
+      name: 'logout',
+      component: () => import('../views/Admin/Auth/LoginView.vue')
+    },
+    {
+      path: '/register/user',
+      name: 'register',
+      component: () => import('../views/Admin/Auth/RegisterUserView.vue')
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component: () => import('../views/Web/User/HistoryUser.vue')
+    },
+    {
+      path: '/deliverer',
+      name: 'deliverer',
+      component: () => import('../views/Web/Deliver/DeliverView.vue')
+    },
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import('../views/Web/Feedback/FeedbackView.vue')
+    },
+    {
+      path: '/history_deliverer',
+      name: 'history_deliverer',
+      component: () => import('../views/Web/History/HistoryView.vue')
+    },
+    
+    {
+      path: '/proccess',
+      name: 'proccess',
+      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
+    },
+    {
+      path: '/request',
+      name: 'request',
+      component: () => import('../views/Web/Request/RequestView.vue')
+    },
+    {
+      path: '/average',
+      name: 'average',
+      component: () => import('../views/Web/Average/AverageView.vue')
+    },
+    
+
   ]
 })
 
 router.beforeEach(async (to, from, next) => {
-  const publicPages = ['/login']
+  const publicPages = ['/login','logout']
   const authRequired = !publicPages.includes(to.path)
   const store = useAuthStore()
 
