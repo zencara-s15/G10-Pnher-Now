@@ -17,6 +17,8 @@ const app = createApp(App)
 configure({
   validateOnInput: true
 })
+  
+
 
 app.use(createPinia())
 app.use(router.router)

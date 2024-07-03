@@ -6,7 +6,7 @@ import { Icon } from '@iconify/vue'
     <!-- Logo -->
     <div class="flex items-center space-x-2">
       <Icon icon="skill-icons:devto-dark" style="font-size: 45px" />
-      <span class="text-xl font-bold">I-KNOW</span>
+      <span class="text-xl font-bold">Phner Now</span>
     </div>
 
     <!-- Menu Items -->
@@ -30,6 +30,36 @@ import { Icon } from '@iconify/vue'
         href="/reports"
         class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
         >Reports</a
+      >
+      <a
+        href="/deliver"
+        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
+        >Deliver</a
+      >
+      <a
+        href="/history"
+        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
+        >History</a
+      >
+      <a
+        href="/average"
+        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
+        >Average</a
+      >
+      <a
+        href="/ProcessDeliver"
+        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
+        >Process</a
+      >
+      <a
+        href="/feedback"
+        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
+        >Feedback</a
+      >
+      <a
+        href="/request"
+        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
+        >Request</a
       >
     </nav>
 
