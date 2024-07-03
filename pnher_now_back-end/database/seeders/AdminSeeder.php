@@ -18,16 +18,18 @@ class AdminSeeder extends Seeder
     public function run()
     {
         $admin = User::create([
-            'name'=>'Admin',
-            'email'=>'admin@gmail.com',
-            'password'=>bcrypt('password'),
+            'first_name' => 'Admin',
+            'last_name' => 'User',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password'),
             'profile' => 'user.avif'
         ]);
-
+    
         $user = User::create([
-            'name'=>'User',
-            'email'=>'user@gmail.com',
-            'password'=>bcrypt('password')
+            'first_name' => 'Regular',
+            'last_name' => 'User',
+            'email' => 'user@gmail.com',
+            'password' => bcrypt('password')
         ]);
         
 
@@ -59,6 +61,11 @@ class AdminSeeder extends Seeder
 
         $permission = Permission::create(['name' => 'Mail access']);
         $permission = Permission::create(['name' => 'Mail edit']);
+
+
+        $permission = Permission::create(['name' => 'Supervisor access']);
+
+
 
 
 
