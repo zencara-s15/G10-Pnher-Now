@@ -89,16 +89,16 @@
       </div>
       <!-- Chart -->
       <div class="cartInfo flex flex-row justify-between">
-        <div class="card w-6/12 m-3 p-2 bg-white rounded-lg">
-          <div class="card-header flex text-center">
+        <div class="card w-6/12 mx-1 p-2 bg-white rounded-lg">
+          <div class="card-header flex justify-center">
             <h1 class="">Information of system</h1>
           </div>
           <div class="card-body">
             <canvas id="barChart"></canvas>
           </div>
         </div>
-        <div class="card w-6/12 m-3 p-2 bg-white rounded-lg">
-          <div class="card-header flex text-center">
+        <div class="card w-6/12 mx-1 p-2 bg-white rounded-lg">
+          <div class="card-header flex justify-center">
             <h1 class="">Total of each months</h1>
           </div>
           <div class="card-body">
@@ -120,7 +120,6 @@
                 '#EF4444',
                 '#FBBF24',
               ],
-              borderWidth: 1
             }],
           },
           options: {
