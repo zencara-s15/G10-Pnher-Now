@@ -55,7 +55,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{company}', [CompanyController::class, 'destroy']);
     });
 
-
      // Branch
      Route::prefix('branches')->group(function () {
         Route::get('/list', [BranchController::class, 'index']);
