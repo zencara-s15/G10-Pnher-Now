@@ -12,7 +12,7 @@ class SupervisorController extends Controller
      */
     public function index()
     {
-        //
+        return view('setting.supervisor.index');
     }
 
     /**
