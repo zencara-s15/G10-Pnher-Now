@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
                                         <div class="card-body flex flex-row items-center">
-                                            <a href="{{ route('supervisor.item_detail')}}"
+                                            <a href="{{ route('supervisor.item_detail') }}"
                                                 class="col-icon flex flex-row items-center">
                                                 <div
                                                     class="col-icon flex flex-row items-center bg-yellow-500 h-37 px-8 py-3 rounded-lg">
@@ -101,36 +101,14 @@
                                         alt="" class=" w-1/2 ml-20">
                                 </div>
                                 <div class="card card-stats card-round bg-white w-2/4 px-2 py-2 m-2 rounded-lg mr-12">
-                                    <div
-                                        class="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto border-4 border-blue-500">
-                                        <div class="flex justify-between items-center mb-4">
-                                            <div class="flex items-center">
-                                                <h2 class="text-lg font-bold mr-2">Nice process today!</h2>
-                                                <svg class="w-4 h-4 text-blue-500" viewBox="0 0 20 20"
-                                                    fill="currentColor">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <div class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
-                                                +45%
-                                            </div>
-                                        </div>
-                                        <div class="mt-4">
-                                            <div class="flex justify-between items-end text-gray-500 text-sm mb-2">
-                                                <div class="flex-1 text-center">Week</div>
-                                                <div class="flex-1 text-center">Month</div>
-                                                <div class="flex-1 text-center">Year</div>
-                                            </div>
-                                            <div class="flex justify-between items-end">
-                                                <div class="flex-1 text-center text-3xl font-bold">123,566</div>
-                                                <div class="flex-1 text-center text-3xl font-bold">123,566</div>
-                                                <div class="flex-1 text-center text-3xl font-bold">123,566</div>
-                                            </div>
-                                        </div>
+                                    {{-- chart graph --}}
+
+                                    <div class="card-body">
+                                        <canvas id="barChart"></canvas>
                                     </div>
+
                                 </div>
+
                             </div>
                             <div class="container-table mt-6 w-full">
                                 <div class="p-3">
@@ -273,4 +251,27 @@
         </main>
     </div>
     </div>
+
 </x-app-layout>
+<script>
+    var ctx = document.getElementById('barChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Monday', 'Tuesday', 'Wendesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            datasets: [{
+                label: 'Sales',
+                data: [12, 19, 14, 9, 10, 13,10],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 10)',
+                    'rgba(54, 162, 235, 10)',
+                    'rgba(255, 206, 86, 10)',
+                    'rgba(75, 192, 192, 10)',
+                    'rgba(153, 102, 255, 10)',
+                    'rgba(255, 159, 64, 10)',
+                    'rgba(255, 159, 109, 10)',
+                ]
+            }]
+        }
+    });
+</script>

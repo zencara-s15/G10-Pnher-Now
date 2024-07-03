@@ -78,7 +78,7 @@
                         </div>
                         <div class="container-table mt-5 w-full">
                             <div class="p-3">
-                                <h1 class="text-2xl"><u>Item Details</u></h1>
+                                <h1 class="text-2xl">Item Details</h1>
                             </div>
                             <table class="ml-2 mr-10">
                                 <thead class="bg-gray-50">

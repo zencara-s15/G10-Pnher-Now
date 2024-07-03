@@ -50,6 +50,7 @@ Route::get('/admin/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+
 // Supervisor
 // Delivery list
 Route::get('/supervisor/delivery-list', function () {

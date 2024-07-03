@@ -32,7 +32,7 @@ class RoleController extends Controller
     {
         $role= Role::latest()->get();
 
-        return view('settin g.role.index',['roles'=>$role]);
+        return view('setting.role.index',['roles'=>$role]);
     }
 
     /**

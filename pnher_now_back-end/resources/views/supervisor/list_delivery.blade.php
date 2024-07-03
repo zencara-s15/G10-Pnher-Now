@@ -79,7 +79,7 @@
                         </div>
                         <div class="container-table mt-5 w-full">
                             <div class="p-3">
-                                <h1 class="text-2xl"><u>List Delivery</u></h1>
+                                <h1 class="text-2xl">List Delivery</h1>
                             </div>
                             <table class="ml-2">
                                 <thead class="bg-gray-50">

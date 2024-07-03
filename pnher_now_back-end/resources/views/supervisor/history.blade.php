@@ -6,7 +6,7 @@
                     <div class="flex-col w-3/4">
                         <div class="container-table w-full">
                             <div class="p-3">
-                                <h1 class="text-2xl"><u>History of Delivery</u></h1>
+                                <h1 class="text-2xl">History of Delivery</h1>
                             </div>
                             <table class="ml-1">
                                 <thead class="bg-gray-50">

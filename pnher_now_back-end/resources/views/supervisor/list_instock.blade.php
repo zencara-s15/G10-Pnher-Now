@@ -77,7 +77,7 @@
                         </div>
                         <div class="container-table mt-5 w-full">
                             <div class="p-3 ml-0">
-                                <h1 class="text-2xl"><u>List Instock</u></h1>
+                                <h1 class="text-2xl">List Instock</h1>
                             </div>
                             <table class="ml-2">
                                 <thead class="bg-gray-50">
