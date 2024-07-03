@@ -1,10 +1,10 @@
 <template>
   <div class="container mx-auto px-4 py-4 flex justify-center items-center">
     <div class="w-full max-w-10/12 bg-white shadow-md rounded flex shadow-lg shadow-indigo-500/40">
-      <div class="w-full max-w-md px-8 pt-6 pb-8 mb-4 md:w-1/2">
-        <div class="text-center font-bold text-xl mb-8">Sign Up</div>
-        <form @submit.prevent="handleSubmit">
-          <div class="mb-4">
+      <div class="w-full max-w-md px-8 pt-6 pb-8 mb-9 md:w-1/2">
+        <h1 class="text-center font-bold mt-3">Sign Up</h1>
+        <form @submit.prevent="onSubmit" class="mt-5 mb-2">
+          <div class="mb-2">
             <label for="name" class="block text-gray-700 text-sm font-bold mb-2"> Your Name </label>
             <input
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -13,8 +13,9 @@
               placeholder="Name"
               v-model="name"
             />
+            <span v-if="nameError" class="text-red-500 text-xs">{{ nameError }}</span>
           </div>
-          <div class="mb-4">
+          <div class="mb-2">
             <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
               Your Email
             </label>
@@ -25,8 +26,9 @@
               placeholder="Email"
               v-model="email"
             />
+            <span v-if="emailError" class="text-red-500 text-xs">{{ emailError }}</span>
           </div>
-          <div class="mb-4">
+          <div class="mb-2">
             <label for="password" class="block text-gray-700 text-sm font-bold mb-2">
               Password
             </label>
@@ -37,18 +39,22 @@
               placeholder="Password"
               v-model="password"
             />
+            <span v-if="passwordError" class="text-red-500 text-xs">{{ passwordError }}</span>
           </div>
-          <div class="mb-4">
+          <div class="mb-2">
             <label for="confirmPassword" class="block text-gray-700 text-sm font-bold mb-2">
-              Repeat your password
+              Confirm your password
             </label>
             <input
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="confirmPassword"
               type="password"
-              placeholder="Confirm Password"
+              placeholder="Enter Password"
               v-model="confirmPassword"
             />
+            <span v-if="confirmPasswordError" class="text-red-500 text-xs">{{
+              confirmPasswordError
+            }}</span>
           </div>
           <div class="mb-6">
             <input
@@ -61,17 +67,19 @@
               I agree to all statements in
               <a href="#" class="text-blue-600 hover:text-blue-800"> Forgot Password </a>
             </label>
+            <span v-if="termsError" class="text-red-500 text-xs">{{ termsError }}</span>
           </div>
           <div class="flex items-center justify-between">
             <button
-              class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
+              :disabled="isSubmitting"
             >
               LOGIN
             </button>
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              @click="showModal = true"
+              class="shadow appearance-none border rounded bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              @click="navigateToRegister"
               type="button"
             >
               REGISTER
@@ -80,61 +88,65 @@
         </form>
       </div>
       <div class="hidden md:flex md:w-1/2">
-        <img src="https://static.vecteezy.com/system/resources/previews/023/743/925/non_2x/scooter-with-delivery-man-flat-cartoon-character-fast-courier-restaurant-food-service-mail-delivery-service-a-postal-employee-the-determination-of-geolocation-using-electronic-device-free-png.png" alt="Signup Image" class="w-full h-full rounded-r object-cover">
-      </div>
-    </div>
-
-    <!-- Modal -->
-    <div v-if="showModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
-      <div class="bg-white rounded-lg p-6 w-1/3">
-        <h2 class="text-xl font-bold mb-4">Select Role</h2>
-        <div class="flex flex-column justify-around">
-          <button @click="navigateTo('user')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold  my-3 py-2 px-4 rounded">
-            User
-          </button>
-          <button @click="navigateTo('delivery')" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            Delivery
-          </button>
-        </div>
-        <div class="flex justify-end mt-4">
-          <button @click="showModal = false" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-            Cancel
-          </button>
-        </div>
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/023/743/925/non_2x/scooter-with-delivery-man-flat-cartoon-character-fast-courier-restaurant-food-service-mail-delivery-service-a-postal-employee-the-determination-of-geolocation-using-electronic-device-free-png.png"
+          alt="Signup Image"
+          class="w-full h-full rounded-r object-cover"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      terms: false,
-      showModal: false
-    }
+<script setup lang="ts">
+import axiosInstance from '@/plugins/axios'
+import { useField, useForm } from 'vee-validate'
+import * as yup from 'yup'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const formSchema = yup.object({
+  name: yup.string().required().label('Name'),
+  email: yup.string().required().email().label('Email address'),
+  password: yup.string().required().label('Password'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .required()
+    .label('Confirm Password'),
+  terms: yup.bool().oneOf([true], 'You must accept the terms').required()
+})
+
+const { handleSubmit, isSubmitting } = useForm({
+  initialValues: {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    terms: false
   },
-  methods: {
-    handleSubmit() {
-      // Add form validation and submission logic here
-      console.log('Submitted!')
-    },
-    navigateTo(role) {
-      // Handle navigation to different registration forms based on the role
-      this.showModal = false
-      if (role === 'user') {
-        // Navigate to user registration form
-        window.location.href = 'register/user';
-      } else if (role === 'delivery') {
-        // Navigate to delivery registration form
-        window.location.href = '/register/delivery';
-      }
-    }
+  validationSchema: formSchema
+})
+
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    const { data } = await axiosInstance.post('/login', values)
+    localStorage.setItem('access_token', data.access_token)
+    router.push('/')
+  } catch (error) {
+    console.error('Error', error)
   }
+})
+
+const { value: name, errorMessage: nameError } = useField('name')
+const { value: email, errorMessage: emailError } = useField('email')
+const { value: password, errorMessage: passwordError } = useField('password')
+const { value: confirmPassword, errorMessage: confirmPasswordError } = useField('confirmPassword')
+const { value: terms, errorMessage: termsError } = useField('terms')
+
+const navigateToRegister = () => {
+  router.push('/register/user')
 }
 </script>
 
