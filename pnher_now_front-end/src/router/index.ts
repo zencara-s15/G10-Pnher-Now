@@ -33,6 +33,7 @@ const router = createRouter({
     },
     
     {
+<<<<<<< HEAD
       path: '/logout',
       name: 'logout',
       component: () => import('../views/Admin/Auth/LoginView.vue')
@@ -80,6 +81,37 @@ const router = createRouter({
     },
     
 
+=======
+      path: "/deliver",
+      name: "deliver",
+      component: () => import('../views/Web/Deliver/DeliverView.vue')
+    },
+    {
+      path: "/history",
+      name: "history",
+      component: () => import('../views/Web/History/HistoryView.vue')
+    },
+    {
+      path: "/average",
+      name: "average",
+      component: () => import('../views/Web/Average/AverageView.vue')
+    },
+    {
+      path: "/processdeliver",
+      name: "processdeliver",
+      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
+    },
+    {
+      path: "/feedback",
+      name: "feedback",
+      component: () => import('../views/Web/Feedback/FeedbackView.vue')
+    },
+    {
+      path: "/request",
+      name: "request",
+      component: () => import('../views/Web/Request/RequestView.vue')
+    }
+>>>>>>> d443dd952d8fa459df9a4882ce9bbaaa3b6be6d3
   ]
 })
 
