@@ -33,7 +33,6 @@ const router = createRouter({
     },
     
     {
-<<<<<<< HEAD
       path: '/logout',
       name: 'logout',
       component: () => import('../views/Admin/Auth/LoginView.vue')
@@ -79,9 +78,7 @@ const router = createRouter({
       name: 'average',
       component: () => import('../views/Web/Average/AverageView.vue')
     },
-    
-
-=======
+    {
       path: "/deliver",
       name: "deliver",
       component: () => import('../views/Web/Deliver/DeliverView.vue')
@@ -111,7 +108,6 @@ const router = createRouter({
       name: "request",
       component: () => import('../views/Web/Request/RequestView.vue')
     }
->>>>>>> d443dd952d8fa459df9a4882ce9bbaaa3b6be6d3
   ]
 })
 
