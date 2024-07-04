@@ -54,8 +54,6 @@
           </div>
           @endcan
         </div>
-
       </div>
   </main>
-</div>
 </x-app-layout>
