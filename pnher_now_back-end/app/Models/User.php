@@ -71,4 +71,8 @@ class User extends Authenticatable
         return $this->hasMany(Baggage::class);
     }
 
+    public function branches()
+    {
+        return $this->hasMany(\App\Models\Supervisor\Branch::class, 'user_id');
+    }
 }
