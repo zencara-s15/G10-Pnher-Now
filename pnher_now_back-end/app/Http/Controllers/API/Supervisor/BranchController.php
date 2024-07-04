@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\API\Supervisor;
 
 use App\Http\Controllers\Controller;
-use App\Models\Supervisor\Company;
+use App\Models\Supervisor\Branch;
 use Illuminate\Http\Request;
 
-class CompanyController extends Controller
+class BranchController extends Controller
 {
     // /**
     //  * Display a listing of the resource.
@@ -50,20 +50,21 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $companies = Company::with('branches')->get();
-        // $companies = Company::all();
-        return response()->json($companies);
+        // dd(1);
+        $branches = Branch::with(['company', 'user'])->get();
+        return response()->json($branches);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'company_id' => 'required|exists:companies,id',
             'address' => 'required',
         ]);
 
-        $company = Company::create($request->all());
+        $branch = Branch::create($request->all());
 
-        return response()->json($company, 201);
+        return response()->json($branch, 201);
     }
 }

@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\API\Delivery\BaggageController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\Supervisor\BranchController;
 use App\Http\Controllers\API\Supervisor\CompanyController;
+use App\Http\Controllers\API\UserController as APIUserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -41,6 +44,30 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/me', [AuthController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::prefix('users')->group(function (){
+        Route::get('/list',[APIUserController::class, 'index']);
+    });
+
+    // Company 
+    Route::prefix('companies')->group(function () {
+        Route::get('/list', [CompanyController::class, 'index']);
+        Route::post('/create', [CompanyController::class, 'store']);
+        Route::get('/{company}', [CompanyController::class, 'show']);
+        Route::put('/{company}', [CompanyController::class, 'update']);
+        Route::delete('/{company}', [CompanyController::class, 'destroy']);
+    });
+
+
+     // Branch
+     Route::prefix('branches')->group(function () {
+        Route::get('/list', [BranchController::class, 'index']);
+        Route::post('/create', [BranchController::class, 'store']);
+        Route::get('/{branch}', [BranchController::class, 'show']);
+        Route::put('/{branch}', [BranchController::class, 'update']);
+        Route::delete('/{branch}', [BranchController::class, 'destroy']);
+    });
+
 });
 
 // user post
@@ -85,3 +112,4 @@ Route::prefix('companies')->group(function () {
     Route::put('/{company}', [CompanyController::class, 'update']);
     Route::delete('/{company}', [CompanyController::class, 'destroy']);
 });
+   
