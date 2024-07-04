@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
+    BranchController,
     ProfileController,
     MailSettingController,
 };
@@ -53,6 +54,27 @@ Route::get('/admin/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
+// Supervisor
+// Delivery list
+Route::get('/supervisor/delivery-list', function () {
+    return view('supervisor.list_delivery');
+})->middleware(['auth'])->name('supervisor.delivery_list');
+
+// list instock
+
+Route::get('/supervisor/list-instock', function () {
+    return view('supervisor.list_instock');
+})->middleware(['auth'])->name('supervisor.list_instock');
+
+// Item details
+Route::get('/supervisor/item-detail', function () {
+    return view('supervisor.item_detail');
+})->middleware(['auth'])->name('supervisor.item_detail');
+
+
+Route::get('/supervisor/history', function () {
+    return view('supervisor.history');
+})->middleware(['auth'])->name('supervisor.history');;
 
 
 Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
@@ -69,5 +91,12 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         Route::put('/mail-update/{mailsetting}',[MailSettingController::class,'update'])->name('mail.update');
 
         Route::get('/chart', [ChartChartController::class, 'chart']);
+
+        //======================== Branch route ===============================
+        Route::resource('branch','BranchController');
+        Route::get('/branch',[BranchController::class,'index'])->name('branch.index');
+        Route::get('/branch/{id}/edit',[BranchController::class,'edit'])->name('branch.edit');
+        Route::get('/branch/{id}',[BranchController::class,'update'])->name('branch.update');
+        Route::get('/branch/{id}',[BranchController::class,'destroy'])->name('branch.destroy');
 
 });

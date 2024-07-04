@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Supervisor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class History extends Controller
 {
     public function index()
     {
-        return view('supervisor.home');
+        return view('supervisor.history');
     }
 }
