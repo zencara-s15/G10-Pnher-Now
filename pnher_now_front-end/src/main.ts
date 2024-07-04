@@ -1,8 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.min.css' // Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import App from './App.vue'
 import router from './router'
@@ -13,11 +14,16 @@ import 'uno.css'
 import { configure } from 'vee-validate'
 // import { library } from '@fortawesome/fontawesome-free';
 // import { FontAwesomeIcon } from '@fortawesome/fontawesome-free';
+
+// library.add(fas);
+
 const app = createApp(App)
 
 configure({
   validateOnInput: true
 })
+  
+
 
 // library.add(...all)
 

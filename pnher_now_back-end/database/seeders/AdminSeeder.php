@@ -63,6 +63,11 @@ class AdminSeeder extends Seeder
         $permission = Permission::create(['name' => 'Mail edit']);
 
 
+        $permission = Permission::create(['name' => 'Supervisor access']);
+
+
+
+
 
         $admin->assignRole($admin_role);
         $user->assignRole($user_role);

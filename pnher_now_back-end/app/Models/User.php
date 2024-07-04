@@ -62,4 +62,13 @@ class User extends Authenticatable
             'password' => $newHashedPassword,
         ]);
     }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    public function baggage()
+    {
+        return $this->hasMany(Baggage::class);
+    }
+
 }

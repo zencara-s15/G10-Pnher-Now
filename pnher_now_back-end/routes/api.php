@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\API\Delivery\BaggageController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\Delivery\DeliveryBaggageController;
+use App\Http\Controllers\API\Delivery\DeliveryStatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +42,35 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::put('/change_password', [AuthController::class, 'change_password']);
     
+});
+// user post
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/list_post', [PostController::class, 'index']);
+    Route::get('/post/{id}', [PostController::class, 'get_post']);
+    Route::post('/post', [PostController::class,'store']);
+});
+
+//Delivery baggage
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/delivery_baggage', [DeliveryBaggageController::class,'PostDelivery']);
+    Route::get('/delivery_baggage', [DeliveryBaggageController::class, 'GetPost']);
+    Route::get('/delivery_baggage/{id}', [DeliveryBaggageController::class, 'GetDelivery']);
+});
+
+//Baggage
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/baggage_post',[BaggageController::class, 'BaggagePost']);
+    Route::get('/baggage_list',[BaggageController::class, 'BaggageList']);
+    Route::get('/baggage_list/{id}', [BaggageController::class, 'GetBaggageById']);
+});
+
+// Delivery status
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/delivery_status_post',[DeliveryStatusController::class, 'DeliveryStatusPost']);
+    Route::get('/delivery_status_list',[DeliveryStatusController::class,'ListStatus']);
+    Route::get('/delivery_status_list/{id}', [DeliveryStatusController::class, 'DeliverStatusListByid']);
 });
