@@ -23,7 +23,7 @@
       </div>
       <div class="col-12 col-md-4 part3">
         <div class="partner-list p-3">
-          <h2 class="text-center mb-3">List of Company</h2>
+          <h1 class="text-center mb-3">List of Company</h1>
           <ul class="list-unstyled">
             <li
               v-for="(partner, index) in partners"
@@ -76,14 +76,8 @@ const partners = ref([
   padding: 20px;
   margin-bottom: 20px;
 }
-.part1 {
-  background-color: #d0d0d0;
-}
-.part2 {
-  background-color: #e0e0e0;
-}
+
 .part3 {
-  background-color: #ffcccc;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,20 +98,22 @@ const partners = ref([
 
 .partner-list {
   width: 100%;
-  background-color: rgba(248, 80, 87, 1);
+  height: 100vh;
+  background-color: rgb(249, 243, 243);
   border-radius: 5px;
   padding: 20px;
+  border: red solid;
 }
 
 .partner-logo {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  border: 2px green solid;
   margin-right: 10px;
 }
 
 .container {
-  background: pink;
   height: 100%;
   width: 100%;
 }
@@ -126,5 +122,8 @@ input {
 }
 span {
   background: rgba(208, 9, 17, 0.5);
+}
+h1{
+  color: red;
 }
 </style>

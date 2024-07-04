@@ -8,12 +8,11 @@
         </div>
       </div>
       <div class="card-body">
-        <p>Number sender: {{ card.numberSender }}</p>
-        <p>Send To: {{ card.sendTo }}</p>
+         <p>Type: {{ card.type }}</p>
+        <p>Weight: {{ card.weight }}</p>
         <p>Number receiver: {{ card.numberReceiver }}</p>
-        <p>Location Receiver: {{ card.locationReceiver }}</p>
-        <p>Type: {{ card.type }}</p>
-        <p>weight: {{ card.weight }}</p>
+        <p>Company: {{card.company}}</p>
+        <p>Address Receiver: {{card.receiver_address}}</p>
       </div>
       <div class="card-footer">
         <p @click="showMap(card)">View Map</p>
@@ -38,51 +37,26 @@ export default {
         {
           name: 'Sreyluch',
           image: 'https://tinypng.com/images/social/website.jpg',
-          numberSender: '0887049868',
-          sendTo: 'PS',
-          numberReceiver: '088998018',
-          locationReceiver: "P'sar Kravanh PS.",
           type: 'decying',
           weight: '2kg',
+          numberReceiver: '088998018',
+          company: 'J&T',
+          receiver_address: "P'sar Kravanh PS.",
           locationSender: 'View Map',
-          coordinates: [12.5657, 104.991] // Example coordinates
+          coordinates: [11.55104, 104.88353] 
         },
         {
           name: 'Sreyluch',
           image: 'https://tinypng.com/images/social/website.jpg',
-          numberSender: '0887049868',
-          sendTo: 'PS',
-          numberReceiver: '088998018',
-          locationReceiver: "P'sar Kravanh PS.",
           type: 'decying',
           weight: '2kg',
-          locationSender: 'View Map',
-          coordinates: [12.5657, 104.991] // Example coordinates
-        },
-        {
-          name: 'Sreyluch',
-          image: 'https://tinypng.com/images/social/website.jpg',
-          numberSender: '0887049868',
-          sendTo: 'PS',
           numberReceiver: '088998018',
-          locationReceiver: "P'sar Kravanh PS.",
-          type: 'decying',
-          weight: '2kg',
+          company: 'J&T',
+          receiver_address: "P'sar Kravanh PS.",
           locationSender: 'View Map',
-          coordinates: [11.55104, 104.88353] // Example coordinates
-        },
-        {
-          name: 'Sreyluch',
-          image: 'https://tinypng.com/images/social/website.jpg',
-          numberSender: '0887049868',
-          sendTo: 'PS',
-          numberReceiver: '088998018',
-          locationReceiver: "P'sar Kravanh PS.",
-          type: 'decying',
-          weight: '2kg',
-          locationSender: 'View Map',
-          coordinates: [11.55104, 104.88353] // Example coordinates
+          coordinates: [11.55104, 104.88353] 
         }
+        
       ],
       showMapModal: false,
       selectedCoordinates: null,
@@ -113,7 +87,7 @@ export default {
         attribution: '© OpenStreetMap contributors'
       }).addTo(this.map);
       L.marker(this.selectedCoordinates).addTo(this.map)
-        .bindPopup('Location Receiver')
+        .bindPopup('Location Sender')
         .openPopup();
       this.map.invalidateSize();
     }
@@ -126,7 +100,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #d3d3d3;
   gap: 20px;
 }
 
