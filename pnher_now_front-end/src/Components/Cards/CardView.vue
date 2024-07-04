@@ -16,13 +16,20 @@
         <p>weight: {{ card.weight }}</p>
       </div>
       <div class="card-footer">
-        <p>{{ card.locationSender }}</p>
+        <p @click="showMap(card)">View Map</p>
       </div>
+    </div>
+
+    <div v-if="showMapModal" class="map-modal">
+      <div class="map-container" ref="mapContainer"></div>
+      <button @click="closeMap">Close Map</button>
     </div>
   </div>
 </template>
 
 <script>
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 export default {
   name: 'CardView',
   data() {
@@ -37,7 +44,8 @@ export default {
           locationReceiver: "P'sar Kravanh PS.",
           type: 'decying',
           weight: '2kg',
-          locationSender: 'View Map'
+          locationSender: 'View Map',
+          coordinates: [12.5657, 104.991] // Example coordinates
         },
         {
           name: 'Sreyluch',
@@ -48,10 +56,67 @@ export default {
           locationReceiver: "P'sar Kravanh PS.",
           type: 'decying',
           weight: '2kg',
-          locationSender: 'View Map'
+          locationSender: 'View Map',
+          coordinates: [12.5657, 104.991] // Example coordinates
+        },
+        {
+          name: 'Sreyluch',
+          image: 'https://tinypng.com/images/social/website.jpg',
+          numberSender: '0887049868',
+          sendTo: 'PS',
+          numberReceiver: '088998018',
+          locationReceiver: "P'sar Kravanh PS.",
+          type: 'decying',
+          weight: '2kg',
+          locationSender: 'View Map',
+          coordinates: [11.55104, 104.88353] // Example coordinates
+        },
+        {
+          name: 'Sreyluch',
+          image: 'https://tinypng.com/images/social/website.jpg',
+          numberSender: '0887049868',
+          sendTo: 'PS',
+          numberReceiver: '088998018',
+          locationReceiver: "P'sar Kravanh PS.",
+          type: 'decying',
+          weight: '2kg',
+          locationSender: 'View Map',
+          coordinates: [11.55104, 104.88353] // Example coordinates
         }
-      ]
+      ],
+      showMapModal: false,
+      selectedCoordinates: null,
+      map: null
     };
+  },
+  methods: {
+    showMap(card) {
+      this.selectedCoordinates = card.coordinates;
+      this.showMapModal = true;
+      this.$nextTick(this.initMap);
+    },
+    closeMap() {
+      this.showMapModal = false;
+      this.selectedCoordinates = null;
+      if (this.map) {
+        this.map.remove();
+        this.map = null;
+      }
+    },
+    initMap() {
+      if (!this.selectedCoordinates) return;
+      if (this.map) {
+        this.map.remove();
+      }
+      this.map = L.map(this.$refs.mapContainer).setView(this.selectedCoordinates, 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(this.map);
+      L.marker(this.selectedCoordinates).addTo(this.map)
+        .bindPopup('Location Receiver')
+        .openPopup();
+      this.map.invalidateSize();
+    }
   }
 };
 </script>
@@ -59,10 +124,10 @@ export default {
 <style scoped>
 .container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100vh;
+  flex-wrap: wrap;
+  justify-content: center;
   background-color: #d3d3d3;
+  gap: 20px;
 }
 
 .card {
@@ -70,15 +135,16 @@ export default {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 350px;
-  padding: 20px;
-  text-align: left;
+  padding: 30px;
   margin: 10px;
+  text-align: left;
 }
 
 .card-header {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  padding: 10px;
 }
 
 .avatar {
@@ -97,11 +163,44 @@ export default {
 .card-footer p {
   font-size: 18px;
   margin: 10px 0;
+  cursor: pointer;
 }
 
 .card-footer {
   text-align: center;
   font-weight: bold;
   margin-top: 15px;
+}
+
+.map-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-container {
+  width: 80%;
+  height: 80%;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.map-modal button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>
