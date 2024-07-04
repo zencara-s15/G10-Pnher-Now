@@ -14,6 +14,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.3/cdn.min.js" integrity="sha512-6LOuSt6loBXwUs8BGpCe7XsllXZBP4EpFE3mZ5Ibax0C7hBymqj0KzDH+brgr07Yr++NTOh3aIv2+8KvEvNOcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
     <!-- Scripts -->
     <!-- Chart JS -->

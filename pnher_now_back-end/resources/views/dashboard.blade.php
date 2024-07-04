@@ -348,6 +348,34 @@
     {{-- </x-app-layout> --}}
     <script>
         //Admin
+
+        //Supervisor
+        var ctx = document.getElementById('barChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Monday', 'Tuesday', 'Wendesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [12, 19, 14, 9, 10, 13, 10],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 10)',
+                        'rgba(54, 162, 235, 10)',
+                        'rgba(255, 206, 86, 10)',
+                        'rgba(75, 192, 192, 10)',
+                        'rgba(153, 102, 255, 10)',
+                        'rgba(255, 159, 64, 10)',
+                        'rgba(255, 159, 109, 10)',
+                    ]
+                }]
+            }
+        });
+    </script>
+
+
+
+
+    <script>
         var ctx = document.getElementById('barChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'pie',
@@ -418,40 +446,7 @@
                 }
             }
         })
-
-
-        //Supervisor
-        var ctx = document.getElementById('barChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Monday', 'Tuesday', 'Wendesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-                datasets: [{
-                    label: 'Sales',
-                    data: [12, 19, 14, 9, 10, 13, 10],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 10)',
-                        'rgba(54, 162, 235, 10)',
-                        'rgba(255, 206, 86, 10)',
-                        'rgba(75, 192, 192, 10)',
-                        'rgba(153, 102, 255, 10)',
-                        'rgba(255, 159, 64, 10)',
-                        'rgba(255, 159, 109, 10)',
-                    ]
-                }]
-            }
-        });
     </script>
 
 
-    {{-- <div>
-    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-        <div class="container px-6">
-
-            <script>
-                
-            </script>
-    </main>
-</div>
-</div> --}}
 </x-app-layout>
