@@ -27,8 +27,7 @@
                 </div>
               </div>
             </div>
-
-
+            
             <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
               <div class="card-body flex flex-row items-center">
                 <div class="col-icon flex flex-row items-center bg-blue-400 h-37 px-4 py-3 rounded-lg">
@@ -106,6 +105,8 @@
           </div>
         </div>
       </div>
+
+
       <script>
         var ctx = document.getElementById('barChart').getContext('2d');
         var myChart = new Chart(ctx, {
