@@ -1,12 +1,12 @@
 <x-app-layout>
   <div>
-    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-      <div class="container mx-auto px-6 py-8">
+    <main class="flex-1 bg-gray-200">
+      <div class="container px-6 py-3">
 
 
-        <h3 class="text-gray-700 text-3xl font-medium mt-14">Welcome : {{ auth()->user()->name }}</h3>
+        <h3 class="text-gray-700 text-3xl font-medium mt-2">Welcome : {{ auth()->user()->name }}</h3>
         <!-- Container -->
-        <div class="container mt-1 ">
+        <div class="container">
 
           <!-- Dashboard -->
           <div class="row flex flex-row m-5 justify-between">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col col-stats ms-3 ms-sm-0 mx-2">
                   <div class="numbers">
-                    <p class="card-category">All Product</p>
+                    <p class="card-category">All Baggages</p>
                     <h4 class="card-title">1,294</h4>
                   </div>
                 </div>
@@ -97,7 +97,7 @@
             <canvas id="barChart"></canvas>
           </div>
         </div>
-        <div class="card w-6/12 mx-1 p-2 bg-white rounded-lg">
+        <div class="card w-6/12 bg-white rounded-lg">
           <div class="card-header flex justify-center">
             <h1 class="">Total of each months</h1>
           </div>
@@ -106,16 +106,21 @@
           </div>
         </div>
       </div>
-      <script>
+    </main>
+  </div>
+  </div>
+</x-app-layout>
+
+<script>
         var ctx = document.getElementById('barChart').getContext('2d');
         var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ['New register', 'All companies', 'All products', 'Order'],
+            labels: ['New register', 'All companies', 'All Baggages', 'Order'],
             datasets: [{
               data: [12, 19, 3, 5],
               backgroundColor: [
-                '#2563EB',
+                '#B941FF',
                 '#2563EB',
                 '#EF4444',
                 '#FBBF24',
@@ -179,7 +184,3 @@
 				}
         })
       </script>
-    </main>
-  </div>
-  </div>
-</x-app-layout>

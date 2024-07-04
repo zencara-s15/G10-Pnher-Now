@@ -16,20 +16,17 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-<<<<<<< HEAD
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-=======
-            
 
-            <div class="flex-1 flex flex-col overflow-scroll">
->>>>>>> 4cab557f7a661cebbcdd630b313161d4cf08e2fb
 
-    <!-- Other head elements -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="flex-1 flex flex-col overflow-scroll">
 
-    <!-- Chart JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- Other head elements -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <!-- Chart JS -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="font-sans antialiased">

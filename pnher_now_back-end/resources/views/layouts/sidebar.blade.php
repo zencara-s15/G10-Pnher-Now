@@ -65,6 +65,15 @@
         </a>
         @endcanany
 
+        @canany('Company access','Company add','Company edit','Company delete')
+        <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{ Route::currentRouteNamed('admin.company.index') ? 'active' : '' }}" href="{{ route('admin.company.index')}}">
+            <span class="material-icons-outlined">
+                local_convenience_store
+            </span>
+            <span class="mx-3">Company</span>
+        </a>
+        @endcanany
+
 
         @canany('Mail access','Mail edit')
         <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{ Route::currentRouteNamed('admin.mail.index') ? 'active' : '' }}" href="{{ route('admin.mail.index')}}">
