@@ -14,7 +14,9 @@ function closeDropdown() {
 </script>
 
 <template>
-  <nav class="flex-no-wrap relative flex w-full items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:flex-wrap lg:justify-start lg:py-4 size-25">
+  <nav
+    class="flex-no-wrap relative flex w-full items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:flex-wrap lg:justify-start lg:py-4 size-25"
+  >
     <div class="flex w-full flex-wrap items-center justify-between px-3">
       <!-- Logo -->
       <router-link
@@ -25,7 +27,7 @@ function closeDropdown() {
       </router-link>
       <!-- Left navigation links -->
       <div class="flex-grow">
-        <div class="flex space-x-4 justify-center gap-x-9">
+        <div class="flex space-x-3 justify-center gap-x-3">
           <router-link
             to="/user/dashboard"
             class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
@@ -46,6 +48,48 @@ function closeDropdown() {
             active-class="text-red-500"
           >
             HISTORY
+          </router-link>
+          <router-link
+            to="/deliverer"
+            class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
+            active-class="text-red-500"
+          >
+            DELIVER
+          </router-link>
+          <router-link
+            to="/feedback"
+            class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
+            active-class="text-red-500"
+          >
+            FEEDBACK
+          </router-link>
+          <router-link
+            to="/history_deliverer"
+            class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
+            active-class="text-red-500"
+          >
+            HISTORY-DELIVERER
+          </router-link>
+          <router-link
+            to="/proccess"
+            class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
+            active-class="text-red-500"
+          >
+            PROCESS
+          </router-link>
+          <router-link
+            to="/request"
+            class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
+            active-class="text-red-500"
+          >
+            REQUEST
+          </router-link>
+          <router-link
+            to="/average"
+            class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
+            active-class="text-red-500"
+          >
+            AVERAGE
           </router-link>
         </div>
       </div>

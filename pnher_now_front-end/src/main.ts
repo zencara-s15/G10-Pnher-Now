@@ -14,6 +14,8 @@ import axios from './plugins/axios'
 import 'uno.css'
 import { configure } from 'vee-validate'
 
+// library.add(fas);
+
 const app = createApp(App)
 
 configure({
