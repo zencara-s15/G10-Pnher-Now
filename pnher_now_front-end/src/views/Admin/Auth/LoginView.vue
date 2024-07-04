@@ -80,9 +80,9 @@ const { handleSubmit, isSubmitting } = useForm({
 
 const onSubmit = handleSubmit(async (values) => {
   try {
-    const { data } = await axiosInstance.post('/home', values)
+    const { data } = await axiosInstance.post('/login', values)
     localStorage.setItem('access_token', data.access_token)
-    router.push('/home')
+    router.push('/home') // Redirect to "/register" after successful login
   } catch (error) {
     console.error('Error', error)
   }
@@ -91,9 +91,6 @@ const onSubmit = handleSubmit(async (values) => {
 const { value: email, errorMessage: emailError } = useField('email')
 const { value: password, errorMessage: passwordError } = useField('password')
 
-const navigateToRegister = () => {
-  router.push('/register/user')
-}
 </script>
 
 <style scoped>
