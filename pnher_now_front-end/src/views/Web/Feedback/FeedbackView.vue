@@ -88,12 +88,7 @@ export default {
 }
 </script>
 
-<<<<<<< HEAD
-<style>
-
-=======
 <style scoped>
->>>>>>> 4cab557f7a661cebbcdd630b313161d4cf08e2fb
 
 .container {
     display: flex;
