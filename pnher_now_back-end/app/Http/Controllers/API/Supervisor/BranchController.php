@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API\Supervisor;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BranchResource;
+use App\Models\Branch as ModelsBranch;
 use App\Models\Supervisor\Branch;
 use Illuminate\Http\Request;
 
@@ -52,12 +54,15 @@ class BranchController extends Controller
     {
         // dd(1);
         $branches = Branch::with(['company', 'user'])->get();
+        // $branches = Branch::all();
+        // return BranchResource::collection($branches);
         return response()->json($branches);
     }
 
     public function store(Request $request)
     {
         $request->validate([
+            'name' => 'required',
             'user_id' => 'required|exists:users,id',
             'company_id' => 'required|exists:companies,id',
             'address' => 'required',

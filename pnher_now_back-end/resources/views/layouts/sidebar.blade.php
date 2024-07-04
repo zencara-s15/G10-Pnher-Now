@@ -100,7 +100,22 @@
             </a>
         @endcanany
 
+        {{-- Branch page --}}
 
+        {{-- @canany('Branch access') --}}
+        <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{ Route::currentRouteNamed('admin.branch.index') ? 'active' : '' }}"
+            href="{{ route('admin.branch.index') }}">
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 21v-2a2 2 0 012-2h1a2 2 0 012 2v2m-5 0h5m5 0h5m-5 0v-2a2 2 0 012-2h1a2 2 0 012 2v2m-5 0h5M3 21h18m-2-7h1a2 2 0 002-2V7a2 2 0 00-2-2h-5V3a2 2 0 00-2-2H9a2 2 0 00-2 2v2H2a2 2 0 00-2 2v5a2 2 0 002 2h1m0-7V3m0 4h12m0 0V3m-6 0h.01" />
+            </svg>
+            <span class="mx-3">Branch</span>
+        </a>
+        {{-- @endcanany --}}
+
+
+        {{-- History page --}}
         @canany('History access')
             <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{ Route::currentRouteNamed('supervisor.history') ? 'active' : '' }}"
                 href="{{ route('supervisor.history') }}">

@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('company_id');
-            $table->string('address')->nullable();
+            $table->string('name');
+            $table->string('user_id');
+            $table->string('company_id');
+            $table->string('address');
             $table->timestamps();
         });
     }
