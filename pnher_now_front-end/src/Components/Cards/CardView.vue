@@ -35,7 +35,7 @@ export default {
     return {
       cards: [
         {
-          name: 'Sreyluch',
+          name: 'KaKa',
           image: 'https://tinypng.com/images/social/website.jpg',
           type: 'decying',
           weight: '2kg',
@@ -46,7 +46,7 @@ export default {
           coordinates: [11.55104, 104.88353] 
         },
         {
-          name: 'Sreyluch',
+          name: 'King',
           image: 'https://tinypng.com/images/social/website.jpg',
           type: 'decying',
           weight: '2kg',
