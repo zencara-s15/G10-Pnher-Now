@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="bg-gradient-to-r min-h-screen flex flex-column items-center justify-center bg-gray-100"
-  >
+  <div class="bg-gradient-to-r min-h-screen flex flex-column items-center justify-center bg-gray-100">
     <div class="pagination flex justify-center items-center pt-30 h-10vh w-80h">
       <div :class="['number', { active: step === 1 }]">1</div>
       <div class="bar"></div>
@@ -14,12 +12,8 @@
         <h1 class="text-center font-bold text-gray-800 mt-3">Register</h1>
         <p class="text-center text-gray-800 my-4">Create an account!</p>
       </div>
-      <form
-        v-if="step === 1"
-        @submit.prevent="nextStep"
-        id=""
-        class="stepOne flex-6 mb-4 flex flex-column gap-4"
-      >
+
+      <form v-if="step === 1" @submit.prevent="nextStep" class="stepOne flex-6 mb-4 flex flex-column gap-4">
         <div class="mb-1">
           <label class="block text-gray-700 font-bold" for="email">Email</label>
           <input
@@ -40,7 +34,6 @@
             required
           />
         </div>
-
         <div class="mb-1">
           <label class="block text-gray-700 font-bold" for="cfPassword">Confirm Password</label>
           <input
@@ -51,35 +44,23 @@
             required
           />
         </div>
-        <div class="stepOne flex-8 gap-2 step flex flex-column">
-          <div class="">
-            <span class="mt-2 color-black">Already have an account? <a href="/">Login</a></span>
-          </div>
-          <div class="flex justify-end item-center">
-            <button class="cssbuttons-io-button" id="text_next">
-              Next
-              <div class="icon next" id="slide_provious">
-                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-              </div>
-            </button>
-          </div>
+        <div class="flex justify-end item-center">
+          <button class="cssbuttons-io-button" type="submit">
+            Next
+            <div class="icon next">
+              <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+          </button>
         </div>
       </form>
-  
-      <!-- step-2  -->
 
-      <form
-        v-if="step === 2"
-        @submit.prevent="nextStep"
-        id="stepTwo"
-        class="flex-6 py-2 grid grid-cols-1 md:grid-cols-2 gap-3"
-      >
+      <form v-if="step === 2" @submit.prevent="register" class="flex-6 py-2 grid grid-cols-1 md:grid-cols-2 gap-3">
         <div class="mb-1">
           <label class="block text-gray-700" for="firstName">First Name</label>
           <input
@@ -120,71 +101,31 @@
             required
           />
         </div>
-        <div class="md:col-span-2 stepTwo flex-8 gap-2 flex justify-between item-center">
-          <!-- <div class="flex "> -->
-            <button class="cssbuttons-io-button" id="text_previous" @click.prevent="prevStep">
-              Back
-              <div class="icon" id="slide_next">
-                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M7.828 11L13.192 5.636 11.778 4.222 4 12l7.778 7.778 1.414-1.414L7.828 13H20v-2z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-              </div>
-            </button>
-            <button class="cssbuttons-io-button" id="text_next">
-              Next
-              <div class="icon next" id="slide_provious">
-                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-              </div>
-            </button>
-          <!-- </div> -->
-        </div>
-      </form>
-
-      <!-- step 3 -->
-      <form
-        v-if="step === 3"
-        @submit.prevent="nextStep"
-        id="stepTwo"
-        class="flex-6 py-2 grid grid-cols-1 md:grid-cols-2 gap-3"
-      >
-        <h1>Last Step</h1>
-        <div class="md:col-span-2 stepTwo flex-8 gap-2 flex justify-between item-center">
-          <!-- <div class="flex "> -->
-            <button class="cssbuttons-io-button" id="text_previous" @click.prevent="prevStep">
-              Back
-              <div class="icon" id="slide_next">
-                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M7.828 11L13.192 5.636 11.778 4.222 4 12l7.778 7.778 1.414-1.414L7.828 13H20v-2z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-              </div>
-            </button>
-            <button class="cssbuttons-io-button" id="text_next">
-              Finish
-              <div class="icon next" id="slide_provious">
-                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-              </div>
-            </button>
-          <!-- </div> -->
+        <div class="flex justify-between item-center">
+          <button class="cssbuttons-io-button" @click.prevent="prevStep">
+            Back
+            <div class="icon">
+              <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M7.828 11L13.192 5.636 11.778 4.222 4 12l7.778 7.778 1.414-1.414L7.828 13H20v-2z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+          </button>
+          <button class="cssbuttons-io-button" type="submit">
+            Register
+            <div class="icon next">
+              <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+          </button>
         </div>
       </form>
     </div>
@@ -207,20 +148,20 @@ export default {
         job: '',
         address: ''
       }
-    }
+    };
   },
   methods: {
     nextStep() {
-      this.step++
+      this.step++;
     },
     prevStep() {
-      this.step--
+      this.step--;
     },
     register() {
-      this.$router.push('/login')
+      this.$router.push('/login');
     }
   }
-}
+};
 </script>
 
 <style>

@@ -12,6 +12,8 @@ import 'element-plus/dist/index.css'
 import axios from './plugins/axios'
 import 'uno.css'
 import { configure } from 'vee-validate'
+// import { library } from '@fortawesome/fontawesome-free';
+// import { FontAwesomeIcon } from '@fortawesome/fontawesome-free';
 
 // library.add(fas);
 
@@ -22,6 +24,8 @@ configure({
 })
   
 
+
+// library.add(...all)
 
 app.use(createPinia())
 app.use(router.router)

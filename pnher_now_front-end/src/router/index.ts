@@ -17,17 +17,12 @@ const router = createRouter({
       }
     },
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: () => import('../views/Admin/Auth/LoginView.vue')
     },
     {
-      path: '/logout',
-      name: 'logout',
-      component: () => import('../views/Admin/Auth/LoginView.vue')
-    },
-    {
-      path: '/',
+      path: '/Home',
       name: 'home',
       component: () => import('../views/Web/User/ProductUser.vue')
     },
@@ -38,7 +33,7 @@ const router = createRouter({
       component: () => import('../views/Admin/Auth/LoginView.vue')
     },
     {
-      path: '/register/user',
+      path: '/register',
       name: 'register',
       component: () => import('../views/Admin/Auth/RegisterUserView.vue')
     },
@@ -112,7 +107,8 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const publicPages = ['/login','logout']
+  const publicPages = ['/']
+  // const publicPages = ['/login','logout']
   const authRequired = !publicPages.includes(to.path)
   const store = useAuthStore()
 
