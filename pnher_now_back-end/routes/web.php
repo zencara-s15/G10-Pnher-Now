@@ -91,5 +91,8 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         //======================== Branch route ===============================
         Route::resource('branch','BranchController');
         Route::get('/branch',[BranchController::class,'index'])->name('branch.index');
+        Route::get('/branch/{id}/edit',[BranchController::class,'edit'])->name('branch.edit');
+        Route::get('/branch/{id}',[BranchController::class,'update'])->name('branch.update');
+        Route::get('/branch/{id}',[BranchController::class,'destroy'])->name('branch.destroy');
 
 });
