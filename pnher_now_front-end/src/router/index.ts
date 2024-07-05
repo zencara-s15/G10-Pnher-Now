@@ -29,8 +29,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/Web/User/ProductUser.vue')
+      component: () => import('../views/Web/HomeView.vue')
     },
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   component: () => import('../views/Web/User/ProductUser.vue')
+    // },
     
     {
       path: '/register/user',
