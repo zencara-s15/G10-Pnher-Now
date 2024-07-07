@@ -95,7 +95,7 @@
             <div class="mb-1 flex-1">
               <label class="block text-gray-700" for="firstName">First Name</label>
               <input
-                v-model="form.firstName"
+                v-model="form.first_name"
                 type="text"
                 id="firstName"
                 class="mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -105,7 +105,7 @@
             <div class="mb-1 flex-1">
               <label class="block text-gray-700" for="lastName">Last Name</label>
               <input
-                v-model="form.lastName"
+                v-model="form.last_name"
                 type="text"
                 id="lastName"
                 class="mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -172,17 +172,88 @@
       >
         <!-- <h1>Last Step</h1> -->
         <div class="flex flex-column justify-between h-35vh">
-          <div class="mb-1 md:col-span-2">
-            <label class="block text-gray-700" for="profilePicture">Profile Picture</label>
-            <input
-              @change="handleFileUpload"
-              type="file"
-              id="profilePicture"
-              class="w-100 mt-1 mb-2 block w-full p-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-              required
-            />
+          <div class="flex justify-center mb-6">
+            <div @click="openImageOptions" class="relative cursor-pointer">
+              <input
+                ref="fileInput"
+                @change="onImageChange"
+                type="file"
+                id="profileImage"
+                accept="image/*"
+                class="hidden"
+              />
+              <div v-if="imagePreview" class="w-24 h-24 bg-gray-200 rounded-full overflow-hidden">
+                <img
+                  :src="imagePreview"
+                  alt="Profile Image Preview"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div
+                v-else
+                class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center"
+              >
+                <img
+                  src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+                  alt="Default Avatar"
+                  class="w-full h-full object-cover rounded-full"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Image Options Modal -->
+          <div
+            v-if="imageOptionsVisible"
+            class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+          >
+            <div class="bg-white p-4 rounded-lg shadow-lg">
+              <h3 class="text-lg font-bold mb-4">Select Image Source</h3>
+              <button
+                type="button"
+                @click="triggerFileInput"
+                class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 mb-2"
+              >
+                Upload File
+              </button>
+              <button
+                @click="openCamera"
+                class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700"
+              >
+                Use Camera
+              </button>
+              <button
+                @click="closeImageOptions"
+                class="mt-4 w-full bg-red-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-red-700"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+
+          <!-- Camera Modal -->
+          <div
+            v-if="cameraVisible"
+            class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+          >
+            <div class="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center">
+              <video ref="video" class="w-full mb-4"></video>
+              <button
+                @click="captureImage"
+                class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mb-2"
+              >
+                Capture
+              </button>
+              <button
+                @click="closeCamera"
+                class="w-full bg-red-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
+
         <div class="mt-4">
           <div class="md:col-span-2 stepTwo flex-8 gap-2 flex justify-between item-center">
             <button class="cssbuttons-io-button" id="text_previous" @click.prevent="prevStep">
@@ -219,7 +290,6 @@
 // import axiosInstance from './axiosInstance';
 import axiosInstance from '@/plugins/axios'
 
-
 export default {
   data() {
     return {
@@ -228,51 +298,106 @@ export default {
         email: '',
         password: '',
         cfPassword: '',
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         address: '',
         date: '',
-        profilePicture: null,
+        profilePicture: null
       },
-    };
+      imagePreview: null,
+      imageOptionsVisible: false,
+      cameraVisible: false,
+      videoStream: null
+    }
   },
   methods: {
     nextStep() {
       if (this.step === 1 && this.form.password !== this.form.cfPassword) {
-        alert('Passwords do not match');
+        alert('Passwords do not match')
       } else {
-        this.step++;
+        this.step++
       }
     },
     prevStep() {
-      this.step--;
+      this.step--
     },
+    triggerFileInput() {
+      this.$refs.fileInput.click();
+    },
+    onImageChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.imagePreview = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+      this.closeImageOptions();
+    },
+    openImageOptions() {
+      this.imageOptionsVisible = true;
+    },
+    closeImageOptions() {
+      this.imageOptionsVisible = false;
+    },
+    openCamera() {
+      this.imageOptionsVisible = false;
+      this.cameraVisible = true;
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+          this.videoStream = stream;
+          this.$refs.video.srcObject = stream;
+          this.$refs.video.play();
+        })
+        .catch((err) => {
+          console.error("Error accessing camera: ", err);
+        });
+    },
+    captureImage() {
+      const canvas = document.createElement('canvas');
+      canvas.width = this.$refs.video.videoWidth;
+      canvas.height = this.$refs.video.videoHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(this.$refs.video, 0, 0, canvas.width, canvas.height);
+      this.imagePreview = canvas.toDataURL('image/png');
+      this.closeCamera();
+    },
+    closeCamera() {
+      if (this.videoStream) {
+        this.videoStream.getTracks().forEach(track => track.stop());
+      }
+      this.cameraVisible = false;
+    },
+
     async submitForm() {
       try {
-        const formData = new FormData();
-        formData.append('email', this.form.email);
-        formData.append('password', this.form.password);
-        formData.append('firstName', this.form.firstName);
-        formData.append('lastName', this.form.lastName);
-        formData.append('address', this.form.address);
-        formData.append('date', this.form.date);
+        const formData = new FormData()
+        formData.append('email', this.form.email)
+        formData.append('password', this.form.password)
+        formData.append('first_name', this.form.first_name)
+        formData.append('last_name', this.form.last_name)
+        formData.append('address', this.form.address)
+        formData.append('date', this.form.date)
         if (this.form.profilePicture) {
-          formData.append('profilePicture', this.form.profilePicture);
+          formData.append('profilePicture', this.form.profilePicture)
         }
 
-        const response = await axiosInstance.post('/register', formData);
-        alert('Form submitted successfully!');
-        console.log(response.data);
+        console.log(this.form);
+
+        const response = await axiosInstance.post('/register/user', this.form)
+        alert('Form submitted successfully!')
+        console.log(response.data)
       } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('An error occurred while submitting the form.');
+        console.error('Error submitting form:', error)
+        alert('An error occurred while submitting the form.')
       }
     },
     handleFileUpload(event) {
-      this.form.profilePicture = event.target.files[0];
-    },
-  },
-};
+      this.form.profilePicture = event.target.files[0]
+    }
+  }
+}
 </script>
 
 
