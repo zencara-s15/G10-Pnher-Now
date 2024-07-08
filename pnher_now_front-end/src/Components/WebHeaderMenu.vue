@@ -173,6 +173,11 @@ function closeDropdown() {
   </nav>
 </template>
 
+
+<script>
+
+</script>
+
 <style scoped>
 .text-red-500 {
   color: #ef4444;

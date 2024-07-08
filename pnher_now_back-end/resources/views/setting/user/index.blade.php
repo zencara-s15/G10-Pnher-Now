@@ -40,6 +40,30 @@
                     <button class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark text-red-400">Delete</button>
                   </form>
                   @endcan
+              <div class="bg-white shadow-md rounded my-6">
+                <table class="text-left w-full border-collapse">
+                  <thead>
+                    <tr>
+                      <th class="py-4 px-6 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light">User Name</th>
+                      <th class="py-4 px-6 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light">Role</th>
+                      <th class="py-4 px-6 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                    @can('User access')
+                      @foreach($users as $user)
+                      <tr class="hover:bg-grey-lighter">
+                        <td class="py-4 px-6 border-b border-grey-light">{{ $user->first_name }} {{$user->last_name}}</td>
+                        <td class="py-4 px-6 border-b border-grey-light">
+                            @foreach($user->roles as $role)
+                              <span class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-gray-500 rounded-full">{{ $role->name }}</span>
+                            @endforeach
+                        </td>
+                        <td class="py-4 px-6 border-b border-grey-light text-right">
+                          @can('User edit')
+                          <a href="{{route('admin.users.edit',$user->id)}}" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark text-blue-400">Edit</a>
+                          @endcan
 
                 </td>
               </tr>
