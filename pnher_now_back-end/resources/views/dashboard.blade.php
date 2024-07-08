@@ -46,88 +46,6 @@
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
-=======
-
-            {{-- chart graph script  --}}
-            <script>
-                var ctx = document.getElementById('barChart').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['New register', 'All companies', 'All products', 'Order'],
-                        datasets: [{
-                            data: [12, 19, 3, 5],
-                            backgroundColor: [
-                                '#2563EB',
-                                '#2563EB',
-                                '#EF4444',
-                                '#FBBF24',
-                            ],
-                        }],
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-                // Line charts
-                var ctx = document.getElementById('lineChart').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        datasets: [{
-                                label: 'New Register',
-                                data: [12, 19, 3, 5, 2, 3, 10],
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                fill: false,
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'Company',
-                                data: [5, 2, 10, 3, 8, 15, 7, 1, 12, 9, 10, 20],
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                fill: false,
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'All Product',
-                                data: [10, 15, 12, 20, 15, 10, 12, 18, 25, 12, 19, 30],
-                                backgroundColor: 'rgba(0, 255, 0, 0.2)',
-                                borderColor: 'rgba(0, 255, 0, 1)',
-                                fill: false,
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'Order',
-                                data: [12, 19, 3, 5, 2, 3, 10, 18, 25, 12, 19, 30],
-                                backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                                borderColor: 'rgba(255, 159, 64, 1)',
-                                fill: false,
-                                borderWidth: 1
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        legend: {
-                            display: false
-                        }
-                    }
-                })
-            </script>
-        @elseif(in_array('user', $roles))
-            <div class="flex">
-                <div class="flex-col w-3/4">
-                    <!-- Container -->
-                    <div class="container mb-7">
->>>>>>> 01833b6688e6b7bc2b9f2022dd0e902107e98bb1
 
             <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
               <div class="card-body flex flex-row items-center">
@@ -146,7 +64,6 @@
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
 
             <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
               <div class="card-body flex flex-row items-center">
@@ -170,7 +87,6 @@
         </div>
         <!-- end Container -->
       </div>
-      
       <!-- Chart -->
       <div class="cartInfo flex flex-row justify-between">
         <div class="card w-6/12 mx-1 p-2 bg-white rounded-lg">
@@ -181,7 +97,6 @@
             <canvas id="barChart"></canvas>
           </div>
         </div>
-
         <div class="card w-6/12 bg-white rounded-lg">
           <div class="card-header flex justify-center">
             <h1 class="">Total of each months</h1>
@@ -220,7 +135,6 @@
             }
           }
         });
-        
         // Line charts
         var ctx = document.getElementById('lineChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -270,32 +184,3 @@
 				}
         })
       </script>
-=======
-            <script>
-                //Supervisor
-                var ctx = document.getElementById('barChart').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Monday', 'Tuesday', 'Wendesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-                        datasets: [{
-                            label: 'Sales',
-                            data: [12, 19, 14, 9, 10, 13, 10],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 10)',
-                                'rgba(54, 162, 235, 10)',
-                                'rgba(255, 206, 86, 10)',
-                                'rgba(75, 192, 192, 10)',
-                                'rgba(153, 102, 255, 10)',
-                                'rgba(255, 159, 64, 10)',
-                                'rgba(255, 159, 109, 10)',
-                            ]
-                        }]
-                    }
-                });
-            </script>
-            @endif
-        </main>
-    </div>
-</x-app-layout>
->>>>>>> 01833b6688e6b7bc2b9f2022dd0e902107e98bb1
