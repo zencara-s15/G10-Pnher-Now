@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     BranchController,
+    DelivererController,
+    DriverController,
     ProfileController,
     MailSettingController,
 };
@@ -98,5 +100,12 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         Route::get('/branch/{id}/edit',[BranchController::class,'edit'])->name('branch.edit');
         Route::get('/branch/{id}',[BranchController::class,'update'])->name('branch.update');
         Route::get('/branch/{id}',[BranchController::class,'destroy'])->name('branch.destroy');
+
+        //======================== Driver ======================================
+        Route::resource('deliverer','DelivererController');
+        Route::get('/deliverer',[DelivererController::class,'index'])->name('deliverer.index');
+        Route::get('/deliverer/{id}/edit',[DelivererController::class,'edit'])->name('deliverer.edit');
+        Route::get('/deliverer/{id}',[DelivererController::class,'update'])->name('deliverer.update');
+        Route::get('/deliverer/{id}',[DelivererController::class,'destroy'])->name('deliverer.destroy');
 
 });
