@@ -23,27 +23,6 @@
           </button>
         </div>
       </div>
-      <div class="col-auto d-flex gap-3" v-for="user in users_image" :key="user.image">
-        <div class="col-auto">
-          <button class="btn btn-light text-danger">
-            <div class="message">
-              <i class="bi bi-5-circle-fill"></i>
-            </div>
-            <i class="bi bi-chat-left"></i>
-          </button>
-        </div>
-        <div class="col-auto">
-          <button class="btn btn-light text-danger">
-            <div class="notification">
-              <i class="bi bi-3-circle-fill"></i>
-            </div>
-            <i class="bi bi-bell"></i>
-          </button>
-        </div>
-        <div class="icon">
-          <img :src="user.image" class="rounded-circle" width="40" height="40" />
-        </div>
-      </div>
     </div>
     <div class="row">
       <div class="col-12">
@@ -76,12 +55,22 @@
         </div>
       </div>
     </div>
+    <!-- <div class="" v-if="status != []" > -->
+      <div v-for="item in status" :key="item.id">
+        <h1>my name: {{ item.name }}</h1>
+      </div>
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
 import WebLayout from '@/Components/Layouts/WebLayout.vue'
+import { useDeliveryStatusStore } from '@/stores/delivery_status-list'
+const store = useDeliveryStatusStore()
+
+
 export default {
+  name: 'HistoryUser',
   components: {
     WebLayout
   },
@@ -121,9 +110,11 @@ export default {
           image:
             'https://assets.goal.com/images/v3/blt7c3d8e239aa1271e/Vini%20Jr%20-%20Stepping%20up%20without%20Neymar.jpg?auto=webp&format=pjpg&width=3840&quality=60'
         }
-      ]
+      ],
+      status: []
     }
   },
+
   computed: {
     filteredDeliveries() {
       return this.deliveries.filter((item) =>
@@ -131,29 +122,35 @@ export default {
       )
     }
   },
-  methods: {
-    clearSearch() {
-      this.searchQuery = ''
-    },
-    toggleMenu(index) {
-      if (this.openMenuIndex === index) {
-        this.openMenuIndex = null
-      } else {
-        this.openMenuIndex = index
-      }
-    },
-    editItem(index) {
-      // Handle edit logic here
-      const item = this.deliveries[index]
-      console.log('Edit item:', item)
-      // Add your edit logic here, e.g., open a modal to edit the delivery details
-    },
-    deleteItem(index) {
-      this.deliveries.splice(index, 1)
-      this.openMenuIndex = null // Close the menu after deleting the item
-      console.log('Deleted item at index:', index)
-    }
+
+  mounted() {
+    store.fetchDeliveryStatus()
+    setTimeout(() => {
+      this.status = store.delivery_status.delivery_status
+      // console.log('status: ', store.delivery_status);
+    }, 2000);
   }
+  //   clearSearch() {
+  //     this.searchQuery = ''
+  //   },
+  //   toggleMenu(index) {
+  //     if (this.openMenuIndex === index) {
+  //       this.openMenuIndex = null
+  //     } else {
+  //       this.openMenuIndex = index
+  //     }
+  //   },
+  //   editItem(index) {
+  //     // Handle edit logic here
+  //     const item = this.deliveries[index]
+  //     console.log('Edit item:', item)
+  //     // Add your edit logic here, e.g., open a modal to edit the delivery details
+  //   },
+  //   deleteItem(index) {
+  //     this.deliveries.splice(index, 1)
+  //     this.openMenuIndex = null // Close the menu after deleting the item
+  //     console.log('Deleted item at index:', index)
+  //   }
 }
 </script>
 
