@@ -2,17 +2,17 @@
   <div
     class="bg-gradient-to-r min-h-screen flex flex-column items-center justify-center bg-gray-100"
   >
-    <div class="pagination flex justify-center items-center pt-30 h-10vh w-80h">
-      <div :class="['number', { active: step === 1 }]">1</div>
-      <div class="bar"></div>
-      <div :class="['number', { active: step === 2 }]">2</div>
-      <div class="bar"></div>
-      <div :class="['number', { active: step === 3 }]">3</div>
-    </div>
     <div class="flex flex-column max-w-6/12 w-full bg-white px-10 mb-4 shadow-lg rounded-lg h-70vh">
       <div class="flex-3">
-        <h1 class="text-center font-bold text-gray-800 mt-3">Register</h1>
-        <p class="text-center text-gray-800 my-4">Create an account!</p>
+        <h1 class="text-center font-size-12 font-bold text-gray-800 mt-3">Register</h1>
+        <!-- <p class="text-center text-gray-800 my-4">Create an account!</p> -->
+        <div class="pagination flex justify-center items-center pt-30 h-10vh w-80h">
+          <div :class="['number', { active: step === 1 }]">1</div>
+          <div class="bar"></div>
+          <div :class="['number', { active: step === 2 }]">2</div>
+          <div class="bar"></div>
+          <div :class="['number', { active: step === 3 }]">3</div>
+        </div>
       </div>
       <form
         v-if="step === 1"
@@ -57,7 +57,10 @@
         <div class="">
           <div class="stepOne flex-8 step flex flex-column">
             <div class="">
-              <span class="mt-2 color-black">Already have an account? <a href="/">Login</a></span>
+              <span class="mt-2 color-black"
+                >Already have an account?
+                <a class="text-primary font-italic" href="/login">Login</a></span
+              >
             </div>
             <div class="flex justify-end item-center">
               <button class="cssbuttons-io-button" id="text_next">
@@ -93,7 +96,7 @@
         <div class="flex flex-col justify-between h-35vh">
           <div class="flex flex-row justify-between gap-4">
             <div class="mb-1 flex-1">
-              <label class="block text-gray-700" for="firstName">First Name</label>
+              <label class="block text-gray-700 font-bold" for="firstName">First Name</label>
               <input
                 v-model="form.first_name"
                 type="text"
@@ -103,7 +106,7 @@
               />
             </div>
             <div class="mb-1 flex-1">
-              <label class="block text-gray-700" for="lastName">Last Name</label>
+              <label class="block text-gray-700 font-bold" for="lastName">Last Name</label>
               <input
                 v-model="form.last_name"
                 type="text"
@@ -114,7 +117,7 @@
             </div>
           </div>
           <div class="mb-1 md:col-span-2">
-            <label class="block text-gray-700" for="address">Address</label>
+            <label class="block text-gray-700 font-bold" for="address">Address</label>
             <input
               v-model="form.address"
               type="text"
@@ -124,7 +127,7 @@
             />
           </div>
           <div class="mb-1 md:col-span-2">
-            <label class="block text-gray-700" for="date">Date of Birth</label>
+            <label class="block text-gray-700 font-bold" for="date">Date of Birth</label>
             <input
               v-model="form.date"
               type="date"
@@ -191,7 +194,7 @@
               </div>
               <div
                 v-else
-                class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center"
+                class="w-48 h-48 bg-gray-200 rounded-full flex items-center justify-center"
               >
                 <img
                   src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
@@ -199,6 +202,7 @@
                   class="w-full h-full object-cover rounded-full"
                 />
               </div>
+              <span>Upload a Profile Picture</span>
             </div>
           </div>
 
@@ -269,7 +273,7 @@
               </div>
             </button>
             <button class="cssbuttons-io-button" id="text_next">
-              Submit
+              Done
               <div class="icon next" id="slide_provious">
                 <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -322,52 +326,53 @@ export default {
       this.step--
     },
     triggerFileInput() {
-      this.$refs.fileInput.click();
+      this.$refs.fileInput.click()
     },
     onImageChange(event) {
-      const file = event.target.files[0];
+      const file = event.target.files[0]
       if (file) {
-        const reader = new FileReader();
+        const reader = new FileReader()
         reader.onload = (e) => {
-          this.imagePreview = e.target.result;
-        };
-        reader.readAsDataURL(file);
+          this.imagePreview = e.target.result
+        }
+        reader.readAsDataURL(file)
       }
-      this.closeImageOptions();
+      this.closeImageOptions()
     },
     openImageOptions() {
-      this.imageOptionsVisible = true;
+      this.imageOptionsVisible = true
     },
     closeImageOptions() {
-      this.imageOptionsVisible = false;
+      this.imageOptionsVisible = false
     },
     openCamera() {
-      this.imageOptionsVisible = false;
-      this.cameraVisible = true;
-      navigator.mediaDevices.getUserMedia({ video: true })
+      this.imageOptionsVisible = false
+      this.cameraVisible = true
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
         .then((stream) => {
-          this.videoStream = stream;
-          this.$refs.video.srcObject = stream;
-          this.$refs.video.play();
+          this.videoStream = stream
+          this.$refs.video.srcObject = stream
+          this.$refs.video.play()
         })
         .catch((err) => {
-          console.error("Error accessing camera: ", err);
-        });
+          console.error('Error accessing camera: ', err)
+        })
     },
     captureImage() {
-      const canvas = document.createElement('canvas');
-      canvas.width = this.$refs.video.videoWidth;
-      canvas.height = this.$refs.video.videoHeight;
-      const context = canvas.getContext('2d');
-      context.drawImage(this.$refs.video, 0, 0, canvas.width, canvas.height);
-      this.imagePreview = canvas.toDataURL('image/png');
-      this.closeCamera();
+      const canvas = document.createElement('canvas')
+      canvas.width = this.$refs.video.videoWidth
+      canvas.height = this.$refs.video.videoHeight
+      const context = canvas.getContext('2d')
+      context.drawImage(this.$refs.video, 0, 0, canvas.width, canvas.height)
+      this.imagePreview = canvas.toDataURL('image/png')
+      this.closeCamera()
     },
     closeCamera() {
       if (this.videoStream) {
-        this.videoStream.getTracks().forEach(track => track.stop());
+        this.videoStream.getTracks().forEach((track) => track.stop())
       }
-      this.cameraVisible = false;
+      this.cameraVisible = false
     },
 
     async submitForm() {
@@ -383,7 +388,7 @@ export default {
           formData.append('profilePicture', this.form.profilePicture)
         }
 
-        console.log(this.form);
+        console.log(this.form)
 
         const response = await axiosInstance.post('/register/user', this.form)
         alert('Form submitted successfully!')
