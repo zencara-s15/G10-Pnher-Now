@@ -9,7 +9,7 @@ class Baggage extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'type', 'weight', 'receiver_phone', 'sending_address', 'company', 'receiving_address', 'status', 'post_id', 'delivery_status_id'
+        'type', 'weight', 'receiver_phone', 'sending_address', 'company', 'receiving_address',  'post_id', 'delivery_status_id'
     ];
     public function post()
     {
@@ -18,5 +18,9 @@ class Baggage extends Model
     public function deliveryStatus()
     {
         return $this->belongsTo(DeliveryStatus::class, 'delivery_status_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
