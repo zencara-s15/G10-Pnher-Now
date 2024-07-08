@@ -20,13 +20,17 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
 
-    <div class="flex-1 flex flex-col overflow-scroll">
+    <div class="flex-1 flex flex-col overflow-hidden">
 
         <!-- Other head elements -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <!-- Chart JS -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </div>
+
+    <!-- Popup -->
+    <script src="{{ mix('js/app.js') }}"></script>
 </head>
 
 <body class="font-sans antialiased">

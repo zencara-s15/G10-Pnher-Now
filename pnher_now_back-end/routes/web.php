@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
-    CompanyController as AdminCompanyController,
+    CompanyController,
+    // CompanyController as AdminCompanyController,
     ProfileController,
     MailSettingController,
 };
 use App\Http\Controllers\API\Chart\ChartController as ChartChartController;
-use App\Http\Controllers\API\Supervisor\CompanyController;
+// use App\Http\Controllers\API\Supervisor\CompanyController;
 use App\Http\Controllers\ChartController;
 
 
@@ -77,6 +78,9 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         // ================Company=================
 
         Route::resource('company', 'CompanyController');
-        Route::get('/company', [AdminCompanyController::class, 'index'])->name('company.index');
-        Route::post('/company-new', [AdminCompanyController::class, 'store'])->name('company.store');
+        Route::get('/company',[CompanyController::class, 'index'])->name('company.index');
+        Route::post('/create', [CompanyController::class, 'store'])->name('comany.create');
+        // Route::get('/company', [AdminCompanyController::class, 'index'])->name('company.index');
+        // Route::get('/company', [AdminCompanyController::class, 'create'])->name('company.create');
+        // Route::put('/company/create', [AdminCompanyController::class, 'store'])->name('company.store');
 });
