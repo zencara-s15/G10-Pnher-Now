@@ -38,36 +38,42 @@
                         <tbody>
                             @can('Deliverer access')
                                 @foreach ($deliverers as $deliverer)
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <td class="px-6 py-4 text-center">
+                                    @foreach ($branches as $branch)
+                                        @if ($deliverer->branch->name == $branch->name)
+                                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                <td class="px-6 py-4 text-center">
 
-                                            {{ $deliverer->id }}
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
+                                                    {{ $deliverer->id }}
+                                                    {{-- {{ $deliverer->branch->id }} --}}
+                                                    {{-- {{ $deliverer->branches->first()->name ?? 'No Branch' }} --}}
+                                                </td>
+                                                <td class="px-6 py-4 text-center">
 
-                                            {{ $deliverer->first_name }}
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
+                                                    {{ $deliverer->user->first_name }}
+                                                </td>
+                                                <td class="px-6 py-4 text-center">
 
-                                            {{ $deliverer->last_name }}
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
+                                                    {{ $deliverer->user->last_name }}
+                                                </td>
+                                                <td class="px-6 py-4 text-center">
 
-                                            {{ $deliverer->email }}
-                                        </td>
+                                                    {{ $deliverer->user->email }}
+                                                </td>
 
-                                        <td class="px-6 py-4 text-center">
-                                            @can('Deliverer delete')
-                                                <form action="{{ route('admin.deliverer.destroy', $deliverer->id) }}" method="POST"
-                                                    class="inline">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button
-                                                        class="bg-red-500 text-white font-bold px-4 py-1 rounded focus:outline-none shadow transition-colors">Delete</button>
-                                                </form>
-                                            @endcan
-                                        </td>
-                                    </tr>
+                                                <td class="px-6 py-4 text-center">
+                                                    @can('Deliverer delete')
+                                                        <form action="{{ route('admin.deliverer.destroy', $deliverer->id) }}"
+                                                            method="POST" class="inline">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button
+                                                                class="bg-red-500 text-white font-bold px-4 py-1 rounded focus:outline-none shadow transition-colors">Delete</button>
+                                                        </form>
+                                                    @endcan
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 @endforeach
                             @endcan
                         </tbody>

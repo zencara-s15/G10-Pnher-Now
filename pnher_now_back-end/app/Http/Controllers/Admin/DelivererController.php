@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DelivererResource;
+use App\Http\Resources\UserResource;
 use App\Models\DelivererInBranch;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,10 +17,18 @@ class DelivererController extends Controller
      */
     public function index()
     {
-        $deliverers = User::whereHas('roles', function ($query){
-            $query->where('name', 'deliverer');
-        })->get();
-        return view('deliverer.index', compact('deliverers'));
+        // $deliverers = User::whereHas('roles', function ($query){
+        //     $query->where('name', 'deliverer');
+        // })->get();
+        $deliverers = DelivererInBranch::all();
+        $deliverers = DelivererResource::collection($deliverers);
+        // $deliverers = User::whereHas('roles', function ($query){
+        //     $query->where('name', 'deliverer');
+        // })->with('branch')->get();
+        $user = auth()->user();
+        $branches = $user->branches;
+        // $deliverers = UserResource::collection($deliverers);
+        return view('deliverer.index', compact('deliverers','branches'));
     }
 
     /**
