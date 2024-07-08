@@ -17,17 +17,11 @@ class DelivererController extends Controller
      */
     public function index()
     {
-        // $deliverers = User::whereHas('roles', function ($query){
-        //     $query->where('name', 'deliverer');
-        // })->get();
         $deliverers = DelivererInBranch::all();
         $deliverers = DelivererResource::collection($deliverers);
-        // $deliverers = User::whereHas('roles', function ($query){
-        //     $query->where('name', 'deliverer');
-        // })->with('branch')->get();
+
         $user = auth()->user();
         $branches = $user->branches;
-        // $deliverers = UserResource::collection($deliverers);
         return view('deliverer.index', compact('deliverers','branches'));
     }
 
@@ -108,7 +102,8 @@ class DelivererController extends Controller
      */
     public function destroy(string $id)
     {
-        $deliverer = User::findOrFail($id);
+        $deliverer = DelivererInBranch::findOrFail($id);
+        $deliverer->user->delete();
         $deliverer->delete();
         return redirect()->route('admin.deliverer.index')->withSuccess('Deliverer deleted successfully.');
     }

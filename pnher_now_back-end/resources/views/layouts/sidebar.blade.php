@@ -122,10 +122,14 @@
         @canany('Branch access', 'Branch add', 'Branch edit', 'Branch destroy')
             <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{ Route::currentRouteNamed('admin.branch.index') ? 'active' : '' }}"
                 href="{{ route('admin.branch.index') }}">
-                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 21v-2a2 2 0 012-2h1a2 2 0 012 2v2m-5 0h5m5 0h5m-5 0v-2a2 2 0 012-2h1a2 2 0 012 2v2m-5 0h5M3 21h18m-2-7h1a2 2 0 002-2V7a2 2 0 00-2-2h-5V3a2 2 0 00-2-2H9a2 2 0 00-2 2v2H2a2 2 0 00-2 2v5a2 2 0 002 2h1m0-7V3m0 4h12m0 0V3m-6 0h.01" />
+                <svg class="h-6 w-6 text-slate-100" width="20" height="20" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <line x1="3" y1="21" x2="21" y2="21" />
+                    <path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4" />
+                    <path d="M5 21v-10.15" />
+                    <path d="M19 21v-10.15" />
+                    <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
                 </svg>
                 <span class="mx-3">Branch</span>
             </a>
@@ -133,15 +137,18 @@
 
         {{-- Driver page --}}
         @canany('Deliverer access', 'Deliverer create', 'Deliverer edit', 'Deliverer delete')
-        <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{ Route::currentRouteNamed('admin.deliverer.index') ? 'active' : '' }}"
-            href="{{ route('admin.deliverer.index') }}">
-            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 21v-2a2 2 0 012-2h1a2 2 0 012 2v2m-5 0h5m5 0h5m-5 0v-2a2 2 0 012-2h1a2 2 0 012 2v2m-5 0h5M3 21h18m-2-7h1a2 2 0 002-2V7a2 2 0 00-2-2h-5V3a2 2 0 00-2-2H9a2 2 0 00-2 2v2H2a2 2 0 00-2 2v5a2 2 0 002 2h1m0-7V3m0 4h12m0 0V3m-6 0h.01" />
-            </svg>
-            <span class="mx-3">Deliverer</span>
-        </a>
+            <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{ Route::currentRouteNamed('admin.deliverer.index') ? 'active' : '' }}"
+                href="{{ route('admin.deliverer.index') }}">
+                <svg class="h-8 w-8 text-slate-100" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <circle cx="7" cy="17" r="2" />
+                    <circle cx="17" cy="17" r="2" />
+                    <path d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+                    <line x1="3" y1="9" x2="7" y2="9" />
+                </svg>
+                <span class="mx-3">Deliverer</span>
+            </a>
         @endcanany
 
         {{-- History page --}}
