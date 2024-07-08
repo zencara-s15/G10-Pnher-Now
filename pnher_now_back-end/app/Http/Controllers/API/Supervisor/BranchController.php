@@ -15,7 +15,7 @@ class BranchController extends Controller
         // dd(1);
         $branches = Branch::with(['company', 'user'])->get();
         // $branches = Branch::all();
-        // return BranchResource::collection($branches);
+        return BranchResource::collection($branches);
         return response()->json($branches);
     }
 
