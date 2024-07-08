@@ -50,8 +50,8 @@ class CompanyController extends Controller
 
     public function index()
     {
-        // $companies = Company::with('branches')->get();
-        $companies = Company::all();
+        $companies = Company::with('branches')->get();
+        // $companies = Company::all();
         return response()->json($companies);
     }
 
@@ -65,5 +65,16 @@ class CompanyController extends Controller
         $company = Company::create($request->all());
 
         return response()->json($company, 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+        ]);
+
+        $company = Company::Find($id);
+
     }
 }
