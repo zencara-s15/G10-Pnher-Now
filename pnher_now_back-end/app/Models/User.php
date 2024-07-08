@@ -90,4 +90,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Branch::class);
     }
+
+    public function branchs()
+    {
+        return $this->hasOne(\App\Models\Supervisor\Branch::class, 'user_id'); // Assuming 'user_id' is the foreign key in the Branch model
+    }
 }
