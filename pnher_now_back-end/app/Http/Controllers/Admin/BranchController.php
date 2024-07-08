@@ -32,6 +32,8 @@ class BranchController extends Controller
         $branches = Branch::all();
         $branches = BranchResource::collection($branches);
         return view('branch.index', ['branches' => $branches], compact('branches'));
+        // return view('branch.index', ['branches' => $branches]);
+        // return view('branch.index');
     }
 
     /**
