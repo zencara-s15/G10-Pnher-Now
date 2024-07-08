@@ -98,16 +98,15 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         // Chart
         Route::get('/chart', [ChartChartController::class, 'chart']);
         Route::get('/chart', [ChartChartController::class, 'chart']);
-
+        
         // ================Company=================
-
+        
         Route::resource('company', 'CompanyController');
         Route::get('/company',[CompanyController::class, 'index'])->name('company.index');
-        Route::post('/create', [CompanyController::class, 'store'])->name('comany.create');
-        Route::get('/company/edit/{id}', [CompanyController::class, 'edit'])->name('comany.edit');
-        // Route::get('/company', [AdminCompanyController::class, 'index'])->name('company.index');
-        // Route::get('/company', [AdminCompanyController::class, 'create'])->name('company.create');
-        // Route::put('/company/create', [AdminCompanyController::class, 'store'])->name('company.store');
+        Route::put('/company/create', [CompanyController::class, 'store'])->name('comany.create');
+        // Route::get('/company/edit/{id}', [CompanyController::class, 'update'])->name('comany.edit');
+        Route::get('/company/delete/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
+        Route::get('/company/edit/{id}', [CompanyController::class, 'update'])->name('comany.update');
 
 
         //======================== Branch route ===============================

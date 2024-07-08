@@ -1,5 +1,9 @@
 <x-app-layout>
     <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 my-5 mx-3">
+        @if(session('success'))
+        <div>{{ session('success') }}</div>
+        @endif
+
         <div class="container mx-auto px-6">
             <div class="text-right flex justify-center items-end">
                 @can('Company create')
@@ -11,7 +15,7 @@
             <table class="text-left w-full border-collapse my-auto">
                 <thead>
                     <tr>
-                        <th class="py-4 px-4 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light">Company</th>
+                        <th class="py-4 px-4 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light">Company Name</th>
                         <th class="py-4 px-4 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light w-3/12">Address</th>
                         <th class="py-4 px-4 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light text-right w-4/12">Actions</th>
                     </tr>
@@ -24,11 +28,13 @@
                         <td class="py-4 px-6 border-b border-grey-light">{{$company->address}}</td>
                         <td class="py-4 px-6 border-b border-grey-light text-right">
                             @can('Company edit')
-                            <a href="" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark text-blue-400">Edit</a>
+                            <a href="{{route('admin.company.edit', $company->id) }}" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark text-blue-400">Edit</a>
                             @endcan
-                            <a href="" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark text-green-400">More</a>
+
                             @can('Company delete')
-                            <form action="" method="POST" class="inline">
+                            <form action="{{ route('admin.company.destroy', $company->id)}}" method="POST" class="inline">
+                                @csrf
+                                @method('delete')
                                 <button class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark text-red-400">Delete</button>
                             </form>
                             @endcan

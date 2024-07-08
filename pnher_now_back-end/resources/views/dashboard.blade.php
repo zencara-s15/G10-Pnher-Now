@@ -87,6 +87,7 @@
         </div>
         <!-- end Container -->
       </div>
+      
       <!-- Chart -->
       <div class="cartInfo flex flex-row justify-between">
         <div class="card w-6/12 mx-1 p-2 bg-white rounded-lg">
@@ -97,6 +98,7 @@
             <canvas id="barChart"></canvas>
           </div>
         </div>
+
         <div class="card w-6/12 bg-white rounded-lg">
           <div class="card-header flex justify-center">
             <h1 class="">Total of each months</h1>
@@ -135,6 +137,7 @@
             }
           }
         });
+        
         // Line charts
         var ctx = document.getElementById('lineChart').getContext('2d');
         var myChart = new Chart(ctx, {
