@@ -21,8 +21,8 @@ class Branch extends Model
         return $this->belongsTo(User::class, "user_id");
     }
 
-    public function supervisor()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    // public function supervisor()
+    // {
+    //     return $this->belongsTo(User::class, 'user_id');
+    // }
 }
