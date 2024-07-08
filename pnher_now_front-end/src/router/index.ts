@@ -8,12 +8,12 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/admin/dashboard',
+      path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/Admin/DashboardView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'admin'
+        role: ['user', 'deliverer'],
       }
     },
     {
@@ -24,9 +24,12 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: () => import('../views/Web/User/ProductUser.vue')
+      component: () => import('../views/Web/User/ProductUser.vue'),
+      meta: {
+        requiresAuth: true,
+        role: ['user', 'admin']
+      }
     },
-    
     {
       path: '/logout',
       name: 'logout',
@@ -40,80 +43,85 @@ const router = createRouter({
     {
       path: '/history',
       name: 'history',
-      component: () => import('../views/Web/User/HistoryUser.vue')
+      component: () => import('../views/Web/User/HistoryUser.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
     },
     {
       path: '/deliverer',
       name: 'deliverer',
-      component: () => import('../views/Web/Deliver/DeliverView.vue')
+      component: () => import('../views/Web/Deliver/DeliverView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
     },
     {
       path: '/feedback',
       name: 'feedback',
-      component: () => import('../views/Web/Feedback/FeedbackView.vue')
+      component: () => import('../views/Web/Feedback/FeedbackView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
     },
     {
       path: '/history_deliverer',
       name: 'history_deliverer',
-      component: () => import('../views/Web/History/HistoryView.vue')
+      component: () => import('../views/Web/History/HistoryView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
     },
-    
     {
-      path: '/proccess',
-      name: 'proccess',
-      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
+      path: '/process',
+      name: 'process',
+      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
     },
     {
       path: '/request',
       name: 'request',
-      component: () => import('../views/Web/Request/RequestView.vue')
+      component: () => import('../views/Web/Request/RequestView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
     },
     {
       path: '/average',
       name: 'average',
-      component: () => import('../views/Web/Average/AverageView.vue')
+      component: () => import('../views/Web/Average/AverageView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'admin'
+      }
     },
     {
-      path: "/deliver",
-      name: "deliver",
-      component: () => import('../views/Web/Deliver/DeliverView.vue')
-    },
-    {
-      path: "/history",
-      name: "history",
-      component: () => import('../views/Web/History/HistoryView.vue')
-    },
-    {
-      path: "/average",
-      name: "average",
-      component: () => import('../views/Web/Average/AverageView.vue')
-    },
-    {
-      path: "/processdeliver",
-      name: "processdeliver",
-      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
-    },
-    {
-      path: "/feedback",
-      name: "feedback",
-      component: () => import('../views/Web/Feedback/FeedbackView.vue')
-    },
-    {
-      path: "/request",
-      name: "request",
-      component: () => import('../views/Web/Request/RequestView.vue')
+      path: '/deliver',
+      name: 'deliver',
+      component: () => import('../views/Web/Deliver/DeliverView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
     }
   ]
 })
 
 router.beforeEach(async (to, from, next) => {
-  // const publicPages = ['/login']
-  const publicPages = ['/login','/register',]
+  const publicPages = ['/login', '/register']
   const authRequired = !publicPages.includes(to.path)
   const store = useAuthStore()
 
   try {
-    const { data } = await axiosInstance.get('/get_users')
+    const { data } = await axiosInstance.get('/me')
 
     store.isAuthenticated = true
     store.user = data.data
@@ -130,14 +138,21 @@ router.beforeEach(async (to, from, next) => {
 
     simpleAcl.rules = rules()
   } catch (error) {
-    /* empty */
+    store.isAuthenticated = false
+    store.user = null
+    store.permissions = []
+    store.roles = []
   }
 
   if (authRequired && !store.isAuthenticated) {
-    next('/login')
-  } else {
-    next()
+    return next('/login')
   }
+
+  if (to.meta.role && !store.roles.some(role => to.meta.role.includes(role))) {
+    return next('/login')
+  }
+
+  next()
 })
 
 export default { router, simpleAcl }
