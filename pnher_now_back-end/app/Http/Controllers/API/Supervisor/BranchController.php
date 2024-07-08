@@ -10,52 +10,12 @@ use Illuminate\Http\Request;
 
 class BranchController extends Controller
 {
-    // /**
-    //  * Display a listing of the resource.
-    //  */
-    // public function index()
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(string $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, string $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(string $id)
-    // {
-    //     //
-    // }
-
     public function index()
     {
         // dd(1);
         $branches = Branch::with(['company', 'user'])->get();
         // $branches = Branch::all();
-        // return BranchResource::collection($branches);
+        return BranchResource::collection($branches);
         return response()->json($branches);
     }
 
@@ -71,5 +31,33 @@ class BranchController extends Controller
         $branch = Branch::create($request->all());
 
         return response()->json($branch, 201);
+    }
+
+    public function show($id)
+    {
+        $branch = Branch::findOrFail($id);
+        $branch = new BranchResource($branch);
+        return response()->json($branch);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name'=>"required",
+            'user_id' => 'required|exists:users,id',
+            'company_id' => 'required|exists:companies,id',
+            'address' => 'required',
+        ]);
+        
+        $branch = Branch::findOrFail($id);
+        $branch->update($request->all());
+        $branch = new BranchResource($branch);
+        return response()->json($branch, 200);
+    }
+
+    public function destroy($id){
+        $branch = Branch::findOrFail($id);
+        $branch->delete();
+        return response()->json(null, 204);
     }
 }

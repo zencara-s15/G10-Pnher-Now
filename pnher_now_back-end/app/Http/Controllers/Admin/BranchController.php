@@ -43,7 +43,7 @@ class BranchController extends Controller
     {
         $supervisors = User::whereHas('roles', function ($query) {
             $query->where('name', 'supervisor');
-        })->whereDoesntHave('branch')
+        })->whereDoesntHave('branchs')
             ->get();
 
         $companies = Company::all();
@@ -89,7 +89,7 @@ class BranchController extends Controller
         $supervisors = User::whereHas('roles', function ($query) {
             $query->where('name', 'supervisor');
         })
-            ->whereDoesntHave('branch')
+            ->whereDoesntHave('branchs')
             ->orWhere('id', $branch->user_id) // Include the current supervisor of the branch
             ->get();
 
