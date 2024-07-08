@@ -19,6 +19,7 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
+<<<<<<< HEAD
 
     <div class="flex-1 flex flex-col overflow-hidden">
 
@@ -31,6 +32,17 @@
 
     <!-- Popup -->
     <script src="{{ mix('js/app.js') }}"></script>
+=======
+    <!-- Other head elements -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    {{-- icon link --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+>>>>>>> 01833b6688e6b7bc2b9f2022dd0e902107e98bb1
 </head>
 
 <body class="font-sans antialiased">

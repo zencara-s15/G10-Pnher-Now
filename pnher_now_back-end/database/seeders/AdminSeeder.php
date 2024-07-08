@@ -71,6 +71,11 @@ class AdminSeeder extends Seeder
         $permission = Permission::create(['name' => 'Branch edit']);
         $permission = Permission::create(['name' => 'Branch delete']);
 
+        //Deliverer 
+        $permission = Permission::create(['name' => 'Deliverer access']);
+        $permission = Permission::create(['name' => 'Deliverer create']);
+        $permission = Permission::create(['name' => 'Deliverer edit']);
+        $permission = Permission::create(['name' => 'Deliverer delete']);
 
         $permission = Permission::create(['name' => 'Supervisor access']);
 
