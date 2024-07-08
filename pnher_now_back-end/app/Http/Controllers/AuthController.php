@@ -101,11 +101,10 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'address' => $request->address,
             'date_of_birth' => $request->date_of_birth,
-            'profile'=>$profilePath
+            'profile' => $profilePath
         ]);
 
         $user->assignRole('user');
-
         return response()->json([
             'message' => 'User registered successfully',
             'user' => $user,
@@ -138,7 +137,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'address' => $request->address,
             'date_of_birth' => $request->date_of_birth,
-            'profile'=>$request-> $profilePath
+            'profile' => $request->$profilePath
         ]);
 
         $user->assignRole('deliverer');
@@ -147,6 +146,38 @@ class AuthController extends Controller
             'message' => 'You have registered as a deliverer successfully',
             'user' => $user,
             'roles' => $user->getRoleNames(),
+        ]);
+    }
+
+    public function change_password(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required|string',
+            'new_password' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()->toArray(),
+            ], 422); 
+        }
+
+        $user = $request->user();
+        $currentHashedPassword = User::where('id', $user->id)->value('password');
+        if (!password_verify($request->current_password, $currentHashedPassword)) {
+            return response()->json([
+                'message' => 'Current password is incorrect',
+            ], 401); 
+        }
+        $newHashedPassword = password_hash($request->new_password, PASSWORD_BCRYPT);
+        $user->update([
+            'password' => $newHashedPassword,
+        ]);
+        unset($user->password);
+        return response()->json([
+            'message' => 'Password successfully changed',
+            'data' => $user,
         ]);
     }
 }

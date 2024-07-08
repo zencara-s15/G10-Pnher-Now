@@ -22,25 +22,98 @@ const router = createRouter({
       component: () => import('../views/Admin/Auth/LoginView.vue')
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
-      component: () => import('../views/Web/HomeView.vue')
+      component: () => import('../views/Web/User/ProductUser.vue')
+    },
+    
+    {
+      path: '/logout',
+      name: 'logout',
+      component: () => import('../views/Admin/Auth/LoginView.vue')
     },
     {
-      path: '/post',
-      name: 'post',
-      component: () => import('../views/Web/Post/ListView.vue')
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/Admin/Auth/RegisterUserView.vue')
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component: () => import('../views/Web/User/HistoryUser.vue')
+    },
+    {
+      path: '/deliverer',
+      name: 'deliverer',
+      component: () => import('../views/Web/Deliver/DeliverView.vue')
+    },
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import('../views/Web/Feedback/FeedbackView.vue')
+    },
+    {
+      path: '/history_deliverer',
+      name: 'history_deliverer',
+      component: () => import('../views/Web/History/HistoryView.vue')
+    },
+    
+    {
+      path: '/proccess',
+      name: 'proccess',
+      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
+    },
+    {
+      path: '/request',
+      name: 'request',
+      component: () => import('../views/Web/Request/RequestView.vue')
+    },
+    {
+      path: '/average',
+      name: 'average',
+      component: () => import('../views/Web/Average/AverageView.vue')
+    },
+    {
+      path: "/deliver",
+      name: "deliver",
+      component: () => import('../views/Web/Deliver/DeliverView.vue')
+    },
+    {
+      path: "/history",
+      name: "history",
+      component: () => import('../views/Web/History/HistoryView.vue')
+    },
+    {
+      path: "/average",
+      name: "average",
+      component: () => import('../views/Web/Average/AverageView.vue')
+    },
+    {
+      path: "/processdeliver",
+      name: "processdeliver",
+      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
+    },
+    {
+      path: "/feedback",
+      name: "feedback",
+      component: () => import('../views/Web/Feedback/FeedbackView.vue')
+    },
+    {
+      path: "/request",
+      name: "request",
+      component: () => import('../views/Web/Request/RequestView.vue')
     }
   ]
 })
 
 router.beforeEach(async (to, from, next) => {
-  const publicPages = ['/login']
+  // const publicPages = ['/login']
+  const publicPages = ['/login','/register',]
   const authRequired = !publicPages.includes(to.path)
   const store = useAuthStore()
 
   try {
-    const { data } = await axiosInstance.get('/me')
+    const { data } = await axiosInstance.get('/get_users')
 
     store.isAuthenticated = true
     store.user = data.data
