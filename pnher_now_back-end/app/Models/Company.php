@@ -10,4 +10,10 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'address'];
+
+    public function branches()
+    {
+        return $this->hasMany(Branch::class);
+    }
+
 }
