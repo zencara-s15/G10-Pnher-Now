@@ -57,7 +57,7 @@
                                     <td class="px-6 py-4 text-center">
                                         @can('Branch edit')
                                         <a href="{{ route('admin.branch.edit', $branch->id) }}"
-                                            class="bg-blue-500 text-white font-bold px-4 py-1 rounded focus:outline-none shadow transition-colors mr-4">
+                                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark text-blue-400">
                                             Edit
                                         </a>
                                         @endcan
@@ -67,8 +67,7 @@
                                                 class="inline">
                                                 @csrf
                                                 @method('delete')
-                                                <button
-                                                    class="bg-red-500 text-white font-bold px-4 py-1 rounded focus:outline-none shadow transition-colors">Delete</button>
+                                                <button class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark text-red-400">Delete</button>
                                             </form>
                                         @endcan
                                     </td>

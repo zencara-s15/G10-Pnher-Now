@@ -186,7 +186,7 @@
                     }
                 })
             </script>
-        @elseif(in_array('user', $roles))
+        @elseif(in_array('supervisor', $roles))
             <div class="flex">
                 <div class="flex-col w-3/4">
                     <!-- Container -->
