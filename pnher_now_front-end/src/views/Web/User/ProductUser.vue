@@ -1,5 +1,6 @@
 <template>
-  <WebLayout></WebLayout>
+  <!-- <WebLayout></WebLayout> -->
+  <UserLayout></UserLayout>
   <div class="container mt-4 p-4">
     <div class="row justify-content-between align-items-center mb-5">
       <div class="col-auto">
@@ -267,9 +268,12 @@
 
 <script>
 import WebLayout from '@/Components/Layouts/WebLayout.vue'
+import UserLayout from '@/Components/Layouts/UserLayout.vue'
+
 export default {
   components: {
-    WebLayout
+    WebLayout,
+    UserLayout
   },
 
   data() {

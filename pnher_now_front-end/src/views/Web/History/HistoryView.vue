@@ -1,5 +1,7 @@
 <template>
-  <WebLayout></WebLayout>
+  <!-- <WebLayout></WebLayout> -->
+  <AdminLayout></AdminLayout>
+
       <div class="main">
         <div class="card-border">
           <div v-for="user in users" :key="user.id" class="card">
@@ -45,10 +47,13 @@
 
 <script>
 import WebLayout from '@/Components/Layouts/WebLayout.vue';
+import AdminLayout from '@/Components/Layouts/UserLayout.vue'
+
 
 export default {
   components: {
-    WebLayout
+    WebLayout,
+    AdminLayout
   },
   name: 'HistoryView',
   data() {
