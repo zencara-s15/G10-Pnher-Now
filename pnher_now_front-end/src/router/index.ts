@@ -8,12 +8,12 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/admin/dashboard',
+      path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/Admin/DashboardView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'admin'
+        role: ['user', 'deliverer'],
       }
     },
     {
@@ -22,20 +22,101 @@ const router = createRouter({
       component: () => import('../views/Admin/Auth/LoginView.vue')
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
-      component: () => import('../views/Web/HomeView.vue')
+      component: () => import('../views/Web/User/ProductUser.vue'),
+      meta: {
+        requiresAuth: true,
+        role: ['user', 'admin']
+      }
     },
     {
-      path: '/post',
-      name: 'post',
-      component: () => import('../views/Web/Post/ListView.vue')
+      path: '/logout',
+      name: 'logout',
+      component: () => import('../views/Admin/Auth/LoginView.vue')
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/Admin/Auth/RegisterUserView.vue')
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component: () => import('../views/Web/User/HistoryUser.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
+    },
+    {
+      path: '/deliverer',
+      name: 'deliverer',
+      component: () => import('../views/Web/Deliver/DeliverView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
+    },
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import('../views/Web/Feedback/FeedbackView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
+    },
+    {
+      path: '/history_deliverer',
+      name: 'history_deliverer',
+      component: () => import('../views/Web/History/HistoryView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
+    },
+    {
+      path: '/process',
+      name: 'process',
+      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
+    },
+    {
+      path: '/request',
+      name: 'request',
+      component: () => import('../views/Web/Request/RequestView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
+    },
+    {
+      path: '/average',
+      name: 'average',
+      component: () => import('../views/Web/Average/AverageView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'admin'
+      }
+    },
+    {
+      path: '/deliver',
+      name: 'deliver',
+      component: () => import('../views/Web/Deliver/DeliverView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
     }
   ]
 })
 
 router.beforeEach(async (to, from, next) => {
-  const publicPages = ['/login']
+  const publicPages = ['/login', '/register']
   const authRequired = !publicPages.includes(to.path)
   const store = useAuthStore()
 
@@ -57,14 +138,21 @@ router.beforeEach(async (to, from, next) => {
 
     simpleAcl.rules = rules()
   } catch (error) {
-    /* empty */
+    store.isAuthenticated = false
+    store.user = null
+    store.permissions = []
+    store.roles = []
   }
 
   if (authRequired && !store.isAuthenticated) {
-    next('/login')
-  } else {
-    next()
+    return next('/login')
   }
+
+  if (to.meta.role && !store.roles.some(role => to.meta.role.includes(role))) {
+    return next('/login')
+  }
+
+  next()
 })
 
 export default { router, simpleAcl }

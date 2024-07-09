@@ -1,29 +1,59 @@
-<!-- src/components/Login.vue -->
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-100">
-    <el-card class="w-full max-w-md shadow-lg">
-      <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
-      <el-form @submit="onSubmit">
-        <el-form-item :error="emailError">
-          <el-input placeholder="Email Address" v-model="email" size="large" />
-        </el-form-item>
-
-        <el-form-item :error="nameError" class="mt-8">
-          <el-input placeholder="Password" v-model="password" size="large" type="password" />
-        </el-form-item>
-
-        <div>
-          <el-button
-            size="large"
-            class="mt-3 w-full"
-            :disabled="isSubmitting"
-            type="primary"
-            native-type="submit"
-            >Submit</el-button
-          >
+  <div class="bg-gradient-to-r container mx-auto flex justify-center items-center h-screen w-full">
+    <div class="w-full max-w-6xl bg-white shadow-md rounded flex shadow-lg shadow-indigo-500/40 h-5/6">
+      <div class="w-full flex flex-row mx-auto px-8 my-10">
+        <div class="w-1/2 flex flex-col justify-center items-center">
+          <h1 class="text-4xl font-bold text-gray-800">SIGN-IN</h1>
+          <form @submit.prevent="onSubmit" class="w-full mt-8">
+            <div class="mb-6">
+              <label for="email" class="block text-gray-700 font-bold mb-2">
+                Email
+                <span v-if="emailError" class="text-red-500 text-xs">{{ emailError }}</span>
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="email"
+                type="email"
+                v-model="email"
+              />
+            </div>
+            <div class="mb-6">
+              <label for="password" class="block text-gray-700 font-bold mb-2">
+                Password
+                <span v-if="passwordError" class="text-red-500 text-xs">{{ passwordError }}</span>
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="password"
+                type="password"
+                v-model="password"
+              />
+            </div>
+            <div class="flex items-center justify-between mb-6">
+              <a href="#" class="text-blue-600 hover:text-blue-800">Forgot Password?</a>
+              <button
+                class="shadow appearance-none border rounded bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                type="submit"
+                :disabled="isSubmitting"
+              >
+                LOGIN
+              </button>
+            </div>
+            <div class="text-center">
+              <span class="text-dark">Don't have an account? </span>
+              <a href="/register" class="text-blue-600 hover:text-blue-800">Signup</a>
+            </div>
+          </form>
         </div>
-      </el-form>
-    </el-card>
+        <div class="w-1/2 hidden md:block">
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/023/743/925/non_2x/scooter-with-delivery-man-flat-cartoon-character-fast-courier-restaurant-food-service-mail-delivery-service-a-postal-employee-the-determination-of-geolocation-using-electronic-device-free-png.png"
+            alt="Signup Image"
+            class="w-full h-full object-cover rounded-r-md"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,14 +66,14 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const formSchema = yup.object({
-  password: yup.string().required().label('Password'),
-  email: yup.string().required().email().label('Email address')
+  email: yup.string().required().email().label('Email address'),
+  password: yup.string().required().label('Password')
 })
 
 const { handleSubmit, isSubmitting } = useForm({
   initialValues: {
-    password: '',
-    email: ''
+    email: '',
+    password: ''
   },
   validationSchema: formSchema
 })
@@ -52,18 +82,23 @@ const onSubmit = handleSubmit(async (values) => {
   try {
     const { data } = await axiosInstance.post('/login', values)
     localStorage.setItem('access_token', data.access_token)
-    router.push('/')
+    if (data.role === 'user') {
+      router.push('/user_dashboard')
+    } else if (data.role === 'deliverer') {
+      router.push('/deliverer_dashboard')
+    }
   } catch (error) {
-    console.warn('Error')
+    console.error('Error:', error)
   }
 })
 
-const { value: password, errorMessage: nameError } = useField('password')
 const { value: email, errorMessage: emailError } = useField('email')
+const { value: password, errorMessage: passwordError } = useField('password')
+
 </script>
 
 <style scoped>
-.min-h-screen {
-  min-height: 100vh;
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, #4f46e5, #7c3aed, #ec4899);
 }
 </style>
