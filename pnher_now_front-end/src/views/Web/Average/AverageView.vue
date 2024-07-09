@@ -1,43 +1,46 @@
 <template>
     <WebLayout></WebLayout>
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <title>Card with Icons</title>
     </head>
-
-    <div class="form">
-        <div class="col d-flex gap-3">
-            <div class="card-body">
-                <div class="card-text">
-                    <h5><i class="fas fa-truck"></i> 10</h5>
-                    <p> On process delivery</p>
+    <body>
+        <div class="form m-5">
+            <div class="flex gap-3" style="width: 65%; margin: auto;">
+                <div class="bg-orange-300 shadow-md rounded-lg p-6 flex-1">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-truck text-gray-500"></i>
+                        <h5 class="text-2xl font-bold ml-15">10</h5>
+                    </div>
+                    <p class="text-gray-500 mt-3">On process delivery</p>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="card-text">
-                    <h5><i class="fas fa-box"></i> 10</h5>
-                    <p> Total delivery</p>
+                <div class="bg-orange-300 shadow-md rounded-lg p-6 flex-1">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-box text-gray-500"></i>
+                        <h5 class="text-2xl font-bold ml-15">10</h5>
+                    </div>
+                    <p class="text-gray-500 mt-3">Total delivery</p>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="card-text">
-                    <h5><i class="fas fa-comments"></i> 10</h5>
-                    <p>Total feedback</p>
+                <div class="bg-orange-300 shadow-md rounded-lg p-6 flex-1">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-comments text-gray-500"></i>
+                        <h5 class="text-2xl font-bold ml-15">10</h5>
+                    </div>
+                    <p class="text-gray-500 mt-3">Total feedback</p>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="card-text">
-                    <h5><i class="fas fa-money-bill"></i> 10</h5>
-                    <p> Total money earned</p>
+                <div class="bg-orange-300 shadow-md rounded-lg p-6 flex-1">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-money-bill text-gray-500"></i>
+                        <h5 class="text-2xl font-bold ml-15">10</h5>
+                    </div>
+                    <p class="text-gray-500 mt-3">Total money earned</p>
                 </div>
             </div>
         </div>
-    </div>
+    </body>
 </template>
-
 <script>
 import WebLayout from '@/Components/Layouts/WebLayout.vue'
 export default {
@@ -45,47 +48,9 @@ export default {
         WebLayout
     },
     name: "AverageView",
-
 }
 </script>
 
 <style scoped>
-.form {
-    display: flex;
-    margin-left: 5px;
-    margin-top: 20px;
-}
 
-.card-body {
-    background: orange;
-    flex-direction: row;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    height: 15vh;
-    width: 160px;
-    margin-left: 20px;
-
-}
-
-.card-text h5 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.card-text p {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    color: black;
-}
-
-link {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 20px;
-}
 </style>

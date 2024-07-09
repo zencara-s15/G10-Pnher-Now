@@ -1,46 +1,44 @@
 <template>
   <WebLayout></WebLayout>
-      <div class="main">
-        <div class="card-border">
-          <div v-for="user in users" :key="user.id" class="card">
-            <div class="card-body">
-              <img :src="user.avatar" class="card-img-top" :alt="user.name">
-              <p class="card-id">{{ user.id }}</p>
-              <p class="card-name">{{ user.name }}</p>
-              <p class="card-email">{{ user.location }}</p>
-              <p class="card-email">{{ user.date }}</p>
-              <p class="card-email">{{ user.email }}</p>
-              <div class="btn">
-                <button type="button" class="btn btn-info" @click="SaveCard(user)">Save</button>
-                <button type="button" class="btn btn-danger" @click="DeleteCard(user)">Delete</button>
-              </div>
-            </div>
-          </div>
+  <div class="main">
+    <div class="card-border">
+      <div v-for="user in users" :key="user.id" class="card">
+        <div class="card-body">
+          <img :src="user.avatar" class="card-img-top" :alt="user.name">
+          <p class="card-id">{{ user.id }}</p>
+          <p class="card-name">{{ user.name }}</p>
+          <p class="card-email">{{ user.location }}</p>
+          <p class="card-email">{{ user.date }}</p>
+          <p class="card-email">{{ user.email }}</p>
+          <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+            @click="DeleteCard(user)">Delete </button>
         </div>
-        <table class="table ">
-          <thead class="table-warning">
-            <h1>Table Detail</h1>
-            <tr>
-              <th scope="col">Image</th>
-              <th scope="col">Id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Date</th>
-              <th scope="col">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="user in users" :key="user.id">
-              <td><img :src="user.avatar" class="table-img" :alt="user.name"></td>
-              <td>{{ user.id }}</td>
-              <td>{{ user.name }}</td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.date }}</td>
-              <td>{{ totalUsers }}</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
+    </div>
+    <table class="table ">
+      <thead class="table-warning">
+        <h1>Table Detail</h1>
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Date</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" :key="user.id">
+          <td><img :src="user.avatar" class="table-img" :alt="user.name"></td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.date }}</td>
+          <td>{{ totalUsers }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -123,7 +121,6 @@ export default {
 </script>
 
 <style scoped>
-
 .main {
   display: flex;
   flex-direction: column;
@@ -134,7 +131,7 @@ export default {
   display: flex;
   margin-bottom: 0.5rem;
   flex-direction: row;
- 
+
 }
 
 .card-border {
@@ -199,6 +196,3 @@ p {
   border-radius: 50%;
 }
 </style>
-
-
-

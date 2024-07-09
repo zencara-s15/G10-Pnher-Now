@@ -82,7 +82,11 @@ const router = createRouter({
       name: 'average',
       component: () => import('../views/Web/Average/AverageView.vue')
     },
-    
+    {
+      path: '/users',
+      name: 'users',
+      component: () => import('../views/Web/Users/UsersView.vue')
+    },
 
   ]
 })

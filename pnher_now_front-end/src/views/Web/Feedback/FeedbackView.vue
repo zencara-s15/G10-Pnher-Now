@@ -1,25 +1,25 @@
 <template>
     <WebLayout></WebLayout>
-            <div class="container">
-                <h3>Feedback From Customer</h3>
-                <div v-for="user in users" :key="user.id" class="card">
-                    <div class="card-body">
-                        <div class="card-text">
-                            <img :src="user.avatar" alt="User Profile" class="avatar-fluid rounded-circle">
-                            <div class="user-info">
-                                <p class="first_name">{{ user.first_name }}</p>
-                                <p class="last_name">{{ user.last_name }}</p>
-                                <div class="star-icon">
-                                    <i class="fas fa-star" v-for="n in 5" :key="n"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="des">
-                            <p class="descript">{{ user.descript }}</p>
+    <div class="container ml-50 col mt-5">
+        <h2>Feedback From Customer</h2>
+        <div v-for="user in users" :key="user.id" class="card" style="width: 70%;">
+            <div class="card-body ">
+                <div class="card-text d-flex " style="flex-direction: row;">
+                    <img :src="user.avatar" alt="User Profile" class="avatar-fluid rounded-circle">
+                    <div class="user-info d-flex ml-5">
+                        <p class="first_name">{{ user.first_name }}</p>
+                        <p class="last_name">{{ user.last_name }}</p>
+                        <div class="star-icon">
+                            <i class="fas fa-star" v-for="n in 5" :key="n"></i>
                         </div>
                     </div>
                 </div>
+                <div class="des ml-12">
+                    <p class="descript">{{ user.descript }}</p>
+                </div>
             </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -39,7 +39,7 @@ export default {
                     "email": "michael.lawson@reqres.in",
                     "first_name": "Michael",
                     "last_name": "Lawson",
-                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.",
+                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management.",
                     "avatar": "https://reqres.in/img/faces/7-image.jpg"
                 },
                 {
@@ -47,7 +47,7 @@ export default {
                     "email": "lindsay.ferguson@reqres.in",
                     "first_name": "Lindsay",
                     "last_name": "Ferguson",
-                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.",
+                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management.",
                     "avatar": "https://reqres.in/img/faces/8-image.jpg"
                 },
                 {
@@ -55,7 +55,7 @@ export default {
                     "email": "tobias.funke@reqres.in",
                     "first_name": "Tobias",
                     "last_name": "Funke",
-                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.",
+                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management.",
                     "avatar": "https://reqres.in/img/faces/9-image.jpg"
                 },
                 {
@@ -63,7 +63,7 @@ export default {
                     "email": "byron.fields@reqres.in",
                     "first_name": "Byron",
                     "last_name": "Fields",
-                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.",
+                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management.",
                     "avatar": "https://reqres.in/img/faces/10-image.jpg"
                 },
                 {
@@ -71,7 +71,7 @@ export default {
                     "email": "george.edwards@reqres.in",
                     "first_name": "George",
                     "last_name": "Edwards",
-                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.",
+                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management.",
                     "avatar": "https://reqres.in/img/faces/11-image.jpg"
                 },
                 {
@@ -79,7 +79,7 @@ export default {
                     "email": "rachel.howell@reqres.in",
                     "first_name": "Rachel",
                     "last_name": "Howell",
-                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.",
+                    "descript": "This project involves creating a social media application that integrates with the Facebook API for user authentication and management.",
                     "avatar": "https://reqres.in/img/faces/12-image.jpg"
                 }
             ]
@@ -90,37 +90,15 @@ export default {
 
 <style scoped>
 
-.container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    margin-left: 50px;
-}
-
 .card {
-    display: flex;
-    flex-direction: column;
     margin-top: 5px;
     padding: 10px;
-    border-radius: 5px;
-    width: 195vh;
-    height: 20vh;
+    height: 18vh;
 }
 
 .card-body {
     display: flex;
     flex-direction: column;
-}
-
-.card-text {
-    display: flex;
-    flex-direction: row;
-
-}
-
-.user-info {
-    display: flex;
-    margin-left: 10px;
 }
 
 .star-icon {
