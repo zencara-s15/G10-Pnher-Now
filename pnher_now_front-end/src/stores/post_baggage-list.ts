@@ -23,7 +23,8 @@ export const usePostBaggageStore = defineStore('postBaggage', {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
           },
         });
-        this.post_baggage = response.data;
+        this.post_baggage = response.data.baggage;
+        
       } catch (error) {
         console.error('Error fetching post baggage:', error);
       }

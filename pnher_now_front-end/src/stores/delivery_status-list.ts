@@ -14,7 +14,7 @@ export const useDeliveryStatusStore = defineStore('deliveryStatus', {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
           },
         });
-        this.delivery_status = response.data;
+        this.delivery_status = response.data.delivery_status;
       } catch (error) {
         console.error('Error fetching delivery status:', error);
       }

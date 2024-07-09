@@ -27,7 +27,7 @@ const router = createRouter({
       component: () => import('../views/Web/User/ProductUser.vue'),
       meta: {
         requiresAuth: true,
-        role: ['user', 'admin']
+        role: ['user', 'admin', 'deliverer']
       }
     },
     {
@@ -55,7 +55,7 @@ const router = createRouter({
       component: () => import('../views/Web/Deliver/DeliverView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'deliverer'
+        role:['deliverer','user']
       }
     },
     {
@@ -64,7 +64,7 @@ const router = createRouter({
       component: () => import('../views/Web/Feedback/FeedbackView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'user'
+        role: 'deliverer'
       }
     },
     {
@@ -91,7 +91,7 @@ const router = createRouter({
       component: () => import('../views/Web/Request/RequestView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'user'
+        role: 'deliverer'
       }
     },
     {
@@ -100,7 +100,7 @@ const router = createRouter({
       component: () => import('../views/Web/Average/AverageView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'admin'
+        role: 'deliverer'
       }
     },
   ],

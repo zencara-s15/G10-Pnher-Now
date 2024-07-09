@@ -36,10 +36,13 @@
                 <p class="card-text">Type: {{ item.type }}</p>
               </div>
               <div class="d-flex gap-1">
-                <p class="card-text">Weight: {{ item.weight }}Kg</p>
+                <p class="card-text">Weight: {{ item.weight }} Kg</p>
               </div>
               <div class="d-flex gap-1">
                 <p class="card-text">Company: {{ item.company }}</p>
+              </div>
+              <div class="d-flex gap-1">
+                <p class="card-text">Total Price: {{ calculateTotalCost(item.weight) }} Real</p>
               </div>
               <div class="pt-2">
                 <button class="btn btn-danger" @click="deleteItem(item.id)">Delete</button>
@@ -51,12 +54,23 @@
     </div>
 
     <!-- Modal for Adding New Baggage -->
-    <div v-if="showModal" class="modal fade show" style="display: block" tabindex="-1" role="dialog">
+    <div
+      v-if="showModal"
+      class="modal fade show"
+      style="display: block"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content mt-20">
           <div class="modal-header d-flex justify-content-between align-items-center">
             <h5 class="modal-title text-white">Add New Baggage</h5>
-            <button type="button" class="close btn bg-danger" @click="showModal = false" aria-label="Close">
+            <button
+              type="button"
+              class="close btn bg-danger"
+              @click="showModal = false"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -67,34 +81,73 @@
                 <div class="col-md-20">
                   <div class="form-group">
                     <label for="receiver_phone" class="text-danger">Receiver Phone</label>
-                    <input type="text" v-model="formData.receiver_phone" class="form-control" id="receiver_phone" required />
+                    <input
+                      type="text"
+                      v-model="formData.receiver_phone"
+                      class="form-control"
+                      id="receiver_phone"
+                      required
+                    />
                   </div>
                   <div class="form-group">
                     <label for="sending_address" class="text-danger">Sending Address</label>
-                    <input type="text" v-model="formData.sending_address" class="form-control" id="sending_address" required />
+                    <input
+                      type="text"
+                      v-model="formData.sending_address"
+                      class="form-control"
+                      id="sending_address"
+                      required
+                    />
                   </div>
                   <div class="form-group">
                     <label for="receiving_address" class="text-danger">Receiving Address</label>
-                    <input type="text" v-model="formData.receiving_address" class="form-control" id="receiving_address" required />
+                    <input
+                      type="text"
+                      v-model="formData.receiving_address"
+                      class="form-control"
+                      id="receiving_address"
+                      required
+                    />
                   </div>
                   <div class="form-group">
                     <label for="type" class="text-danger">Type</label>
-                    <input type="text" v-model="formData.type" class="form-control" id="type" required />
+                    <input
+                      type="text"
+                      v-model="formData.type"
+                      class="form-control"
+                      id="type"
+                      required
+                    />
                   </div>
                   <div class="form-group">
                     <label for="weight" class="text-danger">Weight</label>
-                    <input type="number" v-model="formData.weight" class="form-control" id="weight" required />
+                    <input
+                      type="number"
+                      v-model="formData.weight"
+                      class="form-control"
+                      id="weight"
+                      required
+                      @input="updateTotalCost"
+                    />
                   </div>
                   <div class="form-group">
                     <label for="company" class="text-danger">Company</label>
-                    <input type="text" v-model="formData.company" class="form-control" id="company" required />
+                    <input
+                      type="text"
+                      v-model="formData.company"
+                      class="form-control"
+                      id="company"
+                      required
+                    />
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="d-flex justify-content-between mt-4">
                   <button type="submit" class="btn bg-white">Booking Now</button>
-                  <button type="button" class="btn bg-white" @click="showModal = false">Cancel</button>
+                  <button type="button" class="btn bg-white" @click="showModal = false">
+                    Cancel
+                  </button>
                 </div>
               </div>
             </form>
@@ -182,9 +235,13 @@ export default {
       );
     });
 
+    const calculateTotalCost = (weight) => {
+      return weight * 6000;
+    };
+
     onMounted(async () => {
       await store.fetchPostBaggage(); // Fetch initial baggage list on component mount
-      baggage.value = store.post_baggage.baggage;
+      baggage.value = store.post_baggage;
     });
 
     return {
@@ -195,9 +252,11 @@ export default {
       deleteItem,
       searchQuery,
       filteredBaggage,
+      calculateTotalCost,
       store, // Expose store to access state in template
     };
   },
+  
 };
 </script>
 

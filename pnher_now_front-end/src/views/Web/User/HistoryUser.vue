@@ -32,23 +32,29 @@
         <div class="list-group">
           <div
             class="list-group-item d-flex justify-content-between align-items-center mb-3 border-red"
-            v-for="(item, index) in filteredDeliveries"
-            :key="index"
+            v-for="item in baggage"
+            :key="item.id"
           >
             <div class="d-flex align-items-center">
               <div class="icon">
-                <img :src="item.image" class="rounded-circle" width="40" height="40" />
+                <img
+                  src="https://img.a.transfermarkt.technology/portrait/big/406635-1668524492.jpg?lm=1"
+                  class="rounded-circle"
+                  width="40"
+                  height="40"
+                />
               </div>
               <div class="ms-3">
-                <div class="route fw-bold">{{ item.route }}</div>
-                <div class="date text-muted">Delivered on {{ item.date }}</div>
+                <div class="route fw-bold">
+                  FROM {{ item.sending_address }} TO {{ item.receiving_address }}
+                </div>
+                <div class="date text-muted">Delivered on {{ item.created_at }}</div>
               </div>
             </div>
             <div class="menu position-relative">
               <button class="btn btn-outline-secondary btn-sm" @click="toggleMenu(index)">⋮</button>
               <div v-if="openMenuIndex === index" class="dropdown-menu show position-absolute">
-                <button class="dropdown-item" @click="editItem(index)">Edit</button>
-                <button class="dropdown-item" @click="deleteItem(index)">Delete</button>
+                <button class="dropdown-item" @click="editItem(index)">Detail</button>
               </div>
             </div>
           </div>
@@ -56,102 +62,33 @@
       </div>
     </div>
     <!-- <div class="" v-if="status != []" > -->
-      <div v-for="item in status" :key="item.id">
-        <h1>my name: {{ item.name }}</h1>
-      </div>
+    <div v-for="item in status" :key="item.id">
+      <h1>History Status: {{ item.name }}</h1>
+    </div>
     <!-- </div> -->
   </div>
 </template>
 
-<script>
+<script setup lang="ts" >
 import WebLayout from '@/Components/Layouts/WebLayout.vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import { useDeliveryStatusStore } from '@/stores/delivery_status-list'
-const store = useDeliveryStatusStore()
+import { usePostBaggageStore } from '@/stores/post_baggage-list'
+const deliveryStore = useDeliveryStatusStore()
+const baggageStore = usePostBaggageStore()
+const baggage = ref()
+const status = ref()
 
+onMounted(async () => {
+  await baggageStore.fetchPostBaggage()
+  await deliveryStore.fetchDeliveryStatus()
 
-export default {
-  name: 'HistoryUser',
-  components: {
-    WebLayout
-  },
-  data() {
-    return {
-      searchQuery: '',
-      openMenuIndex: null,
-      deliveries: [
-        {
-          route: 'FROM BTB TO KPS',
-          date: '20th June 2024',
-          image: 'https://img.a.transfermarkt.technology/portrait/big/406635-1668524492.jpg?lm=1'
-        },
-        {
-          route: 'FROM PHNOM PENH TO BTB',
-          date: '15th May 2024',
-          image: 'https://img.vavel.com/c700_475_3800763-77305188-2560-1440-1698005483328.jpg'
-        },
-        {
-          route: 'FROM PHNOM PENH TO BTB',
-          date: '10th May 2024',
-          image: 'https://img.a.transfermarkt.technology/portrait/big/406635-1668524492.jpg?lm=1'
-        },
-        {
-          route: 'FROM BTB TO PS',
-          date: '10th May 2024',
-          image: 'https://img.vavel.com/c700_475_3800763-77305188-2560-1440-1698005483328.jpg'
-        },
-        {
-          route: 'FROM PHNOM PENH TO BTB',
-          date: '15th April 2024',
-          image: 'https://img.a.transfermarkt.technology/portrait/big/406635-1668524492.jpg?lm=1'
-        }
-      ],
-      users_image: [
-        {
-          image:
-            'https://assets.goal.com/images/v3/blt7c3d8e239aa1271e/Vini%20Jr%20-%20Stepping%20up%20without%20Neymar.jpg?auto=webp&format=pjpg&width=3840&quality=60'
-        }
-      ],
-      status: []
-    }
-  },
+  baggage.value = baggageStore.post_baggage;
+  status.value = deliveryStore.delivery_status;
+  baggage.value = baggage.value.filter((b: any) => b.delivery_status_id == 5)
+  console.log(baggage.value, status.value);
+})
 
-  computed: {
-    filteredDeliveries() {
-      return this.deliveries.filter((item) =>
-        item.route.toLowerCase().includes(this.searchQuery.toLowerCase())
-      )
-    }
-  },
-
-  mounted() {
-    store.fetchDeliveryStatus()
-    setTimeout(() => {
-      this.status = store.delivery_status.delivery_status
-      // console.log('status: ', store.delivery_status);
-    }, 2000);
-  }
-  //   clearSearch() {
-  //     this.searchQuery = ''
-  //   },
-  //   toggleMenu(index) {
-  //     if (this.openMenuIndex === index) {
-  //       this.openMenuIndex = null
-  //     } else {
-  //       this.openMenuIndex = index
-  //     }
-  //   },
-  //   editItem(index) {
-  //     // Handle edit logic here
-  //     const item = this.deliveries[index]
-  //     console.log('Edit item:', item)
-  //     // Add your edit logic here, e.g., open a modal to edit the delivery details
-  //   },
-  //   deleteItem(index) {
-  //     this.deliveries.splice(index, 1)
-  //     this.openMenuIndex = null // Close the menu after deleting the item
-  //     console.log('Deleted item at index:', index)
-  //   }
-}
 </script>
 
 <style scoped>
