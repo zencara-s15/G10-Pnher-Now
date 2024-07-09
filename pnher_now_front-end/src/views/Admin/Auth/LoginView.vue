@@ -80,13 +80,13 @@ const { handleSubmit, isSubmitting } = useForm({
 
 const onSubmit = handleSubmit(async (values) => {
   try {
-    // console.log('Submitting:', values)
     const { data } = await axiosInstance.post('/login', values)
-    console.log('Response:', data)
     localStorage.setItem('access_token', data.access_token)
-    // console.log('Token stored:', data.access_token)
-    console.log("role",data.role);
-    router.push('/home') // Redirect to "/home" after successful login
+    if (data.role === 'user') {
+      router.push('/user_dashboard')
+    } else if (data.role === 'deliverer') {
+      router.push('/deliverer_dashboard')
+    }
   } catch (error) {
     console.error('Error:', error)
   }

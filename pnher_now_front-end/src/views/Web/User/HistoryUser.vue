@@ -1,7 +1,7 @@
 <template>
-  <WebLayout></WebLayout>
+  <UserLayout></UserLayout>
   <div class="container delivery-list p-5">
-    <div class="row d-flex justify-content-between">
+    <!-- <div class="row d-flex justify-content-between">
       <div class="col-auto">
         <div class="input-group search-group" style="width: 500px">
           <span class="input-group-text bg-danger text-white">
@@ -23,7 +23,28 @@
           </button>
         </div>
       </div>
-    </div>
+      <div class="col-auto d-flex gap-3" v-for="user in users_image" :key="user.image">
+        <div class="col-auto">
+          <button class="btn btn-light text-danger">
+            <div class="message">
+              <i class="bi bi-5-circle-fill"></i>
+            </div>
+            <i class="bi bi-chat-left"></i>
+          </button>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-light text-danger">
+            <div class="notification">
+              <i class="bi bi-3-circle-fill"></i>
+            </div>
+            <i class="bi bi-bell"></i>
+          </button>
+        </div>
+        <div class="icon">
+          <img :src="user.image" class="rounded-circle" width="40" height="40" />
+        </div>
+      </div>
+    </div> -->
     <div class="row">
       <div class="col-12">
         <div class="mt-3 mb-3">

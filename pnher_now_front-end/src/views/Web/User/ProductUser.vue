@@ -163,11 +163,13 @@ import WebLayout from '@/Components/Layouts/WebLayout.vue';
 import { ref, onMounted, computed } from 'vue';
 import { usePostBaggageStore } from '@/stores/post_baggage-list';
 import Button from '@/Components/Button/Button.vue';
+import UserLayout from '@/Components/Layouts/UserLayout.vue'
 
 export default {
   components: {
     WebLayout,
     Button,
+    UserLayout
   },
   setup() {
     const store = usePostBaggageStore();

@@ -27,7 +27,7 @@ const router = createRouter({
       component: () => import('../views/Web/User/ProductUser.vue'),
       meta: {
         requiresAuth: true,
-        role: ['user', 'admin', 'deliverer']
+        role: ['user', 'admin']
       }
     },
     {
@@ -55,7 +55,7 @@ const router = createRouter({
       component: () => import('../views/Web/Deliver/DeliverView.vue'),
       meta: {
         requiresAuth: true,
-        role:['deliverer','user']
+        role: 'deliverer'
       }
     },
     {
@@ -64,7 +64,7 @@ const router = createRouter({
       component: () => import('../views/Web/Feedback/FeedbackView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'deliverer'
+        role: 'user'
       }
     },
     {
@@ -91,7 +91,7 @@ const router = createRouter({
       component: () => import('../views/Web/Request/RequestView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'deliverer'
+        role: 'user'
       }
     },
     {
@@ -100,10 +100,19 @@ const router = createRouter({
       component: () => import('../views/Web/Average/AverageView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'deliverer'
+        role: 'admin'
       }
     },
-  ],
+    {
+      path: '/deliver',
+      name: 'deliver',
+      component: () => import('../views/Web/Deliver/DeliverView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
+    }
+  ]
 })
 
 router.beforeEach(async (to, from, next) => {

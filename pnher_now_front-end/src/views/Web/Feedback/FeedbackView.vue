@@ -1,5 +1,6 @@
 <template>
-    <WebLayout></WebLayout>
+    <!-- <WebLayout></WebLayout> -->
+    <DelivererLayout></DelivererLayout>
             <div class="container">
                 <h3>Feedback From Customer</h3>
                 <div v-for="user in users" :key="user.id" class="card">
@@ -23,12 +24,14 @@
 </template>
 
 <script>
-import WebLayout from '@/Components/Layouts/WebLayout.vue';
+// import UserLayout from '@/Components/Layouts/UserLayout.vue'
+import DelivererLayout from '@/Components/Layouts/DelivererLayout.vue'
+
 import '@fortawesome/fontawesome-free/css/all.css';
 
 export default {
     components: {
-        WebLayout
+        DelivererLayout
     },
     name: 'FeedbackView',
     data() {
@@ -94,7 +97,7 @@ export default {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    margin-left: 50px;
+    /* margin-left: 50px; */
 }
 
 .card {
