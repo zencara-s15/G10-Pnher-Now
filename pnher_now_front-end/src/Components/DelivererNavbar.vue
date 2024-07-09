@@ -47,7 +47,7 @@ watchEffect(() => {
           <router-link class="tab_label" to="/deliverer_dashboard">Dashboard</router-link>
           
           <input type="radio" name="tab" id="tab2" class="tab tab--2" :checked="activeTab === 1" />
-          <router-link class="tab_label" to="/">Processing</router-link>
+          <router-link class="tab_label" to="/feedback">Feedback</router-link>
           
           <input type="radio" name="tab" id="tab3" class="tab tab--3" :checked="activeTab === 2" />
           <router-link class="tab_label" to="/history_deliverer">History</router-link>

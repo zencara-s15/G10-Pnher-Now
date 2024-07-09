@@ -36,7 +36,7 @@ const router = createRouter({
       component: () => import('../views/Web/User/ProductUser.vue'),
       meta: {
         requiresAuth: true,
-        role: ['user', 'admin']
+        role: 'user'
       }
     },
     {
