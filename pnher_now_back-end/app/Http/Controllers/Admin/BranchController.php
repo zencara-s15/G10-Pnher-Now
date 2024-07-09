@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BranchResource;
+use App\Models\Company as ModelsCompany;
 use App\Models\Supervisor\Branch;
 use App\Models\Supervisor\Company;
 use App\Models\User;
@@ -46,12 +47,12 @@ class BranchController extends Controller
         })->whereDoesntHave('branch')
             ->get();
 
-        $companies = Company::all();
+        $companies = ModelsCompany::all();
         return view('branch.new', compact('supervisors', 'companies'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage.       
      */
     public function store(Request $request)
     {
@@ -93,7 +94,7 @@ class BranchController extends Controller
             ->orWhere('id', $branch->user_id) // Include the current supervisor of the branch
             ->get();
 
-        $companies = Company::all();
+        $companies = ModelsCompany::all();
 
         return view('branch.edit', compact('branch', 'supervisors', 'companies'));
     }

@@ -108,75 +108,75 @@
   </div>
   </div>
   <script>
-  var ctx = document.getElementById('barChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['New register', 'All companies', 'All Baggages', 'Order'],
-      datasets: [{
-        data: [12, 19, 3, 5],
-        backgroundColor: [
-          '#B941FF',
-          '#2563EB',
-          '#EF4444',
-          '#FBBF24',
-        ],
-      }],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+    var ctx = document.getElementById('barChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['New register', 'All companies', 'All Baggages', 'Order'],
+        datasets: [{
+          data: [12, 19, 3, 5],
+          backgroundColor: [
+            '#B941FF',
+            '#2563EB',
+            '#EF4444',
+            '#FBBF24',
+          ],
+        }],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  });
-  // Line charts
-  var ctx = document.getElementById('lineChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      datasets: [{
-          label: 'New Register',
-          data: [12, 19, 3, 5, 2, 3, 10],
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          fill: false,
-          borderWidth: 1
-        },
-        {
-          label: 'Company',
-          data: [5, 2, 10, 3, 8, 15, 7, 1, 12, 9, 10, 20],
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255, 99, 132, 1)',
-          fill: false,
-          borderWidth: 1
-        },
-        {
-          label: 'All Product',
-          data: [10, 15, 12, 20, 15, 10, 12, 18, 25, 12, 19, 30],
-          backgroundColor: 'rgba(0, 255, 0, 0.2)',
-          borderColor: 'rgba(0, 255, 0, 1)',
-          fill: false,
-          borderWidth: 1
-        },
-        {
-          label: 'Order',
-          data: [12, 19, 3, 5, 2, 3, 10, 18, 25, 12, 19, 30],
-          backgroundColor: 'rgba(255, 159, 64, 0.2)',
-          borderColor: 'rgba(255, 159, 64, 1)',
-          fill: false,
-          borderWidth: 1
+    });
+    // Line charts
+    var ctx = document.getElementById('lineChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+            label: 'New Register',
+            data: [12, 19, 3, 5, 2, 3, 10],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            fill: false,
+            borderWidth: 1
+          },
+          {
+            label: 'Company',
+            data: [5, 2, 10, 3, 8, 15, 7, 1, 12, 9, 10, 20],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            fill: false,
+            borderWidth: 1
+          },
+          {
+            label: 'All Product',
+            data: [10, 15, 12, 20, 15, 10, 12, 18, 25, 12, 19, 30],
+            backgroundColor: 'rgba(0, 255, 0, 0.2)',
+            borderColor: 'rgba(0, 255, 0, 1)',
+            fill: false,
+            borderWidth: 1
+          },
+          {
+            label: 'Order',
+            data: [12, 19, 3, 5, 2, 3, 10, 18, 25, 12, 19, 30],
+            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            fill: false,
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        legend: {
+          display: false
         }
-      ]
-    },
-    options: {
-      responsive: true,
-      legend: {
-        display: false
       }
-    }
-  })
-</script>
+    })
+  </script>
 </x-app-layout>

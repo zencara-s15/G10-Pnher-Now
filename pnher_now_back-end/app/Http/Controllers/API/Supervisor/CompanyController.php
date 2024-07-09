@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Supervisor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CompanyResource;
+use App\Models\Company as ModelsCompany;
 use App\Models\Supervisor\Company;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class CompanyController extends Controller
 
     public function show($id)
     {
-        $company = Company::findOrFail($id);
+        $company = ModelsCompany::findOrFail($id);
         $company = new CompanyResource($company);
         return response()->json($company);
     }
