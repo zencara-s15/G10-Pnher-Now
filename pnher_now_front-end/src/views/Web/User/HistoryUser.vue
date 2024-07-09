@@ -1,5 +1,5 @@
 <template>
-  <WebLayout></WebLayout>
+  <UserLayout></UserLayout>
   <div class="container delivery-list p-5">
     <div class="row d-flex justify-content-between">
       <div class="col-auto">
@@ -21,6 +21,27 @@
           >
             <i class="bi bi-x-square"></i>
           </button>
+        </div>
+      </div>
+      <div class="col-auto d-flex gap-3" v-for="user in users_image" :key="user.image">
+        <div class="col-auto">
+          <button class="btn btn-light text-danger">
+            <div class="message">
+              <i class="bi bi-5-circle-fill"></i>
+            </div>
+            <i class="bi bi-chat-left"></i>
+          </button>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-light text-danger">
+            <div class="notification">
+              <i class="bi bi-3-circle-fill"></i>
+            </div>
+            <i class="bi bi-bell"></i>
+          </button>
+        </div>
+        <div class="icon">
+          <img :src="user.image" class="rounded-circle" width="40" height="40" />
         </div>
       </div>
     </div>
@@ -70,7 +91,8 @@
 </template>
 
 <script setup lang="ts" >
-import WebLayout from '@/Components/Layouts/WebLayout.vue'
+
+import UserLayout from '@/Components/Layouts/UserLayout.vue'
 import { ref, onMounted, watch, computed } from 'vue'
 import { useDeliveryStatusStore } from '@/stores/delivery_status-list'
 import { usePostBaggageStore } from '@/stores/post_baggage-list'

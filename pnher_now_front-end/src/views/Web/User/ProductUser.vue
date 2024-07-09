@@ -1,10 +1,12 @@
 <template>
-  <WebLayout>
-    <div class="container mt-4 p-4">
-      <div class="row justify-content-between align-items-center mb-5">
-        <div class="col-auto">
-          <h3 class="fw-bolder text-dark">List of User Products</h3>
-        </div>
+  <!-- <WebLayout></WebLayout> -->
+  <UserLayout></UserLayout>
+  <div class="container mt-4 p-4">
+    <div class="row justify-content-between align-items-center mb-5 bg-red">
+      <div class="col-auto">
+        <h3 class="fw-bolder text-dark">List of User Product</h3>
+      </div>
+      <div class="col-auto">
         <div class="col-auto">
           <div class="input-group search-group mr-50">
             <span class="input-group-text bg-danger text-white">
@@ -155,25 +157,25 @@
         </div>
       </div>
     </div>
-  </WebLayout>
+  </div>
 </template>
 
 <script>
-import WebLayout from '@/Components/Layouts/WebLayout.vue';
-import { ref, onMounted, computed } from 'vue';
-import { usePostBaggageStore } from '@/stores/post_baggage-list';
-import Button from '@/Components/Button/Button.vue';
+import { ref, onMounted, computed } from 'vue'
+import { usePostBaggageStore } from '@/stores/post_baggage-list'
+import Button from '@/Components/Button/Button.vue'
+import UserLayout from '@/Components/Layouts/UserLayout.vue'
 
 export default {
   components: {
-    WebLayout,
     Button,
+    UserLayout
   },
   setup() {
-    const store = usePostBaggageStore();
-    const showModal = ref(false);
-    const baggage = ref([]);
-    const searchQuery = ref('');
+    const store = usePostBaggageStore()
+    const showModal = ref(false)
+    const baggage = ref([])
+    const searchQuery = ref('')
     const formData = {
       receiver_phone: '',
       sending_address: '',
@@ -182,11 +184,11 @@ export default {
       weight: '',
       company: '',
       post_id: '',
-      delivery_status_id: '',
-    };
+      delivery_status_id: ''
+    }
 
     const addItem = async () => {
-      showModal.value = false;
+      showModal.value = false
       const newItem = {
         receiver_phone: formData.receiver_phone,
         sending_address: formData.sending_address,
@@ -195,54 +197,55 @@ export default {
         weight: formData.weight,
         company: formData.company,
         post_id: formData.post_id !== '' ? parseInt(formData.post_id) : null,
-        delivery_status_id: formData.delivery_status_id !== '' ? parseInt(formData.delivery_status_id) : null,
-      };
+        delivery_status_id:
+          formData.delivery_status_id !== '' ? parseInt(formData.delivery_status_id) : null
+      }
 
       try {
-        await store.addPostBaggage(newItem); // Call the addPostBaggage action
-        await store.fetchPostBaggage(); // Fetch updated baggage list
+        await store.addPostBaggage(newItem) // Call the addPostBaggage action
+        await store.fetchPostBaggage() // Fetch updated baggage list
         // Clear form data
-        formData.receiver_phone = '';
-        formData.sending_address = '';
-        formData.receiving_address = '';
-        formData.type = '';
-        formData.weight = '';
-        formData.company = '';
-        formData.post_id = '';
-        formData.delivery_status_id = '';
+        formData.receiver_phone = ''
+        formData.sending_address = ''
+        formData.receiving_address = ''
+        formData.type = ''
+        formData.weight = ''
+        formData.company = ''
+        formData.post_id = ''
+        formData.delivery_status_id = ''
       } catch (error) {
-        console.error('Error adding new baggage item:', error);
+        console.error('Error adding new baggage item:', error)
         // Handle error as needed
       }
-      location.reload();
-    };
+      location.reload()
+    }
 
     const deleteItem = async (itemId) => {
       try {
-        await store.deletePostBaggage(itemId);
-        await store.fetchPostBaggage();
-        baggage.value = store.post_baggage;
+        await store.deletePostBaggage(itemId)
+        await store.fetchPostBaggage()
+        baggage.value = store.post_baggage
       } catch (error) {
-        console.error('Error deleting baggage item:', error);
+        console.error('Error deleting baggage item:', error)
         // Handle error as needed
       }
-      location.reload();
-    };
+      location.reload()
+    }
 
     const filteredBaggage = computed(() => {
       return baggage.value.filter((item) =>
         item.receiver_phone.toLowerCase().includes(searchQuery.value.toLowerCase())
-      );
-    });
+      )
+    })
 
     const calculateTotalCost = (weight) => {
-      return weight * 6000;
-    };
+      return weight * 6000
+    }
 
     onMounted(async () => {
-      await store.fetchPostBaggage(); // Fetch initial baggage list on component mount
-      baggage.value = store.post_baggage;
-    });
+      await store.fetchPostBaggage() // Fetch initial baggage list on component mount
+      baggage.value = store.post_baggage
+    })
 
     return {
       showModal,
@@ -253,11 +256,10 @@ export default {
       searchQuery,
       filteredBaggage,
       calculateTotalCost,
-      store, // Expose store to access state in template
-    };
-  },
-  
-};
+      store // Expose store to access state in template
+    }
+  }
+}
 </script>
 
 <style scoped>

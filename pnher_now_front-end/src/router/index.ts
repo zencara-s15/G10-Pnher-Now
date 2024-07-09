@@ -8,12 +8,21 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: () => import('../views/Admin/DashboardView.vue'),
+      path: '/user_dashboard',
+      name: 'user_dashboard',
+      component: () => import('../views/User/DashboardUserView.vue'),
       meta: {
         requiresAuth: true,
-        role: ['user', 'deliverer'],
+        role: 'user'
+      }
+    },
+    {
+      path: '/deliverer_dashboard',
+      name: 'deliverer_dashboard',
+      component: () => import('../views/Deliverer/DelivererDashboardView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
       }
     },
     {
@@ -27,7 +36,7 @@ const router = createRouter({
       component: () => import('../views/Web/User/ProductUser.vue'),
       meta: {
         requiresAuth: true,
-        role: ['user', 'admin', 'deliverer']
+        role: 'user'
       }
     },
     {
@@ -35,11 +44,13 @@ const router = createRouter({
       name: 'logout',
       component: () => import('../views/Admin/Auth/LoginView.vue')
     },
+
     {
       path: '/register',
       name: 'register',
       component: () => import('../views/Admin/Auth/RegisterUserView.vue')
     },
+
     {
       path: '/history',
       name: 'history',
@@ -49,6 +60,7 @@ const router = createRouter({
         role: 'user'
       }
     },
+
     {
       path: '/deliverer',
       name: 'deliverer',
@@ -103,6 +115,15 @@ const router = createRouter({
         role: 'deliverer'
       }
     },
+    {
+      path: '/deliver',
+      name: 'deliver',
+      component: () => import('../views/Web/Deliver/DeliverView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
+    },
   ],
 })
 
@@ -113,28 +134,37 @@ router.beforeEach(async (to, from, next) => {
 
   try {
     const { data } = await axiosInstance.get('/me')
-
+    
     store.isAuthenticated = true
     store.user = data.data
-
+    
     store.permissions = data.data.permissions.map((item: any) => item.name)
     store.roles = data.data.roles.map((item: any) => item.name)
-
+    
     const rules = () =>
       defineAclRules((setRule) => {
         store.permissions.forEach((permission: string) => {
           setRule(permission, () => true)
         })
       })
-
+      
     simpleAcl.rules = rules()
+
+    if (to.path === '/login' && store.isAuthenticated) {
+      if (store.roles.includes('user')) {
+        return next('/user_dashboard')
+      }
+      if (store.roles.includes('deliverer')) {
+        return next('/deliverer_dashboard')
+      }
+    }
   } catch (error) {
     store.isAuthenticated = false
     store.user = null
     store.permissions = []
     store.roles = []
   }
-
+    
   if (authRequired && !store.isAuthenticated) {
     return next('/login')
   }
