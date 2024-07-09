@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Baggage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

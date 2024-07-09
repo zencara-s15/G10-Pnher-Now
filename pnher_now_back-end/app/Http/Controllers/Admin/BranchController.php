@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BranchResource;
-use App\Models\Supervisor\Branch;
-use App\Models\Supervisor\Company;
+use App\Models\Branch;
+use App\Models\Company as ModelsCompany;
+// use App\Models\Supervisor\Branch;
+// use App\Models\Branch;
+// use App\Models\Supervisor\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class BranchController extends Controller
 {
@@ -45,12 +49,12 @@ class BranchController extends Controller
         })->whereDoesntHave('branchs')
             ->get();
 
-        $companies = Company::all();
+        $companies = ModelsCompany::all();
         return view('branch.new', compact('supervisors', 'companies'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage.       
      */
     public function store(Request $request)
     {
@@ -92,7 +96,7 @@ class BranchController extends Controller
             ->orWhere('id', $branch->user_id) // Include the current supervisor of the branch
             ->get();
 
-        $companies = Company::all();
+        $companies = ModelsCompany::all();
 
         return view('branch.edit', compact('branch', 'supervisors', 'companies'));
     }
@@ -130,6 +134,11 @@ class BranchController extends Controller
     public function destroy(string $id)
     {
         $branch = Branch::findOrFail($id);
+        foreach ($branch->deliverers as $deliverer) {
+            $deliverer->user->delete();
+            $deliverer->delete();
+        }
+        $branch->user->delete();
         $branch->delete();
         return redirect()->route('admin.branch.index')->with('success', 'Branch deleted successfully.');
     }

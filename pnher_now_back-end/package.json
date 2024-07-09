@@ -24,6 +24,8 @@
         "tailwindcss": "^2.0.2"
     },
     "dependencies": {
+<<<<<<< HEAD
+=======
 =======
         "postcss": "^8.4.39",
         "postcss-import": "^16.1.0",
@@ -32,6 +34,7 @@
     "dependencies": {
         "apexcharts": "^3.49.2",
 >>>>>>> f10ebcc2c1219586e3b1cb98757342bd1cda2f99
+>>>>>>> 7579aed6997ad97de4a98af2b4c3572b00efe5b3
         "chart.js": "^4.4.3"
     }
 }

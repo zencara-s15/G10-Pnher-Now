@@ -79,7 +79,11 @@ class AdminSeeder extends Seeder
 
         $permission = Permission::create(['name' => 'Supervisor access']);
 
-
+        // Company permission
+        $permission = Permission::create(['name' => 'Company access']);
+        $permission = Permission::create(['name' => 'Company edit']);
+        $permission = Permission::create(['name' => 'Company create']);
+        $permission = Permission::create(['name' => 'Company delete']);
 
 
 

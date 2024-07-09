@@ -4,8 +4,9 @@ namespace App\Http\Controllers\API\Supervisor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BranchResource;
-use App\Models\Branch as ModelsBranch;
-use App\Models\Supervisor\Branch;
+use App\Models\Branch;
+// use App\Models\Branch as ModelsBranch;
+// use App\Models\Supervisor\Branch;
 use Illuminate\Http\Request;
 
 class BranchController extends Controller

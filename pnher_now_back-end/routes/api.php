@@ -102,5 +102,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/delivery_status_list/{id}', [DeliveryStatusController::class, 'DeliverStatusListByid']);
 });
 
+// Company
+// Route::middleware('auth:sanctum')->group(function(){
+
+//     Route::prefix('company')->group(function () {
+//         Route::get('/list', [CompanyController::class, 'index']);
+//         Route::post('/create', [CompanyController::class, 'store']);
+//         Route::get('/{company}', [CompanyController::class, 'show']);
+//         Route::put('/{company}', [CompanyController::class, 'update']);
+//         Route::delete('/{company}', [CompanyController::class, 'destroy']);
+//     });
+// });
+    // Company 
+
 
    

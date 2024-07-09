@@ -31,87 +31,40 @@ const router = createRouter({
       }
     },
     {
-      path: '/logout',
-      name: 'logout',
-      component: () => import('../views/Admin/Auth/LoginView.vue')
+      path: "/deliver",
+      name: "deliver",
+      component: () => import('../views/Web/Deliver/DeliverView.vue')
     },
     {
-      path: '/register',
-      name: 'register',
-      component: () => import('../views/Admin/Auth/RegisterUserView.vue')
+      path: "/history",
+      name: "history",
+      component: () => import('../views/Web/History/HistoryView.vue')
     },
     {
-      path: '/history',
-      name: 'history',
-      component: () => import('../views/Web/User/HistoryUser.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'user'
-      }
+      path: "/average",
+      name: "average",
+      component: () => import('../views/Web/Average/AverageView.vue')
     },
     {
-      path: '/deliverer',
-      name: 'deliverer',
-      component: () => import('../views/Web/Deliver/DeliverView.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'deliverer'
-      }
+      path: "/processdeliver",
+      name: "processdeliver",
+      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
     },
     {
-      path: '/feedback',
-      name: 'feedback',
-      component: () => import('../views/Web/Feedback/FeedbackView.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'user'
-      }
+      path: "/feedback",
+      name: "feedback",
+      component: () => import('../views/Web/Feedback/FeedbackView.vue')
     },
     {
-      path: '/history_deliverer',
-      name: 'history_deliverer',
-      component: () => import('../views/Web/History/HistoryView.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'deliverer'
-      }
-    },
-    {
-      path: '/process',
-      name: 'process',
-      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'deliverer'
-      }
-    },
-    {
-      path: '/request',
-      name: 'request',
-      component: () => import('../views/Web/Request/RequestView.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'user'
-      }
-    },
-    {
-      path: '/average',
-      name: 'average',
-      component: () => import('../views/Web/Average/AverageView.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'admin'
-      }
-    },
-    {
-      path: '/deliver',
-      name: 'deliver',
-      component: () => import('../views/Web/Deliver/DeliverView.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'deliverer'
-      }
+      path: "/request",
+      name: "request",
+      component: () => import('../views/Web/Request/RequestView.vue')
+// >>>>>>> 2f9a8494ca5795ab5b7908b8f9e38a36c1773720
     }
+// <<<<<<< HEAD
+// >>>>>>> d443dd952d8fa459df9a4882ce9bbaaa3b6be6d3
+// =======
+// >>>>>>> 7579aed6997ad97de4a98af2b4c3572b00efe5b3
   ]
 })
 

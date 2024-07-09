@@ -24,8 +24,11 @@ configure({
 })
   
 
+<<<<<<< HEAD
+=======
 
 // library.add(...all)
+>>>>>>> 7579aed6997ad97de4a98af2b4c3572b00efe5b3
 
 app.use(createPinia())
 app.use(router.router)

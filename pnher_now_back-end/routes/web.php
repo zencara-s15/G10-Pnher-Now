@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
+    CompanyController,
+    // CompanyController as AdminCompanyController,
     BranchController,
     DelivererController,
     DriverController,
@@ -9,7 +11,10 @@ use App\Http\Controllers\Admin\{
     MailSettingController,
 };
 use App\Http\Controllers\API\Chart\ChartController as ChartChartController;
+// use App\Http\Controllers\API\Supervisor\CompanyController;
 use App\Http\Controllers\ChartController;
+
+// use App\Http\Controllers\ChartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,8 +96,20 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         Route::put('/profile-update',[ProfileController::class,'update'])->name('profile.update');
         Route::get('/mail',[MailSettingController::class,'index'])->name('mail.index');
         Route::put('/mail-update/{mailsetting}',[MailSettingController::class,'update'])->name('mail.update');
-
+        
+        // Chart
         Route::get('/chart', [ChartChartController::class, 'chart']);
+        Route::get('/chart', [ChartChartController::class, 'chart']);
+        
+        // ================Company=================
+        
+        Route::resource('company', 'CompanyController');
+        Route::get('/company',[CompanyController::class, 'index'])->name('company.index');
+        Route::put('/company/create', [CompanyController::class, 'store'])->name('comany.create');
+        // Route::get('/company/edit/{id}', [CompanyController::class, 'update'])->name('comany.edit');
+        Route::get('/company/delete/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
+        Route::get('/company/edit/{id}', [CompanyController::class, 'update'])->name('comany.update');
+
 
         //======================== Branch route ===============================
         Route::resource('branch','BranchController');
