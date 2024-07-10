@@ -1,7 +1,7 @@
 <template>
-  <WebLayout></WebLayout>
+  <UserLayout></UserLayout>
   <div class="container delivery-list p-5">
-    <div class="row d-flex justify-content-between">
+    <!-- <div class="row d-flex justify-content-between">
       <div class="col-auto">
         <div class="input-group search-group" style="width: 500px">
           <span class="input-group-text bg-danger text-white">
@@ -44,7 +44,7 @@
           <img :src="user.image" class="rounded-circle" width="40" height="40" />
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="row">
       <div class="col-12">
         <div class="mt-3 mb-3">
@@ -81,9 +81,12 @@
 
 <script>
 import WebLayout from '@/Components/Layouts/WebLayout.vue'
+import UserLayout from '@/Components/Layouts/UserLayout.vue'
+
 export default {
   components: {
-    WebLayout
+    WebLayout,
+    UserLayout
   },
   data() {
     return {

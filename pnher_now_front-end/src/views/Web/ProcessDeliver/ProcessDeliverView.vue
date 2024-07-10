@@ -78,9 +78,15 @@ export default {
 
 }
 
+<<<<<<< HEAD
 </script>
 
 <style>
+=======
+</script >
+
+<style scoped>
+>>>>>>> 4bc13939737eacee3a6a2864ab7b518c2fbc09ec
 .table {
     justify-content: center;
     align-items: center;

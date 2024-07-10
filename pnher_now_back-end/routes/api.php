@@ -44,6 +44,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/me', [AuthController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::put('/change_password', [AuthController::class, 'change_password']);
+    
 
     Route::prefix('users')->group(function (){
         Route::get('/list',[APIUserController::class, 'index']);
@@ -69,7 +71,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 });
-
 // user post
 
 Route::middleware('auth:sanctum')->group(function () {
