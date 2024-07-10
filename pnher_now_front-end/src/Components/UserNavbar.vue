@@ -14,6 +14,11 @@ function closeDropdown() {
   showDropdown.value = false
 }
 
+function logOut() {
+  localStorage.removeItem('access_token')
+  router.push('/login')
+}
+
 const tabs = [
   { name: 'Dashboard', path: '/user_dashboard' },
   { name: 'Home', path: '/home' },
@@ -87,7 +92,7 @@ watchEffect(() => {
               <div class="block w-full px-4 py-2 text-sm text-neutral-700 hover:bg-zinc-100 hover:text-red dark:text-white dark:hover:bg-neutral-700 cursor-pointer">
                 My profile
               </div>
-              <div class="block w-full px-4 py-2 text-sm text-neutral-700 hover:bg-zinc-100 hover:text-red dark:text-white dark:hover:bg-neutral-700 cursor-pointer">
+              <div class="block w-full px-4 py-2 text-sm text-neutral-700 hover:bg-zinc-100 hover:text-red dark:text-white dark:hover:bg-neutral-700 cursor-pointer" @click="logOut">
                 Log out
               </div>
             </div>
@@ -99,65 +104,66 @@ watchEffect(() => {
 </template>
 
 <style scoped>
-  nav {
-    padding: 0 20px;
-    position: sticky;
-    top: 0;
-    z-index: 50;
- }
-  .tab-container {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 10px;
-    color: white;
-    border-radius: 9px;
-    height: 60px;
-  }
-  
-  .indicator {
-    content: "";
-    width: 150px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    position: absolute;
-    top: 10px;
-    z-index: 9;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
-    border-radius: 7px;
-    transition: all 0.2s ease-out;
-  }
-  
-  .tab {
-    width: 150px;
-    height: 40px;
-    position: absolute;
-    z-index: 99;
-    outline: none;
-    opacity: 0;
-  }
-  
-  .tab_label {
-    width: 150px;
-    height: 40px;
-    position: relative;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    font-size: 1rem;
-    opacity: 0.8;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-  }
-  input {
-    color: white;
-  }
-  a:hover {
-    color: #f1f1f1;
-  }
+nav {
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.tab-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px;
+  color: white;
+  border-radius: 9px;
+  height: 60px;
+}
+
+.indicator {
+  content: "";
+  width: 150px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  top: 10px;
+  z-index: 9;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 7px;
+  transition: all 0.2s ease-out;
+}
+
+.tab {
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  z-index: 99;
+  outline: none;
+  opacity: 0;
+}
+
+.tab_label {
+  width: 150px;
+  height: 40px;
+  position: relative;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  text-align: center;
+  border-radius: 8px;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
+.tab_label:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tab:checked + .tab_label {
+  color: white;
+}
 </style>
