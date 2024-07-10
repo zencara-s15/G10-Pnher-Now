@@ -2,15 +2,21 @@ import { createRouter, createWebHistory } from 'vue-router'
 import axiosInstance from '@/plugins/axios'
 import { useAuthStore } from '@/stores/auth-store'
 import { createAcl, defineAclRules } from 'vue-simple-acl'
+import { ref } from 'vue'
 
 const simpleAcl = createAcl({})
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: () => import('../views/Admin/DashboardView.vue'),
+      path: '/',
+      name: 'welcome',
+      component: () => import('../views/Web/HomeView.vue')
+    },
+    {
+      path: '/user_dashboard',
+      name: 'user_dashboard',
+      component: () => import('../views/User/DashboardUserView.vue'),
       meta: {
         requiresAuth: true,
         role: ['user', 'deliverer'],
@@ -27,7 +33,7 @@ const router = createRouter({
       component: () => import('../views/Web/User/ProductUser.vue'),
       meta: {
         requiresAuth: true,
-        role: ['user', 'admin']
+        role: 'user'
       }
     },
     {
@@ -52,10 +58,10 @@ const router = createRouter({
     {
       path: '/deliverer',
       name: 'deliverer',
-      component: () => import('../views/Web/Deliver/DeliverView.vue'),
+      component: () => import('@/views/Web/Deliver/DeliverView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'deliverer'
+        role:'deliverer'
       }
     },
     {
@@ -100,15 +106,6 @@ const router = createRouter({
       component: () => import('../views/Web/Average/AverageView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'admin'
-      }
-    },
-    {
-      path: '/deliver',
-      name: 'deliver',
-      component: () => import('../views/Web/Deliver/DeliverView.vue'),
-      meta: {
-        requiresAuth: true,
         role: 'deliverer'
       }
     }
@@ -119,7 +116,7 @@ router.beforeEach(async (to, from, next) => {
   const publicPages = ['/login', '/register']
   const authRequired = !publicPages.includes(to.path)
   const store = useAuthStore()
-
+  const page = ref<string>(to.path)
   try {
     const { data } = await axiosInstance.get('/me')
 
@@ -135,8 +132,17 @@ router.beforeEach(async (to, from, next) => {
           setRule(permission, () => true)
         })
       })
-
+      
     simpleAcl.rules = rules()
+      console.log(page.value)
+    if (to.path === '/login' && store.isAuthenticated) {
+      if (store.roles.includes('user')) {
+        return next('/user_dashboard')
+      }
+      if (store.roles.includes('deliverer') && store.isAuthenticated == true) {
+        return next(page.value != '/login' ?  page.value :'/deliverer_dashboard')
+      }
+    }
   } catch (error) {
     store.isAuthenticated = false
     store.user = null
