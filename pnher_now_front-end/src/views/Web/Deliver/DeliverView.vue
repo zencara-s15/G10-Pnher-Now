@@ -1,5 +1,5 @@
 <template>
-  <WebLayout></WebLayout>
+  <UserLayout></UserLayout>
   <div class="delivers m-5">
     <nav class="form-delivers delivers-expand-lg flex-row p-1" v-for="item in baggage" :key="item.id">
       <div class="card" style="width: 70%">
@@ -43,23 +43,21 @@
 </template>
 
 <script>
-import WebLayout from '@/Components/Layouts/WebLayout.vue'
+import UserLayout from '@/Components/Layouts/UserLayout.vue'
 import { ref, onMounted, watch } from 'vue'
 import { usePostBaggageStore } from '@/stores/post_baggage-list'
 
 export default {
   components: {
-    WebLayout
+    UserLayout
   },
-  name: 'DeliverView',
+  name: 'Deliverer',
   setup() {
     const baggageStore = usePostBaggageStore()
     const baggage = ref([])
 
-    onMounted(() => {
-      baggageStore.fetchPostBaggage()
-    })
-    watch(() => {
+    onMounted(async () => {
+      await baggageStore.fetchPostBaggage()
       baggage.value = baggageStore.post_baggage
     })
 
