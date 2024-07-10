@@ -32,7 +32,11 @@
                 <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="inline">
                   @csrf
                   @method('delete')
-                  <button class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark text-green-400">More</button>
+                  <button class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark text-green-400">
+                    <span class="material-icons-outlined">
+                      more_vert
+                    </span>
+                  </button>
                 </form>
                 @endcan
               </td>

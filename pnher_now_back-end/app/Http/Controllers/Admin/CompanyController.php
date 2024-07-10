@@ -34,21 +34,6 @@ class CompanyController extends Controller
         return redirect()->route('admin.company.index')->with('success', 'Company created successfully');
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Company $company){
         $company->delete();
         // Redirect to the company index page with a success message
