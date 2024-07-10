@@ -1,5 +1,5 @@
 <template>
-  <UserLayout></UserLayout>
+<DelivererLayout>
   <div class="delivers m-5">
     <nav class="form-delivers delivers-expand-lg flex-row p-1" v-for="item in baggage" :key="item.id">
       <div class="card" style="width: 70%">
@@ -40,16 +40,17 @@
       </div>
     </nav>
   </div>
+</DelivererLayout>
 </template>
 
 <script>
-import UserLayout from '@/Components/Layouts/UserLayout.vue'
-import { ref, onMounted, watch } from 'vue'
+import DelivererLayout from '@/Components/Layouts/DelivererLayout.vue';
+import { ref, onMounted } from 'vue'
 import { usePostBaggageStore } from '@/stores/post_baggage-list'
 
 export default {
   components: {
-    UserLayout
+    DelivererLayout
   },
   name: 'Deliverer',
   setup() {

@@ -53,7 +53,7 @@
         <div class="list-group">
           <div
             class="list-group-item d-flex justify-content-between align-items-center mb-3 border-red"
-            v-for="item in baggage"
+            v-for="(item, index) in baggage"
             :key="item.id"
           >
             <div class="d-flex align-items-center">
@@ -73,44 +73,77 @@
               </div>
             </div>
             <div class="menu position-relative">
-              <button class="btn btn-outline-secondary btn-sm" @click="toggleMenu(index)">⋮</button>
+              <button class="btn btn-outline-secondary btn-sm" @click="showDetail(item)">ShowDetail</button>
               <div v-if="openMenuIndex === index" class="dropdown-menu show position-absolute">
-                <button class="dropdown-item" @click="editItem(index)">Detail</button>
+                <button class="dropdown-item" @click="editItem(index)">cancel</button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="" v-if="status != []" > -->
     <div v-for="item in status" :key="item.id">
       <h1>History Status: {{ item.name }}</h1>
     </div>
-    <!-- </div> -->
+    <!-- Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailModalLabel">Delivery Detail</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div v-if="selectedItem">
+              <p><strong>From:</strong> {{ selectedItem.sending_address }}</p>
+              <p><strong>To:</strong> {{ selectedItem.receiving_address }}</p>
+              <p><strong>Delivered on:</strong> {{ selectedItem.created_at }}</p>
+              <!-- Add more details as necessary -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<script setup lang="ts" >
-
+<script setup lang="ts">
 import UserLayout from '@/Components/Layouts/UserLayout.vue'
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useDeliveryStatusStore } from '@/stores/delivery_status-list'
 import { usePostBaggageStore } from '@/stores/post_baggage-list'
+import { Modal } from 'bootstrap'
+
 const deliveryStore = useDeliveryStatusStore()
 const baggageStore = usePostBaggageStore()
-const baggage = ref()
-const status = ref()
+const baggage = ref([])
+const status = ref([])
+const selectedItem = ref(null)
+const searchQuery = ref('')
+let openMenuIndex = ref(-1)
 
 onMounted(async () => {
   await baggageStore.fetchPostBaggage()
   await deliveryStore.fetchDeliveryStatus()
 
-  baggage.value = baggageStore.post_baggage;
-  status.value = deliveryStore.delivery_status;
+  baggage.value = baggageStore.post_baggage
+  status.value = deliveryStore.delivery_status
   baggage.value = baggage.value.filter((b: any) => b.delivery_status_id == 5)
-  console.log(baggage.value, status.value);
+  console.log(baggage.value, status.value)
 })
 
+const showDetail = (item: any) => {
+  selectedItem.value = item
+  const detailModal = new Modal(document.getElementById('detailModal')!)
+  detailModal.show()
+}
+
+const clearSearch = () => {
+  searchQuery.value = ''
+}
 </script>
 
 <style scoped>
