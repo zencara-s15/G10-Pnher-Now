@@ -1,5 +1,4 @@
 <template>
-  <!-- <WebLayout></WebLayout> -->
   <UserLayout></UserLayout>
   <div class="container mt-4 p-4">
     <div class="row justify-content-between align-items-center mb-5">
