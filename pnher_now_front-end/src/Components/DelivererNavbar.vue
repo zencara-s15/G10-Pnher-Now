@@ -14,6 +14,11 @@ function closeDropdown() {
   showDropdown.value = false
 }
 
+function logOut() {
+  localStorage.removeItem('access_token')
+  router.push('/login')
+}
+
 const tabs = [
   { name: 'Dashboard', path: '/deliverer_dashboard' },
   { name: 'Feedback', path: '/feedback' },
@@ -87,7 +92,7 @@ watchEffect(() => {
               <div class="block w-full px-4 py-2 text-sm text-neutral-700 hover:bg-zinc-100 hover:text-red dark:text-white dark:hover:bg-neutral-700 cursor-pointer">
                 My profile
               </div>
-              <div class="block w-full px-4 py-2 text-sm text-neutral-700 hover:bg-zinc-100 hover:text-red dark:text-white dark:hover:bg-neutral-700 cursor-pointer">
+              <div class="block w-full px-4 py-2 text-sm text-neutral-700 hover:bg-zinc-100 hover:text-red dark:text-white dark:hover:bg-neutral-700 cursor-pointer" @click="logOut">
                 Log out
               </div>
             </div>
