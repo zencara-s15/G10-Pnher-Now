@@ -34,10 +34,11 @@ class CompanyController extends Controller
         return redirect()->route('admin.company.index')->with('success', 'Company created successfully');
     }
 
-    public function destroy(Company $company){
+    public function destroy(string $id){
+        $company = Company::findOrFail( $id );
         $company->delete();
         // Redirect to the company index page with a success message
-        return redirect()->back()->withSuccess('Company deleted successfully');
+        return redirect()->route('admin.company.index')->withSuccess('Company deleted successfully');
     }
 
     /**
@@ -46,7 +47,9 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company){
+    public function edit(string $id){
+        $company = Company::findOrFail( $id );
+        $company = Company::findOrFail( $company->id );
         return view('company.edit', ['company' => $company]);
     }
 

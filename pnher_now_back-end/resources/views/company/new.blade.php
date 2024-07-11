@@ -42,7 +42,6 @@
                     </div>
                 </div>
             </div>
-    </div>
-    </main>
+        </main>
     </div>
 </x-app-layout>

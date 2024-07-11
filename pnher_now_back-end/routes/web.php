@@ -107,7 +107,7 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         Route::get('/company',[CompanyController::class, 'index'])->name('company.index');
         Route::put('/company/create', [CompanyController::class, 'store'])->name('comany.create');
         // Route::get('/company/edit/{id}', [CompanyController::class, 'update'])->name('comany.edit');
-        Route::get('/company/delete/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
+        Route::delete('/company/delete/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
         Route::get('/company/edit/{id}', [CompanyController::class, 'update'])->name('comany.update');
 
 
