@@ -1,7 +1,7 @@
 <x-app-layout>
     <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 my-1 mx-1">
         <div class="container mx-auto px-2 py-2">
-            <div class="text-right flex flex-row justify-between items-end">
+            <div data-modal-target="default-modal" data-modal-toggle="default-modal"  class="text-right flex flex-row justify-between items-end">
                 @can('Company create')
                 <a href="{{route('admin.company.create')}}" type="button" class="flex flex-row justify-between items-center px-5 py-1 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-500 text-white font-extrabold text-lg rounded shadow-2xl hover:from-blue-600 hover:via-blue-700 hover:to-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-70 active:bg-red-800 active:shadow-inner transform hover:scale-110 transition duration-500 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed m-4 ml-auto">
                     <span class="material-icons-outlined">
@@ -56,3 +56,4 @@
         </div>
     </main>
 </x-app-layout>
+
