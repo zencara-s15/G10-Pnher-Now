@@ -25,13 +25,6 @@ const router = createRouter({
 
     // register
     {
-      path: '/register',
-      name: 'register',
-      component: () => import('../views/Admin/Auth/RegisterUserView.vue')
-    },
-
-    // logout 
-    {
       path: '/logout',
       name: 'logout',
       component: () => import('../views/Admin/Auth/LoginView.vue')
@@ -58,15 +51,10 @@ const router = createRouter({
         role: 'user'
       }
     },
-
     {
-      path: '/history',
-      name: 'history',
-      component: () => import('../views/Web/User/HistoryUser.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'user'
-      }
+      path: "/average",
+      name: "average",
+      component: () => import('../views/Web/Average/AverageView.vue')
     },
 
     {

@@ -55,19 +55,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('companies')->group(function () {
         Route::get('/list', [CompanyController::class, 'index']);
         Route::post('/create', [CompanyController::class, 'store']);
-        Route::get('/{company}', [CompanyController::class, 'show']);
-        Route::put('/{company}', [CompanyController::class, 'update']);
-        Route::delete('/{company}', [CompanyController::class, 'destroy']);
+        Route::get('/show/{company}', [CompanyController::class, 'show']);
+        Route::put('/edit/{company}', [CompanyController::class, 'update']);
+        Route::delete('delete/{company}', [CompanyController::class, 'destroy']);
     });
-
-
+    
      // Branch
      Route::prefix('branches')->group(function () {
         Route::get('/list', [BranchController::class, 'index']);
         Route::post('/create', [BranchController::class, 'store']);
-        Route::get('/{branch}', [BranchController::class, 'show']);
-        Route::put('/{branch}', [BranchController::class, 'update']);
-        Route::delete('/{branch}', [BranchController::class, 'destroy']);
+        Route::get('show/{branch}', [BranchController::class, 'show']);
+        Route::put('edit/{branch}', [BranchController::class, 'update']);
+        Route::delete('delete/{branch}', [BranchController::class, 'destroy']);
     });
 
 });
@@ -103,3 +102,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/delivery_status_list', [DeliveryStatusController::class, 'ListStatus']);
     Route::get('/delivery_status_list/{id}', [DeliveryStatusController::class, 'DeliverStatusListByid']);
 });
+// Company
+// Route::middleware('auth:sanctum')->group(function(){
+
+//     Route::prefix('company')->group(function () {
+//         Route::get('/list', [CompanyController::class, 'index']);
+//         Route::post('/create', [CompanyController::class, 'store']);
+//         Route::get('/{company}', [CompanyController::class, 'show']);
+//         Route::put('/{company}', [CompanyController::class, 'update']);
+//         Route::delete('/{company}', [CompanyController::class, 'destroy']);
+//     });
+// });
+    // Company 
+
+
+   

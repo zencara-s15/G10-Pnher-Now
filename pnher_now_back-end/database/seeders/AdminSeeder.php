@@ -62,8 +62,30 @@ class AdminSeeder extends Seeder
         $permission = Permission::create(['name' => 'Mail access']);
         $permission = Permission::create(['name' => 'Mail edit']);
 
+        //History
+        $permission = Permission::create(['name' => 'History access']);
+
+        //Branch
+        $permission = Permission::create(['name' => 'Branch access']);
+        $permission = Permission::create(['name' => 'Branch create']);
+        $permission = Permission::create(['name' => 'Branch edit']);
+        $permission = Permission::create(['name' => 'Branch delete']);
+
+        //Deliverer 
+        $permission = Permission::create(['name' => 'Deliverer access']);
+        $permission = Permission::create(['name' => 'Deliverer create']);
+        $permission = Permission::create(['name' => 'Deliverer edit']);
+        $permission = Permission::create(['name' => 'Deliverer delete']);
 
         $permission = Permission::create(['name' => 'Supervisor access']);
+
+        // Company permission
+        $permission = Permission::create(['name' => 'Company access']);
+        $permission = Permission::create(['name' => 'Company edit']);
+        $permission = Permission::create(['name' => 'Company create']);
+        $permission = Permission::create(['name' => 'Company delete']);
+
+
 
         $admin->assignRole($admin_role);
         $user->assignRole($user_role);

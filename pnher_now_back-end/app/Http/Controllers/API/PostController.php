@@ -13,15 +13,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        // dd(1);
-        // Retrieve all posts
         $posts = Post::all();
-        $user=Auth::user();
-        $posts=PostResource::collection($user->posts()->get());
-
-        // Return posts as a JSON response
-        return response()->json(['users' => Auth::user(), 'posts' => $posts]);
-        // return response()->json($posts);
+        return response()->json($posts);
     }
 
     public function store(Request $request)
