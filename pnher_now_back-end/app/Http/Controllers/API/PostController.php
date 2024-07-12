@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,12 @@ class PostController extends Controller
         // dd(1);
         // Retrieve all posts
         $posts = Post::all();
+        $user=Auth::user();
+        $posts=PostResource::collection($user->posts()->get());
 
         // Return posts as a JSON response
-        return response()->json($posts);
+        return response()->json(['users' => Auth::user(), 'posts' => $posts]);
+        // return response()->json($posts);
     }
 
     public function store(Request $request)

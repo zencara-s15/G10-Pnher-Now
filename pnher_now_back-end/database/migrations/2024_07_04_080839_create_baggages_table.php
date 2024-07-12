@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('baggage', function (Blueprint $table) {
             $table->id();
@@ -19,24 +19,23 @@ return new class extends Migration
             $table->string('sending_address');
             $table->string('company');
             $table->string('receiving_address');
-            $table->boolean('status');
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('delivery_status_id');
-
+             // Make 'status' nullable
+            $table->unsignedBigInteger('post_id')->nullable(); // Make 'post_id' nullable
+            $table->unsignedBigInteger('delivery_status_id')->nullable(); // Make 'delivery_status_id' nullable
+        
+            // Define foreign key constraints (assuming 'posts' and 'delivery_status' tables exist)
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->foreign('delivery_status_id')->references('id')->on('delivery_status')->onDelete('cascade');
-
+        
             $table->timestamps();
         });
     }
 
-    public function down() 
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
-        Schema::table('baggage', function (Blueprint $table) {
-            $table->dropForeign(['post_id']);
-            $table->dropForeign(['delivery_status_id']);
-        });
-
         Schema::dropIfExists('baggage');
     }
 };

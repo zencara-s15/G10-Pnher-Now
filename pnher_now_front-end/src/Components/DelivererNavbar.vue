@@ -5,6 +5,7 @@ import { useRoute, useRouter } from 'vue-router'
 const showDropdown = ref(false)
 const route = useRoute()
 const router = useRouter()
+const index = ref<string>('1')
 
 function toggleDropdown() {
   showDropdown.value = !showDropdown.value
@@ -20,9 +21,10 @@ function logOut() {
 }
 
 const tabs = [
-  { name: 'Dashboard', path: '/deliverer_dashboard' },
-  { name: 'Feedback', path: '/feedback' },
-  { name: 'History', path: '/history_deliverer' }
+  {id: 1, name: 'Dashboard', path: '/deliverer_dashboard' },
+  {id: 2, name: 'Feedback', path: '/feedback' },
+  {id: 3, name: 'History', path: '/history_deliverer' },
+  {id: 4, name: 'Deliverer', path: '/deliverer' },
 ]
 
 const activeTab = computed(() => {
@@ -56,6 +58,9 @@ watchEffect(() => {
           
           <input type="radio" name="tab" id="tab3" class="tab tab--3" :checked="activeTab === 2" />
           <router-link class="tab_label" to="/history_deliverer">History</router-link>
+
+          <input type="radio" name="tab" id="tab4" class="tab tab--4" :checked="activeTab === 3" />
+          <router-link class="tab_label" to="/deliverer">Deliverer</router-link>
           
           <div class="indicator" :style="{ left: `${10 + activeTab * 150}px` }"></div>
         </div>

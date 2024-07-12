@@ -71,7 +71,7 @@ function closeDropdown() {
             HISTORY-DELIVERER
           </router-link>
           <router-link
-            to="/proccess"
+            to="/process"
             class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
             active-class="text-red-500"
           >

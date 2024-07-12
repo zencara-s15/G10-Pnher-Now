@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\deliveryStatus;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,9 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // \App\Models\User::fa ctory(10)->create();
         $this->call(AdminSeeder::class);
         \App\Models\Post::factory(17)->create();
         $this->call(MailsettingSeeder::class);
+        $this->call(DeliveryStatusSeeder::class);
     }
 }

@@ -50,6 +50,16 @@ const router = createRouter({
     },
 
     {
+      path: '/home',
+      name: 'home',
+      component: () => import('../views/Web/User/ProductUser.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
+    },
+
+    {
       path: '/history',
       name: 'history',
       component: () => import('../views/Web/User/HistoryUser.vue'),
@@ -82,7 +92,7 @@ const router = createRouter({
     },
 
     {
-      path: '/deliver',
+      path: '/deliverer',
       name: 'deliver',
       component: () => import('../views/Web/Deliver/DeliverView.vue'),
       meta: {
