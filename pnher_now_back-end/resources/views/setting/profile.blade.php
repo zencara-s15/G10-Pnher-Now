@@ -8,8 +8,13 @@
                           @csrf
                           @method('put')
                           <div class="flex flex-col space-y-2">
-                            <label for="name" class="text-gray-700 select-none font-medium">User Name</label>
-                            <input id="name" type="text" name="name" value="{{ old('name',$user->name) }}"
+                            <label for="name" class="text-gray-700 select-none font-medium">User First Name</label>
+                            <input id="name" type="text" name="first_name" value="{{ old('name',$user->first_name) }}"
+                              placeholder="Enter name" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                            />
+                          <div class="flex flex-col space-y-2">
+                            <label for="name" class="text-gray-700 select-none font-medium">User Last Name</label>
+                            <input id="name" type="text" name="last_name" value="{{ old('name',$user->last_name) }}"
                               placeholder="Enter name" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                             />
                         </div>

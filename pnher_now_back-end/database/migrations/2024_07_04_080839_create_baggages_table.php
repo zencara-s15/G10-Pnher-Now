@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('weight');
             $table->string('receiver_phone');
             $table->string('sending_address');
-            $table->string('company');
+            $table->string('company')->nullable();
             $table->string('receiving_address');
              // Make 'status' nullable
             $table->unsignedBigInteger('post_id')->nullable(); // Make 'post_id' nullable
