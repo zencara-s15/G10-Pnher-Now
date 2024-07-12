@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Company;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Branch extends Model
 {
     use HasFactory;
+
     protected $fillable = ['name', 'user_id', 'company_id', 'address'];
 
     public function company()
@@ -32,4 +31,5 @@ class Branch extends Model
      {
          return $this->hasMany(DelivererInBranch::class);
      }
+
 }

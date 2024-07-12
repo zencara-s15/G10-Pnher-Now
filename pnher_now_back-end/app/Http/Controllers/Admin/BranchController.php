@@ -31,11 +31,18 @@ class BranchController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, string $id)
     {
         $branches = Branch::all();
         $branches = BranchResource::collection($branches);
-        return view('branch.index', ['branches' => $branches], compact('branches'));
+        $supervisors = User::whereHas('roles', function ($query) {
+            $query->where('name', 'supervisor');
+        })->whereDoesntHave('branchs')
+            ->get();
+
+        $companies = ModelsCompany::all();
+
+        return view('branch.index', ['branches' => $branches,'supervisors'=>$supervisors, 'companies'=>$companies ], compact('branches','supervisors', 'companies'));
 
     }
 
