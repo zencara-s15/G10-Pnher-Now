@@ -24,10 +24,6 @@ configure({
   validateOnInput: true
 })
   
-
-
-// library.add(...all)
-
 app.use(createPinia())
 app.use(router.router)
 app.use(ElementPlus)

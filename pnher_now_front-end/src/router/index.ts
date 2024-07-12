@@ -51,15 +51,10 @@ const router = createRouter({
         role: 'user'
       }
     },
-
     {
-      path: '/history',
-      name: 'history',
-      component: () => import('../views/Web/User/HistoryUser.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'user'
-      }
+      path: "/average",
+      name: "average",
+      component: () => import('../views/Web/Average/AverageView.vue')
     },
 
     {
