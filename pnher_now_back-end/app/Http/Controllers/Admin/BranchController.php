@@ -1,17 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BranchResource;
 use App\Models\Branch;
-use App\Models\Company as ModelsCompany;
-// use App\Models\Supervisor\Branch;
-// use App\Models\Branch;
-// use App\Models\Supervisor\Company;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 
 class BranchController extends Controller
 {
@@ -31,19 +26,13 @@ class BranchController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, string $id)
+    public function index()
     {
         $branches = Branch::all();
         $branches = BranchResource::collection($branches);
-        $supervisors = User::whereHas('roles', function ($query) {
-            $query->where('name', 'supervisor');
-        })->whereDoesntHave('branchs')
-            ->get();
-
-        $companies = ModelsCompany::all();
-
-        return view('branch.index', ['branches' => $branches,'supervisors'=>$supervisors, 'companies'=>$companies ], compact('branches','supervisors', 'companies'));
-
+        return view('branch.index', ['branches' => $branches], compact('branches'));
+        // return view('branch.index', ['branches' => $branches]);
+        // return view('branch.index');
     }
 
     /**
@@ -56,12 +45,12 @@ class BranchController extends Controller
         })->whereDoesntHave('branchs')
             ->get();
 
-        $companies = ModelsCompany::all();
+        $companies = Company::all();
         return view('branch.new', compact('supervisors', 'companies'));
     }
 
     /**
-     * Store a newly created resource in storage.       
+     * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
@@ -103,7 +92,7 @@ class BranchController extends Controller
             ->orWhere('id', $branch->user_id) // Include the current supervisor of the branch
             ->get();
 
-        $companies = ModelsCompany::all();
+        $companies = Company::all();
 
         return view('branch.edit', compact('branch', 'supervisors', 'companies'));
     }
@@ -141,11 +130,6 @@ class BranchController extends Controller
     public function destroy(string $id)
     {
         $branch = Branch::findOrFail($id);
-        foreach ($branch->deliverers as $deliverer) {
-            $deliverer->user->delete();
-            $deliverer->delete();
-        }
-        $branch->user->delete();
         $branch->delete();
         return redirect()->route('admin.branch.index')->with('success', 'Branch deleted successfully.');
     }
