@@ -5,6 +5,9 @@ namespace App\Http\Controllers\API\Delivery;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Baggage;
+use App\Models\User;
+use App\Http\Resources\BaggageResource;
+
 
 class BaggageController extends Controller
 {
@@ -13,30 +16,41 @@ class BaggageController extends Controller
      */
     public function BaggageList()
     {
-        // Retrieve all baggage with deliveryStatus relationship loaded
-        $baggage = Baggage::with('deliveryStatus:id,name')->get();
+        // Retrieve all baggage with deliveryStatus and user relationships loaded
+        $baggage = Baggage::with(['deliveryStatus:id,name', 'user:id,name'])->get();
 
         // Return a JSON response
-        return response()->json(['success' => 'Baggage retrieved successfully!', 'baggage' => $baggage], 200);
+        return response()->json([
+            'success' => 'Baggage retrieved successfully!',
+            'baggage' => $baggage
+        ], 200);
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function BaggagePost(Request $request)
     {
-        // Validate the incoming request data
-        $request->validate([
+        // Define validation rules
+        $rules = [
             'type' => 'required|string|max:255',
             'weight' => 'required|integer',
             'receiver_phone' => 'required|string|max:255',
             'sending_address' => 'required|string|max:255',
             'company' => 'required|string|max:255',
             'receiving_address' => 'required|string|max:255',
-            'status' => 'required|boolean',
-            'post_id' => 'required|exists:posts,id',
-            'delivery_status_id' => 'required|exists:delivery_status,id',
-        ]);
+        ];
+
+        // Adjust validation rules for optional fields
+        if ($request->has('post_id')) {
+            $rules['post_id'] = 'nullable|exists:posts,id';
+        }
+
+        if ($request->has('delivery_status_id')) {
+            $rules['delivery_status_id'] = 'nullable|exists:delivery_status,id';
+        }
+
+        // Validate the incoming request data
+        $request->validate($rules);
 
         // Prepare the data for insertion
         $data = $request->all();
@@ -71,8 +85,10 @@ class BaggageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function DeleteBaggage(string $id)
     {
-        //
+        // Find and delete the baggage by ID
+        $baggage = Baggage::destroy($id);
+        return response()->json(['success' => $baggage, 'message' => 'Baggage deleted successfully'], 200);
     }
 }

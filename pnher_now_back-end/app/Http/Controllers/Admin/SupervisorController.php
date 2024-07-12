@@ -12,7 +12,10 @@ class SupervisorController extends Controller
      */
     public function index()
     {
+        // Correct the view name here, assuming it should be 'admin.supervisors.index'
+
         return view('setting.supervisor.index');
+        
     }
 
     /**
@@ -20,7 +23,7 @@ class SupervisorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Implement logic to store a new resource
     }
 
     /**
@@ -28,7 +31,7 @@ class SupervisorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Implement logic to show a specific resource identified by $id
     }
 
     /**
@@ -36,7 +39,7 @@ class SupervisorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Implement logic to update a specific resource identified by $id
     }
 
     /**
@@ -44,6 +47,6 @@ class SupervisorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Implement logic to delete a specific resource identified by $id
     }
 }

@@ -44,6 +44,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/me', [AuthController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::put('/change_password', [AuthController::class, 'change_password']);
+    
 
     Route::prefix('users')->group(function (){
         Route::get('/list',[APIUserController::class, 'index']);
@@ -69,7 +71,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 });
-
 // user post
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -92,6 +93,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/baggage_post', [BaggageController::class, 'BaggagePost']);
     Route::get('/baggage_list', [BaggageController::class, 'BaggageList']);
     Route::get('/baggage_list/{id}', [BaggageController::class, 'GetBaggageById']);
+    Route::delete('/baggage_delete/{id}', [BaggageController::class, 'DeleteBaggage']);
 });
 
 // Delivery status
@@ -101,6 +103,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/delivery_status_list', [DeliveryStatusController::class, 'ListStatus']);
     Route::get('/delivery_status_list/{id}', [DeliveryStatusController::class, 'DeliverStatusListByid']);
 });
-
-
-   
