@@ -2,7 +2,7 @@
   <div
     class="bg-gradient-to-r min-h-screen flex flex-column items-center justify-center bg-gray-100"
   >
-    <div class="flex flex-column max-w-6/12 w-full bg-white px-10 mb-4 shadow-lg rounded-lg h-70vh">
+    <div class="flex flex-column max-w-6/12 w-full bg-white px-10 mb-4 shadow-lg rounded-lg h-75vh">
       <div class="flex-3">
         <h1 class="text-center font-size-12 font-bold text-gray-800 mt-3">Register</h1>
         <!-- <p class="text-center text-gray-800 my-4">Create an account!</p> -->
@@ -403,8 +403,7 @@ export default {
     }
   }
 }
-</script>
-
+</script>  
 
 <style>
 /* Add any additional custom styles here */
