@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,11 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        // dd(1);
-        // Retrieve all posts
         $posts = Post::all();
-
-        // Return posts as a JSON response
         return response()->json($posts);
     }
 

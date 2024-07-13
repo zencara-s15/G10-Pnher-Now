@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import AdminLayout from '@/Components/Layouts/AdminLayout.vue'
+// import AdminLayout from '@/Components/Layouts/AdminLayout.vue'
+import AdminLayout from '@/Components/Layouts/UserLayout.vue'
+
 </script>
 <template>
   <AdminLayout

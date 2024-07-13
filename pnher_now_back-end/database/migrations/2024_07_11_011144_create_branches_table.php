@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('company_id');
-            $table->string('address')->nullable();
+            $table->string('name');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('company_id')->constrained()->onDelete('cascade'); // Assuming 'deliverer_id' references the 'users' table
+            $table->string('address');
             $table->timestamps();
         });
     }

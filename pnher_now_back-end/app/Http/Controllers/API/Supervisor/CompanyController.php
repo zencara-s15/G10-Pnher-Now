@@ -3,56 +3,25 @@
 namespace App\Http\Controllers\API\Supervisor;
 
 use App\Http\Controllers\Controller;
-use App\Models\Supervisor\Company;
+use App\Http\Resources\CompanyResource;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-    // /**
-    //  * Display a listing of the resource.
-    //  */
-    // public function index()
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(string $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, string $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(string $id)
-    // {
-    //     //
-    // }
 
     public function index()
     {
         $companies = Company::with('branches')->get();
         // $companies = Company::all();
         return response()->json($companies);
+    }
+
+    public function show($id)
+    {
+        $company = Company::findOrFail($id);
+        $company = new CompanyResource($company);
+        return response()->json($company);
     }
 
     public function store(Request $request)
@@ -65,5 +34,27 @@ class CompanyController extends Controller
         $company = Company::create($request->all());
 
         return response()->json($company, 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+        ]);
+
+        $company = Company::findOrFail($id);
+        $company->update($request->all());
+        $company = new CompanyResource($company);
+
+        return response()->json($company);
+    }
+
+    public function destroy($id)
+    {
+        $company = Company::findOrFail($id);
+        $company->delete();
+
+        return response()->json(null, 204);
     }
 }

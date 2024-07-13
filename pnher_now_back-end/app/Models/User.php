@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Branch;
+use App\Models\Post;
+use App\Models\Baggage;
+use App\Models\Company;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,7 +29,9 @@ class User extends Authenticatable
         'password',
         'address',
         'date_of_birth',
-        'profile'
+        'profile',
+        'current_password',
+        'new_password'
     ];
 
     /**
@@ -47,6 +53,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function updatePassword(string $currentPassword, string $newPassword): bool
+    {
+        $currentHashedPassword = User::where('id', $this->id)->value('password');
+        if (!password_verify($currentPassword, $currentHashedPassword)) {
+            return false; // Current password is incorrect
+        }
+        // Hash the new password
+        $newHashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+        // Update the user's password in the database
+        return $this->update([
+            'password' => $newHashedPassword,
+        ]);
+    }
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -58,6 +77,20 @@ class User extends Authenticatable
 
     public function branches()
     {
-        return $this->hasMany(\App\Models\Supervisor\Branch::class, 'user_id');
+        return $this->hasMany(Branch::class, 'user_id');
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function branchs()
+    {
+        return $this->hasOne(Branch::class, 'user_id'); // Assuming 'user_id' is the foreign key in the Branch model
+    }
+
+    public function company() {
+        return $this->belongsTo(Company::class);
     }
 }

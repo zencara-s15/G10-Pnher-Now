@@ -7,20 +7,22 @@ const simpleAcl = createAcl({})
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // ----- authentication -----
+
+    // welcome 
     {
-      path: '/admin/dashboard',
-      name: 'dashboard',
-      component: () => import('../views/Admin/DashboardView.vue'),
-      meta: {
-        requiresAuth: true,
-        role: 'admin'
-      }
+      path: '/',
+      name: 'Welcome',
+      component: () => import('../views/Web/HomeView.vue')
     },
+
+    // log in 
     {
       path: '/login',
       name: 'login',
       component: () => import('../views/Admin/Auth/LoginView.vue')
     },
+<<<<<<< HEAD
     {
       path: '/logout',
       name: 'logout',
@@ -79,65 +81,160 @@ const router = createRouter({
       name: "deliver",
       component: () => import('../views/Web/Deliver/DeliverView.vue')
     },
+=======
+
+    // register
+>>>>>>> dcc517505d8728efb8a6e02b3a03b36c31d8e32c
     {
-      path: "/history",
-      name: "history",
-      component: () => import('../views/Web/History/HistoryView.vue')
+      path: '/logout',
+      name: 'logout',
+      component: () => import('../views/Admin/Auth/LoginView.vue')
+    },
+
+    // ----- user -----
+
+    {
+      path: '/user_dashboard',
+      name: 'user_dashboard',
+      component: () => import('../views/User/DashboardUserView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
+    },
+
+    {
+      path: '/home',
+      name: 'home',
+      component: () => import('../views/Web/User/ProductUser.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
     },
     {
       path: "/average",
       name: "average",
       component: () => import('../views/Web/Average/AverageView.vue')
     },
+
     {
-      path: "/processdeliver",
-      name: "processdeliver",
-      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
+      path: '/request',
+      name: 'request',
+      component: () => import('../views/Web/Request/RequestView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
     },
+
+    // ----- deliverer -----
+
     {
-      path: "/feedback",
-      name: "feedback",
-      component: () => import('../views/Web/Feedback/FeedbackView.vue')
+      path: '/deliverer_dashboard',
+      name: 'deliverer_dashboard',
+      component: () => import('../views/Deliverer/DelivererDashboardView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
     },
+
     {
-      path: "/request",
-      name: "request",
-      component: () => import('../views/Web/Request/RequestView.vue')
+      path: '/deliverer',
+      name: 'deliver',
+      component: () => import('../views/Web/Deliver/DeliverView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
+    },
+
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import('../views/Web/Feedback/FeedbackView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
+    },
+
+    {
+      path: '/history_deliverer',
+      name: 'history_deliverer',
+      component: () => import('../views/Web/History/HistoryView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
+    },
+
+    {
+      path: '/process',
+      name: 'process',
+      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'deliverer'
+      }
+    },
+
+    {
+      path: '/average',
+      name: 'average',
+      component: () => import('../views/Web/Average/AverageView.vue')
     }
   ]
 })
 
 router.beforeEach(async (to, from, next) => {
-  const publicPages = ['/login','logout']
+  const publicPages = ['/' , '/login', '/register']
   const authRequired = !publicPages.includes(to.path)
   const store = useAuthStore()
 
   try {
     const { data } = await axiosInstance.get('/me')
-
+    
     store.isAuthenticated = true
     store.user = data.data
-
-    store.permissions = data.data.permissions.map((item: any) => item.name)
-    store.roles = data.data.roles.map((item: any) => item.name)
-
+    
+    store.permissions = data.data.permissions.map((item) => item.name)
+    store.roles = data.data.roles.map((item) => item.name)
+    
     const rules = () =>
       defineAclRules((setRule) => {
-        store.permissions.forEach((permission: string) => {
+        store.permissions.forEach((permission) => {
           setRule(permission, () => true)
         })
       })
-
+      
     simpleAcl.rules = rules()
+
+    if (publicPages.includes(to.path) && store.isAuthenticated) {
+      if (store.roles.includes('user')) {
+        return next('/user_dashboard')
+      }
+      if (store.roles.includes('deliverer')) {
+        return next('/deliverer_dashboard')
+      }
+    }
   } catch (error) {
-    /* empty */
+    store.isAuthenticated = false
+    store.user = null
+    store.permissions = []
+    store.roles = []
+  }
+    
+  if (authRequired && !store.isAuthenticated) {
+    return next('/login')
   }
 
-  if (authRequired && !store.isAuthenticated) {
-    next('/login')
-  } else {
-    next()
+  if (to.meta.role && !store.roles.includes(to.meta.role)) {
+    return next('/login')
   }
+
+  next()
 })
 
 export default { router, simpleAcl }
