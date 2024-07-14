@@ -44,8 +44,8 @@ class AuthController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        // $permissions = $user->getAllPermissions();
-        $roles = $user->getRoleNames();
+        $permissions = $user->permissions;
+        $roles = $user->roles;
         return response()->json([
             'message' => 'Login success',
             'data' => $user,
@@ -66,22 +66,22 @@ class AuthController extends Controller
     {
         $user = User::latest()->get();
         // $permissions = $user->getAllPermissions();
-        $roles = $user->getRoleNames();
+        // $roles = $user->getRoleNames();
         return response()->json([
             // 'message' => 'Login success',
             'data' => $user,
-            'roles' => $roles
+            // 'roles' => $roles
         ]);
     }
 
     public function user_register(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'address' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
             'date_of_birth' => 'nullable|date',
         ]);
 
@@ -129,7 +129,6 @@ class AuthController extends Controller
         if ($request->hasFile('profile')) {
             $profilePath = $request->file('profile')->store('profiles', 'public');
         }
-
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -160,7 +159,7 @@ class AuthController extends Controller
             return response()->json([
                 'message' => 'Validation failed',
                 'errors' => $validator->errors()->toArray(),
-            ], 422); 
+            ], 422);
         }
 
         $user = $request->user();
@@ -168,7 +167,7 @@ class AuthController extends Controller
         if (!password_verify($request->current_password, $currentHashedPassword)) {
             return response()->json([
                 'message' => 'Current password is incorrect',
-            ], 401); 
+            ], 401);
         }
         $newHashedPassword = password_hash($request->new_password, PASSWORD_BCRYPT);
         $user->update([
