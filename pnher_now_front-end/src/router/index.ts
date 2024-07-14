@@ -22,69 +22,8 @@ const router = createRouter({
       name: 'login',
       component: () => import('../views/Admin/Auth/LoginView.vue')
     },
-<<<<<<< HEAD
-    {
-      path: '/logout',
-      name: 'logout',
-      component: () => import('../views/Admin/Auth/LoginView.vue')
-    },
-    {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/Web/User/ProductUser.vue')
-    },
-    
-    {
-      path: '/register/user',
-      name: 'register',
-      component: () => import('../views/Admin/Auth/RegisterUserView.vue')
-    },
-    {
-      path: '/history',
-      name: 'history',
-      component: () => import('../views/Web/User/HistoryUser.vue')
-    },
-    {
-      path: '/deliverer',
-      name: 'deliverer',
-      component: () => import('../views/Web/Deliver/DeliverView.vue')
-    },
-    {
-      path: '/feedback',
-      name: 'feedback',
-      component: () => import('../views/Web/Feedback/FeedbackView.vue')
-    },
-    {
-      path: '/history_deliverer',
-      name: 'history_deliverer',
-      component: () => import('../views/Web/History/HistoryView.vue')
-    },
-    
-    {
-      path: '/proccess',
-      name: 'proccess',
-      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
-    },
-    {
-      path: '/request',
-      name: 'request',
-      component: () => import('../views/Web/Request/RequestView.vue')
-    },
-    {
-      path: '/average',
-      name: 'average',
-      component: () => import('../views/Web/Average/AverageView.vue')
-    },{
-    
-
-      path: "/deliver",
-      name: "deliver",
-      component: () => import('../views/Web/Deliver/DeliverView.vue')
-    },
-=======
 
     // register
->>>>>>> dcc517505d8728efb8a6e02b3a03b36c31d8e32c
     {
       path: '/logout',
       name: 'logout',
