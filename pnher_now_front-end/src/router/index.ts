@@ -67,6 +67,17 @@ const router = createRouter({
       }
     },
 
+
+    {
+      path: '/user_feedback',
+      name: 'user_feedback',
+      component: () => import('../views/Web/Feedback/FeedbackUserView.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
+    },
+
     // ----- deliverer -----
 
     {
