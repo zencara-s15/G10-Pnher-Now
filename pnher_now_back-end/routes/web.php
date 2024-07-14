@@ -108,7 +108,6 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
          Route::get('/company/delete/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
          Route::get('/company/edit/{id}', [CompanyController::class, 'update'])->name('comany.update');
  
- 
          //======================== Branch route ===============================
          Route::resource('branch','BranchController');
          Route::get('/branch',[BranchController::class,'index'])->name('branch.index');

@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Delivery\DeliveryBaggageController;
 use App\Http\Controllers\API\Delivery\DeliveryStatusController;
+use App\Http\Controllers\API\User\DeliverandUserController;
+use App\Http\Controllers\API\User\FeedbackController;
+use App\Models\DelivererAndUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +105,24 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/delivery_status_list', [DeliveryStatusController::class, 'ListStatus']);
     Route::get('/delivery_status_list/{id}', [DeliveryStatusController::class, 'DeliverStatusListByid']);
 });
+
+// Feedback routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/feedback_post', [FeedbackController::class, 'FeedbackPost']);
+    Route::get('/feedback_list', [FeedbackController::class, 'FeedbackList']);
+    Route::get('/feedback_list/{id}', [FeedbackController::class, 'GetFeedbackById']);
+});
+
+// Deliverer and User 
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/DeliverersAndUser/last', [DeliverandUserController::class, 'lastDelivererId']);
+});
+
+// Route::post('/feedback_post', [FeedbackController::class, 'store']);
+
+
+
 // Company
 // Route::middleware('auth:sanctum')->group(function(){
 
