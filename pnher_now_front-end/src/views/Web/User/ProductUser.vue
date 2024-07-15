@@ -3,7 +3,7 @@
   <div class="container mt-4 p-4">
     <div class="row justify-content-between align-items-center mb-4">
       <div class="col-auto">
-        <h3 class="fw-bolder text-dark">List of User Product</h3>
+        <h3 class="fw-bolder text-dark">List of User Booking</h3>
       </div>
       <div class="col-auto">
         <div class="col-auto">
@@ -22,11 +22,11 @@
 
     <!-- Displaying Baggage List -->
     <div class="row">
-      <div class="col-md-4 mb-3" v-for="item in filteredBaggage" :key="item.id">
+      <div class="col-md-4 mb-3" v-for="(item, index) in baggage" :key="item.id">
         <div class="card">
           <div class="card-body">
             <div class="d-flex gap-1">
-              <p class="card-title">Receiver Phone: {{ item.receiver_phone }}</p>
+              <p class="card-title">Receiver Phone: {{ item.phone_receiver }}</p>
             </div>
             <div class="d-flex gap-1">
               <p class="card-text">Sending Address: {{ item.sending_address }}</p>
@@ -43,6 +43,8 @@
             <div class="d-flex gap-1">
               <p class="card-text">Company: {{ item.company }}</p>
             </div>
+            <!-- {{ user_baggage[index].first_name + ' ' + user_baggage[index].last_name}} -->
+
             <div class="d-flex gap-1">
               <p class="card-text">Total Price: {{ calculateTotalCost(item.weight) }} Real</p>
             </div>
@@ -168,6 +170,7 @@ export default {
     const store = usePostBaggageStore()
     const showModal = ref(false)
     const baggage = ref([])
+    const user_baggage = ref([])
     const searchQuery = ref('')
     const formData = {
       receiver_phone: '',
@@ -238,6 +241,8 @@ export default {
     onMounted(async () => {
       await store.fetchPostBaggage() // Fetch initial baggage list on component mount
       baggage.value = store.post_baggage
+      user_baggage.value = store.user_baggage // Fetch user's baggage list
+      console.log(user_baggage)
     })
 
     return {
@@ -245,6 +250,7 @@ export default {
       formData,
       addItem,
       baggage,
+      user_baggage,
       deleteItem,
       searchQuery,
       filteredBaggage,

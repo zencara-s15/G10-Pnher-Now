@@ -8,11 +8,11 @@ const simpleAcl = createAcl({})
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      name: 'welcome',
-      component: () => import('../views/Web/HomeView.vue')
-    },
+    // {
+    //   path: '/',
+    //   name: 'welcome',
+    //   component: () => import('../views/Web/HomeView.vue')
+    // },
     {
       path: '/user_dashboard',
       name: 'user_dashboard',
@@ -20,6 +20,15 @@ const router = createRouter({
       meta: {
         requiresAuth: true,
         role: ['user', 'deliverer'],
+      }
+    },
+    {
+      path: '/deliverer_dashboard',
+      name: 'deliverer_dashboard',
+      component: () => import('../views/Deliverer/DelivererDashboardView.vue'),
+      meta: {
+        requiresAuth: true,
+        role:'deliverer',
       }
     },
     {
@@ -70,7 +79,7 @@ const router = createRouter({
       component: () => import('../views/Web/Feedback/FeedbackView.vue'),
       meta: {
         requiresAuth: true,
-        role: 'user'
+        role: 'deliverer'
       }
     },
     {
