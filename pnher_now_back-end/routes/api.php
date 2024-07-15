@@ -105,6 +105,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/delivery_status_list', [DeliveryStatusController::class, 'ListStatus']);
     Route::get('/delivery_status_list/{id}', [DeliveryStatusController::class, 'DeliverStatusListByid']);
 });
-
-
-   

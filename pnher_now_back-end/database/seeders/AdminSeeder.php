@@ -65,14 +65,9 @@ class AdminSeeder extends Seeder
 
         $permission = Permission::create(['name' => 'Supervisor access']);
 
-
-
-
-
         $admin->assignRole($admin_role);
         $user->assignRole($user_role);
-
-
+        
         $admin_role->givePermissionTo(Permission::all());
     }
 }
