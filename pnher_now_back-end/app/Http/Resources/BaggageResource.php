@@ -16,15 +16,15 @@ class BaggageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,  // Assuming `name` is an attribute of `Baggage`
-            'user' => [
-                'id' => $this->user->id,
-                'name' => $this->user->name,
-            ],
-            'deliveryStatus' => [
-                'id' => $this->deliveryStatus->id,
-                'name' => $this->deliveryStatus->name,
-            ],
+            'phone_receiver' => $this->receiver_phone,
+            'sending_address'=>$this->sending_address,
+            'receiving_address'=>$this->receiving_address,
+            'type'=>$this->type,
+            'weight'=>$this->weight,
+            'company'=>$this->company,
+            'delivery_status_id'=>$this->delivery_status_id,
+            'post_id'=>$this->user  // Assuming `name` is an attribute of `Baggage`
+            
         ];
     }
 }
