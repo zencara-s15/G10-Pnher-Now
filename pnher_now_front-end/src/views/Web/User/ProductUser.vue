@@ -3,14 +3,14 @@
     <div class="container p-4 bg-gray-600">
       <div class="row justify-content-between align-items-center mb-4">
         <div class="col-auto">
-          <h3 class="fw-bolder text-dark">List of User Products</h3>
+          <!-- <h3 class="fw-bolder text-dark">List of User Products</h3> -->
         </div>
         <div class="col-auto">
           <div class="input-group search-group mr-50">
-            <span class="input-group-text bg-danger text-white">
+            <!-- <span class="input-group-text bg-danger text-white">
               <i class="bi bi-search"></i>
             </span>
-            <input type="text" class="form-control" placeholder="Search..." v-model="searchQuery" />
+            <input type="text" class="form-control" placeholder="Search..." v-model="searchQuery" /> -->
           </div>
         </div>
         <div class="col-auto">
@@ -20,7 +20,7 @@
 
       <!-- Displaying Baggage List -->
       <div class="row">
-        <div class="col-md-4 mb-3" v-for="item in filteredBaggage" :key="item.id">
+        <div class="col-md-4 mb-6" v-for="item in filteredBaggage" :key="item.id">
           <BaggagePostCard :item="item" @delete="deleteItem" />
         </div>
       </div>

@@ -4,15 +4,15 @@
       <div class="bg-gradient-to-l from-orange-400 to-red-500 text-white p-8">
         <div class="flex flex-col md:flex-row items-center">
           <div class="ml-7 md:w-1/2">
-            <h1 class="text-4xl font-bold mb-4">
-              <span class="text-yellow-400">Baggages💼</span> delivery in Cambodia
+            <h1 class="text-5xl mb-4">
+              <span class=" font-bold text-yellow-400">Baggages</span><Span> delivery in </Span><Span class="font-bold">Cambodia</Span>
             </h1>
-            <p class="mb-6">
+            <p class="mb-6 text-2xl">
               Product delivery is a courier service in which a store or independent delivery company
               delivers products to a customer.
             </p>
             <button class="bg-yellow-400 text-black py-2 px-4 rounded-lg hover:bg-yellow-500">
-              Explore menu
+              Full Map
             </button>
           </div>
           <div class="md:w-1/2 mt-8 md:mt-0 ">

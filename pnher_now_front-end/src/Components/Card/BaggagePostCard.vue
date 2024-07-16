@@ -38,7 +38,7 @@
         </p>
       </div>
       <div class="d-flex gap-1 mb-2 align-items-center">
-        <i class="bi bi-currency-exchange text-danger me-2"></i>
+        <i class="bi bi-currency-exchange text-success me-2"></i>
         <p class="card-text m-0">
           Total Price: <strong>{{ calculateTotalCost(item.weight) }} Real</strong>
         </p>
