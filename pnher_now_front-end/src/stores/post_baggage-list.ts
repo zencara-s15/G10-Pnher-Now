@@ -12,7 +12,9 @@ export const usePostBaggageStore = defineStore('postBaggage', {
       company: string,
       receiving_address: string,
       post_id: number,
-      delivery_status_id: number
+      delivery_status_id: number,
+      longitude?: number, // Optional properties
+      latitude?: number // Optional properties
     }>,
   }),
   actions: {
@@ -55,5 +57,25 @@ export const usePostBaggageStore = defineStore('postBaggage', {
         throw error; // Throw the error to handle it in the component
       }
     },
+    async getCurrentLocation(): Promise<{ longitude: number, latitude: number }> {
+      return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { longitude, latitude } = position.coords;
+              resolve({ longitude, latitude });
+            },
+            (error) => {
+              console.error('Error getting location:', error);
+              reject(error);
+            }
+          );
+        } else {
+          const error = new Error('Geolocation is not supported by this browser.');
+          console.error(error.message);
+          reject(error);
+        }
+      });
+    }
   },
 });
