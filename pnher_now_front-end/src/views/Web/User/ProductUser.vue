@@ -146,6 +146,7 @@ export default {
     const store = usePostBaggageStore()
     const showModal = ref(false)
     const baggage = ref([])
+    const user_baggage = ref([])
     const searchQuery = ref('')
     const formData = ref({
       receiver_phone: '',
@@ -234,6 +235,8 @@ export default {
     onMounted(async () => {
       await store.fetchPostBaggage() // Fetch initial baggage list on component mount
       baggage.value = store.post_baggage
+      user_baggage.value = store.user_baggage // Fetch user's baggage list
+      console.log(user_baggage)
     })
 
     return {
@@ -241,6 +244,7 @@ export default {
       formData,
       addItem,
       baggage,
+      user_baggage,
       deleteItem,
       searchQuery,
       filteredBaggage,

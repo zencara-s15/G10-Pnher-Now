@@ -73,7 +73,9 @@
               </div>
             </div>
             <div class="menu position-relative">
-              <button class="btn btn-outline-secondary btn-sm" @click="showDetail(item)">ShowDetail</button>
+              <button class="btn btn-outline-secondary btn-sm" @click="showDetail(item)">
+                ShowDetail
+              </button>
               <div v-if="openMenuIndex === index" class="dropdown-menu show position-absolute">
                 <button class="dropdown-item" @click="editItem(index)">cancel</button>
               </div>
@@ -86,18 +88,34 @@
       <h1>History Status: {{ item.name }}</h1>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="detailModal"
+      tabindex="-1"
+      aria-labelledby="detailModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="detailModalLabel">Delivery Detail</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="detailModalLabel">Information Detail</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <div v-if="selectedItem">
               <p><strong>From:</strong> {{ selectedItem.sending_address }}</p>
               <p><strong>To:</strong> {{ selectedItem.receiving_address }}</p>
-              <p><strong>Delivered on:</strong> {{ selectedItem.created_at }}</p>
+              <p><strong>Phone Receiver:</strong> {{ selectedItem.phone_receiver }}</p>
+              <p><strong>Type Of Baggage:</strong> {{ selectedItem.type }}</p>
+              <p><strong>Weight Of Baggage:</strong> {{ selectedItem.weight }} Kg</p>
+              <p><strong>Company:</strong> {{ selectedItem.company }} Kg</p>
+              <!-- <p>Total Cost: {{ calculateTotalCost(selectedItem.weight) }} Real</p> -->
+
               <!-- Add more details as necessary -->
             </div>
           </div>
@@ -132,7 +150,7 @@ onMounted(async () => {
   baggage.value = baggageStore.post_baggage
   status.value = deliveryStore.delivery_status
   baggage.value = baggage.value.filter((b: any) => b.delivery_status_id == 5)
-  console.log(baggage.value, status.value)
+  // console.log(baggage.value)
 })
 
 const showDetail = (item: any) => {
@@ -145,6 +163,7 @@ const clearSearch = () => {
   searchQuery.value = ''
 }
 </script>
+
 
 <style scoped>
 .delivery-list {

@@ -16,8 +16,7 @@ class PostResource extends JsonResource
     {
         return [
             'baggage'=>$this->baggage()->get(),
-            
-            
+              
         ];
     }
 }
