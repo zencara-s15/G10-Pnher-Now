@@ -27,107 +27,102 @@
     </div>
 
     <!-- Modal for Adding New Baggage -->
-    <div
-      v-if="showModal"
-      class="modal fade show"
-      style="display: block"
-      tabindex="-1"
-      role="dialog"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content my-15 h-80vh">
-          <div class="modal-header d-flex justify-content-between align-items-center">
-            <h5 class="modal-title text-white">Add New Baggage</h5>
-            <button
-              type="button"
-              class="close btn bg-danger"
-              @click="showModal = false"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form @submit.prevent="addItem" class="">
-              <div class="row">
-                <!-- Form inputs for adding a new baggage -->
-                <div class="col-md-20 flex flex-col gap-10px">
-                  <div class="form-group">
-                    <label for="receiver_phone" class="text-dark">Receiver Phone</label>
-                    <input
-                      type="text"
-                      v-model="formData.receiver_phone"
-                      class="form-control"
-                      id="receiver_phone"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="sending_address" class="text-dark">Sending Address</label>
-                    <input
-                      type="text"
-                      v-model="formData.sending_address"
-                      class="form-control"
-                      id="sending_address"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="receiving_address" class="text-dark">Receiving Address</label>
-                    <input
-                      type="text"
-                      v-model="formData.receiving_address"
-                      class="form-control"
-                      id="receiving_address"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="type" class="text-dark">Type</label>
-                    <input
-                      type="text"
-                      v-model="formData.type"
-                      class="form-control"
-                      id="type"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="weight" class="text-dark">Weight</label>
-                    <input
-                      type="number"
-                      v-model="formData.weight"
-                      class="form-control"
-                      id="weight"
-                      required
-                      @input="updateTotalCost"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="company" class="text-dark">Company</label>
-                    <input
-                      type="text"
-                      v-model="formData.company"
-                      class="form-control"
-                      id="company"
-                      required
-                    />
+    <transition name="modal">
+      <div v-if="showModal" class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+            <div class="modal-header d-flex justify-content-between align-items-center">
+              <h5 class="modal-title text-white">Add New Baggage</h5>
+              <button
+                type="button"
+                class="close btn bg-danger"
+                @click="showModal = false"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form @submit.prevent="addItem">
+                <div class="row">
+                  <!-- Form inputs for adding a new baggage -->
+                  <div class="col-md-12 flex flex-col gap-10px">
+                    <div class="form-group">
+                      <label for="receiver_phone" class="text-dark">Receiver Phone</label>
+                      <input
+                        type="text"
+                        v-model="formData.receiver_phone"
+                        class="form-control"
+                        id="receiver_phone"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="sending_address" class="text-dark">Sending Address</label>
+                      <input
+                        type="text"
+                        v-model="formData.sending_address"
+                        class="form-control"
+                        id="sending_address"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="receiving_address" class="text-dark">Receiving Address</label>
+                      <input
+                        type="text"
+                        v-model="formData.receiving_address"
+                        class="form-control"
+                        id="receiving_address"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="type" class="text-dark">Type</label>
+                      <input
+                        type="text"
+                        v-model="formData.type"
+                        class="form-control"
+                        id="type"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="weight" class="text-dark">Weight</label>
+                      <input
+                        type="number"
+                        v-model="formData.weight"
+                        class="form-control"
+                        id="weight"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="company" class="text-dark">Company</label>
+                      <input
+                        type="text"
+                        v-model="formData.company"
+                        class="form-control"
+                        id="company"
+                        required
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <div class="d-flex justify-content-between mt-4">
-                  <button type="submit" class="btn bg-primary text-white">Confirm</button>
-                  <button type="button" class="btn bg-danger text-white" @click="showModal = false">
-                    Cancel
-                  </button>
+                <div class="form-group">
+                  <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn bg-primary text-white">Confirm</button>
+                    <button type="button" class="btn bg-danger text-white" @click="showModal = false">
+                      Cancel
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </transition>
   </UserLayout>
 </template>
 
@@ -304,30 +299,80 @@ export default {
   border-radius: 5px;
 }
 
-.btn-danger:hover {
-  background-color: #c82333;
-  border-color: #bd2130;
+.btn-danger {
+  background-color: #dc3545;
 }
 
-.modal-content {
-  border-radius: 10px;
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-wrapper {
+  width: 400px;
+  background: #fff;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .modal-header {
-  background-color: #343a40;
-  color: white;
+  background-color: #dc3545;
+  padding: 10px 15px;
+}
+
+.modal-header .modal-title {
+  margin: 0;
+  color: #fff;
 }
 
 .modal-header .close {
-  color: white;
-}
-
-.modal-header .close:hover {
-  color: #ccc;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 1.2rem;
 }
 
 .modal-body {
   padding: 20px;
+}
+
+.modal-body .form-group {
+  margin-bottom: 15px;
+}
+
+.modal-body .form-control {
+  border-radius: 4px;
+}
+
+.modal-body .btn {
+  width: 48%;
+}
+
+.transition-enter-active, .transition-leave-active {
+  transition: opacity 0.5s;
+}
+
+.transition-enter, .transition-leave-to {
+  opacity: 0;
 }
 </style>
