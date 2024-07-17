@@ -14,9 +14,9 @@
     </div>
   </div>
   <div class="max-w-7xl px-4 sm:px-6 lg:px-8">
-        <button type="button" class="btn btn-outline-warning">
-          <a href="/login" class="text-gray-800 hover:text-black-600">Login</a> /
-          <a href="/register" class="text-gray-800 hover:text-black-600">Sign Up</a>
+        <button type="button" class="btn btn-outline-danger">
+          <a href="/login" class="text-white hover:text-black-600">Login</a> /
+          <a href="/register" class="text-white hover:text-black-600">Sign Up</a>
         </button>
       </div>
 </nav>

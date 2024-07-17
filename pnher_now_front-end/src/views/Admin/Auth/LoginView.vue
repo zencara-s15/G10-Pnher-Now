@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gradient-to-r container mx-auto flex justify-center items-center h-screen w-full">
+  <div class="bg-gradient-to-l from-orange-400 to-red-500 container mx-auto flex justify-center items-center h-screen w-full">
     <div class="w-full max-w-6xl bg-white shadow-md rounded flex shadow-lg shadow-indigo-500/40 h-5/6">
       <div class="w-full flex flex-row mx-auto px-8 my-10">
         <div class="w-1/2 flex flex-col justify-center items-center">
@@ -98,7 +98,5 @@ const { value: password, errorMessage: passwordError } = useField('password')
 </script>
 
 <style scoped>
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, #4f46e5, #7c3aed, #ec4899);
-}
+
 </style>

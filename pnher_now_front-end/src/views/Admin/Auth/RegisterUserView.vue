@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gradient-to-r min-h-screen flex flex-column items-center justify-center bg-gray-100"
+    class="bg-gradient-to-r from-orange-400 to-red-500 min-h-screen flex flex-column items-center justify-center bg-gray-100"
   >
     <div class="flex flex-column max-w-6/12 w-full bg-white px-10 mb-4 shadow-lg rounded-lg h-75vh">
       <div class="flex-3">
@@ -472,9 +472,7 @@ export default {
 </script>
 
 <style scoped>
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, #4f46e5, #7c3aed, #ec4899);
-}
+
 
 .step-indicator {
   display: flex;
@@ -499,7 +497,7 @@ export default {
   line-height: 28px;
   border-radius: 50%;
   color: #4f46e5;
-  background: #ffffff;
+  background: #c5c2c2;
   font-size: 15px;
   position: relative;
 }
