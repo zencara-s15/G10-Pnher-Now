@@ -8,7 +8,7 @@
       >
         <div class="w-full flex flex-row mx-auto px-8 my-10">
           <div class="w-1/2 flex flex-col justify-center items-center">
-            <h1 class="text-4xl font-bold text-gray-800">Feedback To Deliverer</h1>
+            <h1 class="text-4xl font-bold text-gray-800">Feedback to Deliverer</h1>
             <form @submit.prevent="onSubmit" class="w-full mt-8">
               <div class="mb-6">
                 <label for="title" class="block text-gray-700 font-bold mb-2">Title</label>
@@ -20,13 +20,23 @@
                 />
               </div>
               <div class="mb-6">
-                <label for="message" class="block text-gray-700 font-bold mb-2">Your message</label>
+                <label for="message" class="block text-gray-700 font-bold mb-2">Your feedback</label>
                 <textarea
                   id="message"
                   v-model="message"
                   rows="4"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 ></textarea>
+              </div>
+              <div class="mb-6">
+                <label for="rate" class="block text-gray-700 font-bold mb-2">Rate</label>
+                <input
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="rate"
+                  type="number"
+                  v-model="rate"
+                  placeholder="rate from 1 to 10"
+                />
               </div>
               <div class="flex items-center justify-center mt-3">
                 <button
@@ -69,9 +79,9 @@ export default {
   },
   data() {
     return {
-      userId:2,
       title: '',
       message: '',
+      rate:0,
       isSubmitting: false
     }
   },
@@ -79,17 +89,12 @@ export default {
     async onSubmit() {
       this.isSubmitting = true
       try {
-        // Fetch the last deliverer ID from the backend
-        // const delivererResponse = await axios.get('/api/DeliverersAndUser/last')
-        // const lastDelivererId = delivererResponse.data.lastDelivererId
-
-        const lastDelivererId = 5
-
         const response = await axiosInstance.post('http://127.0.0.1:8000/api/feedback_post', {
           user_id: this.userId,
           title: this.title,
           comment: this.message,
-          delivererAndUser_id: lastDelivererId
+          rates: this.rate,
+          // delivererAndUser_id: lastDelivererId
         })
         console.log('Response:', response.data)
 
@@ -97,6 +102,7 @@ export default {
         // Optionally, clear the form
         this.title = ''
         this.message = ''
+        this.rate = ''
       } catch (error) {
         console.error('There was an error submitting the form:', error)
         alert('There was an error submitting the form. Please try again.')

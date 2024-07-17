@@ -3,20 +3,48 @@
   <DelivererLayout>
     <div class="container">
       <h3>Feedback From Customer</h3>
-      <div v-for="user in users" :key="user.id" class="card">
+      <div v-for="feedbacks in feedbacks" :key="feedbacks.id" class="card">
         <div class="card-body">
           <div class="card-text">
-            <img :src="user.avatar" alt="User Profile" class="avatar-fluid rounded-circle" />
+            <img
+              :src="getProfileImage(feedbacks.user.profile)"
+              alt="User Profile"
+              class="avatar-fluid rounded-circle"
+            />
+
             <div class="user-info">
-              <p class="first_name">{{ user.first_name }}</p>
-              <p class="last_name">{{ user.last_name }}</p>
-              <div class="star-icon">
+              <div class="name_date">
+                <div class="name">
+                  <p class="first_name ml-4">{{ feedbacks.user.first_name }}</p>
+                  <p class="last_name ml-2">{{ feedbacks.user.last_name }}</p>
+                </div>
+                <p class="date ml-3">{{ feedbacks.create}}</p>
+              </div>
+              <div class="star-icon" id="one" v-if="feedbacks.rates > 0 && feedbacks.rates <= 2">
+                <i class="fas fa-star" v-for="n in 1" :key="n"></i>
+              </div>
+              <div class="star-icon" id="two" v-if="feedbacks.rates > 2 && feedbacks.rates <= 4">
+                <i class="fas fa-star" v-for="n in 2" :key="n"></i>
+              </div>
+              <div class="star-icon" id="tree" v-if="feedbacks.rates > 4 && feedbacks.rates <= 6">
+                <i class="fas fa-star" v-for="n in 3" :key="n"></i>
+              </div>
+              <div class="star-icon" id="four" v-if="feedbacks.rates > 6 && feedbacks.rates <= 8">
+                <i class="fas fa-star" v-for="n in 4" :key="n"></i>
+              </div>
+              <div class="star-icon" id="five" v-if="feedbacks.rates > 8">
                 <i class="fas fa-star" v-for="n in 5" :key="n"></i>
+              </div>
+              <div class="star-icon" v-if="feedbacks.rates == 8">
+                <i class="fas fa-star" v-for="n in 0" :key="n"></i>
               </div>
             </div>
           </div>
           <div class="des">
-            <p class="descript">{{ user.descript }}</p>
+            <p class="descript mt-1"><b>Title :</b> {{ feedbacks.title }}</p>
+          </div>
+          <div class="des">
+            <p class="descript mt-1"><b>Comment :</b> {{ feedbacks.comment }}</p>
           </div>
         </div>
       </div>
@@ -29,6 +57,7 @@
 import DelivererLayout from '@/Components/Layouts/DelivererLayout.vue'
 
 import '@fortawesome/fontawesome-free/css/all.css'
+import axios from '@/plugins/axios'
 
 export default {
   components: {
@@ -37,84 +66,51 @@ export default {
   name: 'FeedbackView',
   data() {
     return {
-      users: [
-        {
-          id: 1,
-          email: 'michael.lawson@reqres.in',
-          first_name: 'Michael',
-          last_name: 'Lawson',
-          descript:
-            'This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.',
-          avatar: 'https://reqres.in/img/faces/7-image.jpg'
-        },
-        {
-          id: 2,
-          email: 'lindsay.ferguson@reqres.in',
-          first_name: 'Lindsay',
-          last_name: 'Ferguson',
-          descript:
-            'This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.',
-          avatar: 'https://reqres.in/img/faces/8-image.jpg'
-        },
-        {
-          id: 3,
-          email: 'tobias.funke@reqres.in',
-          first_name: 'Tobias',
-          last_name: 'Funke',
-          descript:
-            'This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.',
-          avatar: 'https://reqres.in/img/faces/9-image.jpg'
-        },
-        {
-          id: 4,
-          email: 'byron.fields@reqres.in',
-          first_name: 'Byron',
-          last_name: 'Fields',
-          descript:
-            'This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.',
-          avatar: 'https://reqres.in/img/faces/10-image.jpg'
-        },
-        {
-          id: 5,
-          email: 'george.edwards@reqres.in',
-          first_name: 'George',
-          last_name: 'Edwards',
-          descript:
-            'This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.',
-          avatar: 'https://reqres.in/img/faces/11-image.jpg'
-        },
-        {
-          id: 6,
-          email: 'rachel.howell@reqres.in',
-          first_name: 'Rachel',
-          last_name: 'Howell',
-          descript:
-            'This project involves creating a social media application that integrates with the Facebook API for user authentication and management. The application allows users to register, log in, and log out using their Facebook credentials. Users can view and edit their profiles, upload profile pictures, and manage their friend connections.',
-          avatar: 'https://reqres.in/img/faces/12-image.jpg'
-        }
-      ]
+      feedbacks: []
+    }
+  },
+  mounted() {
+    // ================== get all feedback from customer ==================
+    axios
+      .get('http://127.0.0.1:8000/api/getFeedback')
+      .then((response) => {
+        this.feedbacks = response.data.getFeedbacks
+        console.log(this.feedbacks[0].user.profile)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  },
+
+  methods: {
+    getProfileImage(profile) {
+      if (profile) {
+        return `http://127.0.0.1:8000/images/${profile}`
+      }
+      return 'default-profile-image-path' // Provide a default image path if needed
     }
   }
 }
 </script>
 
 <style scoped>
-
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-top: 10px;
   /* margin-left: 50px; */
 }
 
 .card {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   margin-top: 5px;
   padding: 10px;
   border-radius: 5px;
   width: 100%;
-  height: 20vh;
 }
 
 .card-body {
@@ -131,15 +127,28 @@ export default {
   display: flex;
   margin-left: 10px;
 }
+.name {
+  width: 120px;
+  display: flex;
+}
+.first_name, .last_name {
+  font-size: 20px;
+}
+.date{
+  color: rgb(101, 101, 101);
+  font-size: 13px;
+}
 
 .star-icon {
   display: flex;
+  justify-content: end;
+  width: 100px;
   color: gold;
-  margin-left: 10px;
+  margin-left: 770px;
 }
 
 .avatar-fluid {
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
 }
 </style>
