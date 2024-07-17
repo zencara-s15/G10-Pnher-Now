@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+     /**
      * Run the migrations.
      */
     public function up(): void
@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->text('comment');
+            $table->integer('rates');
             $table->integer('delivererAndUser_id');
             $table->timestamps();
         });

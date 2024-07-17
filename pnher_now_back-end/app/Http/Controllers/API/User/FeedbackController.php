@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\DelivererAndUser;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 
@@ -25,11 +26,31 @@ class FeedbackController extends Controller
             // 'user_id' = auth()->user()->id,
             'title' => 'required',
             'comment' => 'required|string',
+            'rates' => 'required',
         ]);
 
-        $feedback = Feedback::create($request->all());
+        // Retrieve the last deliverer_and_user_id
+        $lastDelivererAndUser = DelivererAndUser::latest('id')->first();
 
-        return response()->json(['message' => 'Feedback submitted successfully', 'data' => $feedback], 201);
+        if ($lastDelivererAndUser) {
+            // Merge the deliverer_and_user_id into the request data
+            $feedbackData = $request->all();
+            $feedbackData['user_id'] = auth()->id(); // Get the authenticated user's ID
+            $feedbackData['delivererAndUser_id'] = $lastDelivererAndUser->id;
+
+            // Create the Feedback record
+            $feedback = Feedback::create($feedbackData);
+
+            return response()->json(['message' => 'Feedback submitted successfully', 'data' => $feedback], 201);
+        } else {
+            return response()->json(['message' => 'No Deliverer and User record found'], 404);
+        }
+
+        // $feedback = Feedback::create($request->all());
+
+        // return response()->json(['message' => 'Feedback submitted successfully', 'data' => $feedback], 201);
+
+        // dd(10);
     }
 
     /**

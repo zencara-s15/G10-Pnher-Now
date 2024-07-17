@@ -3,19 +3,17 @@
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
             <div class="container mx-auto px-6 py-8">
                 <div class="flex">
-                    <div class="flex-col w-3/4">
+                    <div class="flex-col w-full">
                         <!-- Container -->
-                        <div class="container mb-7">
+                        <div class="container mb-7 w-full">
 
-                            <!-- Dashboard -->
-                            <div class="row flex flex-row justify-self-start mr-10">
-
-                                <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
-                                    <div class="card-body flex flex-row items-center">
-                                        <a href="{{ route('supervisor.delivery_list') }}"
+                            <div class="row flex flex-row justify-between">
+                                <div class="card card-stats card-round bg-white w-1/4 h-28 rounded-lg m-2">
+                                    <div class="card-body flex flex-row">
+                                        <a href="{{ route('admin.supervisor.list_delivery') }}"
                                             class="col-icon flex flex-row items-center">
                                             <div
-                                                class="col-icon flex flex-row items-center  bg-yellow-500 h-37 px-6 py-3 rounded-lg">
+                                                class="col-icon flex flex-row items-center justify-center bg-yellow-500 w-32 h-28 rounded-tl-lg rounded-bl-lg">
                                                 <div class="icon-big text-center icon-primary bubble-shadow-small">
                                                     <span class="material-icons-outlined"
                                                         style="font-size:50px ;color:white;">
@@ -24,41 +22,56 @@
                                                 </div>
                                             </div>
                                             <div class="col col-stats ms-3 ms-sm-0 mx-2">
-                                                <div class="numbers">
-                                                    <p class="card-category ml-4">List Delivery</p>
+                                                <div class="h-14 flex items-center justify-center w-36">
+                                                    <h1>Delivery</h1>
+                                                </div>
+                                                <hr class="custom-hr">
+                                                <div class="numbers h-14 flex items-center justify-center w-36">
+                                                    <p class="card-category ml-4">10</p>
                                                 </div>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
 
-                                <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
+                                <div class="card card-stats card-round bg-white w-1/4 h-28 rounded-lg m-2">
                                     <div class="card-body flex flex-row items-center">
-                                        <a href="{{ route('supervisor.list_instock') }}"
+                                        <a href="{{ route('admin.supervisor.list_instock') }}"
                                             class="col-icon flex flex-row items-center">
                                             <div
-                                                class="col-icon flex flex-row items-center  bg-yellow-500 h-37 px-8 py-3 rounded-lg">
+                                                class="col-icon flex flex-row items-center justify-center bg-yellow-500 w-32 h-28 rounded-tl-lg rounded-bl-lg">
                                                 <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                                    <span class="material-icons-outlined"
-                                                        style="font-size:50px ;color:white;">
-                                                        <i class="fas fa-file-alt w-57"></i>
-                                                    </span>
+                                                    <svg class="h-16 w-16 text-white" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <line x1="16.5" y1="9.4" x2="7.5"
+                                                            y2="4.21" />
+                                                        <path
+                                                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                                        <line x1="12" y1="22.08" x2="12"
+                                                            y2="12" />
+                                                    </svg>
                                                 </div>
                                             </div>
                                             <div class="col col-stats ms-3 ms-sm-0 mx-2">
-                                                <div class="numbers">
-                                                    <p class="card-category ml-4">List Instock</p>
+                                                <div class="h-14 flex items-center justify-center w-36">
+                                                    <h1>In Stock</h1>
+                                                </div>
+                                                <hr class="custom-hr">
+                                                <div class="numbers h-14 flex items-center justify-center w-36">
+                                                    <p class="card-category ml-4">10</p>
                                                 </div>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
+                                <div class="card card-stats card-round bg-white w-1/4 h-28 rounded-lg m-2">
                                     <div class="card-body flex flex-row items-center">
-                                        <a href="{{ route('supervisor.item_detail') }}"
+                                        <a href="{{ route('admin.supervisor.item_detail') }}"
                                             class="col-icon flex flex-row items-center">
                                             <div
-                                                class="col-icon flex flex-row items-center bg-yellow-500 h-37 px-8 py-3 rounded-lg">
+                                                class="col-icon flex flex-row items-center justify-center bg-yellow-500 w-32 h-28 rounded-tl-lg rounded-bl-lg">
                                                 <div class="icon-big text-center icon-primary bubble-shadow-small">
                                                     <span class="material-icons-outlined"
                                                         style="font-size:50px ;color:white;">
@@ -67,8 +80,38 @@
                                                 </div>
                                             </div>
                                             <div class="col col-stats ms-3 ms-sm-0 mx-2">
-                                                <div class="numbers">
-                                                    <p class="card-category ml-4">Item Detail</p>
+                                                <div class="h-14 flex items-center justify-center w-36">
+                                                    <h1>Item Detail</h1>
+                                                </div>
+                                                <hr class="custom-hr">
+                                                <div class="numbers h-14 flex items-center justify-center w-36">
+                                                    <p class="card-category ml-4">10</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card card-stats card-round bg-white w-1/4 h-28 rounded-lg m-2">
+                                    <div class="card-body flex flex-row">
+                                        <a href="#" class="col-icon flex flex-row justify-center">
+                                            <div
+                                                class="col-icon flex flex-row items-center justify-center bg-yellow-500 w-32 h-28 rounded-tl-lg rounded-bl-lg">
+                                                <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                                    <svg class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="col col-stats ms-3 ms-sm-0 mx-2">
+                                                <div class="h-14 flex items-center justify-center w-36">
+                                                    <h1>Deliverer</h1>
+                                                </div>
+                                                <hr class="custom-hr">
+                                                <div class="numbers h-14 flex items-center justify-center w-36">
+                                                    <p class="card-category ml-4">10</p>
                                                 </div>
                                             </div>
                                         </a>
@@ -81,133 +124,61 @@
                             <div class="p-3">
                                 <h1 class="text-2xl">List Delivery</h1>
                             </div>
-                            <table class="ml-2">
+                            <table class="mr-5 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-4 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             User</th>
                                         <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-3 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Type</th>
                                         <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-3 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             From</th>
                                         <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-3 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             To</th>
                                         <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-3 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Phone Sender</th>
                                         <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-3 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Phone Reciever</th>
                                         <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-4 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Branch</th>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            Narith
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Fruit
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Kompong Cham
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Phom Penh
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                            086343092
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            079573972
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            BFC
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            Narith
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Fruit
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Kompong Cham
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Phom Penh
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                            086343092
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            079573972
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            BFC
-                                        </td>
-                                    </tr>
+                                    @foreach ($deliverieds as $deliveried)
+                                        <tr>
+                                            <td class="px-4 py-4 whitespace-wrap text-sm font-medium text-gray-900">
+                                                {{$deliveried->post_id}}
+                                            </td>
+                                            <td class="px-3 py-4 whitespace-wrap text-sm text-gray-500">
+                                                {{$deliveried->type}}
+                                            </td>
+                                            <td class="px-3 py-4 whitespace-wrap text-sm text-gray-500">
+                                                {{$deliveried->sending_address}}
+                                            </td>
+                                            <td class="px-3 py-4 whitespace-wrap text-sm text-gray-500">
+                                                {{$deliveried->receiving_address}}
+                                            </td>
+                                            <td class="px-3 py-4 whitespace-wrap text-sm">
+                                                {{$deliveried->receiver_phone}}
+                                            </td>
+                                            <td class="px-3 py-4 whitespace-wrap text-sm font-medium text-gray-500">
+                                                {{$deliveried->receiver_phone}}
+                                            </td>
+                                            <td class="px-4 py-4 whitespace-wrap text-sm text-gray-500">
+                                                {{$deliveried->company}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <!-- End Container -->
-                    </div>
-                    <div class="w-1/4 bg-white h-screen rounded-l-lg">
-                        <div class="flex">
-                            <div class="flex-grow p-4 grid grid-row-3 gap-4 mr-px">
-                                <div class="bg-white rounded-lg shadow-md p-3 px-3 flex gap-8">
-                                    <div
-                                        class="col-icon flex flex-row items-center bg-yellow-400 h-30 px-3 py-3 rounded-lg">
-                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                            <p class="text-2xl font-bold text-white">+90</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2 class="text-lg font-bold">Exports</h2>
-                                        <div class="flex mt-3 gap-2">
-                                            <p class="text-green-500"> <i class='fas fa-arrow-up'></i></p>
-                                            <p class="text-gray-500">10%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-white rounded-lg shadow-md p-3 px-3 flex gap-8">
-                                    <div
-                                        class="col-icon flex flex-row items-center bg-green-600 h-30 px-3 py-3 rounded-lg">
-                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                            <p class="text-2xl font-bold text-white">+90</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2 class="text-lg font-bold">Activity</h2>
-                                        <div class="flex mt-3 gap-2">
-                                            <p class="text-green-500"> <i class='fas fa-arrow-up'></i></p>
-                                            <p class="text-gray-500">10%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-white rounded-lg shadow-md p-3 px-3 flex gap-8">
-                                    <div
-                                        class="col-icon flex flex-row items-center bg-red-700 h-30 px-3 py-3 rounded-lg">
-                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                            <p class="text-2xl font-bold text-white">+90</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2 class="text-lg font-bold">Instock</h2>
-                                        <div class="flex mt-3 gap-2">
-                                            <p class="text-green-500"> <i class='fas fa-arrow-up'></i></p>
-                                            <p class="text-gray-500">10%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -215,3 +186,10 @@
     </div>
     </div>
 </x-app-layout>
+<style>
+    .custom-hr {
+        height: 2px;
+        background-color: #60A5FA;
+        border: none;
+    }
+</style>
