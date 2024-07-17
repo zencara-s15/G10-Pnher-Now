@@ -22,8 +22,8 @@
                 <input :type="passwordFieldType"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="password" v-model="password" />
-                <span v-if="password.length < 8" class="text-red-500">
-                  Password should be at least 8 characters long.
+                <span v-if="password.length <=6 " class="text-red-500">
+                  Password should be at least 6 characters long.
                 </span>
                 <span class="absolute inset-y-0 right-0 pr-4 items-center mt-2" @click="togglePasswordVisibility">
                   <svg v-if="passwordFieldType === 'password'" xmlns="http://www.w3.org/2000/svg" fill="none"
