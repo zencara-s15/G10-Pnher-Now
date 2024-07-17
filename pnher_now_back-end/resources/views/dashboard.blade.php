@@ -197,7 +197,7 @@
 
                             <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
                                 <div class="card-body flex flex-row items-center">
-                                    <a href="{{ route('supervisor.delivery_list') }}"
+                                    <a href="{{ route('admin.supervisor.list_delivery') }}"
                                         class="col-icon flex flex-row items-center">
                                         <div
                                             class="col-icon flex flex-row items-center  bg-yellow-500 h-37 px-6 py-3 rounded-lg">
@@ -219,7 +219,7 @@
 
                             <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
                                 <div class="card-body flex flex-row items-center">
-                                    <a href="{{ route('supervisor.list_instock') }}"
+                                    <a href="{{ route('admin.supervisor.list_instock')}}"
                                         class="col-icon flex flex-row items-center">
                                         <div
                                             class="col-icon flex flex-row items-center  bg-yellow-500 h-37 px-8 py-3 rounded-lg">
@@ -240,7 +240,7 @@
                             </div>
                             <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
                                 <div class="card-body flex flex-row items-center">
-                                    <a href="{{ route('supervisor.item_detail') }}"
+                                    <a href="{{ route('admin.supervisor.item_detail') }}"
                                         class="col-icon flex flex-row items-center">
                                         <div
                                             class="col-icon flex flex-row items-center bg-yellow-500 h-37 px-8 py-3 rounded-lg">

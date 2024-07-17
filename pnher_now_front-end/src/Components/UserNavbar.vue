@@ -22,7 +22,8 @@ function logOut() {
 const tabs = [
   { name: 'Dashboard', path: '/user_dashboard' },
   { name: 'Home', path: '/home' },
-  { name: 'History', path: '/history' }
+  { name: 'History', path: '/history' },
+  { name: 'User_Feedback', path: '/user_feedback' }
 ]
 
 const activeTab = computed(() => {
@@ -56,6 +57,9 @@ watchEffect(() => {
           
           <input type="radio" name="tab" id="tab3" class="tab tab--3" :checked="activeTab === 2" />
           <router-link class="tab_label" to="/history">History</router-link>
+
+          <input type="radio" name="tab" id="tab3" class="tab tab--4" :checked="activeTab === 3" />
+          <router-link class="tab_label" to="/user_feedback">Feedback</router-link>
           
           <div class="indicator" :style="{ left: `${10 + activeTab * 150}px` }"></div>
         </div>

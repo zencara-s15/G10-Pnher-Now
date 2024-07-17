@@ -2,11 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
+    BaggageInStockeController,
     CompanyController,
     // CompanyController as AdminCompanyController,
     BranchController,
     DelivererController,
+    DeliveryListController,
     DriverController,
+    ItemDetailController,
     ProfileController,
     MailSettingController,
     SupervisorController,
@@ -108,7 +111,6 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
          Route::get('/company/delete/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
          Route::get('/company/edit/{id}', [CompanyController::class, 'update'])->name('comany.update');
  
- 
          //======================== Branch route ===============================
          Route::resource('branch','BranchController');
          Route::get('/branch',[BranchController::class,'index'])->name('branch.index');
@@ -122,6 +124,13 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
          Route::get('/deliverer/{id}/edit',[DelivererController::class,'edit'])->name('deliverer.edit');
          Route::get('/deliverer/{id}',[DelivererController::class,'update'])->name('deliverer.update');
          Route::get('/deliverer/{id}',[DelivererController::class,'destroy'])->name('deliverer.destroy');
+
+         //======================== Baggages In Stockes ======================================
+         Route::resource('instock','BaggageInStockeController');
+        //  Route::get('/instock',[BaggageInStockeController::class,'index'])->name('supervisor.list_instock');
+         Route::get('/instock', [BaggageInStockeController::class, 'index'])->name('supervisor.list_instock');
+         Route::get('/itemDetail', [BaggageInStockeController::class, 'itemDetail'])->name('supervisor.item_detail');
+         Route::get('/listDelivery', [DeliveryListController::class, 'listDelivery'])->name('supervisor.list_delivery');
  
     }
 );

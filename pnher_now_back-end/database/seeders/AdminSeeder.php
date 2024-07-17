@@ -85,6 +85,8 @@ class AdminSeeder extends Seeder
         $permission = Permission::create(['name' => 'Company create']);
         $permission = Permission::create(['name' => 'Company delete']);
 
+        $permission = Permission::create(['name' => 'BaggageInStock access']);
+
 
 
         $admin->assignRole($admin_role);
