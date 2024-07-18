@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,8 @@ class CompanyController extends Controller
     }
 
     public function index() {
-        $company = Company::all();
-        return view('company.index',['company' => $company]);
-        // return view('companies.index');
+        $companies = Company::all();
+        return redirect()->route('admin.company.index');
     }
 
     public function create(){
@@ -64,5 +64,6 @@ class CompanyController extends Controller
         $company->update($request->all());
         return redirect()->route('admin.company.index')->withSuccess('Company updated successfully');
     }
+
     
 }

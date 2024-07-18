@@ -22,7 +22,7 @@
                     </thead>
                     <tbody>
                         @can('Company access')
-                        @foreach($company as $company)
+                        @foreach($companies as $company)
                         <tr class="hover:bg-grey-lighter">
                             <td class="py-4 px-6 border-b border-grey-light">{{$company->name}}</td>
                             <td class="py-4 px-6 border-b border-grey-light">{{$company->address}}</td>

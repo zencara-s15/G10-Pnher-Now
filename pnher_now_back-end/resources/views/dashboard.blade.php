@@ -19,8 +19,8 @@
                 </div>
                 <div class="col col-stats ms-3 ms-sm-0 mx-2">
                   <div class="numbers">
-                    <p class="card-category">New Register</p>
-                    <h4 class="card-title">1,294</h4>
+                    <p class="card-category">All User</p>
+                    <h4 class="card-title">{{$totalUsers}}</h4>
                   </div>
                 </div>
               </div>
@@ -39,7 +39,7 @@
                 <div class="col col-stats ms-3 ms-sm-0 mx-2">
                   <div class="numbers">
                     <p class="card-category">Companies</p>
-                    <h4 class="card-title">1,294</h4>
+                    <h4 class="card-title">{{$totalCompanies}}</h4>
                   </div>
                 </div>
               </div>
@@ -57,7 +57,7 @@
                 <div class="col col-stats ms-3 ms-sm-0 mx-2">
                   <div class="numbers">
                     <p class="card-category">All Baggages</p>
-                    <h4 class="card-title">1,294</h4>
+                    <h4 class="card-title">{{$totalBaggages}}</h4>
                   </div>
                 </div>
               </div>
@@ -74,8 +74,8 @@
                 </div>
                 <div class="col col-stats ms-3 ms-sm-0  mx-2">
                   <div class="numbers">
-                    <p class="card-category">Order</p>
-                    <h4 class="card-title">1,294</h4>
+                    <p class="card-category">Feedback</p>
+                    <h4 class="card-title"></h4>
                   </div>
                 </div>
               </div>

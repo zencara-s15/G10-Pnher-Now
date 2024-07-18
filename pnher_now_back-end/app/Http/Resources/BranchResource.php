@@ -15,7 +15,6 @@ class BranchResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-<<<<<<< HEAD
             'id' => $this->id,
             'name' => $this->name,
             'address' => $this->address,
@@ -23,7 +22,6 @@ class BranchResource extends JsonResource
             'first_name' => $this->user->first_name,
             'last_name' => $this->user->last_name,
             // 'user' =>$this->user_id->first_name,
-=======
             "id" => $this->id,
             "name" => $this->name,
             "user" => [
@@ -43,7 +41,6 @@ class BranchResource extends JsonResource
             ],
             'create' => $this->created_at->format('d/m/Y'),
             'update' => $this->updated_at->format('d/m/Y'),
->>>>>>> 90f53849db4e0ee2e551b6edb4afbc21786e8bed
         ];
     }
 }
