@@ -45,9 +45,14 @@ class DeliveryStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function DeliveryStatusEdit(Request $request, string $id)
     {
-        //
+        $status = deliveryStatus::find($id);
+        if (!$status) {
+            return response()->json(['message' => 'Delivery Status not found'], 404);
+        }
+        $status->update($request->all());
+        return response()->json(['delivery_status' => $status,'message' => 'Delivery Status Updated Successfully'],200);
     }
 
     /**
