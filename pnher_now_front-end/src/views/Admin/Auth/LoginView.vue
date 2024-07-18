@@ -62,6 +62,7 @@ import axiosInstance from '@/plugins/axios'
 import { useField, useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2'
 
 const router = useRouter()
 
@@ -82,12 +83,27 @@ const onSubmit = handleSubmit(async (values) => {
   try {
     const { data } = await axiosInstance.post('/login', values)
     localStorage.setItem('access_token', data.access_token)
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Login Successful',
+      text: 'You have successfully logged in!',
+      timer: 2000,
+      showConfirmButton: false
+    })
+
     if (data.role === 'user') {
       router.push('/user_dashboard')
     } else if (data.role === 'deliverer') {
       router.push('/deliverer_dashboard')
     }
+    location.reload()
   } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Login Failed',
+      text: error.response?.data?.message || 'An error occurred while logging in',
+    })
     console.error('Error:', error)
   }
 })
@@ -98,5 +114,4 @@ const { value: password, errorMessage: passwordError } = useField('password')
 </script>
 
 <style scoped>
-
 </style>
