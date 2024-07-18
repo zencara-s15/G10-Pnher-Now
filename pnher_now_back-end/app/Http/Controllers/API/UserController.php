@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResources;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class UserController extends Controller
         $user = User::with('branches')->get();
 
         // Return posts as a JSON response
-        return response()->json($user);
+        return response()->json(UserResources::collection($user));
     }
 
     /**

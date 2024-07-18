@@ -99,6 +99,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/baggage_post', [BaggageController::class, 'BaggagePost']);
     Route::get('/baggage_list', [BaggageController::class, 'BaggageList']);
     Route::get('/baggage_list/{id}', [BaggageController::class, 'GetBaggageById']);
+    Route::put('/baggage_update/{id}', [BaggageController::class, 'BaggageUpdateById']);
     Route::delete('/baggage_delete/{id}', [BaggageController::class, 'DeleteBaggage']);
 });
 
@@ -106,6 +107,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/delivery_status_post', [DeliveryStatusController::class, 'DeliveryStatusPost']);
+    Route::put('/delivery_status_edit/{id}', [DeliveryStatusController::class, 'DeliveryStatusEdit']);
     Route::get('/delivery_status_list', [DeliveryStatusController::class, 'ListStatus']);
     Route::get('/delivery_status_list/{id}', [DeliveryStatusController::class, 'DeliverStatusListByid']);
 });

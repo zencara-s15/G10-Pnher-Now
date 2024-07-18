@@ -17,13 +17,15 @@ class BaggageController extends Controller
     public function BaggageList()
     {
         // Retrieve all baggage with deliveryStatus and user relationships loaded
-        $baggage = Baggage::with(['deliveryStatus:id,name', 'user:id,name'])->get();
+        // $baggage = Baggage::with(['deliveryStatus:id,name', 'user:id,name'])->get();
 
         // Return a JSON response
-        return response()->json([
-            'success' => 'Baggage retrieved successfully!',
-            'baggage' => $baggage
-        ], 200);
+        // return response()->json([
+        //     'success' => 'Baggage retrieved successfully!',
+        //     'baggage' => $baggage
+        // ], 200);
+        return BaggageResource::collection(Baggage::all());
+        // return Baggage::all();
     }
     /**
      * Store a newly created resource in storage.
@@ -31,6 +33,9 @@ class BaggageController extends Controller
     public function BaggagePost(Request $request)
     {
         // Define validation rules
+        $userId = $request->user()->id;
+        // Default delivery status is "Pending"
+        $deliveryStatus = 1; 
         $rules = [
             'type' => 'required|string|max:255',
             'weight' => 'required|integer',
@@ -57,7 +62,10 @@ class BaggageController extends Controller
 
         // Create the baggage entry
         $baggage = Baggage::create($data);
+        $baggage->post_id = $userId;
+        $baggage->delivery_status_id = $deliveryStatus;
 
+        $baggage->save();
         // Return a JSON response
         return response()->json(['success' => 'Baggage post created successfully!', 'baggage' => $baggage], 201);
     }
@@ -77,9 +85,23 @@ class BaggageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function BaggageUpdateById(Request $request, string $id)
     {
-        //
+        // Define validation rules
+        $rules = [
+            'delivery_status_id' => 'nullable|exists:delivery_status,id',
+        ];
+        // Validate the incoming request data
+        $request->validate($rules);
+        // Prepare the data for update
+        $data = $request->all();
+        // Find the baggage by ID and update it
+        $baggage = Baggage::find($id);
+        $baggage->update(['delivery_status_id' => $request->delivery_status_id]);
+        // Return a JSON response
+        return response()->json(['success' => 'Baggage updated successfully!', 'baggage' => $baggage], 200);
+        // return response()->json(['success' => 'Baggage updated successfully!', 'baggage' => $baggage], 200);
+
     }
 
     /**
