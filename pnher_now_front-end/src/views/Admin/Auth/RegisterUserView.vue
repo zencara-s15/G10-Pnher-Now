@@ -193,7 +193,7 @@
                 accept="image/*"
                 class="hidden"
               />
-              <div v-if="imagePreview" class="w-24 h-24 bg-gray-200 rounded-full overflow-hidden">
+              <div v-if="imagePreview" class="w-52 h-52 bg-gray-200 rounded-full overflow-hidden">
                 <img
                   :src="imagePreview"
                   alt="Profile Image Preview"
@@ -301,6 +301,7 @@
 <script>
 import * as Yup from 'yup'
 import axiosInstance from '@/plugins/axios'
+import Swal from 'sweetalert2'
 
 export default {
   data() {
@@ -354,7 +355,12 @@ export default {
           console.log('Email exists:', emailExists)
 
           if (emailExists) {
-            alert('Email already exists')
+            Swal.fire({
+              title: 'Email Already Exists',
+              text: 'Please use a different email address.',
+              icon: 'warning',
+              confirmButtonText: 'OK'
+            })
           } else {
             this.step++
             console.log('Next step:', this.step)
@@ -457,11 +463,24 @@ export default {
         }
 
         const response = await axiosInstance.post('/register/user', formData)
-        alert('Form submitted successfully!')
+        Swal.fire({
+          title: 'Form submitted successfully!',
+          text: 'Click OK to go to login page.',
+          icon: 'success',
+          showConfirmButton: false, // Hide the confirm button
+          timer: 3000 // Display the alert for 3 seconds
+        }).then(() => {
+          this.$router.push('/login')
+        })
         console.log(response.data)
       } catch (error) {
         console.error('Error submitting form:', error)
-        alert('An error occurred while submitting the form.')
+        Swal.fire({
+          title: 'Error!',
+          text: 'An error occurred while submitting the form.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
       }
     },
     handleFileUpload(event) {
@@ -472,8 +491,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .step-indicator {
   display: flex;
   justify-content: space-between;
@@ -611,4 +628,3 @@ export default {
   transform: scale(0.95);
 }
 </style>
-
