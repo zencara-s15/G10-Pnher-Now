@@ -7,6 +7,7 @@ use App\Models\Supervisor\Branch;
 // use App\Models\Branch;
 use App\Models\Post;
 use App\Models\Baggage;
+use App\Models\Branch as ModelsBranch;
 use App\Models\Company;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -79,34 +80,11 @@ class User extends Authenticatable
 
     public function branches()
     {
-        return $this->hasMany(BranchResource::class, 'user_id');
+        return $this->hasMany(ModelsBranch::class, 'user_id');
     }
-
-    // public function branch()
-    // {
-    //     return $this->belongsTo(Branch::class);
-    // }
-
-    // public function branchs()
-    // {
-    //     return $this->hasOne(Branch::class, 'user_id'); // Assuming 'user_id' is the foreign key in the Branch model
-    // }
-
-    public function company() {
+    public function company()
+    {
         return $this->belongsTo(Company::class);
     }
-    // public function branches()
-    // {
-    //     return $this->hasMany(\App\Models\Supervisor\Branch::class, 'user_id');
-    // }
-
-    // public function branch()
-    // {
-    //     return $this->hasOne(\App\Models\Supervisor\Branch::class, 'user_id'); // Assuming 'user_id' is the foreign key in the Branch model
-    // }
-
-    // public function branch()
-    // {
-    //     return $this->belongsTo(Branch::class);
-    // }
+    
 }

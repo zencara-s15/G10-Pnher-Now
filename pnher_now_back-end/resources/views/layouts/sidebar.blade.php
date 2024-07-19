@@ -146,12 +146,6 @@
                 <span class="mx-3">Branch</span>
             </a>
         @endcanany
-
-
-            <span class="mx-3">Company</span>
-        </a>
-        @endcanany
-        <!-- Company -->
         
         {{-- Branch page --}}
 
@@ -200,7 +194,5 @@
                 <span class="mx-3">History</span>
             </a>
         @endcanany
-
-
     </nav>
 </div>

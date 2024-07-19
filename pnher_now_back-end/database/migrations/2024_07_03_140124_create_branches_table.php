@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('deliverer_and_users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('user_id');
             $table->string('company_id');
             $table->string('address');
             $table->integer('deliverer_id');
