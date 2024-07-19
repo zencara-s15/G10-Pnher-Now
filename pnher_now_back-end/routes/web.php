@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\{
     CompanyController,
     // CompanyController as AdminCompanyController,
     BranchController,
+    ChartController as AdminChartController,
     DashboardController,
     DelivererController,
     DriverController,
@@ -142,8 +143,7 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')
         Route::put('/mail-update/{mailsetting}', [MailSettingController::class, 'update'])->name('mail.update');
 
         // Chart
-        Route::get('/chart', [ChartChartController::class, 'chart']);
-        Route::get('/chart', [ChartChartController::class, 'chart']);
+        Route::get('/chart', [AdminChartController::class, 'index'])->name('chart');
 
         // ================Company=================
 

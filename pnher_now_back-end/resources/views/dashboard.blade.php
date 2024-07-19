@@ -12,7 +12,7 @@
 
                         <!-- Dashboard -->
                         <div class="row flex flex-row m-5 justify-between">
-                            <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
+                            <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray:100 dark:hover:bg-green-800 transform hover:scale-105">
                                 <div class="card-body flex flex-row items-center">
                                     <div
                                         class="col-icon flex flex-row items-center bg-blue-600 h-37 px-4 py-3 rounded-lg">
@@ -32,7 +32,7 @@
                             </div>
 
 
-                            <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
+                            <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
                                 <div class="card-body flex flex-row items-center">
                                     <div
                                         class="col-icon flex flex-row items-center bg-blue-400 h-37 px-4 py-3 rounded-lg">
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
 
-                            <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
+                            <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
                                 <div class="card-body flex flex-row items-center">
                                     <div
                                         class="col-icon flex flex-row items-center bg-red-500 h-37 px-4 py-3 rounded-lg">
@@ -61,16 +61,16 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="col col-stats ms-3 ms-sm-0 mx-2">
+                                    <div class="col col-stats ms-3 ms-sm-0 mx-2 ">
                                         <div class="numbers">
-                                            <p class="card-category">All Baggages</p>
-                                            <h4 class="card-title">{{$totalBaggages}}+  </h4>
+                                            <p class="card-category">All Posts</p>
+                                            <h4 class="card-title">{{$totalBaggages}}+ </h4>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
+                            <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
                                 <div class="card-body flex flex-row items-center">
                                     <div
                                         class="col-icon flex flex-row items-center bg-yellow-400 h-37 px-4 py-3 rounded-lg">
@@ -83,7 +83,7 @@
                                     <div class="col col-stats ms-3 ms-sm-0  mx-2">
                                         <div class="numbers">
                                             <p class="card-category">Feedback</p>
-                                            <h4 class="card-title"></h4>
+                                            <h4 class="card-title">{{$allFeedbacks}}+</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@
                         <canvas id="barChart"></canvas>
                     </div>
                 </div>
-                <div class="card w-6/12 bg-white rounded-lg">
+                <div class="card w-6/12 bg-white mx-1 p-2 rounded-lg">
                     <div class="card-header flex justify-center">
                         <h1 class="">Total of each months</h1>
                     </div>
@@ -119,12 +119,12 @@
                 var myChart = new Chart(ctx, {
                     type: 'pie',
                     data: {
-                        labels: ['All USers', 'All Companies', 'All Baggages', 'All Feedbacks'],
+                        labels: ['All Users', 'All Companies', 'All Posts', 'All Feedbacks'],
                         datasets: [{
                             data: [12, 19, 3, 5],
                             backgroundColor: [
                                 '#2563EB',
-                                '#2563EB',
+                                '#EE0943',
                                 '#EF4444',
                                 '#FBBF24',
                             ],
@@ -145,7 +145,7 @@
                     data: {
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                         datasets: [{
-                                label: 'New Register',
+                                label: 'All Users',
                                 data: [12, 19, 3, 5, 2, 3, 10],
                                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -153,7 +153,7 @@
                                 borderWidth: 1
                             },
                             {
-                                label: 'Company',
+                                label: 'Companies',
                                 data: [5, 2, 10, 3, 8, 15, 7, 1, 12, 9, 10, 20],
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
@@ -161,7 +161,7 @@
                                 borderWidth: 1
                             },
                             {
-                                label: 'All Product',
+                                label: 'All Posts',
                                 data: [10, 15, 12, 20, 15, 10, 12, 18, 25, 12, 19, 30],
                                 backgroundColor: 'rgba(0, 255, 0, 0.2)',
                                 borderColor: 'rgba(0, 255, 0, 1)',
@@ -169,7 +169,7 @@
                                 borderWidth: 1
                             },
                             {
-                                label: 'Order',
+                                label: 'Feedback',
                                 data: [12, 19, 3, 5, 2, 3, 10, 18, 25, 12, 19, 30],
                                 backgroundColor: 'rgba(255, 159, 64, 0.2)',
                                 borderColor: 'rgba(255, 159, 64, 1)',
