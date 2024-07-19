@@ -7,7 +7,7 @@
         :key="item.id"
       >
         <div class="card" v-if="item.delivery_status_id === 1">
-          <div class="card-body" v-if="!hideCardBody">
+          <div class="card-body " v-if="!hideCardBody">
             <div class="card-header">
               <div class="img">
                 <img :src="`http://127.0.0.1:8000/images/${item.post_id?.profile}`" />
@@ -22,7 +22,6 @@
               <button type="button" class="btn btn-info" @click="showPostDetails(item)">
                 Detail
               </button>
-              <!-- <button type="button" class="btn btn-warning" @click="toggleCardBody">Cancel</button> -->
             </div>
           </div>
         </div>
@@ -191,8 +190,8 @@ export default {
 .delivers {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
 }
+
 .card {
   background-color: #fff;
   border: 1px solid #ccc;
@@ -300,5 +299,10 @@ export default {
   width: 450px;
   height: 300px;
   margin-bottom: -90px;
+}
+.google-map{
+  background: #000000;
+  width: 100%;
+  height: 50%;
 }
 </style>
