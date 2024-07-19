@@ -39,15 +39,9 @@ export default {
 }
 </script>
 
-<<<<<<< HEAD
 <style>
-=======
 <style scoped>
-<<<<<<< HEAD
->>>>>>> 4cab557f7a661cebbcdd630b313161d4cf08e2fb
 
-=======
->>>>>>> 7579aed6997ad97de4a98af2b4c3572b00efe5b3
 .form {
   display: flex;
   flex-direction: column;

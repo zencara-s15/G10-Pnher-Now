@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style>
+
 <style scoped>
 .form {
     display: flex;
@@ -90,4 +90,4 @@ link {
     margin-right: 20px;
 }
 </style>
-</style>
+

@@ -103,6 +103,7 @@ class DelivererController extends Controller
     public function destroy(string $id)
     {
         $deliverer = DelivererInBranch::findOrFail($id);
+        
         $deliverer->user->delete();
         $deliverer->delete();
         return redirect()->route('admin.deliverer.index')->withSuccess('Deliverer deleted successfully.');

@@ -14,81 +14,8 @@ function closeDropdown() {
 </script>
 
 <template>
-<<<<<<< HEAD
-  <header class="flex justify-between px-50 py-3 bg-white items-center">
-    <!-- Logo -->
-    <div class="flex items-center space-x-2">
-      <Icon icon="skill-icons:devto-dark" style="font-size: 45px" />
-      <span class="text-xl font-bold">Phner Now</span>
-    </div>
-
-    <!-- Menu Items -->
-    <nav class="flex justify-center space-x-4">
-      <a
-        href="/post"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Post</a
-      >
-      <a
-        href="/team"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Team</a
-      >
-      <a
-        href="/projects"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Projects</a
-      >
-      <a
-        href="/reports"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Reports</a
-      >
-      <a
-        href="/deliver"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Deliver</a
-      >
-      <a
-        href="/history"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >History</a
-      >
-      <a
-        href="/average"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Average</a
-      >
-      <a
-        href="/ProcessDeliver"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Process</a
-      >
-      <a
-        href="/feedback"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Feedback</a
-      >
-      <a
-        href="/request"
-        class="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900"
-        >Request</a
-      >
-    </nav>
-
-    <!-- Sign In -->
-    <div>
-      <div>
-      <div class="px-4 py-2 rounded font-semibold">
-        <a
-          href="/Logout"
-          class="font-bold text-slate-700 rounded-full flex items-center justify-center bg-danger"
-          style="width: 40px; height: 40px; display: inline-flex"
-        >
-        <i class="bi bi-box-arrow-right text-white"></i>
-=======
   <nav
-    class="flex-no-wrap relative flex w-full items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:flex-wrap lg:justify-start lg:py-4 size-25"
+    class="flex-no-wrap relative flex w-full items-center justify-between bg-gray-500 py-2 shadow-dark-mild dark:bg-neutral-700 lg:flex-wrap lg:justify-start lg:py-4 size-25"
   >
     <div class="flex w-full flex-wrap items-center justify-between px-3">
       <!-- Logo -->
@@ -96,7 +23,7 @@ function closeDropdown() {
         to="/"
         class="flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0"
       >
-        <img src="../assets/logo.png" style="height: 50px" alt="TE Logo" loading="lazy" />
+        <img src="../assets/Pnher now LOGO.png" style="height: 50px" alt="TE Logo" loading="lazy" />
       </router-link>
       <!-- Left navigation links -->
       <div class="flex-grow">
@@ -144,7 +71,7 @@ function closeDropdown() {
             HISTORY-DELIVERER
           </router-link>
           <router-link
-            to="/proccess"
+            to="/process"
             class="text-black/60 transition duration-200 hover:text-red/80 dark:text-white/60 dark:hover:text-white/80"
             active-class="text-red-500"
           >
@@ -182,7 +109,6 @@ function closeDropdown() {
               />
             </svg>
           </span>
->>>>>>> 4cab557f7a661cebbcdd630b313161d4cf08e2fb
         </a>
         <!-- Notification Bell Icon -->
         <div class="relative">
@@ -246,6 +172,11 @@ function closeDropdown() {
     </div>
   </nav>
 </template>
+
+
+<script>
+
+</script>
 
 <style scoped>
 .text-red-500 {

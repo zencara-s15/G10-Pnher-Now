@@ -44,15 +44,15 @@ class BranchController extends Controller
     {
         $supervisors = User::whereHas('roles', function ($query) {
             $query->where('name', 'supervisor');
-        })->whereDoesntHave('branch')
+        })->whereDoesntHave('branchs')
             ->get();
 
-        $companies = ModelsCompany::all();
+        $companies = Company::all();
         return view('branch.new', compact('supervisors', 'companies'));
     }
 
     /**
-     * Store a newly created resource in storage.       
+     * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
@@ -90,11 +90,11 @@ class BranchController extends Controller
         $supervisors = User::whereHas('roles', function ($query) {
             $query->where('name', 'supervisor');
         })
-            ->whereDoesntHave('branch')
+            ->whereDoesntHave('branchs')
             ->orWhere('id', $branch->user_id) // Include the current supervisor of the branch
             ->get();
 
-        $companies = ModelsCompany::all();
+        $companies = Company::all();
 
         return view('branch.edit', compact('branch', 'supervisors', 'companies'));
     }

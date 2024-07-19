@@ -89,8 +89,7 @@ class AdminSeeder extends Seeder
 
         $admin->assignRole($admin_role);
         $user->assignRole($user_role);
-
-
+        
         $admin_role->givePermissionTo(Permission::all());
     }
 }

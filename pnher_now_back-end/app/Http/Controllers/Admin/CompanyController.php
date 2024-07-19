@@ -19,8 +19,9 @@ class CompanyController extends Controller
     }
 
     public function index() {
-        $companies = Company::all();
-        return redirect()->route('admin.company.index');
+        $company = Company::all();
+        return view('company.index',['company' => $company]);
+        // return view('companies.index');
     }
 
     public function create(){
@@ -34,11 +35,25 @@ class CompanyController extends Controller
         return redirect()->route('admin.company.index')->with('success', 'Company created successfully');
     }
 
-    public function destroy(string $id){
-        $company = Company::findOrFail( $id );
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Company $company){
         $company->delete();
         // Redirect to the company index page with a success message
-        return redirect()->route('admin.company.index')->withSuccess('Company deleted successfully');
+        return redirect()->back()->withSuccess('Company deleted successfully');
     }
 
     /**
@@ -47,9 +62,7 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(string $id){
-        $company = Company::findOrFail( $id );
-        $company = Company::findOrFail( $company->id );
+    public function edit(Company $company){
         return view('company.edit', ['company' => $company]);
     }
 
@@ -64,6 +77,5 @@ class CompanyController extends Controller
         $company->update($request->all());
         return redirect()->route('admin.company.index')->withSuccess('Company updated successfully');
     }
-
     
 }

@@ -36,6 +36,13 @@ class CompanyController extends Controller
         return response()->json($company);
     }
 
+    public function show($id)
+    {
+        $company = Company::findOrFail($id);
+        $company = new CompanyResource($company);
+        return response()->json($company);
+    }
+
     public function store(Request $request)
     {
         $request->validate([

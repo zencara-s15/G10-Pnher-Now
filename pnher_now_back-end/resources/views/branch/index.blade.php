@@ -82,4 +82,8 @@
         </main>
     </div>
     </div>
+<<<<<<< HEAD
 </x-app-layout>
+=======
+</x-app-layout>
+>>>>>>> user_feedback

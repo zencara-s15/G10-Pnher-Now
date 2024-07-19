@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Supervisor\Branch;
+// use App\Models\Supervisor\Branch;
+
+use App\Http\Resources\BranchResource;
+use App\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +21,6 @@ class DelivererInBranch extends Model
     }
     public function branch()
     {
-        return $this->belongsTo(Branch::class,'branch_id');
+        return $this->belongsTo(BranchResource::class,'branch_id');
     }
 }

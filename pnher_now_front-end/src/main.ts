@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import './assets/main.css'
 
 import { createApp } from 'vue'
@@ -22,13 +23,6 @@ const app = createApp(App)
 configure({
   validateOnInput: true
 })
-  
-
-<<<<<<< HEAD
-=======
-
-// library.add(...all)
->>>>>>> 7579aed6997ad97de4a98af2b4c3572b00efe5b3
 
 app.use(createPinia())
 app.use(router.router)
