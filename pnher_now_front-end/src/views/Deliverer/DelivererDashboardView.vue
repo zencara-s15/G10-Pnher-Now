@@ -41,10 +41,8 @@
               <p>Total Cost: {{ calculateTotalCost(selectedBaggage.weight) }} Real</p>
               <p>Company: {{ selectedBaggage.company }}</p>
             </div>
-            <div class="d-flex justify-center image">
-              <img src="/src/assets/deliverer.png" width="300px" />
-            </div>
-            <div class="mt-3 p-3 d-flex justify-between">
+            
+            <div class=" p-3 d-flex justify-between">
               <div>
                 <button type="button" class="btn btn-outline-danger" @click="closeAlert">
                   Back

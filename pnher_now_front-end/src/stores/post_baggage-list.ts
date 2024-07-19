@@ -4,7 +4,19 @@ import { ref } from 'vue';
 
 export const usePostBaggageStore = defineStore('postBaggage', {
   state: () => ({
-    post_baggage: [],
+    post_baggage: [] as Array<{
+      id: number,
+      type: string,
+      weight: number,
+      receiver_phone: string,
+      sending_address: string,
+      company: string,
+      receiving_address: string,
+      post_id: number,
+      delivery_status_id: number,
+      longitude?: number, // Optional properties
+      latitude?: number // Optional properties
+    }>,
     user_baggage: ref(),
     baggage: ref<Object>(),
     responseMessage: ref<any>()
@@ -46,6 +58,26 @@ export const usePostBaggageStore = defineStore('postBaggage', {
         throw error; // Throw the error to handle it in the component
       }
     },
+    async getCurrentLocation(): Promise<{ longitude: number, latitude: number }> {
+      return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { longitude, latitude } = position.coords;
+              resolve({ longitude, latitude });
+            },
+            (error) => {
+              console.error('Error getting location:', error);
+              reject(error);
+            }
+          );
+        } else {
+          const error = new Error('Geolocation is not supported by this browser.');
+          console.error(error.message);
+          reject(error);
+        }
+      });
+    },
     async updateBaggageStatus(id: number, baggage_id: number) {
       try {
         const response = await axiosInstance.put(`/baggage_update/${baggage_id}`, {delivery_status_id: id});
@@ -56,6 +88,7 @@ export const usePostBaggageStore = defineStore('postBaggage', {
         throw error; // Throw the error to handle it in the component
       }
     }
+    
     
   },
 });

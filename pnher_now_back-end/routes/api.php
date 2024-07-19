@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BaggageInStockeController;
 use App\Http\Controllers\API\Delivery\BaggageController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\API\PostController;
@@ -12,6 +13,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Delivery\DeliveryBaggageController;
 use App\Http\Controllers\API\Delivery\DeliveryStatusController;
+use App\Http\Controllers\API\Delivery\GetFeedbackController;
+use App\Http\Controllers\API\User\DeliverandUserController;
+use App\Http\Controllers\API\User\FeedbackController;
+use App\Models\DelivererAndUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +50,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::put('/change_password', [AuthController::class, 'change_password']);
+
+    Route::get('/instock', [BaggageInStockeController::class, 'index'])->name('supervisor.list_instock');
     
 
     Route::prefix('users')->group(function (){
@@ -55,19 +62,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('companies')->group(function () {
         Route::get('/list', [CompanyController::class, 'index']);
         Route::post('/create', [CompanyController::class, 'store']);
-        Route::get('/{company}', [CompanyController::class, 'show']);
-        Route::put('/{company}', [CompanyController::class, 'update']);
-        Route::delete('/{company}', [CompanyController::class, 'destroy']);
+        Route::get('/show/{company}', [CompanyController::class, 'show']);
+        Route::put('/edit/{company}', [CompanyController::class, 'update']);
+        Route::delete('delete/{company}', [CompanyController::class, 'destroy']);
     });
-
-
+    
      // Branch
      Route::prefix('branches')->group(function () {
         Route::get('/list', [BranchController::class, 'index']);
         Route::post('/create', [BranchController::class, 'store']);
-        Route::get('/{branch}', [BranchController::class, 'show']);
-        Route::put('/{branch}', [BranchController::class, 'update']);
-        Route::delete('/{branch}', [BranchController::class, 'destroy']);
+        Route::get('show/{branch}', [BranchController::class, 'show']);
+        Route::put('edit/{branch}', [BranchController::class, 'update']);
+        Route::delete('delete/{branch}', [BranchController::class, 'destroy']);
     });
 
 });
@@ -105,3 +111,39 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/delivery_status_list', [DeliveryStatusController::class, 'ListStatus']);
     Route::get('/delivery_status_list/{id}', [DeliveryStatusController::class, 'DeliverStatusListByid']);
 });
+
+// Feedback routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/feedback_post', [FeedbackController::class, 'FeedbackPost']);
+    Route::get('/feedback_list', [FeedbackController::class, 'FeedbackList']);
+    Route::get('/feedback_list/{id}', [FeedbackController::class, 'GetFeedbackById']);
+});
+
+// Deliverer and User 
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/DeliverersAndUser/last', [DeliverandUserController::class, 'lastDelivererId']);
+});
+
+
+Route::get('/getFeedback', [GetFeedbackController::class, 'index']);
+
+// Route::post('/feedback_post', [FeedbackController::class, 'store']);
+
+
+
+// Company
+// Route::middleware('auth:sanctum')->group(function(){
+
+//     Route::prefix('company')->group(function () {
+//         Route::get('/list', [CompanyController::class, 'index']);
+//         Route::post('/create', [CompanyController::class, 'store']);
+//         Route::get('/{company}', [CompanyController::class, 'show']);
+//         Route::put('/{company}', [CompanyController::class, 'update']);
+//         Route::delete('/{company}', [CompanyController::class, 'destroy']);
+//     });
+// });
+    // Company 
+
+
+   
