@@ -1,8 +1,8 @@
 <x-app-layout>
     <div>
         <main class="flex-1 mt-2 overflow-x-hidden overflow-y-auto bg-gray-200">
-            <div class="container px-2 py-2 pb-16 flex justify-center rounded-xl">
-                <div class="bg-white shadow-md rounded my-6 p-3 w-6/12">
+            <div class="container px-4 py-1 pb-10 flex justify-center rounded-xl">
+                <div class="bg-white shadow-md rounded my-3 p-3 w-full">
                     <div class="modal-dialog" id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="flex justify-end">
                             <a href="{{route('admin.company.index')}}">
