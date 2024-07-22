@@ -23,7 +23,7 @@ function closeDropdown() {
 
 function logOut() {
   localStorage.removeItem('access_token')
-  router.push('/login')
+  router.push('/')
 }
 
 const tabs = [
