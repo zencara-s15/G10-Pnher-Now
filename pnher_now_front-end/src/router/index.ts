@@ -77,6 +77,15 @@ const router = createRouter({
         role: 'user'
       }
     },
+    {
+      path: '/history',
+      name: 'History',
+      component: () => import('../views/Web/User/HistoryUser.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
+    },
 
     // ----- deliverer -----
 
@@ -139,7 +148,7 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: () => import('../views/Admin/Auth/RegisterUserView.vue')
-    }
+    },
   ]
 })
 

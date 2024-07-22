@@ -1,47 +1,69 @@
 <template>
   <DelivererLayout></DelivererLayout>
-  <div class="information-card">
-    <div class="delivery-info">
-      <div class="text-white d-flex justify-content-center p-2 bg-dark radius1 mt-3">
-        <h1>Information</h1>
-      </div>
-      <div
-        class="alert-card-body card-deliverer mb-5"
-        v-for="(item, index) in baggage"
-        :key="item.id"
-      >
-        <div class="information" v-if="item.delivery_status_id === 2">
-          <div class="p-3">
-            <p>Phone Receiver: {{ item.phone_receiver }}</p>
-            <p>Sending Address: {{ item.sending_address }}</p>
-            <p>Receiving Address: {{ item.receiving_address }}</p>
-            <p>Baggage Type: {{ item.type }}</p>
-            <p>Weight: {{ item.weight }} Kg</p>
-            <p>Total Cost: {{ calculateTotalCost(item.weight) }} Real</p>
-            <p>Company: {{ item.company }}</p>
+  <div class="container">
+    <div class="information-card pt-5">
+      <div class="delivery-info">
+        <div class="text-white d-flex justify-content-center p-2 bg-orange-600 radius1">
+          <h1>Information</h1>
+        </div>
+        <div v-if="noCardsToShow" class="text-center p-3">
+          <div class="mt-5 d-flex justify-content-center">
+            <img src="/src/assets//Arrived/delivery_arrived.png" alt="Deliverer" width="300px" />
           </div>
-          <div class="p-3">
-            <div>
-              <img src="/src/assets/deliverer.png" alt="" width="100px" />
+        </div>
+        <div
+          v-else
+          class="alert-card-body card-deliverer mb-5"
+          v-for="(item, index) in baggage"
+          :key="item.id"
+        >
+          <div class="information" v-if="item.delivery_status_id === 2">
+            <div class="p-3">
+              <p>
+                Phone Receiver: <strong>{{ item.phone_receiver }}</strong>
+              </p>
+              <p>
+                Sending Address: <strong>{{ item.sending_address }}</strong>
+              </p>
+              <p>
+                Receiving Address: <strong>{{ item.receiving_address }}</strong>
+              </p>
+              <p>
+                Baggage Type: <strong>{{ item.type }}</strong>
+              </p>
+              <p>
+                Weight: <strong>{{ item.weight }} Kg</strong>
+              </p>
+              <p>
+                Total Cost: <strong>{{ calculateTotalCost(item.weight) }} Real</strong>
+              </p>
+              <p>
+                Company: <strong>{{ item.company }}</strong>
+              </p>
             </div>
-            <div class="pt-5">
-              <button
-                type="button"
-                class="btn btn-warning bg-orange-600 text-white"
-                @click="ArrivedBranch(item, index)"
-              >
-                Arrived
-              </button>
+            <div class="p-3">
+              <div>
+                <img src="/src/assets/deliverying.png" alt="" width="150px" />
+              </div>
+              <div class="pt-5">
+                <button
+                  type="button"
+                  class="btn btn-warning bg-orange-600 text-white"
+                  @click="ArrivedBranch(item, index)"
+                >
+                  Arrived
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="google-map mt-3 ml-5">
-      <div class="text-white d-flex justify-content-center p-2 bg-dark radius1">
-        <h1>Tracking Map</h1>
+      <div class="google-map ml-5">
+        <div class="text-white d-flex justify-content-center p-2 bg-orange-600 radius1">
+          <h1>Tracking Map</h1>
+        </div>
+        <GoogleMap />
       </div>
-      <GoogleMap />
     </div>
   </div>
 </template>
@@ -95,6 +117,11 @@ export default {
     senderId() {
       const urlParams = new URLSearchParams(window.location.search)
       return urlParams.get('sender') || Math.floor(Math.random() * 10) + 1
+    },
+    noCardsToShow() {
+      return (
+        this.baggage.length === 0 || !this.baggage.some((item) => item.delivery_status_id === 2)
+      )
     }
   },
   methods: {
@@ -103,8 +130,6 @@ export default {
       this.selectedBaggage = baggage
       this.isAlertVisible = true
       this.hideCardBody = false
-      // console.log(baggage)
-      // console.log(index)
 
       this.baggageStore = usePostBaggageStore()
       this.delivery_status_id = '3'
@@ -122,21 +147,23 @@ export default {
 
 <style scoped>
 .information-card {
-  /* background: #000000; */
   display: flex;
   width: 100%;
-  /* height: 100vh; */
 }
 .information {
-  /* background-color: #c92626; */
   width: 100%;
-  /* height: 78.3%; */
 }
 .google-map {
-  /* background: #c81313; */
+  border: 1px solid gray;
+  border-radius: 10px 10px 10px 10px;
   width: 100%;
 }
 .delivery-info {
+  border: 1px solid gray;
+  border-radius: 10px 10px 10px 10px;
   width: 40%;
+}
+.radius1 {
+  border-radius: 9px 9px 0px 0px;
 }
 </style>
