@@ -22,7 +22,7 @@
                 <input :type="passwordFieldType"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="password" v-model="password" />
-                <span v-if="password.length <=6 " class="text-red-500">
+                <span v-if="password.length <=6 " class="text-red-600">
                   Password should be at least 6 characters long.
                 </span>
                 <span class="absolute inset-y-0 right-0 pr-4 items-center mt-2" @click="togglePasswordVisibility">
@@ -44,16 +44,16 @@
               </div>
             </div>
             <div class="flex items-center justify-between mb-6">
-              <a href="#" class="text-blue-600 hover:text-blue-800">Forgot Password?</a>
+              <a href="#" class="text-blue-600 hover:text-blue-800 italic underline">Forgot Password?</a>
               <button
-                class="shadow appearance-none border rounded bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="bg-gradient-to-l from-orange-400 to-red-500 shadow appearance-none border rounded bg-red-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 type="submit" :disabled="isSubmitting">
                 LOGIN
               </button>
             </div>
             <div class="text-center">
               <span class="text-dark">Don't have an account? </span>
-              <a href="/register" class="text-blue-600 hover:text-blue-800">Signup</a>
+              <a href="/register" class="text-blue-600 hover:text-blue-800 underline italic">Signup</a>
             </div>
           </form>
         </div>
@@ -73,6 +73,7 @@ import { useField, useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2'
 
 const router = useRouter()
 
@@ -93,11 +94,35 @@ const onSubmit = handleSubmit(async (values) => {
   try {
     const { data } = await axiosInstance.post('/login', values)
     localStorage.setItem('access_token', data.access_token)
-    router.push('/home') // Redirect to "/home" after successful login
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Login Successful',
+      text: 'You have successfully logged in!',
+      timer: 2000,
+      showConfirmButton: false
+    }).then(() => {
+      if (data.role === 'user') {
+        router.push('/user_dashboard')
+      } else if (data.role === 'deliverer') {
+        router.push('/deliverer_dashboard')
+      }
+
+      // Delay the reload by 5 seconds (5000 milliseconds)
+      setTimeout(() => {
+        location.reload()
+      }, 100)
+    })
   } catch (error) {
-    console.error('Error', error)
+    Swal.fire({
+      icon: 'error',
+      title: 'Login Failed',
+      text: error.response?.data?.message || 'An error occurred while logging in',
+    })
+    console.error('Error:', error)
   }
 })
+
 
 const { value: email, errorMessage: emailError } = useField('email')
 const { value: password, errorMessage: passwordError } = useField('password')
@@ -109,5 +134,4 @@ const togglePasswordVisibility = () => {
 </script>
 
 <style scoped>
-
 </style>
