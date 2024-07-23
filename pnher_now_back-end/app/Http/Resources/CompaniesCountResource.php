@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CompanyResource extends JsonResource
+class CompaniesCountResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,13 +14,16 @@ class CompanyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $this->load('company');
+        $totalCompanies = $this->company ? $this->company->count() : 0;
+
         return [
             "id" => $this->id,
             "name" => $this->name,
             "address" => $this->address,
-            // "number" => $this->id->count(),
-            'create' => $this->created_at->format('d/m/Y'),
-            'update' => $this->updated_at->format('d/m/Y'),
+            "total_company" => $totalCompanies,
         ];
+
     }
+
 }

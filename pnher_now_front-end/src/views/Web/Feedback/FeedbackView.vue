@@ -94,6 +94,7 @@ export default {
 </script>
 
 <style scoped>
+
 .container {
   display: flex;
   flex-direction: column;
@@ -151,4 +152,5 @@ export default {
   width: 60px;
   height: 60px;
 }
+
 </style>

@@ -43,6 +43,51 @@ const router = createRouter({
     },
 
     {
+      path: '/history',
+      name: 'history',
+      component: () => import('../views/Web/User/HistoryUser.vue')
+    },
+    {
+      path: '/deliverer',
+      name: 'deliverer',
+      component: () => import('../views/Web/Deliver/DeliverView.vue')
+    },
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import('../views/Web/Feedback/FeedbackView.vue')
+    },
+    {
+      path: '/history_deliverer',
+      name: 'history_deliverer',
+      component: () => import('../views/Web/History/HistoryView.vue')
+    },
+    
+    {
+      path: '/proccess',
+      name: 'proccess',
+      component: () => import('../views/Web/ProcessDeliver/ProcessDeliverView.vue')
+    },
+    {
+      path: '/request',
+      name: 'request',
+      component: () => import('../views/Web/Request/RequestView.vue')
+    },
+    {
+      path: '/average',
+      name: 'average',
+      component: () => import('../views/Web/Average/AverageView.vue')
+    },
+
+    {
+      path: "/deliver",
+      name: "deliver",
+      component: () => import('../views/Web/Deliver/DeliverView.vue')
+    },
+    {
+      path: "/history",
+      name: "history",
+      component: () => import('../views/Web/History/HistoryView.vue')
       path: '/home',
       name: 'home',
       component: () => import('../views/Web/User/ProductUser.vue'),

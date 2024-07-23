@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Models\Supervisor;
+
+use App\Models\Company;
+use App\Models\User;
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
