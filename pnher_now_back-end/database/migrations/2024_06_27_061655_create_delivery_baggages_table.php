@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delivery_baggages', function (Blueprint $table) {
+        Schema::create('delivery_baggage', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->foreignId('baggage_id')->onDelete('cascade');
             $table->foreignId('deliverer_id')->constrained('users')->onDelete('cascade'); // Assuming 'deliverer_id' references the 'users' table
-            $table->boolean('status');
-            $table->timestamps();
+            $table->boolean('status')->nullable();
+            $table->timestamps();   
         });
     }
 

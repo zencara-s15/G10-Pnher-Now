@@ -9,7 +9,7 @@ class Baggage extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'type', 'weight', 'receiver_phone', 'sending_address', 'company', 'receiving_address',  'post_id', 'delivery_status_id'
+        'type', 'weight', 'receiver_phone', 'sending_address', 'company', 'receiving_address', 'longitude', 'latitude', 'post_id', 'delivery_status_id'
     ];
     public function post()
     {
