@@ -15,7 +15,11 @@ const router = createRouter({
       name: 'Welcome',
       component: () => import('../views/Web/HomeView.vue')
     },
-
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/Admin/Auth/RegisterUserView.vue')
+    },
     // log in 
     {
       path: '/login',
@@ -43,9 +47,18 @@ const router = createRouter({
     },
 
     {
-      path: '/home',
-      name: 'home',
+      path: '/baggages',
+      name: 'baggages',
       component: () => import('../views/Web/User/ProductUser.vue'),
+      meta: {
+        requiresAuth: true,
+        role: 'user'
+      }
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component: () => import('../views/Web/User/HistoryUser.vue'),
       meta: {
         requiresAuth: true,
         role: 'user'
@@ -77,6 +90,7 @@ const router = createRouter({
         role: 'user'
       }
     },
+    
 
     // ----- deliverer -----
 
@@ -91,9 +105,9 @@ const router = createRouter({
     },
 
     {
-      path: '/deliverer',
+      path: '/delivering',
       name: 'deliver',
-      component: () => import('../views/Web/Deliver/DeliverView.vue'),
+      component: () => import('../views/Web/Deliver/DeliveringView.vue'),
       meta: {
         requiresAuth: true,
         role: 'deliverer'
@@ -135,11 +149,6 @@ const router = createRouter({
       name: 'average',
       component: () => import('../views/Web/Average/AverageView.vue')
     },
-    {
-      path: '/register',
-      name: 'register',
-      component: () => import('../views/Admin/Auth/RegisterUserView.vue')
-    }
   ]
 })
 

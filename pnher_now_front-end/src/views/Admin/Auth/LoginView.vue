@@ -93,7 +93,12 @@ const onSubmit = handleSubmit(async (values) => {
   try {
     const { data } = await axiosInstance.post('/login', values)
     localStorage.setItem('access_token', data.access_token)
-    router.push('/home') // Redirect to "/home" after successful login
+    // router.push('/home')
+    if(data.role == 'user'){
+      router.push('/user_dashboard') // Redirect to "/home" after successful login
+    }else if (data.role === 'deliverer') {
+      router.push('/deliverer_dashboard')
+    }
   } catch (error) {
     console.error('Error', error)
   }

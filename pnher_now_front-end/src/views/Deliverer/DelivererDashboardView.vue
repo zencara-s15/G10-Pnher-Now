@@ -1,73 +1,84 @@
+<!-- Dashboard.vue -->
 <template>
   <DelivererLayout>
-    <div class="delivers mt-5">
-      <nav
-        class="form-delivers delivers-expand-lg flex-row"
-        v-for="(item, index) in baggage"
-        :key="item.id"
-      >
-        <div class="card" v-if="item.delivery_status_id === 1">
-          <div class="card-body" v-if="!hideCardBody">
-            <div class="card-header">
-              <div class="img">
-                <img :src="`http://127.0.0.1:8000/images/${item.post_id?.profile}`" />
-              </div>
-              <div class="card-title">
-                <p class="name">
-                  Name: {{ users[index]?.first_name + ' ' + users[index]?.last_name }}
-                </p>
-              </div>
-            </div>
-            <div class="card-actions">
-              <button type="button" class="btn btn-info" @click="showPostDetails(item)">
-                Detail
-              </button>
-              <!-- <button type="button" class="btn btn-warning" @click="toggleCardBody">Cancel</button> -->
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div class="row m-4">
+      <div class="col-md-4 mb-4" v-for="(item, index) in pendingBaggages" :key="item.id">
+        <DeliveryManCard :item="item" :user="users[index]" @show-details="showPostDetails" />
+      </div>
+
       <div v-if="isAlertVisible" class="alert-card">
         <div class="alert-card-body card-deliverer mb-5">
           <div class="information">
-            <div class="text-white d-flex justify-content-center p-2 bg-red radius1">
-              <h2>Information</h2>
+            <div class="text-white d-flex justify-content-center p-0 m-0 rounded-t-lg bg-red-500 radius1">
+              <h2 class="p-10px">Information</h2>
             </div>
-            <div class="p-3">
-              <p>Phone Receiver: {{ selectedBaggage.phone_receiver }}</p>
-              <p>Sending Address: {{ selectedBaggage.sending_address }}</p>
-              <p>Receiving Address: {{ selectedBaggage.receiving_address }}</p>
-              <p>Baggage Type: {{ selectedBaggage.type }}</p>
-              <p>Weight: {{ selectedBaggage.weight }} Kg</p>
-              <p>Total Cost: {{ calculateTotalCost(selectedBaggage.weight) }} Real</p>
-              <p>Company: {{ selectedBaggage.company }}</p>
-            </div>
-            
-            <div class=" p-3 d-flex justify-between">
-              <div>
+            <div class="card-body flex flex-col text-dark p-20px">
+              <div class="d-flex gap-1 mb-2 align-items-center">
+                <i class="bi bi-building text-danger me-2"></i>
+                <p class="card-text m-0">
+                  Company: <strong>{{ selectedBaggage.company }}</strong>
+                </p>
+              </div>
+              <div class="d-flex gap-1 mb-2 align-items-center">
+                <i class="bi bi-phone text-danger me-2"></i>
+                <p class="card-text m-0">
+                  Receiver Phone: <strong>{{ selectedBaggage.receiver_phone }}</strong>
+                </p>
+              </div>
+              <div class="d-flex gap-1 mb-2 align-items-center">
+                <i class="bi bi-geo-alt text-danger me-2"></i>
+                <p class="card-text m-0">
+                  Sending Address: <strong>{{ selectedBaggage.sending_address }}</strong>
+                </p>
+              </div>
+              <div class="d-flex gap-1 mb-2 align-items-center">
+                <i class="bi bi-geo text-danger me-2"></i>
+                <p class="card-text m-0">
+                  Receiving Address: <strong>{{ selectedBaggage.receiving_address }}</strong>
+                </p>
+              </div>
+              <div class="d-flex gap-1 mb-2 align-items-center">
+                <i class="bi bi-box-seam text-danger me-2"></i>
+                <p class="card-text m-0">
+                  Type: <strong>{{ selectedBaggage.type }}</strong>
+                </p>
+              </div>
+              <div class="d-flex gap-1 mb-2 align-items-center">
+                <i class="bi bi-cart text-danger me-2"></i>
+                <p class="card-text m-0">
+                  Weight: <strong>{{ selectedBaggage.weight }} Kg</strong>
+                </p>
+              </div>
+              <div class="d-flex gap-1 mb-2 align-items-center">
+                <i class="bi bi-currency-exchange text-success me-2"></i>
+                <p class="card-text m-0">
+                  Total Price: <strong>{{ calculateTotalCost(selectedBaggage.weight) }} Real</strong>
+                </p>
+              </div>
+              <div class="d-flex gap-20px justify-between mt-10px">
                 <button type="button" class="btn btn-outline-danger" @click="closeAlert">
                   Back
                 </button>
-              </div>
-              <div>
                 <button
                   type="button"
                   class="btn btn-success"
-                  @click="acceptDelivery(selectedBaggage, index)"
+                  @click="acceptDelivery(selectedBaggage, selectedBaggageIndex)"
                 >
                   Accept
                 </button>
               </div>
             </div>
-          </div>
-          <div class="Map">
-            <div class="text-white d-flex justify-content-center p-2 radius2">
-              <h2>Map</h2>
-            </div>
-            <div class="google-map">
-              <!-- Map component goes here -->
-              <GoogleMap />
-            </div>
+            <!-- <div class="p-3 text-dark">
+              <p>Phone Receiver: {{ selectedBaggage.receiver_phone }}</p>
+              <p>Sending Address: {{ selectedBaggage.sending_address }}</p>
+              <p>Receiving Address: {{ selectedBaggage.receiving_address }}</p>
+              <p>Baggage Type: {{ selectedBaggage.type }}</p>
+              <p>Weight: {{ selectedBaggage.weight }}Kg</p>
+              <p>Total Cost: {{ calculateTotalCost(selectedBaggage.weight) }} Real</p>
+              <p>Company: {{ selectedBaggage.company }}</p>
+            </div> -->
+
+           
           </div>
         </div>
       </div>
@@ -76,71 +87,76 @@
 </template>
 
 <script>
-import DelivererLayout from '@/Components/Layouts/DelivererLayout.vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { usePostBaggageStore } from '@/stores/post_baggage-list'
-import GoogleMap from '@/Components/Layouts/GoogleMap.vue'
+import DelivererLayout from '@/Components/Layouts/DelivererLayout.vue'
+import DeliveryManCard from '@/Components/Card/DeliveryManCard.vue'
 
 export default {
   components: {
     DelivererLayout,
-    GoogleMap
+    DeliveryManCard
   },
-  name: 'Deliverer',
   setup() {
     const baggageStore = usePostBaggageStore()
     const baggage = ref([])
     const users = ref([])
+    const currentLocation = ref({ latitude: null, longitude: null })
 
     onMounted(async () => {
       await baggageStore.fetchPostBaggage()
       users.value = baggageStore.user_baggage
       baggage.value = baggageStore.post_baggage
-      console.log(baggage)
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            currentLocation.value.latitude = position.coords.latitude
+            currentLocation.value.longitude = position.coords.longitude
+          },
+          (error) => {
+            console.error('Error getting location:', error)
+          }
+        )
+      } else {
+        console.error('Geolocation is not supported by this browser.')
+      }
     })
 
     const calculateTotalCost = (weight) => {
-      // Replace with your actual logic to calculate total cost based on weight
-      return weight * 6000 // Assuming a rate of 6000 Real per Kg
+      return weight * 6000
     }
+
+    const pendingBaggages = computed(() => {
+      return baggage.value.filter((item) => item.delivery_status_id === 1)
+    })
 
     return {
       baggage,
       users,
-      calculateTotalCost
+      currentLocation,
+      calculateTotalCost,
+      pendingBaggages
     }
   },
   data() {
     return {
-      senderDetail: {
-        name: '',
-        items: '',
-        location: '',
-        phone_number: '',
-        map: ''
-      },
-      selectedBaggage: ref(null),
+      selectedBaggage: null,
+      selectedBaggageIndex: null,
       isAlertVisible: false,
       hideCardBody: false,
-      delivery_status_id: ref(null)
-    }
-  },
-  computed: {
-    senderId() {
-      const urlParams = new URLSearchParams(window.location.search)
-      return urlParams.get('sender') || Math.floor(Math.random() * 10) + 1
+      delivery_status_id: null
     }
   },
   methods: {
-    async fetchSenderDetails() {},
-    async showPostDetails(baggage) {
+    async showPostDetails(baggage, index) {
       this.selectedBaggage = baggage
-      console.log(baggage)
+      this.selectedBaggageIndex = index
       this.isAlertVisible = true
       this.hideCardBody = false
 
       this.baggageStore = usePostBaggageStore()
-      this.delivery_status_id = '1'
+      this.delivery_status_id = 1
     },
     async acceptDelivery(baggage, index) {
       this.selectedBaggage = baggage
@@ -153,7 +169,7 @@ export default {
       this.delivery_status_id = '2'
       try {
         await this.baggageStore.updateBaggageStatus(this.delivery_status_id, baggage.id)
-        window.location.href = '/deliverer'
+        window.location.href = '/delivering'
         console.log(this.baggageStore.responseMessage)
       } catch (error) {
         console.warn(error)
@@ -172,131 +188,33 @@ export default {
         console.warn(error)
       }
     },
-    toggleCardBody() {
-      this.hideCardBody = !this.hideCardBody
-    },
     closeAlert() {
       this.isAlertVisible = false
+      this.selectedBaggage = null
     }
-  },
-  created() {
-    this.fetchSenderDetails()
   }
 }
 </script>
 
 <style scoped>
-.delivers {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.card {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 250px; /* Set width and height to make the card square */
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  height: 100%;
-  justify-content: space-between;
-}
-
-.card-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.card-header img {
-  width: 80px;
-  height: 80px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.card-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.card-content {
-  margin-bottom: 10px;
-}
-
-.card-actions {
+.alert-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  gap: 30px;
-}
-
-.alert-card {
-  display: flex;
-  align-content: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  width: 100%;
-  background: #000000;
-  height: 100%;
+  align-items: center;
+  z-index: 1000;
 }
 
 .alert-card-body {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  box-shadow: 0 4px 8px rgb(6, 1, 1);
+  width: 30%;
   background-color: white;
-  border: 1px solid #ccc;
-  text-align: left;
-  width: 100%;
-}
-
-.alert-card h5 {
-  margin-bottom: 10px;
-}
-
-.card-deliverer {
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-  height: 70vh;
-  border-radius: 10px 10px 10px;
-}
-.information,
-.Map {
-  width: 100%;
-  height: 100%;
-}
-.radius1 {
-  background: #d23202;
-  border-radius: 10px 0px 0px 0px;
-}
-.radius2 {
-  background: #d23202;
-  border-radius: 0px 10px 0px 0px;
-}
-.image {
-  width: 450px;
-  height: 300px;
-  margin-bottom: -90px;
+  /* padding: 20px; */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 </style>

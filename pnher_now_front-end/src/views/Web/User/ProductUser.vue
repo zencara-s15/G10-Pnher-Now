@@ -1,16 +1,11 @@
 <template>
   <UserLayout>
-    <div class="container p-4 bg-gray-600">
+    <div class="container p-4 bg-gray-200">
       <div class="row justify-content-between align-items-center mb-4">
         <div class="col-auto">
-          <!-- <h3 class="fw-bolder text-dark">List of User Products</h3> -->
         </div>
         <div class="col-auto">
           <div class="input-group search-group mr-50">
-            <!-- <span class="input-group-text bg-danger text-white">
-              <i class="bi bi-search"></i>
-            </span>
-            <input type="text" class="form-control" placeholder="Search..." v-model="searchQuery" /> -->
           </div>
         </div>
         <div class="col-auto">
@@ -127,10 +122,10 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from 'vue'
-import { usePostBaggageStore } from '@/stores/post_baggage-list'
-import UserLayout from '@/Components/Layouts/UserLayout.vue'
-import BaggagePostCard from '@/Components/Card/BaggagePostCard.vue'
+import { ref, onMounted, computed } from 'vue';
+import { usePostBaggageStore } from '@/stores/post_baggage-list';
+import UserLayout from '@/Components/Layouts/UserLayout.vue';
+import BaggagePostCard from '@/Components/Card/BaggagePostCard.vue';
 
 export default {
   components: {
@@ -138,11 +133,11 @@ export default {
     BaggagePostCard
   },
   setup() {
-    const store = usePostBaggageStore()
-    const showModal = ref(false)
-    const baggage = ref([])
-    const user_baggage = ref([])
-    const searchQuery = ref('')
+    const store = usePostBaggageStore();
+    const showModal = ref(false);
+    const baggage = ref([]);
+    const user_baggage = ref([]);
+    const searchQuery = ref('');
     const formData = ref({
       receiver_phone: '',
       sending_address: '',
@@ -152,169 +147,84 @@ export default {
       company: '',
       post_id: '',
       delivery_status_id: '',
-      lat: '',
-      lng: ''
-    })
+      latitude: '',
+      longitude: ''
+    });
 
     const addItem = async () => {
-      // Get current location
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async (position) => {
-          const lat = position.coords.latitude
-          const lng = position.coords.longitude
-          formData.value.lat = lat
-          formData.value.lng = lng
+      try {
+        const { longitude, latitude } = await store.getCurrentLocation();
+        formData.value.latitude = latitude;
+        formData.value.longitude = longitude;
 
-          showModal.value = false
-          const newItem = {
-            receiver_phone: formData.value.receiver_phone,
-            sending_address: formData.value.sending_address,
-            receiving_address: formData.value.receiving_address,
-            type: formData.value.type,
-            weight: formData.value.weight,
-            company: formData.value.company,
-            post_id: formData.value.post_id !== '' ? parseInt(formData.value.post_id) : null,
-            delivery_status_id:
-              formData.value.delivery_status_id !== ''
-                ? parseInt(formData.value.delivery_status_id)
-                : null,
-            lat: formData.value.lat,
-            lng: formData.value.lng
-          }
+        const newItem = {
+          receiver_phone: formData.value.receiver_phone,
+          sending_address: formData.value.sending_address,
+          receiving_address: formData.value.receiving_address,
+          type: formData.value.type,
+          weight: formData.value.weight,
+          company: formData.value.company,
+          post_id: formData.value.post_id ? parseInt(formData.value.post_id) : null,
+          delivery_status_id: formData.value.delivery_status_id ? parseInt(formData.value.delivery_status_id) : null,
+          longitude: formData.value.longitude,
+          latitude: formData.value.latitude
+        };
 
-          try {
-            await store.addPostBaggage(newItem) // Call the addPostBaggage action
-            await store.fetchPostBaggage() // Fetch updated baggage list
-            // Clear form data
-            formData.value = {
-              receiver_phone: '',
-              sending_address: '',
-              receiving_address: '',
-              type: '',
-              weight: '',
-              company: '',
-              post_id: '',
-              delivery_status_id: '',
-              lat: '',
-              lng: ''
-            }
-          } catch (error) {
-            console.error('Error adding new baggage item:', error)
-            // Handle error as needed
-          }
-          location.reload()
-        })
-      } else {
-        alert('Geolocation is not supported by this browser.')
+        await store.addPostBaggage(newItem);
+        await store.fetchPostBaggage();
+
+        // Reset form and close modal
+        formData.value = {
+          receiver_phone: '',
+          sending_address: '',
+          receiving_address: '',
+          type: '',
+          weight: '',
+          company: '',
+          post_id: '',
+          delivery_status_id: '',
+          latitude: '',
+          longitude: ''
+        };
+        showModal.value = false;
+      } catch (error) {
+        console.error('Error adding new baggage:', error);
       }
-    }
+    };
 
     const deleteItem = async (itemId) => {
       try {
-        await store.deletePostBaggage(itemId)
-        await store.fetchPostBaggage()
-        baggage.value = store.post_baggage
+        await store.deletePostBaggage(itemId);
+        await store.fetchPostBaggage();
       } catch (error) {
-        console.error('Error deleting baggage item:', error)
-        // Handle error as needed
+        console.error('Error deleting baggage:', error);
       }
-      location.reload()
-    }
+    };
 
     const filteredBaggage = computed(() => {
-      return baggage.value.filter((item) =>
+      return store.post_baggage.filter((item) =>
         item.receiver_phone.toLowerCase().includes(searchQuery.value.toLowerCase())
-      )
-    })
+      );
+    });
 
-    onMounted(async () => {
-      await store.fetchPostBaggage() // Fetch initial baggage list on component mount
-      baggage.value = store.post_baggage
-      user_baggage.value = store.user_baggage // Fetch user's baggage list
-      console.log(user_baggage)
-    })
+    onMounted(() => {
+      store.fetchPostBaggage();
+    });
 
     return {
       showModal,
       formData,
       addItem,
-      baggage,
-      user_baggage,
       deleteItem,
       searchQuery,
-      filteredBaggage,
-      store // Expose store to access state in template
-    }
+      filteredBaggage
+    };
   }
-}
+};
 </script>
 
 <style scoped>
-.container {
-  background-color: #f8f9fa;
-}
-
-.card {
-  border: none;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.card:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transform: scale(1.05);
-}
-
-.card-body {
-  padding: 20px;
-  background-color: white;
-}
-
-.card-body .card-title {
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-.card-body .card-text {
-  font-size: 0.875rem;
-  color: #6c757d;
-}
-
-.search-group {
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.search-group .input-group-text {
-  border: none;
-}
-
-.search-group .form-control {
-  border: none;
-  box-shadow: none;
-}
-
-.btn {
-  border-radius: 5px;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
-}
-
-.btn-primary {
-  background-color: #007bff;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
+/* Add your styles here */
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -324,55 +234,21 @@ export default {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .modal-wrapper {
-  width: 400px;
-  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-container {
+  background: white;
   border-radius: 8px;
-  overflow: hidden;
-}
-
-.modal-header {
-  background-color: #dc3545;
-  padding: 10px 15px;
-}
-
-.modal-header .modal-title {
-  margin: 0;
-  color: #fff;
-}
-
-.modal-header .close {
-  border: none;
-  background: none;
-  color: #fff;
-  font-size: 1.2rem;
-}
-
-.modal-body {
+  width: 600px;
+  /* max-width: 100%; */
   padding: 20px;
-}
-
-.modal-body .form-group {
-  margin-bottom: 15px;
-}
-
-.modal-body .form-control {
-  border-radius: 4px;
-}
-
-.modal-body .btn {
-  width: 48%;
-}
-
-.transition-enter-active, .transition-leave-active {
-  transition: opacity 0.5s;
-}
-
-.transition-enter, .transition-leave-to {
-  opacity: 0;
 }
 </style>
