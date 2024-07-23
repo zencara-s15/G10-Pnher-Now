@@ -173,33 +173,4 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         
-         Route::resource('company', 'CompanyController');
-         Route::get('/company',[CompanyController::class, 'index'])->name('company.index');
-         Route::put('/company/create', [CompanyController::class, 'store'])->name('comany.create');
-         // Route::get('/company/edit/{id}', [CompanyController::class, 'update'])->name('comany.edit');
-         Route::get('/company/delete/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
-         Route::get('/company/edit/{id}', [CompanyController::class, 'update'])->name('comany.update');
- 
-         //======================== Branch route ===============================
-         Route::resource('branch','BranchController');
-         Route::get('/branch',[BranchController::class,'index'])->name('branch.index');
-         Route::get('/branch/{id}/edit',[BranchController::class,'edit'])->name('branch.edit');
-         Route::get('/branch/{id}',[BranchController::class,'update'])->name('branch.update');
-         Route::get('/branch/{id}',[BranchController::class,'destroy'])->name('branch.destroy');
- 
-         //======================== Driver ======================================
-         Route::resource('deliverer','DelivererController');
-         Route::get('/deliverer',[DelivererController::class,'index'])->name('deliverer.index');
-         Route::get('/deliverer/{id}/edit',[DelivererController::class,'edit'])->name('deliverer.edit');
-         Route::get('/deliverer/{id}',[DelivererController::class,'update'])->name('deliverer.update');
-         Route::get('/deliverer/{id}',[DelivererController::class,'destroy'])->name('deliverer.destroy');
-
-         //======================== Baggages In Stockes ======================================
-         Route::resource('instock','BaggageInStockeController');
-        //  Route::get('/instock',[BaggageInStockeController::class,'index'])->name('supervisor.list_instock');
-         Route::get('/instock', [BaggageInStockeController::class, 'index'])->name('supervisor.list_instock');
-         Route::get('/itemDetail', [BaggageInStockeController::class, 'itemDetail'])->name('supervisor.item_detail');
-         Route::get('/listDelivery', [DeliveryListController::class, 'listDelivery'])->name('supervisor.list_delivery');
- 
-    }
-);
+    });
