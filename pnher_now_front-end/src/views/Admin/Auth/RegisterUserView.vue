@@ -67,7 +67,7 @@
             <div class="">
               <span class="mt-2 color-black"
                 >Already have an account?
-                <a class="text-primary font-italic" href="/login">Login</a></span
+                <a class="text-primary italic underline" href="/login">Login</a></span
               >
             </div>
             <div class="flex justify-end item-center">
@@ -464,8 +464,8 @@ export default {
 
         const response = await axiosInstance.post('/register/user', formData)
         Swal.fire({
-          title: 'Form submitted successfully!',
-          text: 'Click OK to go to login page.',
+          title: 'Successfully created an account!',
+          text: 'You can log in now.',
           icon: 'success',
           showConfirmButton: false, // Hide the confirm button
           timer: 3000 // Display the alert for 3 seconds
@@ -473,7 +473,7 @@ export default {
           this.$router.push('/login')
         })
         console.log(response.data)
-      } catch (error) {
+      } catch (error) { 
         console.error('Error submitting form:', error)
         Swal.fire({
           title: 'Error!',
