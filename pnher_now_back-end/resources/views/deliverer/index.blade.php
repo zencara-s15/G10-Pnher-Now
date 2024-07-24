@@ -66,8 +66,11 @@
                                                                 method="POST" class="inline">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <button
-                                                                    class="bg-red-500 text-white font-bold px-4 py-1 rounded focus:outline-none shadow transition-colors">Delete</button>
+                                                                <button class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark text-red-400">
+                                                                    <span class="material-icons-outlined">
+                                                                        delete
+                                                                    </span>
+                                                                </button>
                                                             </form>
                                                         @endcan
                                                     </td>

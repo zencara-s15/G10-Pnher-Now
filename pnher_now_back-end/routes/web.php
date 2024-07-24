@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\{
     DelivererController,
     DeliveryListController,
     DriverController,
+    HistoryController,
     ItemDetailController,
     ProfileController,
     MailSettingController,
@@ -130,9 +131,9 @@ require __DIR__ . '/auth.php';
 // })->middleware(['auth'])->name('supervisor.item_detail');
 
 
-Route::get('/supervisor/history', function () {
-    return view('supervisor.history');
-})->middleware(['auth'])->name('supervisor.history');;
+// Route::get('/supervisor/history', function () {
+//     return view('supervisor.history');
+// })->middleware(['auth'])->name('supervisor.history');;
 
 
 Route::namespace('App\Http\Controllers\Admin')->name('admin.')
@@ -183,4 +184,6 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')
         Route::get('/instock', [BaggageInStockeController::class, 'index'])->name('supervisor.list_instock');
         Route::get('/itemDetail', [BaggageInStockeController::class, 'itemDetail'])->name('supervisor.item_detail');
         Route::get('/listDelivery', [DeliveryListController::class, 'listDelivery'])->name('supervisor.list_delivery');
+
+        Route::get('/history',[HistoryController::class, 'history'])->name('supervisor.history');
     });

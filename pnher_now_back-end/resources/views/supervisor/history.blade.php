@@ -12,74 +12,47 @@
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            User</th>
+                                            class="px-7 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            Post ID</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-7 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Type</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-7 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             From</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-7 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             To</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-7 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Sender</th>
                                         <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-7 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Reciever</th>
-                                        <th
-                                            class="px-7 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Action</th>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach ($histories as $history)
                                     <tr>
                                         <td class="px-7 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            Narith
+                                            {{$history->post_id}}
                                         </td>
                                         <td class="px-7 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Fruit
+                                            {{$history->type}}
                                         </td>
                                         <td class="px-7 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Kompong Cham
+                                            {{$history->sending_address}}
                                         </td>
                                         <td class="px-7 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Phnom Penh
+                                            {{$history->receiving_address}}
                                         </td>
                                         <td class="px-7 py-4 whitespace-nowrap text-sm">
-                                            086343092
+                                            {{$history->receiver_phone}}
                                         </td>
                                         <td class="px-7 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            079573972
-                                        </td>
-                                        <td class="px-7 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <span class="text-red-400">Delete</span>
+                                            {{$history->receiver_phone}}
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="px-7 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            Narith
-                                        </td>
-                                        <td class="px-7 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Fruit
-                                        </td>
-                                        <td class="px-7 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Kompong Cham
-                                        </td>
-                                        <td class="px-7 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            Phnom Penh
-                                        </td>
-                                        <td class="px-7 py-4 whitespace-nowrap text-sm">
-                                            086343092
-                                        </td>
-                                        <td class="px-7 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            079573972
-                                        </td>
-                                        <td class="px-7 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <span class="text-red-400">Delete</span>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

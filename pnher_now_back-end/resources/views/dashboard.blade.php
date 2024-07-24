@@ -4,90 +4,98 @@
             <div class="container mx-auto px-6 py-8">
 
                 @php
-                $roles = auth()->user()->roles->pluck('name')->toArray();
+                    $roles = auth()->user()->roles->pluck('name')->toArray();
                 @endphp
 
                 @if (in_array('admin', $roles))
-                <div class="container">
+                    <div class="container">
 
-                    <!-- Dashboard -->
-                    <div class="row flex flex-row m-5 justify-between">
-                        <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray:100 dark:hover:bg-green-800 transform hover:scale-105">
-                            <div class="card-body flex flex-row items-center">
-                                <div class="col-icon flex flex-row items-center bg-blue-600 h-37 px-4 py-3 rounded-lg">
-                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <span class="material-icons-outlined" style="font-size:48px;color:white;">
-                                            group
-                                        </span>
+                        <!-- Dashboard -->
+                        <div class="row flex flex-row m-5 justify-between">
+                            <div
+                                class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray:100 dark:hover:bg-green-800 transform hover:scale-105">
+                                <div class="card-body flex flex-row items-center">
+                                    <div
+                                        class="col-icon flex flex-row items-center bg-blue-600 h-37 px-4 py-3 rounded-lg">
+                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                            <span class="material-icons-outlined" style="font-size:48px;color:white;">
+                                                group
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0 mx-2">
+                                        <div class="numbers">
+                                            <p class="card-category">All Users</p>
+                                            <h4 class="card-title">{{ $totalUsers }}+</h4>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col col-stats ms-3 ms-sm-0 mx-2">
-                                    <div class="numbers">
-                                        <p class="card-category">All Users</p>
-                                        <h4 class="card-title">{{$totalUsers}}+</h4>
+                            </div>
+
+
+                            <div
+                                class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
+                                <div class="card-body flex flex-row items-center">
+                                    <div
+                                        class="col-icon flex flex-row items-center bg-blue-400 h-37 px-4 py-3 rounded-lg">
+                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                            <span class="material-icons-outlined" style="font-size:48px;color:white;">
+                                                store
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0 mx-2">
+                                        <div class="numbers">
+                                            <p class="card-category">Companies</p>
+                                            <h4 class="card-title">{{ $totalCompanies }}+</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
+                                <div class="card-body flex flex-row items-center">
+                                    <div
+                                        class="col-icon flex flex-row items-center bg-red-500 h-37 px-4 py-3 rounded-lg">
+                                        <div class="icon-big text-center bubble-shadow-small">
+                                            <span class="material-icons-outlined" style="font-size:48px;color:white;">
+                                                production_quantity_limits
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0 mx-2 ">
+                                        <div class="numbers">
+                                            <p class="card-category">All Posts</p>
+                                            <h4 class="card-title">{{ $totalBaggages }}+ </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
+                                <div class="card-body flex flex-row items-center">
+                                    <div
+                                        class="col-icon flex flex-row items-center bg-yellow-400 h-37 px-4 py-3 rounded-lg">
+                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                            <span class="material-icons-outlined" style="font-size:48px;color:white;">
+                                                check_circle
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0  mx-2">
+                                        <div class="numbers">
+                                            <p class="card-category">Feedback</p>
+                                            <h4 class="card-title">{{ $allFeedbacks }}+</h4>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
-                            <div class="card-body flex flex-row items-center">
-                                <div class="col-icon flex flex-row items-center bg-blue-400 h-37 px-4 py-3 rounded-lg">
-                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <span class="material-icons-outlined" style="font-size:48px;color:white;">
-                                            store
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col col-stats ms-3 ms-sm-0 mx-2">
-                                    <div class="numbers">
-                                        <p class="card-category">Companies</p>
-                                        <h4 class="card-title">{{$totalCompanies}}+</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
-                            <div class="card-body flex flex-row items-center">
-                                <div class="col-icon flex flex-row items-center bg-red-500 h-37 px-4 py-3 rounded-lg">
-                                    <div class="icon-big text-center bubble-shadow-small">
-                                        <span class="material-icons-outlined" style="font-size:48px;color:white;">
-                                            production_quantity_limits
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col col-stats ms-3 ms-sm-0 mx-2 ">
-                                    <div class="numbers">
-                                        <p class="card-category">All Posts</p>
-                                        <h4 class="card-title">{{$totalBaggages}}+ </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
-                            <div class="card-body flex flex-row items-center">
-                                <div class="col-icon flex flex-row items-center bg-yellow-400 h-37 px-4 py-3 rounded-lg">
-                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <span class="material-icons-outlined" style="font-size:48px;color:white;">
-                                            check_circle
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col col-stats ms-3 ms-sm-0  mx-2">
-                                    <div class="numbers">
-                                        <p class="card-category">Feedback</p>
-                                        <h4 class="card-title">{{$allFeedbacks}}+</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- end Dashboard -->
                     </div>
-                    <!-- end Dashboard -->
-                </div>
-                <!-- end Container -->
+                    <!-- end Container -->
             </div>
             <!-- Chart -->
             <div class="cartInfo flex flex-row justify-between">
@@ -206,7 +214,7 @@
                     }
                 })
             </script>
-            @elseif(in_array('supervisor', $roles))
+        @elseif(in_array('supervisor', $roles))
             <div class="flex">
                 <div class="flex-col w-full">
                     <!-- Container -->
@@ -233,7 +241,7 @@
                                         <div class="col col-stats ms-3 ms-sm-0 mx-2">
                                             <div class="numbers">
                                                 <p class="card-category">List Delivery</p>
-                                                <h4 class="card-title">1,294</h4>
+                                                <h4 class="card-title">{{$delivery}}</h4>
                                             </div>
                                         </div>
                                     </a>
@@ -258,7 +266,7 @@
                                         <div class="col col-stats ms-3 ms-sm-0 mx-2">
                                             <div class="numbers">
                                                 <p class="card-category">In Stock</p>
-                                                <h4 class="card-title">1,294</h4>
+                                                <h4 class="card-title">{{$instock}}</h4>
                                             </div>
                                         </div>
                                     </a>
@@ -284,7 +292,7 @@
                                         <div class="col col-stats ms-3 ms-sm-0 mx-2">
                                             <div class="numbers">
                                                 <p class="card-category">Item detail</p>
-                                                <h4 class="card-title">1,294</h4>
+                                                <h4 class="card-title">{{$itemdetail}}</h4>
                                             </div>
                                         </div>
                                     </a>
@@ -304,7 +312,7 @@
                                     <div class="col col-stats ms-3 ms-sm-0  mx-2">
                                         <div class="numbers">
                                             <p class="card-category">Delivery</p>
-                                            <h4 class="card-title">1,294</h4>
+                                            <h4 class="card-title">{{$deliverer}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -336,76 +344,47 @@
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th
-                                        class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        User</th>
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        Post ID</th>
                                     <th
-                                        class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         Type</th>
                                     <th
-                                        class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         From</th>
                                     <th
-                                        class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         Phone Sender</th>
                                     <th
-                                        class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         Phone Reciever</th>
                                     <th
-                                        class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         Branch</th>
-                                    <th
-                                        class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Active</th>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <tr>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        Narith
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Fruit
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Kompong Cham
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm">
-                                        086343092
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        079573972
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        BFC
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <span class="text-blue-400">Edit</span>
-                                        <span class="text-red-400">Red</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        Narith
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Fruit
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Kompong Cham
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm">
-                                        086343092
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        079573972
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        BFC
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <span class="text-blue-400">Edit</span>
-                                        <span class="text-red-400">Red</span>
-                                    </td>
-                                </tr>
+                                @foreach ($news as $new)
+                                    <tr>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            {{ $new->post_id }}
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $new->type }}
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $new->sending_address }}
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm">
+                                            {{ $new->receiver_phone }}
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            {{ $new->receiver_phone }}
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            VRT
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -439,3 +418,9 @@
         </main>
     </div>
 </x-app-layout>
+
+<style>
+    table {
+        width: 95%;
+    }
+</style>
