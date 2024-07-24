@@ -19,6 +19,9 @@ use App\Http\Controllers\Admin\{
 use App\Http\Controllers\API\Chart\ChartController as ChartChartController;
 // use App\Http\Controllers\API\Supervisor\CompanyController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\Supervisor\History;
+use App\Http\Controllers\Supervisor\list_delivery;
+use App\Http\Controllers\Supervisor\list_instock;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // use App\Http\Controllers\ChartController;
@@ -72,64 +75,64 @@ require __DIR__ . '/auth.php';
 
 // Supervisor
 // Delivery list
-Route::get('/supervisor/delivery-list', function () {
-    return view('supervisor.list_delivery');
-})->middleware(['auth'])->name('supervisor.delivery_list');
+// Route::get('/supervisor/delivery-list', function () {
+//     return view('supervisor.list_delivery');
+// })->middleware(['auth'])->name('supervisor.delivery_list');
 
 // list instock
 require __DIR__ . '/auth.php';
 
 
-// Supervisor
-// Delivery list
-Route::get('/supervisor/delivery-list', function () {
-    return view('supervisor.list_delivery');
-})->middleware(['auth'])->name('supervisor.delivery_list');
+// // Supervisor
+// // Delivery list
+// Route::get('/supervisor/delivery-list', function () {
+//     return view('supervisor.list_delivery');
+// })->middleware(['auth'])->name('supervisor.delivery_list');
 
-// list instock
+// // list instock
 
-Route::get('/supervisor/list-instock', function () {
-    return view('supervisor.list_instock');
-})->middleware(['auth'])->name('supervisor.list_instock');
+// Route::get('/supervisor/list-instock', function () {
+//     return view('supervisor.list_instock');
+// })->middleware(['auth'])->name('supervisor.list_instock');
 
-// Item details
-Route::get('/supervisor/item-detail', function () {
-    return view('supervisor.item_detail');
-})->middleware(['auth'])->name('supervisor.item_detail');
-
-
-Route::get('/supervisor/history', function () {
-    return view('supervisor.history');
-})->middleware(['auth'])->name('supervisor.history');;
+// // Item details
+// Route::get('/supervisor/item-detail', function () {
+//     return view('supervisor.item_detail');
+// })->middleware(['auth'])->name('supervisor.item_detail');
 
 
-Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
-    ->group(function () {
-        Route::resource('roles', 'RoleController');
-        Route::resource('permissions', 'PermissionController');
-        Route::resource('users', 'UserController');
-        Route::resource('posts', 'PostController');
-        Route::resource('supervisor', 'SupervisorController');
-
-        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-        Route::put('/profile-update', [ProfileController::class, 'update'])->name('profile.update');
-        Route::get('/mail', [MailSettingController::class, 'index'])->name('mail.index');
-        Route::put('/mail-update/{mailsetting}', [MailSettingController::class, 'update'])->name('mail.update');
-
-    });
-Route::get('/supervisor/list-instock', function () {
-    return view('supervisor.list_instock');
-})->middleware(['auth'])->name('supervisor.list_instock');
-
-// Item details
-Route::get('/supervisor/item-detail', function () {
-    return view('supervisor.item_detail');
-})->middleware(['auth'])->name('supervisor.item_detail');
+// Route::get('/supervisor/history', function () {
+//     return view('supervisor.history');
+// })->middleware(['auth'])->name('supervisor.history');;
 
 
-Route::get('/supervisor/history', function () {
-    return view('supervisor.history');
-})->middleware(['auth'])->name('supervisor.history');;
+// Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
+//     ->group(function () {
+//         Route::resource('roles', 'RoleController');
+//         Route::resource('permissions', 'PermissionController');
+//         Route::resource('users', 'UserController');
+//         Route::resource('posts', 'PostController');
+//         Route::resource('supervisor', 'SupervisorController');
+
+//         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+//         Route::put('/profile-update', [ProfileController::class, 'update'])->name('profile.update');
+//         Route::get('/mail', [MailSettingController::class, 'index'])->name('mail.index');
+//         Route::put('/mail-update/{mailsetting}', [MailSettingController::class, 'update'])->name('mail.update');
+
+//     });
+// Route::get('/supervisor/list-instock', function () {
+//     return view('supervisor.list_instock');
+// })->middleware(['auth'])->name('supervisor.list_instock');
+
+// // Item details
+// Route::get('/supervisor/item-detail', function () {
+//     return view('supervisor.item_detail');
+// })->middleware(['auth'])->name('supervisor.item_detail');
+
+
+// Route::get('/supervisor/history', function () {
+//     return view('supervisor.history');
+// })->middleware(['auth'])->name('supervisor.history');;
 
 
 Route::namespace('App\Http\Controllers\Admin')->name('admin.')
@@ -139,6 +142,7 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')
         Route::resource('users', 'UserController');
         Route::resource('posts', 'PostController');
         Route::resource('supervisor', 'SupervisorController');
+        // Route::resources('supervisor', 'BaggageInStockeController');
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::put('/profile-update', [ProfileController::class, 'update'])->name('profile.update');
@@ -172,5 +176,21 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')
         Route::get('/deliverer/{id}', [DelivererController::class, 'destroy'])->name('deliverer.destroy');
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        // //Super visor dashboard page
+        // Route::resource('supervisor','History');
+        // Route::get('/supervisor/list-instock',[BaggageInStockeController::class, 'index'])->name('list-instock');
+        // Route::get('/supervisor/list-delivery',[DeliveryListController::class, 'listDelivery'])->name('list-delivery');
+        // Route::get('/supervisor/itemDetail',[ItemDetailController::class, 'index'])->name('list-instock');
         
+
     });
+
+
+// Supervisor routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/supervisor/delivery-list', [DelivererController::class, 'listDelivery'])->name('supervisor.delivery_list');
+    Route::get('/supervisor/list-instock', [BaggageInStockeController::class, 'index'])->name('supervisor.list_instock');
+    Route::get('/supervisor/item-detail', [ItemDetailController::class, 'index'])->name('supervisor.item_detail');
+    // Route::get('/supervisor/history', [DelivererController::class, 'history'])->name('supervisor.history');
+});
