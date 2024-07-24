@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Http\Resources\BranchResource;
-use App\Models\Supervisor\Branch;
+// use App\Models\Supervisor\Branch;
 // use App\Models\Branch;
 use App\Models\Post;
 use App\Models\Baggage;
 use App\Models\Branch as ModelsBranch;
+use App\Models\Branch;
 use App\Models\Company;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -92,4 +93,8 @@ class User extends Authenticatable
         return $this->hasMany(DelivererAndUser::class);
     }
     
+    public function branchs()
+    {
+        return $this->hasOne(Branch::class, 'user_id'); // Assuming 'user_id' is the foreign key in the Branch model
+    }
 }
