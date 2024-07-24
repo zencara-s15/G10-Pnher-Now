@@ -1,25 +1,48 @@
 <template>
   <DelivererLayout />
   <div class="container">
-    <div class="my-trips mt-3">
-      <h1>Delivering History</h1>
-      <div class="search-container">
-        <i class="bi bi-search search-icon"></i>
-        <input type="text" v-model="searchQuery" placeholder="Search here..." class="search-input" />
+    <div class="my-trips mt-3 mx-35px">
+      <div class="flex flex-row justify-between">
+        <div class="w-30% text-gray-900">
+          <span class="text-2xl font-bold w-18% text-dark border-b-2 border-red-500 pb-1">
+            History
+          </span>
+          <p class="mt-5px">See all history with clear information.</p>
+        </div>
+        <div class="w-40% search-container">
+          <i class="bi bi-search search-icon text-dark"></i>
+          <input
+            type="text"
+            v-model="searchQuery"
+            placeholder="Search here..."
+            class="search-input text-dark"
+          />
+        </div>
+
+        <div class="w-30% filter-container">
+          <button class="filter-button">
+            <i class="bi bi-funnel"></i>
+            All
+            <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
       </div>
-      <DelivererHistory
-        v-for="history in filteredBaggage"
-        :key="history.id"
-        :date="time"
-        :delivery_status_id="history.delivery_status_id"
-        :sender="history.sending_address"
-        :receiver="history.receiving_address"
-        :phone_receiver="history.phone_receiver"
-        :type="history.type"
-        :weight="history.weight"
-        :companies="history.company"
-        :total_price="calculateTotalCost(history.weight)"
-      />
+
+      <div class="mt-40px">
+        <DelivererHistory
+          v-for="history in filteredBaggage"
+          :key="history.id"
+          :date="time"
+          :delivery_status_id="history.delivery_status_id"
+          :sender="history.sending_address"
+          :receiver="history.receiving_address"
+          :phone_receiver="history.phone_receiver"
+          :type="history.type"
+          :weight="history.weight"
+          :companies="history.company"
+          :total_price="calculateTotalCost(history.weight)"
+        />
+      </div>
     </div>
   </div>
 </template>

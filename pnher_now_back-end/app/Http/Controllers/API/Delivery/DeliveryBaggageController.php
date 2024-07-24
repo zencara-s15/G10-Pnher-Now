@@ -149,24 +149,16 @@ class DeliveryBaggageController extends Controller
         }
 
         // Extract relevant data
-        $deliveryBaggageWithData = $deliveryBaggage->map(function ($item) {
-            return [
-                'id' => $item->id,
-                'baggage_id' => $item->baggage_id,
-                'baggage' => [
-                    'type' => $item->baggage->type,
-                    'weight' => $item->baggage->weight,
-                    'receiver_phone' => $item->baggage->receiver_phone,
-                    'sending_address' => $item->baggage->sending_address,
-                    'company' => $item->baggage->company,
-                    'receiving_address' => $item->baggage->receiving_address,
-                    'status' => $item->baggage->status,
-                ],
-                'status' => $item->status,
-            ];
-        });
+        // $deliveryBaggageWithData = $deliveryBaggage->map(function ($item) {
+        //     return [
+        //         'id' => $item->id,
+        //         // 'baggage_id' => $item->baggage_id,
+        //         'baggage' => $item,
+        //         'status' => $item->status,
+        //     ];
+        // });
 
         // Return JSON response
-        return Response::json(['data' => $deliveryBaggageWithData]);
+        return Response::json(['data' => $deliveryBaggage]);
     }
 }

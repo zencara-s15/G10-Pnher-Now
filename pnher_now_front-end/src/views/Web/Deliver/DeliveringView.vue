@@ -1,14 +1,14 @@
 <!-- src/components/Dashboard.vue -->
 <template>
   <DelivererLayout>
-    <h1 class="text-dark">Baggage which picked</h1>
-    <div v-if="loading">Loading...</div>
+    <h1 class="text-dark ">COMING SOON</h1>
+    <!-- <div v-if="loading">Loading...</div>
     <div v-if="error">{{ error }}</div>
     <div v-else>
       <div v-for="baggage in baggages" :key="baggage.id">
         <h1 class="text-dark">{{ baggage.id }}</h1>
       </div>
-    </div>
+    </div> -->
   </DelivererLayout>
 </template>
 

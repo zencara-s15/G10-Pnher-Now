@@ -2,13 +2,13 @@
   <div class="card flex-row shadow-sm">
     <div class="card-body flex flex-col">
       <div class="d-flex gap-1 mb-2 align-items-center">
-        <i class="bi bi-building text-danger me-2"></i>
+        <i class="bi bi-building text-warning me-2"></i>
         <p class="card-text m-0">
           Company: <strong>{{ item.company }}</strong>
         </p>
       </div>
       <div class="d-flex gap-1 mb-2 align-items-center">
-        <i class="bi bi-phone text-danger me-2"></i>
+        <i class="bi bi-phone text-primary me-2"></i>
         <p class="card-text m-0">
           Receiver Phone: <strong>{{ item.receiver_phone }}</strong>
         </p>
@@ -20,13 +20,13 @@
         </p>
       </div>
       <div class="d-flex gap-1 mb-2 align-items-center">
-        <i class="bi bi-geo text-danger me-2"></i>
+        <i class="bi bi-geo text-success me-2"></i>
         <p class="card-text m-0">
           Receiving Address: <strong>{{ item.receiving_address }}</strong>
         </p>
       </div>
       <div class="d-flex gap-1 mb-2 align-items-center">
-        <i class="bi bi-box-seam text-danger me-2"></i>
+        <i class="bi bi-box-seam text-primary me-2"></i>
         <p class="card-text m-0">
           Type: <strong>{{ item.type }}</strong>
         </p>
