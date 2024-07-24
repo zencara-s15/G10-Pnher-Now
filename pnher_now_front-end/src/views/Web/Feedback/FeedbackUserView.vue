@@ -81,7 +81,7 @@ export default {
     return {
       title: '',
       message: '',
-      rate:0,
+      rate:'',
       isSubmitting: false
     }
   },
