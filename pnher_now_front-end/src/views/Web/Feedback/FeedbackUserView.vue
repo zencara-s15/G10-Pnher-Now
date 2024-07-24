@@ -1,61 +1,55 @@
 <template>
   <UserLayout>
-    <div
-      class="bg-gradient-to-r container mx-auto flex justify-center items-center h-screen w-full"
-    >
-      <div
-        class="w-full max-w-6xl bg-white shadow-md rounded flex shadow-lg shadow-indigo-500/40 h-5/6"
-      >
-        <div class="w-full flex flex-row mx-auto px-8 my-10">
-          <div class="w-1/2 flex flex-col justify-center items-center">
-            <h1 class="text-4xl font-bold text-gray-800">Feedback to Deliverer</h1>
-            <form @submit.prevent="onSubmit" class="w-full mt-8">
-              <div class="mb-6">
-                <label for="title" class="block text-gray-700 font-bold mb-2">Title</label>
-                <input
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="title"
-                  type="text"
-                  v-model="title"
-                />
-              </div>
-              <div class="mb-6">
-                <label for="message" class="block text-gray-700 font-bold mb-2">Your feedback</label>
-                <textarea
-                  id="message"
-                  v-model="message"
-                  rows="4"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                ></textarea>
-              </div>
-              <div class="mb-6">
-                <label for="rate" class="block text-gray-700 font-bold mb-2">Rate</label>
-                <input
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="rate"
-                  type="number"
-                  v-model="rate"
-                  placeholder="rate from 1 to 10"
-                />
-              </div>
-              <div class="flex items-center justify-center mt-3">
-                <button
-                  class="shadow appearance-none border rounded bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  type="submit"
-                  :disabled="isSubmitting"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-          <div class="w-1/2 hidden md:block">
-            <img
-              src="https://media.istockphoto.com/id/1324723183/vector/workplace-culture-abstract-concept-vector-illustration.jpg?s=612x612&w=0&k=20&c=tt27M26Y-j-sCyJBYe-BOQ7duqeHFFlYBfENNYpJr-o="
-              alt="Feedback Image"
-              class="w-full h-full object-cover rounded-r-md"
-            />
-          </div>
+    <div class="bg-gradient-to-r container mx-auto flex justify-center items-center h-full w-full py-8">
+      <div class="w-full max-w-6xl bg-white shadow-md rounded-lg flex flex-col md:flex-row shadow-lg shadow-indigo-500/40">
+        <div class="w-full md:w-1/2 flex flex-col justify-center items-center p-8">
+          <h1 class="text-4xl font-bold text-gray-800 text-center">Feedback to Deliverer</h1>
+          <form @submit.prevent="onSubmit" class="w-full mt-8">
+            <div class="mb-6">
+              <label for="title" class="block text-gray-700 font-bold mb-2">Title</label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="title"
+                type="text"
+                v-model="title"
+              />
+            </div>
+            <div class="mb-6">
+              <label for="message" class="block text-gray-700 font-bold mb-2">Your feedback</label>
+              <textarea
+                id="message"
+                v-model="message"
+                rows="4"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              ></textarea>
+            </div>
+            <div class="mb-6">
+              <label for="rate" class="block text-gray-700 font-bold mb-2">Rate</label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="rate"
+                type="number"
+                v-model="rate"
+                placeholder="Rate from 1 to 10"
+              />
+            </div>
+            <div class="flex items-center justify-center mt-3">
+              <button
+                class="shadow appearance-none border rounded bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                type="submit"
+                :disabled="isSubmitting"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="w-full md:w-1/2 hidden md:block">
+          <img
+            src="https://media.istockphoto.com/id/1324723183/vector/workplace-culture-abstract-concept-vector-illustration.jpg?s=612x612&w=0&k=20&c=tt27M26Y-j-sCyJBYe-BOQ7duqeHFFlYBfENNYpJr-o="
+            alt="Feedback Image"
+            class="w-full h-full object-cover rounded-r-md"
+          />
         </div>
       </div>
     </div>
@@ -64,8 +58,7 @@
 
 <script>
 import UserLayout from '@/Components/Layouts/UserLayout.vue'
-import axiosInstance from '@/plugins/axios';
-// import axios from 'axios'
+import axiosInstance from '@/plugins/axios'
 
 export default {
   components: {
@@ -81,7 +74,7 @@ export default {
     return {
       title: '',
       message: '',
-      rate:0,
+      rate: 0,
       isSubmitting: false
     }
   },
@@ -93,13 +86,11 @@ export default {
           user_id: this.userId,
           title: this.title,
           comment: this.message,
-          rates: this.rate,
-          // delivererAndUser_id: lastDelivererId
+          rates: this.rate
         })
         console.log('Response:', response.data)
 
         alert('Form submitted successfully!')
-        // Optionally, clear the form
         this.title = ''
         this.message = ''
         this.rate = ''
@@ -114,7 +105,19 @@ export default {
 }
 </script>
 
-
 <style scoped>
 /* Add your custom styles here */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .h-full {
+    height: auto;
+  }
+  .p-8 {
+    padding: 1rem;
+  }
+}
 </style>

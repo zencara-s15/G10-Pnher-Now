@@ -1,25 +1,52 @@
 <template>
   <UserLayout>
-    <div class="container p-4 bg-gray-600">
-      <div class="row justify-content-between align-items-center mb-4">
-        <div class="col-auto">
-          <!-- <h3 class="fw-bolder text-dark">List of User Products</h3> -->
+    <div class="container p-4 px-35px bg-gray-200">
+      <div class="flex flex-row justify-between px-35px">
+        <div class="w-30% text-gray-900">
+          <span class="text-2xl font-bold w-40% text-dark border-b-2 border-red-500 pb-1">
+            My Baggages
+          </span>
+          <p class="mt-5px">See all your baggage.</p>
         </div>
-        <div class="col-auto">
-          <div class="input-group search-group mr-50">
-            <!-- <span class="input-group-text bg-danger text-white">
-              <i class="bi bi-search"></i>
-            </span>
-            <input type="text" class="form-control" placeholder="Search..." v-model="searchQuery" /> -->
+
+        <div class="w-40% search-container">
+          <div class="radio-inputs">
+            <label class="radio">
+              <input type="radio" name="radio" value="" v-model="selectedStatus" />
+              <span class="name">All</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="radio" value="1" v-model="selectedStatus" />
+              <span class="name">Pending</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="radio" value="2" v-model="selectedStatus" />
+              <span class="name">Picked Up</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="radio" value="3" v-model="selectedStatus" />
+              <span class="name">In Stock</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="radio" value="4" v-model="selectedStatus" />
+              <span class="name">In Progress</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="radio" value="5" v-model="selectedStatus" />
+              <span class="name">Delivered</span>
+            </label>
           </div>
         </div>
-        <div class="col-auto">
-          <button class="btn btn-danger me-2" @click="showModal = true">Send Baggage</button>
+
+        <div class="w-30% filter-container gap-20px">
+          <button class="btn bg-red-500 hover:bg-red-600 text-white me-2" @click="showModal = true">
+            Add Baggage
+          </button>
         </div>
       </div>
 
       <!-- Displaying Baggage List -->
-      <div class="row">
+      <div class="row mt-20px px-35px">
         <div class="col-md-4 mb-6" v-for="item in filteredBaggage" :key="item.id">
           <BaggagePostCard :item="item" @delete="deleteItem" />
         </div>
@@ -112,7 +139,11 @@
                 <div class="form-group">
                   <div class="d-flex justify-content-between mt-4">
                     <button type="submit" class="btn bg-primary text-white">Confirm</button>
-                    <button type="button" class="btn bg-danger text-white" @click="showModal = false">
+                    <button
+                      type="button"
+                      class="btn bg-danger text-white"
+                      @click="showModal = false"
+                    >
                       Cancel
                     </button>
                   </div>
@@ -143,6 +174,7 @@ export default {
     const baggage = ref([])
     const user_baggage = ref([])
     const searchQuery = ref('')
+    const selectedStatus = ref('') // Bind to radio buttons
     const formData = ref({
       receiver_phone: '',
       sending_address: '',
@@ -152,60 +184,58 @@ export default {
       company: '',
       post_id: '',
       delivery_status_id: '',
-      lat: '',
-      lng: ''
+      latitude: '',
+      longitude: ''
     })
 
+    const deliveryStatuses = ref([
+      { id: 1, name: 'Pending' },
+      { id: 2, name: 'Picked Up' },
+      { id: 3, name: 'In Stock' },
+      { id: 4, name: 'In Progress' },
+      { id: 5, name: 'Delivered' }
+    ])
+
     const addItem = async () => {
-      // Get current location
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async (position) => {
-          const lat = position.coords.latitude
-          const lng = position.coords.longitude
-          formData.value.lat = lat
-          formData.value.lng = lng
+      try {
+        const { longitude, latitude } = await store.getCurrentLocation()
+        formData.value.latitude = latitude
+        formData.value.longitude = longitude
 
-          showModal.value = false
-          const newItem = {
-            receiver_phone: formData.value.receiver_phone,
-            sending_address: formData.value.sending_address,
-            receiving_address: formData.value.receiving_address,
-            type: formData.value.type,
-            weight: formData.value.weight,
-            company: formData.value.company,
-            post_id: formData.value.post_id !== '' ? parseInt(formData.value.post_id) : null,
-            delivery_status_id:
-              formData.value.delivery_status_id !== ''
-                ? parseInt(formData.value.delivery_status_id)
-                : null,
-            lat: formData.value.lat,
-            lng: formData.value.lng
-          }
+        const newItem = {
+          receiver_phone: formData.value.receiver_phone,
+          sending_address: formData.value.sending_address,
+          receiving_address: formData.value.receiving_address,
+          type: formData.value.type,
+          weight: formData.value.weight,
+          company: formData.value.company,
+          post_id: formData.value.post_id ? parseInt(formData.value.post_id) : null,
+          delivery_status_id: formData.value.delivery_status_id
+            ? parseInt(formData.value.delivery_status_id)
+            : null,
+          longitude: formData.value.longitude,
+          latitude: formData.value.latitude
+        }
 
-          try {
-            await store.addPostBaggage(newItem) // Call the addPostBaggage action
-            await store.fetchPostBaggage() // Fetch updated baggage list
-            // Clear form data
-            formData.value = {
-              receiver_phone: '',
-              sending_address: '',
-              receiving_address: '',
-              type: '',
-              weight: '',
-              company: '',
-              post_id: '',
-              delivery_status_id: '',
-              lat: '',
-              lng: ''
-            }
-          } catch (error) {
-            console.error('Error adding new baggage item:', error)
-            // Handle error as needed
-          }
-          location.reload()
-        })
-      } else {
-        alert('Geolocation is not supported by this browser.')
+        await store.addPostBaggage(newItem)
+        await store.fetchPostBaggage()
+
+        // Reset form and close modal
+        formData.value = {
+          receiver_phone: '',
+          sending_address: '',
+          receiving_address: '',
+          type: '',
+          weight: '',
+          company: '',
+          post_id: '',
+          delivery_status_id: '',
+          latitude: '',
+          longitude: ''
+        }
+        showModal.value = false
+      } catch (error) {
+        console.error('Error adding new baggage:', error)
       }
     }
 
@@ -213,106 +243,93 @@ export default {
       try {
         await store.deletePostBaggage(itemId)
         await store.fetchPostBaggage()
-        baggage.value = store.post_baggage
       } catch (error) {
-        console.error('Error deleting baggage item:', error)
-        // Handle error as needed
+        console.error('Error deleting baggage:', error)
       }
-      location.reload()
     }
 
     const filteredBaggage = computed(() => {
-      return baggage.value.filter((item) =>
-        item.receiver_phone.toLowerCase().includes(searchQuery.value.toLowerCase())
-      )
+      return store.post_baggage.filter((item) => {
+        const matchesSearch = item.receiver_phone
+          .toLowerCase()
+          .includes(searchQuery.value.toLowerCase())
+        const matchesStatus = selectedStatus.value
+          ? item.delivery_status_id === parseInt(selectedStatus.value)
+          : true
+        return matchesSearch && matchesStatus
+      })
     })
 
-    onMounted(async () => {
-      await store.fetchPostBaggage() // Fetch initial baggage list on component mount
-      baggage.value = store.post_baggage
-      user_baggage.value = store.user_baggage // Fetch user's baggage list
-      console.log(user_baggage)
+    onMounted(() => {
+      store.fetchPostBaggage()
     })
 
     return {
       showModal,
       formData,
       addItem,
-      baggage,
-      user_baggage,
       deleteItem,
       searchQuery,
+      selectedStatus, // Make it available for radio buttons
       filteredBaggage,
-      store // Expose store to access state in template
+      deliveryStatuses
     }
   }
 }
 </script>
 
+
 <style scoped>
-.container {
-  background-color: #f8f9fa;
+/* Add your styles here */
+.flex {
+  display: flex;
+  align-items: center;
 }
 
-.card {
-  border: none;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+.justify-between {
+  justify-content: space-between;
 }
 
-.card:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transform: scale(1.05);
+.text-gray-900 {
+  color: #1a202c;
 }
 
-.card-body {
-  padding: 20px;
-  background-color: white;
+.search-container {
+  position: relative;
 }
 
-.card-body .card-title {
-  font-size: 1rem;
-  font-weight: bold;
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
 }
 
-.card-body .card-text {
-  font-size: 0.875rem;
-  color: #6c757d;
+.search-input {
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
-.search-group {
-  border-radius: 20px;
-  overflow: hidden;
+.filter-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.search-group .input-group-text {
-  border: none;
-}
-
-.search-group .form-control {
-  border: none;
-  box-shadow: none;
-}
-
-.btn {
+.filter-button {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #fff;
+  color: #1a202c;
+  cursor: pointer;
 }
 
-.btn-danger {
-  background-color: #dc3545;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
-}
-
-.btn-primary {
-  background-color: #007bff;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
+.filter-button i {
+  margin: 0 5px;
 }
 
 .modal-mask {
@@ -324,55 +341,62 @@ export default {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .modal-wrapper {
-  width: 400px;
-  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-container {
+  background: white;
   border-radius: 8px;
-  overflow: hidden;
-}
-
-.modal-header {
-  background-color: #dc3545;
-  padding: 10px 15px;
-}
-
-.modal-header .modal-title {
-  margin: 0;
-  color: #fff;
-}
-
-.modal-header .close {
-  border: none;
-  background: none;
-  color: #fff;
-  font-size: 1.2rem;
-}
-
-.modal-body {
+  width: 600px;
+  /* max-width: 100%; */
   padding: 20px;
 }
 
-.modal-body .form-group {
-  margin-bottom: 15px;
+/* tab  */
+.radio-inputs {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 0.5rem;
+  background-color: #EEE;
+  box-sizing: border-box;
+  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+  padding: 0.25rem;
+  width: 100%;
+  font-size: 14px;
 }
 
-.modal-body .form-control {
-  border-radius: 4px;
+.radio-inputs .radio {
+  flex: 1 1 auto;
+  text-align: center;
 }
 
-.modal-body .btn {
-  width: 48%;
+.radio-inputs .radio input {
+  display: none;
 }
 
-.transition-enter-active, .transition-leave-active {
-  transition: opacity 0.5s;
+.radio-inputs .radio .name {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: none;
+  padding: .5rem 0;
+  color: rgba(51, 65, 85, 1);
+  transition: all .15s ease-in-out;
 }
 
-.transition-enter, .transition-leave-to {
-  opacity: 0;
+.radio-inputs .radio input:checked + .name {
+  background-color: #fff;
+  font-weight: 600;
 }
+
 </style>

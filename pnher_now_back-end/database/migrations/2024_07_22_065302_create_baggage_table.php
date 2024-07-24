@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string('sending_address');
             $table->string('company')->nullable();
             $table->string('receiving_address');
-             // Make 'status' nullable
+            // Make 'status' nullable
             $table->unsignedBigInteger('post_id')->nullable(); // Make 'post_id' nullable
             $table->unsignedBigInteger('delivery_status_id')->nullable(); // Make 'delivery_status_id' nullable
-        
+
             // Define foreign key constraints (assuming 'posts' and 'delivery_status' tables exist)
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->foreign('delivery_status_id')->references('id')->on('delivery_status')->onDelete('cascade');
-        
+
             $table->timestamps();
         });
     }

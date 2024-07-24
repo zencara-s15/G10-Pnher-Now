@@ -1,18 +1,36 @@
 <template>
   <UserLayout />
   <div class="container">
-    <div class="my-trips mt-3">
-      <h1>Delivering History</h1>
-      <div class="search-container">
-        <i class="bi bi-search search-icon"></i>
-        <input
-          type="text"
-          v-model="searchQuery"
-          placeholder="Search here..."
-          class="search-input"
-        />
+    <div class="my-trips mt-3 mx-35px">
+      <div class="flex flex-row justify-between">
+        <div class="w-30% text-gray-900">
+          <span class="text-2xl font-bold w-18% text-dark border-b-2 border-red-500 pb-1">
+            History
+          </span>
+          <p class="mt-5px">See all history with clear information.</p>
+        </div>
+
+        <div class="w-40% search-container">
+          <i class="bi bi-search search-icon text-dark"></i>
+          <input
+            type="text"
+            v-model="searchQuery"
+            placeholder="Search here..."
+            class="search-input text-dark"
+          />
+        </div>
+
+        <div class="w-30% filter-container">
+          <button class="filter-button">
+            <i class="bi bi-funnel"></i>
+            All
+            <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
       </div>
-      <UserHistory
+
+      <div class="mt-40px">
+        <UserHistory
         v-for="history in filteredBaggage"
         :key="history.id"
         :date="time"
@@ -25,9 +43,12 @@
         :companies="history.company"
         :total_price="calculateTotalCost(history.weight)"
       />
+      </div>
+      
     </div>
   </div>
 </template>
+
 
 <script>
 import UserHistory from '@/Components/HeaderUser/UserHistory.vue'
@@ -82,42 +103,54 @@ export default {
 
 
 <style scoped>
-.my-trips {
-  padding: 10px;
+.flex {
+  display: flex;
+  align-items: center;
 }
 
-h1 {
-  font-size: 1.5em;
-  margin-bottom: 20px;
+.justify-between {
+  justify-content: space-between;
+}
+
+.text-gray-900 {
+  color: #1a202c;
 }
 
 .search-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  padding: 7px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  width: 50%;
+  position: relative;
 }
 
 .search-icon {
-  margin-right: 10px;
-  font-size: 1.3em;
-  color: #bb5110;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
 }
 
 .search-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 3px;
-  font-size: 1em;
-  background-color: transparent;
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
-.search-input::placeholder {
-  color: #aaa;
+.filter-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #1a202c;
+  cursor: pointer;
+}
+
+.filter-button i {
+  margin: 0 5px;
 }
 </style>

@@ -91,6 +91,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/delivery_baggage', [DeliveryBaggageController::class, 'PostDelivery']);
     Route::get('/delivery_baggage', [DeliveryBaggageController::class, 'GetPost']);
     Route::get('/delivery_baggage/{id}', [DeliveryBaggageController::class, 'GetDelivery']);
+    Route::get('/deliverer_pick_up', [DeliveryBaggageController::class, 'DeliveryPickUp']);
 });
 
 //Baggage

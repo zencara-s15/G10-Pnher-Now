@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
 use App\Models\User;
 
-class Delivery_baggage extends Model
+class DeliveryBaggage extends Model
 {
     use HasFactory;
-    protected $fillable = ['post_id', 'deliverer_id', 'status'];
-    public function post()
+    protected $fillable = [ 'deliverer_id', 'baggage_id'];
+    public function baggage()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Baggage::class, 'baggage_id');
     }
 
     public function deliverer()

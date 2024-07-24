@@ -5,7 +5,8 @@
         <div class="flex flex-col md:flex-row items-center">
           <div class="ml-7 md:w-1/2">
             <h1 class="text-5xl mb-4">
-              <span class=" font-bold text-yellow-400">Baggages</span><Span> delivery in </Span><Span class="font-bold">Cambodia</Span>
+              <span class="font-bold text-yellow-400">Baggages</span><Span> delivery in </Span
+              ><Span class="font-bold">Cambodia</Span>
             </h1>
             <p class="mb-6 text-2xl">
               Product delivery is a courier service in which a store or independent delivery company
@@ -15,7 +16,7 @@
               Full Map
             </button>
           </div>
-          <div class="md:w-1/2 mt-8 md:mt-0 ">
+          <div class="md:w-1/2 mt-8 md:mt-0">
             <!-- <img
               src="https://placehold.co/400x300?text=Delivery+Scooter"
               alt="Delivery Scooter"
@@ -30,10 +31,10 @@
         </div>
       </div>
       <div class="m-8">
-        <h2 class="text-2xl font-bold text-dark mb-4">
-          Recently Post 
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <span class="text-2xl font-bold w-15% text-dark mb-4 border-b-4 border-red-500 pb-1">
+          Recently Post
+        </span>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
           <!-- Loop through last three baggages -->
           <div v-for="baggage in lastThreeBaggages" :key="baggage.id">
             <BaggagePostCard :item="baggage" @delete="deleteItem"></BaggagePostCard>
@@ -67,7 +68,7 @@ export default {
     const deleteItem = (id) => {
       // Logic to delete an item
       store.deletePostBaggage(id)
-      baggages.value = baggages.value.filter(baggage => baggage.id !== id)
+      baggages.value = baggages.value.filter((baggage) => baggage.id !== id)
     }
 
     const lastThreeBaggages = computed(() => {

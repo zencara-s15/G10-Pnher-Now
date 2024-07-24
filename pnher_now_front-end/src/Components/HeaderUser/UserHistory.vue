@@ -1,14 +1,17 @@
 <template>
     <div class="trip-item" v-if="delivery_status_id === 5">
-      <span class="status p-1">Completed</span>
+      <span class="status px-10px py-5px">Completed</span>
       <div class="trip-header mt-2">
-        <span class="type">Date time: {{ date }}</span>
+        <span class="type">{{ date }}</span>
+      </div>
+      <div class="trip-header mt-2">
+        <span class="type"><i class="bi bi-geo-alt text-danger me-2"></i>{{ sender }}</span>
       </div>
       <div class="trip-header">
-        <span class="type">FROM: {{ sender }} TO {{ receiver }}</span>
+        <span class="type"><i class="bi bi-geo text-danger me-2"></i>{{ receiver }}</span>
         <div class="details d-flex">
-          <div class="mr-5">
-            <button @click="showDetails">Details</button>
+          <div class="">
+            <button class="bg-orange-500 hover:bg-orange-700" @click="showDetails">Detail</button>
           </div>
         </div>
       </div>
@@ -73,7 +76,7 @@
   }
   
   .status {
-    background: #14cbd4;
+    background: green;
     color: white;
     border-radius: 5px;
     font-weight: bold;
@@ -84,10 +87,9 @@
   }
   
   .details button {
-    background-color: #e36a14;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 5px 20px;
     cursor: pointer;
     border-radius: 4px;
   }

@@ -43,11 +43,11 @@
           Total Price: <strong>{{ calculateTotalCost(item.weight) }} Real</strong>
         </p>
       </div>
-      <div class="d-flex gap-20px">
-        <button class="btn btn-primary w-50">
+      <div class="d-flex justify-end gap-20px">
+        <button class="btn border-primary w-30">
           <i class="bi bi-pencil-square me-2"></i>Edit
         </button>
-        <button class="btn btn-danger w-50" @click="$emit('delete', item.id)">
+        <button class="btn border-danger hover:bg-danger w-30" @click="$emit('delete', item.id)">
           <i class="bi bi-trash me-2"></i>Delete
         </button>
       </div>
