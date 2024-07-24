@@ -16,8 +16,8 @@ onMounted(() => {
   config.apiKey = 'fZSNtpgb8N73PwrIUuMq';
 
   const initialState = {
-  "lng": 104.9123,
-  "lat": 11.5564,
+  "lng": 104.8830406846566,
+  "lat": 11.551364353871305,
   "zoom": 14
 }
 
@@ -38,12 +38,12 @@ onUnmounted(() => {
 .map-wrap {
   position: relative;
   width: 100%;
-  height: calc(100vh - 77px); /* calculate height of the screen minus the heading */
+  /* height: calc(10vh - 77px);  */
 }
 
 .map {
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
-  height: 73%;
+  height: 65.3vh;
 }
 </style>

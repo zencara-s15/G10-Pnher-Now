@@ -1,6 +1,6 @@
 <template>
   <DelivererLayout>
-    <div class="delivers mt-5">
+    <div class="delivers mt-5 ">
       <nav
         class="form-delivers delivers-expand-lg flex-row"
         v-for="(item, index) in baggage"
@@ -22,7 +22,6 @@
               <button type="button" class="btn btn-info" @click="showPostDetails(item)">
                 Detail
               </button>
-              <!-- <button type="button" class="btn btn-warning" @click="toggleCardBody">Cancel</button> -->
             </div>
           </div>
         </div>
@@ -34,19 +33,36 @@
               <h2>Information</h2>
             </div>
             <div class="p-3">
-              <p>Phone Receiver: {{ selectedBaggage.phone_receiver }}</p>
-              <p>Sending Address: {{ selectedBaggage.sending_address }}</p>
-              <p>Receiving Address: {{ selectedBaggage.receiving_address }}</p>
-              <p>Baggage Type: {{ selectedBaggage.type }}</p>
-              <p>Weight: {{ selectedBaggage.weight }} Kg</p>
-              <p>Total Cost: {{ calculateTotalCost(selectedBaggage.weight) }} Real</p>
-              <p>Company: {{ selectedBaggage.company }}</p>
+              <p>
+                Phone Receiver: <strong>{{ selectedBaggage.phone_receiver }}</strong>
+              </p>
+              <p>
+                Sending Address: <strong>{{ selectedBaggage.sending_address }}</strong>
+              </p>
+              <p>
+                Receiving Address: <strong>{{ selectedBaggage.receiving_address }}</strong>
+              </p>
+              <p>
+                Baggage Type: <strong>{{ selectedBaggage.type }}</strong>
+              </p>
+              <p>
+                Weight: <strong>{{ selectedBaggage.weight }} Kg</strong>
+              </p>
+              <p>
+                Total Cost: <strong>{{ calculateTotalCost(selectedBaggage.weight) }} Real</strong>
+              </p>
+              <p>
+                Company: <strong>{{ selectedBaggage.company }}</strong>
+              </p>
             </div>
-            
-            <div class=" p-3 d-flex justify-between">
+            <div class="mt-2 d-flex justify-content-center">
+              <img src="/src/assets/deliverer.png" alt="Deliverer" width="200px" />
+            </div>
+            <div class="p-3 d-flex justify-between click">
               <div>
                 <button type="button" class="btn btn-outline-danger" @click="closeAlert">
                   Back
+                  <i class="bi bi-arrow-left-square-fill"></i>
                 </button>
               </div>
               <div>
@@ -55,7 +71,7 @@
                   class="btn btn-success"
                   @click="acceptDelivery(selectedBaggage, index)"
                 >
-                  Accept
+                  Pick Up
                 </button>
               </div>
             </div>
@@ -189,8 +205,10 @@ export default {
 .delivers {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  /* width: 100%; */
+  /* gap: 10px; */
 }
+
 .card {
   background-color: #fff;
   border: 1px solid #ccc;
@@ -198,7 +216,7 @@ export default {
   padding: 20px;
   margin-bottom: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 250px; /* Set width and height to make the card square */
+  width: 250px; 
   height: 250px;
   display: flex;
   flex-direction: column;
@@ -298,5 +316,12 @@ export default {
   width: 450px;
   height: 300px;
   margin-bottom: -90px;
+}
+.google-map {
+  width: 100%;
+  height: 94%;
+}
+.click {
+  margin-top: 40px;
 }
 </style>

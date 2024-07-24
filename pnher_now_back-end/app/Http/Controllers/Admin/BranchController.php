@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BranchResource;
+use App\Models\Company as ModelsCompany;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\User;

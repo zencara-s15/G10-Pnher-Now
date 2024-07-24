@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Supervisor\Branch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Branch;
+// use App\Models\Branch;
 
 class Company extends Model
 {
@@ -15,6 +16,10 @@ class Company extends Model
     public function branches()
     {
         return $this->hasMany(Branch::class);
+    }
+
+    public function companies(){
+        return $this->hasMany(Company::class);
     }
 
 }

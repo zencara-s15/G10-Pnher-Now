@@ -6,7 +6,7 @@ import DelivererNavbar from "@/Components/DelivererNavbar.vue";
 </script>
 <template>
   <DelivererNavbar/>
-  <div class="md:px-50 h-full">
+  <div class="md:px-10 h-full">
     <div class="h-full">
       <slot />
     </div>

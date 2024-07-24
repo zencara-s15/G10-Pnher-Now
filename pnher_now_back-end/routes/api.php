@@ -112,6 +112,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/delivery_status_list/{id}', [DeliveryStatusController::class, 'DeliverStatusListByid']);
 });
 
+// Company
+// Route::middleware('auth:sanctum')->group(function(){
+
 // Feedback routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/feedback_post', [FeedbackController::class, 'FeedbackPost']);

@@ -1,7 +1,7 @@
 <?php
 namespace App\Traits;
 
-trait uploadImage{
+trait UploadImage{
 
     function saveImage($image, $path = 'images')
     {

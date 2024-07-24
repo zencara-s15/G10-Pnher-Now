@@ -5,8 +5,8 @@
                 <div class="flex">
                     <div class="flex-col w-full">
                         <!-- Container -->
-                        <div class="container mb-7 w-full">
-
+                        {{-- <div class="container mb-7 w-full"> --}}
+                        <div class="container w-full flex flex-row mr-5 justify-between">
                             <!-- Dashboard -->
                             <div class="row flex flex-row m-5 justify-between">
                                 <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
@@ -106,6 +106,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- </div> --}}
                             <!-- end Dashboard -->
                         </div>
                         <div class="container-table mt-5 w-full">
@@ -117,31 +118,31 @@
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th
-                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             User</th>
                                         <th
-                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Type</th>
                                         <th
-                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             From</th>
                                         <th
-                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             To</th>
                                         <th
-                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Sender</th>
                                         <th
-                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Receiver</th>
                                         <th
-                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Branch</th>
                                         <th
-                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Date</th>
                                         <th
-                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Expired</th>
                                     </tr>
                                 </thead>
