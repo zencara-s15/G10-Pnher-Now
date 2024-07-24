@@ -43,7 +43,7 @@
           Total Price: <strong>{{ calculateTotalCost(item.weight) }} Real</strong>
         </p>
       </div>
-      <div class="d-flex justify-end gap-20px">
+      <div class="d-flex justify-between gap-20px">
         <button class="btn border-primary w-30">
           <i class="bi bi-pencil-square me-2"></i>Edit
         </button>
