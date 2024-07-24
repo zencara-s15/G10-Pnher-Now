@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Traits\UploadImage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
+    use  UploadImage;
     public function login(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -91,7 +93,8 @@ class AuthController extends Controller
 
         $profilePath = null;
         if ($request->hasFile('profile')) {
-            $profilePath = $request->file('profile')->store('profiles', 'public');
+            $profilePath = $this->saveImage($request->profile);
+            // $profilePath = $request->file('profile')->store('profiles', 'public');
         }
 
         $user = User::create([
@@ -127,7 +130,8 @@ class AuthController extends Controller
 
         $profilePath = null;
         if ($request->hasFile('profile')) {
-            $profilePath = $request->file('profile')->store('profiles', 'public');
+            $profilePath = $this->saveImage($request->profile);
+            // $profilePath = $request->file('profile')->store('profiles', 'public');
         }
 
         $user = User::create([
@@ -137,7 +141,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'address' => $request->address,
             'date_of_birth' => $request->date_of_birth,
-            'profile' => $request->$profilePath
+            'profile' => $profilePath
         ]);
 
         $user->assignRole('deliverer');

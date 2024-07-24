@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Baggage;
 use App\Models\Post;
-use App\Models\Delivery_baggage;
+use App\Models\DeliveryBaggage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class DeliveryBaggageController extends Controller
@@ -17,7 +18,7 @@ class DeliveryBaggageController extends Controller
     public function GetPost()
     {
         // Retrieve all delivery baggage with their associated posts and users
-        $deliveryBaggage = Delivery_Baggage::with('post.user', 'post.baggage')->get();
+        $deliveryBaggage = DeliveryBaggage::with('post.user', 'post.baggage')->get();
 
         // Extract relevant data
         $deliveryBaggageWithUserData = $deliveryBaggage->map(function ($item) {
@@ -63,7 +64,7 @@ class DeliveryBaggageController extends Controller
         $data = $request->all();
 
         // Create the delivery baggage entry
-        $deliveryBaggage = Delivery_Baggage::create($data);
+        $deliveryBaggage = DeliveryBaggage::create($data);
 
         // Return a JSON response
         return response()->json(['success' => 'Delivery baggage created successfully!', 'delivery_baggage' => $deliveryBaggage], 201);
@@ -75,7 +76,7 @@ class DeliveryBaggageController extends Controller
     public function GetDelivery(string $id)
     {
         // Retrieve delivery baggage with their associated posts, users, and baggage by ID
-        $deliveryBaggage = Delivery_Baggage::with('post.user', 'post.baggage')
+        $deliveryBaggage = DeliveryBaggage::with('post.user', 'post.baggage')
             ->where('id', $id)
             ->get();
 
@@ -126,5 +127,46 @@ class DeliveryBaggageController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function DeliveryPickUp()
+    {
+        // Get the currently authenticated user
+        $user = Auth::user();
+        
+        // Check if the user is authenticated
+        if (!$user) {
+            return Response::json(['error' => 'User not authenticated.'], 401);
+        }
+
+        // Retrieve delivery baggage assigned to the logged-in user
+        $deliveryBaggage = DeliveryBaggage::with('baggage')
+            ->where('deliverer_id', $user->id)
+            ->get();
+
+        // Check if there are any delivery baggage items
+        if ($deliveryBaggage->isEmpty()) {
+            return Response::json(['message' => 'No delivery baggage found for the current user.'], 404);
+        }
+
+        // Extract relevant data
+        $deliveryBaggageWithData = $deliveryBaggage->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'baggage_id' => $item->baggage_id,
+                'baggage' => [
+                    'type' => $item->baggage->type,
+                    'weight' => $item->baggage->weight,
+                    'receiver_phone' => $item->baggage->receiver_phone,
+                    'sending_address' => $item->baggage->sending_address,
+                    'company' => $item->baggage->company,
+                    'receiving_address' => $item->baggage->receiving_address,
+                    'status' => $item->baggage->status,
+                ],
+                'status' => $item->status,
+            ];
+        });
+
+        // Return JSON response
+        return Response::json(['data' => $deliveryBaggageWithData]);
     }
 }

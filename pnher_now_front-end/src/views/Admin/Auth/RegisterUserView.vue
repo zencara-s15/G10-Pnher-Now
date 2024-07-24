@@ -1,17 +1,25 @@
 <template>
   <div
-    class="bg-gradient-to-r min-h-screen flex flex-column items-center justify-center bg-gray-100"
+    class="bg-gradient-to-r from-orange-400 to-red-500 min-h-screen flex flex-column items-center justify-center bg-gray-100"
   >
-    <div class="flex flex-column max-w-6/12 w-full bg-white px-10 mb-4 shadow-lg rounded-lg h-70vh">
+    <div class="flex flex-column max-w-6/12 w-full bg-white px-10 mb-4 shadow-lg rounded-lg h-75vh">
       <div class="flex-3">
         <h1 class="text-center font-size-12 font-bold text-gray-800 mt-3">Register</h1>
-        <!-- <p class="text-center text-gray-800 my-4">Create an account!</p> -->
         <div class="pagination flex justify-center items-center pt-30 h-10vh w-80h">
-          <div :class="['number', { active: step === 1 }]">1</div>
-          <div class="bar"></div>
-          <div :class="['number', { active: step === 2 }]">2</div>
-          <div class="bar"></div>
-          <div :class="['number', { active: step === 3 }]">3</div>
+          <div :class="['number', { active: step === 1, verified: step > 1 }]">
+            <span v-if="step > 1" class="checkmark">✔</span>
+            <span v-else>1</span>
+          </div>
+          <div :class="['bar', { active: step >= 2 }]"></div>
+          <div :class="['number', { active: step === 2, verified: step > 2 }]">
+            <span v-if="step > 2" class="checkmark">✔</span>
+            <span v-else>2</span>
+          </div>
+          <div :class="['bar', { active: step >= 3 }]"></div>
+          <div :class="['number', { active: step === 3, verified: step > 3 }]">
+            <span v-if="step > 3" class="checkmark">✔</span>
+            <span v-else>3</span>
+          </div>
         </div>
       </div>
       <form
@@ -59,7 +67,7 @@
             <div class="">
               <span class="mt-2 color-black"
                 >Already have an account?
-                <a class="text-primary font-italic" href="/login">Login</a></span
+                <a class="text-primary italic underline" href="/login">Login</a></span
               >
             </div>
             <div class="flex justify-end item-center">
@@ -185,7 +193,7 @@
                 accept="image/*"
                 class="hidden"
               />
-              <div v-if="imagePreview" class="w-24 h-24 bg-gray-200 rounded-full overflow-hidden">
+              <div v-if="imagePreview" class="w-52 h-52 bg-gray-200 rounded-full overflow-hidden">
                 <img
                   :src="imagePreview"
                   alt="Profile Image Preview"
@@ -291,8 +299,9 @@
 </template>
 
 <script>
-// import axiosInstance from './axiosInstance';
+import * as Yup from 'yup'
 import axiosInstance from '@/plugins/axios'
+import Swal from 'sweetalert2'
 
 export default {
   data() {
@@ -311,15 +320,81 @@ export default {
       imagePreview: null,
       imageOptionsVisible: false,
       cameraVisible: false,
-      videoStream: null
+      videoStream: null,
+      validationSchemaStep1: Yup.object().shape({
+        email: Yup.string().email('Invalid email address').required('Email is required'),
+        password: Yup.string().required('Password is required'),
+        cfPassword: Yup.string()
+          .oneOf([Yup.ref('password')], 'Passwords do not match')
+          .required('Confirm Password is required')
+      }),
+      validationSchemaStep2: Yup.object().shape({
+        first_name: Yup.string().required('First name is required'),
+        last_name: Yup.string().required('Last name is required'),
+        address: Yup.string().required('Address is required'),
+        date: Yup.date().required('Date of birth is required').nullable()
+      }),
+      errors: {} // Track errors for empty fields
     }
   },
   methods: {
-    nextStep() {
-      if (this.step === 1 && this.form.password !== this.form.cfPassword) {
-        alert('Passwords do not match')
+    async nextStep() {
+      if (this.step === 1) {
+        try {
+          await this.validationSchemaStep1.validate({
+            email: this.form.email,
+            password: this.form.password,
+            cfPassword: this.form.cfPassword
+          })
+
+          const response = await axiosInstance.get('/get_users')
+          console.log('Response data:', response.data)
+
+          const users = response.data.data
+          const emailExists = users.some((user) => user.email === this.form.email)
+          console.log('Email exists:', emailExists)
+
+          if (emailExists) {
+            Swal.fire({
+              title: 'Email Already Exists',
+              text: 'Please use a different email address.',
+              icon: 'warning',
+              confirmButtonText: 'OK'
+            })
+          } else {
+            this.step++
+            console.log('Next step:', this.step)
+          }
+        } catch (error) {
+          if (error.name === 'ValidationError') {
+            alert(error.errors[0])
+          } else {
+            console.error('Error checking email:', error)
+            alert('An error occurred while checking the email.')
+          }
+        }
+      } else if (this.step === 2) {
+        try {
+          await this.validationSchemaStep2.validate({
+            first_name: this.form.first_name,
+            last_name: this.form.last_name,
+            address: this.form.address,
+            date: this.form.date
+          })
+
+          this.step++
+          console.log('Next step:', this.step)
+        } catch (error) {
+          if (error.name === 'ValidationError') {
+            alert(error.errors[0])
+          } else {
+            console.error('Error validating step 2:', error)
+            alert('An error occurred while validating step 2.')
+          }
+        }
       } else {
         this.step++
+        console.log('Next step:', this.step)
       }
     },
     prevStep() {
@@ -374,7 +449,6 @@ export default {
       }
       this.cameraVisible = false
     },
-
     async submitForm() {
       try {
         const formData = new FormData()
@@ -388,14 +462,25 @@ export default {
           formData.append('profilePicture', this.form.profilePicture)
         }
 
-        console.log(this.form)
-
-        const response = await axiosInstance.post('/register/user', this.form)
-        alert('Form submitted successfully!')
+        const response = await axiosInstance.post('/register/user', formData)
+        Swal.fire({
+          title: 'Successfully created an account!',
+          text: 'You can log in now.',
+          icon: 'success',
+          showConfirmButton: false, // Hide the confirm button
+          timer: 3000 // Display the alert for 3 seconds
+        }).then(() => {
+          this.$router.push('/login')
+        })
         console.log(response.data)
-      } catch (error) {
+      } catch (error) { 
         console.error('Error submitting form:', error)
-        alert('An error occurred while submitting the form.')
+        Swal.fire({
+          title: 'Error!',
+          text: 'An error occurred while submitting the form.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
       }
     },
     handleFileUpload(event) {
@@ -405,13 +490,7 @@ export default {
 }
 </script>
 
-
-<style>
-/* Add any additional custom styles here */
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, #4f46e5, #7c3aed, #ec4899);
-}
-
+<style scoped>
 .step-indicator {
   display: flex;
   justify-content: space-between;
@@ -422,11 +501,12 @@ export default {
 .step {
   text-align: center;
 }
-/* number of step  */
+
 .pagination {
   gap: 5px;
   padding: 15px 15px;
 }
+
 .pagination .number {
   width: 28px;
   height: 28px;
@@ -434,31 +514,56 @@ export default {
   line-height: 28px;
   border-radius: 50%;
   color: #4f46e5;
-  /* background: ; */
-  background: #ffffff;
+  background: #c5c2c2;
   font-size: 15px;
+  position: relative;
+}
+
+.pagination .number.active {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.pagination .number.verified {
+  background: #4caf50;
+  color: #ffffff;
+}
+
+.pagination .number.verified::after {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: white;
+  color: #4caf50;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .pagination .bar {
   width: 295px;
   height: 4px;
   border-radius: 5px;
+  background: #bbbbbb;
 }
 
-.pagination .active ~ div {
-  background: #bbbbbb;
+.pagination .bar.active {
+  background: #4f46e5;
   color: rgb(0, 0, 0);
 }
 
-/* next and prevoiuse btn  */
-
+/* next and previous buttons */
 #text_next,
 #text_previous {
   background: #4f46e5;
   color: white;
   font-family: inherit;
   padding: 0.25em;
-  /* padding-left: 0.9em; */
   font-size: 14px;
   font-weight: 500;
   border-radius: 0.4em;
@@ -474,9 +579,11 @@ export default {
   margin: 10px;
   width: 6em;
 }
+
 #text_next {
   padding-left: 2.7em;
 }
+
 #text_previous {
   padding-left: 0.8em;
 }
@@ -492,8 +599,6 @@ export default {
   width: 1.8em;
   border-radius: 0.3em;
   box-shadow: 0.1em 0.1em 0.4em 0.15em #4f46e5;
-  /* change this line */
-
   transition: all 0.3s;
 }
 

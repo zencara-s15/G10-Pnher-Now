@@ -1,173 +1,156 @@
 <template>
-  <UserLayout></UserLayout>
-  <div class="container delivery-list p-5">
-    <!-- <div class="row d-flex justify-content-between">
-      <div class="col-auto">
-        <div class="input-group search-group" style="width: 500px">
-          <span class="input-group-text bg-danger text-white">
-            <i class="bi bi-search"></i>
+  <UserLayout />
+  <div class="container">
+    <div class="my-trips mt-3 mx-35px">
+      <div class="flex flex-row justify-between">
+        <div class="w-30% text-gray-900">
+          <span class="text-2xl font-bold w-18% text-dark border-b-2 border-red-500 pb-1">
+            History
           </span>
+          <p class="mt-5px">See all history with clear information.</p>
+        </div>
+
+        <div class="w-40% search-container">
+          <i class="bi bi-search search-icon text-dark"></i>
           <input
             type="text"
-            class="form-control"
-            placeholder="Search here..."
             v-model="searchQuery"
+            placeholder="Search here..."
+            class="search-input text-dark"
           />
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            @click="clearSearch"
-            :disabled="!searchQuery"
-          >
-            <i class="bi bi-x-square"></i>
+        </div>
+
+        <div class="w-30% filter-container">
+          <button class="filter-button">
+            <i class="bi bi-funnel"></i>
+            All
+            <i class="bi bi-chevron-down"></i>
           </button>
         </div>
       </div>
-      <div class="col-auto d-flex gap-3" v-for="user in users_image" :key="user.image">
-        <div class="col-auto">
-          <button class="btn btn-light text-danger">
-            <div class="message">
-              <i class="bi bi-5-circle-fill"></i>
-            </div>
-            <i class="bi bi-chat-left"></i>
-          </button>
-        </div>
-        <div class="col-auto">
-          <button class="btn btn-light text-danger">
-            <div class="notification">
-              <i class="bi bi-3-circle-fill"></i>
-            </div>
-            <i class="bi bi-bell"></i>
-          </button>
-        </div>
-        <div class="icon">
-          <img :src="user.image" class="rounded-circle" width="40" height="40" />
-        </div>
+
+      <div class="mt-40px">
+        <UserHistory
+        v-for="history in filteredBaggage"
+        :key="history.id"
+        :date="time"
+        :delivery_status_id="history.delivery_status_id"
+        :sender="history.sending_address"
+        :receiver="history.receiving_address"
+        :phone_receiver="history.phone_receiver"
+        :type="history.type"
+        :weight="history.weight"
+        :companies="history.company"
+        :total_price="calculateTotalCost(history.weight)"
+      />
       </div>
-    </div> -->
-    <div class="row">
-      <div class="col-12">
-        <div class="mt-3 mb-3">
-          <h2>Past Delivery</h2>
-        </div>
-        <div class="list-group">
-          <div
-            class="list-group-item d-flex justify-content-between align-items-center mb-3 border-red"
-            v-for="item in baggage"
-            :key="item.id"
-          >
-            <div class="d-flex align-items-center">
-              <div class="icon">
-                <img
-                  src="https://img.a.transfermarkt.technology/portrait/big/406635-1668524492.jpg?lm=1"
-                  class="rounded-circle"
-                  width="40"
-                  height="40"
-                />
-              </div>
-              <div class="ms-3">
-                <div class="route fw-bold">
-                  FROM {{ item.sending_address }} TO {{ item.receiving_address }}
-                </div>
-                <div class="date text-muted">Delivered on {{ item.created_at }}</div>
-              </div>
-            </div>
-            <div class="menu position-relative">
-              <button class="btn btn-outline-secondary btn-sm" @click="toggleMenu(index)">⋮</button>
-              <div v-if="openMenuIndex === index" class="dropdown-menu show position-absolute">
-                <button class="dropdown-item" @click="editItem(index)">Detail</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
-    <!-- <div class="" v-if="status != []" > -->
-    <div v-for="item in status" :key="item.id">
-      <h1>History Status: {{ item.name }}</h1>
-    </div>
-    <!-- </div> -->
   </div>
 </template>
 
-<script setup lang="ts" >
-import WebLayout from '@/Components/Layouts/WebLayout.vue'
-import { ref, onMounted, watch, computed } from 'vue'
-import { useDeliveryStatusStore } from '@/stores/delivery_status-list'
+
+<script>
+import UserHistory from '@/Components/HeaderUser/UserHistory.vue'
+import UserLayout from '@/Components/Layouts/UserLayout.vue'
+import { ref, onMounted, computed } from 'vue'
 import { usePostBaggageStore } from '@/stores/post_baggage-list'
-const deliveryStore = useDeliveryStatusStore()
-const baggageStore = usePostBaggageStore()
-const baggage = ref()
-const status = ref()
 
-onMounted(async () => {
-  await baggageStore.fetchPostBaggage()
-  await deliveryStore.fetchDeliveryStatus()
+export default {
+  components: {
+    UserHistory,
+    UserLayout
+  },
+  setup() {
+    const baggageStore = usePostBaggageStore()
+    const baggage = ref([])
+    const searchQuery = ref('')
 
-  baggage.value = baggageStore.post_baggage;
-  status.value = deliveryStore.delivery_status;
-  baggage.value = baggage.value.filter((b: any) => b.delivery_status_id == 5)
-  console.log(baggage.value, status.value);
-})
+    onMounted(async () => {
+      await baggageStore.fetchPostBaggage()
+      baggage.value = baggageStore.post_baggage
+      console.log(baggage.value)
+    })
 
+    const calculateTotalCost = (weight) => {
+      return weight * 6000 // Assuming a rate of 6000 Real per Kg
+    }
+
+    const filteredBaggage = computed(() => {
+      if (!searchQuery.value) {
+        return baggage.value
+      }
+      return baggage.value.filter(
+        (history) =>
+          history.sending_address.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+          history.receiving_address.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+          history.phone_receiver.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+          history.type.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+          history.company.toLowerCase().includes(searchQuery.value.toLowerCase())
+      )
+    })
+
+    return {
+      baggage,
+      searchQuery,
+      filteredBaggage,
+      calculateTotalCost,
+      time: '24/07/05 08:28-08:57'
+    }
+  }
+}
 </script>
 
+
 <style scoped>
-.delivery-list {
-  font-family: Arial, sans-serif;
+.flex {
+  display: flex;
+  align-items: center;
 }
 
-.icon img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
+.justify-between {
+  justify-content: space-between;
 }
 
-.route {
-  font-weight: bold;
+.text-gray-900 {
+  color: #1a202c;
 }
 
-.date {
-  color: gray;
+.search-container {
+  position: relative;
 }
 
-.menu .dropdown-menu {
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  min-width: 10rem;
-  padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
-  font-size: 1rem;
-  color: #212529;
-  text-align: left;
-  list-style: none;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
 }
 
-.menu .dropdown-menu.show {
-  display: block;
+.search-input {
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
-.border-red {
-  border: 1px solid rgb(164, 158, 158);
+.filter-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #fff;
+  color: #1a202c;
+  cursor: pointer;
 }
 
-.notification {
-  position: fixed;
-  top: 120px;
-  right: 100px;
-}
-
-.message {
-  position: fixed;
-  top: 120px;
-  right: 155px;
+.filter-button i {
+  margin: 0 5px;
 }
 </style>
