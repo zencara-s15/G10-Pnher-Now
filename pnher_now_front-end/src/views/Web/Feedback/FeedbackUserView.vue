@@ -11,38 +11,46 @@
             <h1 class="text-4xl font-bold text-gray-800">Feedback to Deliverer</h1>
             <form @submit.prevent="onSubmit" class="w-full mt-8">
               <div class="mb-6">
-                <label for="title" class="block text-gray-700 font-bold mb-2">Title</label>
+                <label for="title" class="block text-gray-700 font-bold mb-2">Feedback On</label>
                 <input
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="title"
                   type="text"
                   v-model="title"
+                  maxlength="20"
+                  :class="{'border-red-500': title.length > 20 || title.length < 1}"
                 />
+                <p v-if="title.length > 20 || title.length < 1" class="text-red-500 text-xs italic">Title must be between 1 and 20 characters.</p>
               </div>
               <div class="mb-6">
-                <label for="message" class="block text-gray-700 font-bold mb-2">Your feedback</label>
+                <label for="message" class="block text-gray-700 font-bold mb-2">Your Feedback</label>
                 <textarea
                   id="message"
                   v-model="message"
                   rows="4"
+                  maxlength="50"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  :class="{'border-red-500': message.length > 100 || message.length < 1}"
                 ></textarea>
+                <p v-if="message.length > 100 || message.length < 1" class="text-red-500 text-xs italic">Message must be between 1 and 100 characters.</p>
               </div>
               <div class="mb-6">
                 <label for="rate" class="block text-gray-700 font-bold mb-2">Rate</label>
-                <input
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                <select
                   id="rate"
-                  type="number"
                   v-model="rate"
-                  placeholder="rate from 1 to 10"
-                />
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="select a rate"
+                >
+                  <option disabled value="">Select a rate</option>
+                  <option v-for="num in 10" :key="num" :value="num">{{ num }}</option>
+                </select>
               </div>
               <div class="flex items-center justify-center mt-3">
                 <button
                   class="shadow appearance-none border rounded bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   type="submit"
-                  :disabled="isSubmitting"
+                  :disabled="isSubmitting || title.length < 1 || title.length > 20 || message.length < 1 || message.length > 100"
                 >
                   Submit
                 </button>
@@ -65,7 +73,6 @@
 <script>
 import UserLayout from '@/Components/Layouts/UserLayout.vue'
 import axiosInstance from '@/plugins/axios';
-// import axios from 'axios'
 
 export default {
   components: {
@@ -81,7 +88,7 @@ export default {
     return {
       title: '',
       message: '',
-      rate:0,
+      rate: null,  // Initialize as null to handle the default value
       isSubmitting: false
     }
   },
@@ -94,7 +101,6 @@ export default {
           title: this.title,
           comment: this.message,
           rates: this.rate,
-          // delivererAndUser_id: lastDelivererId
         })
         console.log('Response:', response.data)
 
@@ -102,7 +108,7 @@ export default {
         // Optionally, clear the form
         this.title = ''
         this.message = ''
-        this.rate = ''
+        this.rate = null
       } catch (error) {
         console.error('There was an error submitting the form:', error)
         alert('There was an error submitting the form. Please try again.')
@@ -114,7 +120,12 @@ export default {
 }
 </script>
 
-
 <style scoped>
 /* Add your custom styles here */
+.border-red-500 {
+  border-color: #f56565;
+}
+.text-red-500 {
+  color: #f56565;
+}
 </style>

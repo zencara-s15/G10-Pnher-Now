@@ -91,10 +91,6 @@ const router = createRouter({
       component: () => import('../views/Web/History/HistoryView.vue')
     },
     {
-<<<<<<< HEAD
-=======
-
->>>>>>> 665df264a4853b947c173b270a332afc2d3650b9
       path: '/home',
       name: 'home',
       component: () => import('../views/Web/User/ProductUser.vue'),
