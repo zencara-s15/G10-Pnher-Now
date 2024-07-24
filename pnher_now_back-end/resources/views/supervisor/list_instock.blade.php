@@ -114,44 +114,44 @@
                                     class="text-base text-black uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th
-                                            class="px-9 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             User</th>
                                         <th
-                                            class="px-9 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Type</th>
                                         <th
-                                            class="px-9 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Weight</th>
                                         <th
-                                            class="px-9 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Phone Reciever</th>
                                         <th
-                                            class="px-9 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Sending Address</th>
                                         <th
-                                            class="px-9 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Recieving Address</th>
                                         <th
-                                            class="px-9 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                            class="px-5 py-3 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             Status</th>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @can('BaggageInStock access')
                                         @foreach ($baggageInStockes as $baggageInStocke)
                                             <tr>
-                                                <td class="px-9 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                <td class="px-5 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {{ $baggageInStocke->post_id }}</td>
-                                                <td class="px-9 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     {{ $baggageInStocke->type }}</td>
-                                                <td class="px-9 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     {{ $baggageInStocke->weight }}</td>
-                                                <td class="px-9 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     {{ $baggageInStocke->receiver_phone }}</td>
-                                                <td class="px-9 py-4 whitespace-nowrap text-sm">
+                                                <td class="px-5 py-4 whitespace-nowrap text-sm">
                                                     {{ $baggageInStocke->sending_address }}</td>
-                                                <td class="px-9 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                <td class="px-5 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {{ $baggageInStocke->receiving_address }}</td>
-                                                <td class="px-9 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                <td class="px-5 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     Status</td>
                                             </tr>
                                         @endforeach
@@ -173,5 +173,8 @@
         height: 2px;
         background-color: #60A5FA;
         border: none;
+    }
+    table {
+        width: 95%;
     }
 </style>

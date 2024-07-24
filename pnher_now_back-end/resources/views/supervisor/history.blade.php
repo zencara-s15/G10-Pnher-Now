@@ -3,12 +3,12 @@
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
             <div class="container mx-auto px-9 py-8">
                 <div class="flex">
-                    <div class="flex-col w-3/4">
+                    <div class="flex-col w-full">
                         <div class="container-table w-full">
                             <div class="p-3">
                                 <h1 class="text-2xl">History of Delivery</h1>
                             </div>
-                            <table class="ml-1">
+                            <table class="ml-1 w-full">
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th
@@ -84,57 +84,6 @@
                             </table>
                         </div>
                         <!-- End Container -->
-                    </div>
-                    <div class="w-1/4 bg-white h-screen rounded-l-lg">
-                        <div class="flex">
-                            <div class="flex-grow p-4 grid grid-row-3 gap-4 mr-px">
-                                <div class="bg-white rounded-lg shadow-md p-3 px-3 flex gap-8">
-                                    <div
-                                        class="col-icon flex flex-row items-center bg-yellow-400 h-30 px-3 py-3 rounded-lg">
-                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                            <p class="text-2xl font-bold text-white">+90</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2 class="text-lg font-bold">Exports</h2>
-                                        <div class="flex mt-3 gap-2">
-                                            <p class="text-green-500"> <i class='fas fa-arrow-up'></i></p>
-                                            <p class="text-gray-500">10%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-white rounded-lg shadow-md p-3 px-3 flex gap-8">
-                                    <div
-                                        class="col-icon flex flex-row items-center bg-green-600 h-30 px-3 py-3 rounded-lg">
-                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                            <p class="text-2xl font-bold text-white">+90</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2 class="text-lg font-bold">Activity</h2>
-                                        <div class="flex mt-3 gap-2">
-                                            <p class="text-green-500"> <i class='fas fa-arrow-up'></i></p>
-                                            <p class="text-gray-500">10%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-white rounded-lg shadow-md p-3 px-3 flex gap-8">
-                                    <div
-                                        class="col-icon flex flex-row items-center bg-red-700 h-30 px-3 py-3 rounded-lg">
-                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                            <p class="text-2xl font-bold text-white">+90</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2 class="text-lg font-bold">Instock</h2>
-                                        <div class="flex mt-3 gap-2">
-                                            <p class="text-green-500"> <i class='fas fa-arrow-up'></i></p>
-                                            <p class="text-gray-500">10%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

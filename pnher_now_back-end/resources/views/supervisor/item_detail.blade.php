@@ -200,4 +200,7 @@
         background-color: #60A5FA;
         border: none;
     }
+    table {
+        width: 95%;
+    }
 </style>
