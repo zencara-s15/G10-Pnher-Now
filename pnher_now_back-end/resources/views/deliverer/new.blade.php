@@ -1,9 +1,13 @@
 <x-app-layout>
+    @include('sweetalert::alert')
     <div>
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
             <div class="container mx-auto px-6 py-1 pb-16">
                 <div class="bg-white shadow-md rounded my-6 p-5">
-                    <form method="POST" action="{{ route('admin.deliverer.store') }}">
+                    <div id="alert-success" class="hidden bg-green-500 text-white text-center py-2 mb-4 rounded">
+                        Successfully added deliverer.
+                    </div>
+                    <form id="delivererForm" method="POST" action="{{ route('admin.deliverer.store') }}">
                         @csrf
                         <div class="flex flex-col space-y-2">
                             <label for="first_name" class="text-gray-700 select-none font-medium">First Name</label>

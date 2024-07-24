@@ -7,9 +7,11 @@ use App\Http\Resources\DelivererResource;
 use App\Http\Resources\UserResource;
 use App\Models\DelivererInBranch;
 use App\Models\User;
+// use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
+use Laracasts\Flash\Flash;
 use Spatie\Permission\Models\Role;
-
+use Alert;
 class DelivererController extends Controller
 {
     /**
@@ -62,9 +64,10 @@ class DelivererController extends Controller
             'deliverer_id' => $user->id,
         ]);
 
-
         $user->syncRoles($request->role_id);
         // $createdUserId = $user->id;
+
+        Flash::info('You have added the data successfully');
         return redirect()->route('admin.deliverer.index')->withSuccess('Deliverer created successfully.');
 
     }

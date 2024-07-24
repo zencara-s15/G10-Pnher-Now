@@ -24,7 +24,9 @@ class GetFeedbackResource extends JsonResource
             'title' => $this->title,
             'comment'=> $this->comment,
             'deliverer' => [
-                'first_name' => $this->delivererAndUser->deliverer_id,
+                // 'first_name' => optional($this->delivererAndUser->deliverer)->first_name,
+                // 'last_name' => optional($this->delivererAndUser->deliverer)->last_name,
+                'first_name' => $this->delivererAndUser->deliverer->first_name,
                 'last_name' => $this->delivererAndUser->deliverer->last_name,
             ],
             'rates'=>$this->rates,
