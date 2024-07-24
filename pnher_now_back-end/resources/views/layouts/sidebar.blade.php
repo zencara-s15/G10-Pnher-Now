@@ -111,42 +111,6 @@
         </a>
         @endcanany
         
-        {{-- Supervisor page --}}
-        @canany('Supervisor access')
-            <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{ Route::currentRouteNamed('admin.supervisor.index') ? 'active' : '' }}"
-                href="{{ route('admin.supervisor.index') }}">
-                <span class="inline-flex justify-center items-center">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>
-                </span>
-
-                <span class="mx-3">Supervisor</span>
-            </a>
-        @endcanany
-
-        <!-- Company -->
-        
-        {{-- Branch page --}}
-
-        @canany('Branch access', 'Branch add', 'Branch edit', 'Branch destroy')
-            <a class="flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{ Route::currentRouteNamed('admin.branch.index') ? 'active' : '' }}"
-                href="{{ route('admin.branch.index') }}">
-                <svg class="h-6 w-6 text-slate-100" width="20" height="20" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <line x1="3" y1="21" x2="21" y2="21" />
-                    <path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4" />
-                    <path d="M5 21v-10.15" />
-                    <path d="M19 21v-10.15" />
-                    <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
-                </svg>
-                <span class="mx-3">Branch</span>
-            </a>
-        @endcanany
-        
         {{-- Branch page --}}
 
         @canany('Branch access', 'Branch add', 'Branch edit', 'Branch destroy')

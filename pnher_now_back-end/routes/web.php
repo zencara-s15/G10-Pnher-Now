@@ -67,7 +67,7 @@ require __DIR__ . '/front_auth.php';
 // Admin routes
 Route::get('/admin/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('admin.dashboard');  
+})->middleware(['auth'])->name('admin.dashboard');
 
 
 require __DIR__ . '/auth.php';
@@ -130,13 +130,13 @@ require __DIR__ . '/auth.php';
 // })->middleware(['auth'])->name('supervisor.item_detail');
 
 
-// Route::get('/supervisor/history', function () {
-//     return view('supervisor.history');
-// })->middleware(['auth'])->name('supervisor.history');;
+Route::get('/supervisor/history', function () {
+    return view('supervisor.history');
+})->middleware(['auth'])->name('supervisor.history');;
 
 
 Route::namespace('App\Http\Controllers\Admin')->name('admin.')
-->prefix('admin')->group(function () {
+    ->prefix('admin')->group(function () {
         Route::resource('roles', 'RoleController');
         Route::resource('permissions', 'PermissionController');
         Route::resource('users', 'UserController');
@@ -177,20 +177,10 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        // //Super visor dashboard page
-        // Route::resource('supervisor','History');
-        // Route::get('/supervisor/list-instock',[BaggageInStockeController::class, 'index'])->name('list-instock');
-        // Route::get('/supervisor/list-delivery',[DeliveryListController::class, 'listDelivery'])->name('list-delivery');
-        // Route::get('/supervisor/itemDetail',[ItemDetailController::class, 'index'])->name('list-instock');
-        
-
+        //======================== Baggages In Stockes ======================================
+        Route::resource('instock', 'BaggageInStockeController');
+        //  Route::get('/instock',[BaggageInStockeController::class,'index'])->name('supervisor.list_instock');
+        Route::get('/instock', [BaggageInStockeController::class, 'index'])->name('supervisor.list_instock');
+        Route::get('/itemDetail', [BaggageInStockeController::class, 'itemDetail'])->name('supervisor.item_detail');
+        Route::get('/listDelivery', [DeliveryListController::class, 'listDelivery'])->name('supervisor.list_delivery');
     });
-
-
-// Supervisor routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/supervisor/delivery-list', [DelivererController::class, 'listDelivery'])->name('supervisor.delivery_list');
-    Route::get('/supervisor/list-instock', [BaggageInStockeController::class, 'index'])->name('supervisor.list_instock');
-    Route::get('/supervisor/item-detail', [ItemDetailController::class, 'index'])->name('supervisor.item_detail');
-    // Route::get('/supervisor/history', [DelivererController::class, 'history'])->name('supervisor.history');
-});
