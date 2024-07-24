@@ -88,6 +88,8 @@ const router = createRouter({
       path: "/history",
       name: "history",
       component: () => import('../views/Web/History/HistoryView.vue')
+    },
+    {
       path: '/home',
       name: 'home',
       component: () => import('../views/Web/User/ProductUser.vue'),
