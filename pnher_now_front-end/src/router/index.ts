@@ -62,7 +62,7 @@ const router = createRouter({
       name: 'history_deliverer',
       component: () => import('../views/Web/History/HistoryView.vue')
     },
-    
+
     {
       path: '/proccess',
       name: 'proccess',
@@ -84,10 +84,14 @@ const router = createRouter({
       name: "deliver",
       component: () => import('../views/Web/Deliver/DeliverView.vue')
     },
+
     {
       path: "/history",
       name: "history",
       component: () => import('../views/Web/History/HistoryView.vue')
+    },
+    {
+
       path: '/home',
       name: 'home',
       component: () => import('../views/Web/User/ProductUser.vue'),
@@ -96,6 +100,7 @@ const router = createRouter({
         role: 'user'
       }
     },
+
     {
       path: "/average",
       name: "average",
@@ -198,26 +203,26 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const publicPages = ['/' , '/login', '/register']
+  const publicPages = ['/', '/login', '/register']
   const authRequired = !publicPages.includes(to.path)
   const store = useAuthStore()
 
   try {
     const { data } = await axiosInstance.get('/me')
-    
+
     store.isAuthenticated = true
     store.user = data.data
-    
+
     store.permissions = data.data.permissions.map((item) => item.name)
     store.roles = data.data.roles.map((item) => item.name)
-    
+
     const rules = () =>
       defineAclRules((setRule) => {
         store.permissions.forEach((permission) => {
           setRule(permission, () => true)
         })
       })
-      
+
     simpleAcl.rules = rules()
 
     if (publicPages.includes(to.path) && store.isAuthenticated) {
@@ -234,7 +239,7 @@ router.beforeEach(async (to, from, next) => {
     store.permissions = []
     store.roles = []
   }
-    
+
   if (authRequired && !store.isAuthenticated) {
     return next('/login')
   }
