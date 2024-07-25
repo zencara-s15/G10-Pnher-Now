@@ -141,6 +141,7 @@ class DeliveryBaggageController extends Controller
         // Retrieve delivery baggage assigned to the logged-in user
         $deliveryBaggage = DeliveryBaggage::with('baggage')
             ->where('deliverer_id', $user->id)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         // Check if there are any delivery baggage items
@@ -148,15 +149,6 @@ class DeliveryBaggageController extends Controller
             return Response::json(['message' => 'No delivery baggage found for the current user.'], 404);
         }
 
-        // Extract relevant data
-        // $deliveryBaggageWithData = $deliveryBaggage->map(function ($item) {
-        //     return [
-        //         'id' => $item->id,
-        //         // 'baggage_id' => $item->baggage_id,
-        //         'baggage' => $item,
-        //         'status' => $item->status,
-        //     ];
-        // });
 
         // Return JSON response
         return Response::json(['data' => $deliveryBaggage]);

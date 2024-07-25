@@ -7,18 +7,17 @@ use App\Models\Baggage;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
-class DeliveryListController extends Controller
+class HistoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('supervisor.list_delivery');
+        return view('supervisor.history');
     }
 
-    public function listDelivery()
-    {
+    public function history(){
         $delivery = Baggage::with('deliveryStatus')
             ->where('delivery_status_id', 5)
             ->count();
@@ -31,13 +30,8 @@ class DeliveryListController extends Controller
 
         // Count deliverers with the same branch as the supervisor
         $deliverer = Role::where('name', 'deliverer')->count();
-        $deliverieds = Baggage::where('delivery_status_id', 5)->get();
-        return view('supervisor.list_delivery', ['deliverieds' => $deliverieds,'delivery' => $delivery, 'instock' => $instock, 'itemdetail' => $itemdetail,'deliverer'=>$deliverer]);
-    }
-
-    public function history(){
         $histories = Baggage::where('delivery_status_id', 5)->get();
-        return view('supervisor.history', ['histories' => $histories]);
+        return view('supervisor.history', ['histories' => $histories,'delivery'=>$delivery, 'instock'=>$instock, 'itemdetail'=>$itemdetail, 'deliverer'=>$deliverer]);
     }
 
     /**

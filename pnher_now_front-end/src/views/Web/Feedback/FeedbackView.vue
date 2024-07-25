@@ -5,21 +5,22 @@
       <h3>Feedback From Customer</h3>
       <div v-for="feedbacks in feedbacks" :key="feedbacks.id" class="card">
         <div class="card-body">
-          <div class="card-text">
-            <img
-              :src="getProfileImage(feedbacks.user.profile)"
-              alt="User Profile"
-              class="avatar-fluid rounded-circle"
-            />
-
-            <div class="user-info">
+          <div class="body-container">
+            <div class="card-text">
+              <img
+                :src="getProfileImage(feedbacks.user.profile)"
+                alt="User Profile"
+                class="avatar-fluid rounded-circle"
+              />
               <div class="name_date">
                 <div class="name">
                   <p class="first_name ml-4">{{ feedbacks.user.first_name }}</p>
                   <p class="last_name ml-2">{{ feedbacks.user.last_name }}</p>
                 </div>
-                <p class="date ml-3">{{ feedbacks.create}}</p>
+                <p class="date ml-3">{{ feedbacks.create }}</p>
               </div>
+            </div>
+            <div class="user-info">
               <div class="star-icon" id="one" v-if="feedbacks.rates > 0 && feedbacks.rates <= 2">
                 <i class="fas fa-star" v-for="n in 1" :key="n"></i>
               </div>
@@ -40,6 +41,7 @@
               </div>
             </div>
           </div>
+          <!-- </div> -->
           <div class="des">
             <p class="descript mt-1"><b>Title :</b> {{ feedbacks.title }}</p>
           </div>
@@ -94,7 +96,6 @@ export default {
 </script>
 
 <style scoped>
-
 .container {
   display: flex;
   flex-direction: column;
@@ -111,12 +112,16 @@ export default {
   margin-top: 5px;
   padding: 10px;
   border-radius: 5px;
-  width: 100%;
+  width: 85%;
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
+}
+.body-container{
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-text {
@@ -132,10 +137,11 @@ export default {
   width: 120px;
   display: flex;
 }
-.first_name, .last_name {
+.first_name,
+.last_name {
   font-size: 20px;
 }
-.date{
+.date {
   color: rgb(101, 101, 101);
   font-size: 13px;
 }
@@ -145,12 +151,10 @@ export default {
   justify-content: end;
   width: 100px;
   color: gold;
-  margin-left: 770px;
 }
 
 .avatar-fluid {
   width: 60px;
   height: 60px;
 }
-
 </style>

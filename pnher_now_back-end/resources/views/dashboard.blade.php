@@ -4,90 +4,98 @@
             <div class="container mx-auto px-6 py-8">
 
                 @php
-                $roles = auth()->user()->roles->pluck('name')->toArray();
+                    $roles = auth()->user()->roles->pluck('name')->toArray();
                 @endphp
 
                 @if (in_array('admin', $roles))
-                <div class="container">
+                    <div class="container">
 
-                    <!-- Dashboard -->
-                    <div class="row flex flex-row m-5 justify-between">
-                        <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray:100 dark:hover:bg-green-800 transform hover:scale-105">
-                            <div class="card-body flex flex-row items-center">
-                                <div class="col-icon flex flex-row items-center bg-blue-600 h-37 px-4 py-3 rounded-lg">
-                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <span class="material-icons-outlined" style="font-size:48px;color:white;">
-                                            group
-                                        </span>
+                        <!-- Dashboard -->
+                        <div class="row flex flex-row m-5 justify-between">
+                            <div
+                                class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray:100 dark:hover:bg-green-800 transform hover:scale-105">
+                                <div class="card-body flex flex-row items-center">
+                                    <div
+                                        class="col-icon flex flex-row items-center bg-blue-600 h-37 px-4 py-3 rounded-lg">
+                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                            <span class="material-icons-outlined" style="font-size:48px;color:white;">
+                                                group
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0 mx-2">
+                                        <div class="numbers">
+                                            <p class="card-category">All Users</p>
+                                            <h4 class="card-title">{{ $totalUsers }}+</h4>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col col-stats ms-3 ms-sm-0 mx-2">
-                                    <div class="numbers">
-                                        <p class="card-category">All Users</p>
-                                        <h4 class="card-title">{{$totalUsers}}+</h4>
+                            </div>
+
+
+                            <div
+                                class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
+                                <div class="card-body flex flex-row items-center">
+                                    <div
+                                        class="col-icon flex flex-row items-center bg-blue-400 h-37 px-4 py-3 rounded-lg">
+                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                            <span class="material-icons-outlined" style="font-size:48px;color:white;">
+                                                store
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0 mx-2">
+                                        <div class="numbers">
+                                            <p class="card-category">Companies</p>
+                                            <h4 class="card-title">{{ $totalCompanies }}+</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
+                                <div class="card-body flex flex-row items-center">
+                                    <div
+                                        class="col-icon flex flex-row items-center bg-red-500 h-37 px-4 py-3 rounded-lg">
+                                        <div class="icon-big text-center bubble-shadow-small">
+                                            <span class="material-icons-outlined" style="font-size:48px;color:white;">
+                                                production_quantity_limits
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0 mx-2 ">
+                                        <div class="numbers">
+                                            <p class="card-category">All Posts</p>
+                                            <h4 class="card-title">{{ $totalBaggages }}+ </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
+                                <div class="card-body flex flex-row items-center">
+                                    <div
+                                        class="col-icon flex flex-row items-center bg-yellow-400 h-37 px-4 py-3 rounded-lg">
+                                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                            <span class="material-icons-outlined" style="font-size:48px;color:white;">
+                                                check_circle
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0  mx-2">
+                                        <div class="numbers">
+                                            <p class="card-category">Feedback</p>
+                                            <h4 class="card-title">{{ $allFeedbacks }}+</h4>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
-                            <div class="card-body flex flex-row items-center">
-                                <div class="col-icon flex flex-row items-center bg-blue-400 h-37 px-4 py-3 rounded-lg">
-                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <span class="material-icons-outlined" style="font-size:48px;color:white;">
-                                            store
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col col-stats ms-3 ms-sm-0 mx-2">
-                                    <div class="numbers">
-                                        <p class="card-category">Companies</p>
-                                        <h4 class="card-title">{{$totalCompanies}}+</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
-                            <div class="card-body flex flex-row items-center">
-                                <div class="col-icon flex flex-row items-center bg-red-500 h-37 px-4 py-3 rounded-lg">
-                                    <div class="icon-big text-center bubble-shadow-small">
-                                        <span class="material-icons-outlined" style="font-size:48px;color:white;">
-                                            production_quantity_limits
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col col-stats ms-3 ms-sm-0 mx-2 ">
-                                    <div class="numbers">
-                                        <p class="card-category">All Posts</p>
-                                        <h4 class="card-title">{{$totalBaggages}}+ </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg transition duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-green-800 transform hover:scale-105">
-                            <div class="card-body flex flex-row items-center">
-                                <div class="col-icon flex flex-row items-center bg-yellow-400 h-37 px-4 py-3 rounded-lg">
-                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <span class="material-icons-outlined" style="font-size:48px;color:white;">
-                                            check_circle
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col col-stats ms-3 ms-sm-0  mx-2">
-                                    <div class="numbers">
-                                        <p class="card-category">Feedback</p>
-                                        <h4 class="card-title">{{$allFeedbacks}}+</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- end Dashboard -->
                     </div>
-                    <!-- end Dashboard -->
-                </div>
-                <!-- end Container -->
+                    <!-- end Container -->
             </div>
             <!-- Chart -->
             <div class="cartInfo flex flex-row justify-between">
@@ -206,7 +214,7 @@
                     }
                 })
             </script>
-            @elseif(in_array('supervisor', $roles))
+        @elseif(in_array('supervisor', $roles))
             <div class="flex">
                 <div class="flex-col w-full">
                     <!-- Container -->
@@ -215,9 +223,13 @@
                         <div class="row flex flex-row m-5 justify-between">
                             <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
                                 <div class="card-body flex flex-row items-center">
-                                    <a href="{{ route('admin.supervisor.list_delivery') }}" class="col-icon flex flex-row items-center">
-                                        <div class="col-icon flex flex-row items-center bg-blue-600 h-37 px-4 py-3 rounded-lg">
-                                            <svg class="h-16 w-16 text-white" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <a href="{{ route('admin.supervisor.list_delivery') }}"
+                                        class="col-icon flex flex-row items-center">
+                                        <div
+                                            class="col-icon flex flex-row items-center bg-blue-600 h-37 px-4 py-3 rounded-lg">
+                                            <svg class="h-16 w-16 text-white" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" />
                                                 <circle cx="7" cy="17" r="2" />
                                                 <circle cx="17" cy="17" r="2" />
@@ -229,7 +241,7 @@
                                         <div class="col col-stats ms-3 ms-sm-0 mx-2">
                                             <div class="numbers">
                                                 <p class="card-category">List Delivery</p>
-                                                <h4 class="card-title">1,294</h4>
+                                                <h4 class="card-title">{{$delivery}}</h4>
                                             </div>
                                         </div>
                                     </a>
@@ -237,11 +249,16 @@
                             </div>
                             <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
                                 <div class="card-body flex flex-row items-center">
-                                    <a href="{{ route('admin.supervisor.list_instock') }}" class="col-icon flex flex-row justify-center items-center">
-                                        <div class="col-icon flex flex-row items-center bg-blue-400 h-37 px-4 py-3 rounded-lg">
-                                            <svg class="h-16 w-16 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <a href="{{ route('admin.supervisor.list_instock') }}"
+                                        class="col-icon flex flex-row justify-center items-center">
+                                        <div
+                                            class="col-icon flex flex-row items-center bg-blue-400 h-37 px-4 py-3 rounded-lg">
+                                            <svg class="h-16 w-16 text-white" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
                                                 <line x1="16.5" y1="9.4" x2="7.5" y2="4.21" />
-                                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                                <path
+                                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
                                                 <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
                                                 <line x1="12" y1="22.08" x2="12" y2="12" />
                                             </svg>
@@ -249,7 +266,7 @@
                                         <div class="col col-stats ms-3 ms-sm-0 mx-2">
                                             <div class="numbers">
                                                 <p class="card-category">In Stock</p>
-                                                <h4 class="card-title">1,294</h4>
+                                                <h4 class="card-title">{{$instock}}</h4>
                                             </div>
                                         </div>
                                     </a>
@@ -258,11 +275,16 @@
 
                             <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
                                 <div class="card-body flex flex-row items-center">
-                                    <a href="{{ route('admin.supervisor.item_detail') }}" class="col-icon flex flex-row justify-center items-center">
-                                        <div class="col-icon flex flex-row items-center bg-red-500 h-37 px-4 py-3 rounded-lg">
-                                            <svg class="h-16 w-16 text-white" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <a href="{{ route('admin.supervisor.item_detail') }}"
+                                        class="col-icon flex flex-row justify-center items-center">
+                                        <div
+                                            class="col-icon flex flex-row items-center bg-red-500 h-37 px-4 py-3 rounded-lg">
+                                            <svg class="h-16 w-16 text-white" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" />
-                                                <path d="M15 21h-9a3 3 0 0 1 -3 -3v-1h10v2a2 2 0 0 0 4 0v-14a2 2 0 1 1 2 2h-2m2 -4h-11a3 3 0 0 0 -3 3v11" />
+                                                <path
+                                                    d="M15 21h-9a3 3 0 0 1 -3 -3v-1h10v2a2 2 0 0 0 4 0v-14a2 2 0 1 1 2 2h-2m2 -4h-11a3 3 0 0 0 -3 3v11" />
                                                 <line x1="9" y1="7" x2="13" y2="7" />
                                                 <line x1="9" y1="11" x2="13" y2="11" />
                                             </svg>
@@ -270,7 +292,7 @@
                                         <div class="col col-stats ms-3 ms-sm-0 mx-2">
                                             <div class="numbers">
                                                 <p class="card-category">Item detail</p>
-                                                <h4 class="card-title">1,294</h4>
+                                                <h4 class="card-title">{{$itemdetail}}</h4>
                                             </div>
                                         </div>
                                     </a>
@@ -279,15 +301,18 @@
 
                             <div class="card card-stats card-round bg-white w-1/3 px-2 py-2 m-2 rounded-lg">
                                 <div class="card-body flex flex-row items-center">
-                                    <div class="col-icon flex flex-row items-center bg-yellow-400 h-37 px-4 py-3 rounded-lg">
-                                        <svg class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    <div
+                                        class="col-icon flex flex-row items-center bg-yellow-400 h-37 px-4 py-3 rounded-lg">
+                                        <svg class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
                                     </div>
                                     <div class="col col-stats ms-3 ms-sm-0  mx-2">
                                         <div class="numbers">
                                             <p class="card-category">Delivery</p>
-                                            <h4 class="card-title">1,294</h4>
+                                            <h4 class="card-title">{{$deliverer}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -296,8 +321,10 @@
                         <!-- end Dashboard -->
                     </div>
                     <div class="board flex justify-between ml-5">
-                        <div class="card card-stats card-round bg-white w-2/4 h-70 px-2 py-2 m-2 rounded-lg flex justify-self-center">
-                            <img src="https://png.pngtree.com/png-clipart/20211026/original/pngtree-cartoon-delivery-man-png-image_876933.png" alt="" class=" w-1/2 ml-20">
+                        <div
+                            class="card card-stats card-round bg-white w-2/4 h-70 px-2 py-2 m-2 rounded-lg flex justify-self-center">
+                            <img src="https://png.pngtree.com/png-clipart/20211026/original/pngtree-cartoon-delivery-man-png-image_876933.png"
+                                alt="" class=" w-1/2 ml-20">
                         </div>
                         <div class="card card-stats card-round bg-white w-2/4 px-2 py-2 m-2 rounded-lg mr-12 ml-3">
                             {{-- chart graph --}}
@@ -316,70 +343,48 @@
                         <table class="ml-5 mr-4">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        User</th>
-                                    <th class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        Post ID</th>
+                                    <th
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         Type</th>
-                                    <th class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         From</th>
-                                    <th class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         Phone Sender</th>
-                                    <th class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         Phone Reciever</th>
-                                    <th class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th
+                                        class="px-12 py-4 text-left text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         Branch</th>
-                                    <th class="px-12 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Active</th>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <tr>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        Narith
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Fruit
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Kompong Cham
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm">
-                                        086343092
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        079573972
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        BFC
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <span class="text-blue-400">Edit</span>
-                                        <span class="text-red-400">Red</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        Narith
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Fruit
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Kompong Cham
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm">
-                                        086343092
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        079573972
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        BFC
-                                    </td>
-                                    <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <span class="text-blue-400">Edit</span>
-                                        <span class="text-red-400">Red</span>
-                                    </td>
-                                </tr>
+                                @foreach ($news as $new)
+                                    <tr>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            {{ $new->post_id }}
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $new->type }}
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $new->sending_address }}
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm">
+                                            {{ $new->receiver_phone }}
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            {{ $new->receiver_phone }}
+                                        </td>
+                                        <td class="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            VRT
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -413,3 +418,9 @@
         </main>
     </div>
 </x-app-layout>
+
+<style>
+    table {
+        width: 95%;
+    }
+</style>

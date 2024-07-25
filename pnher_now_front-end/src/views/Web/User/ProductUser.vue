@@ -242,8 +242,10 @@ export default {
           icon: 'success',
           title: 'Created Successfully',
           text: 'You have created new a baggage successfully!',
-          timer: 3000,
+          timer: 2000,
           showConfirmButton: false
+        }).then(() => {
+          location.reload()
         })
         showModal.value = false
       } catch (error) {

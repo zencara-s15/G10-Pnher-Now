@@ -57,8 +57,10 @@
                                     <td class="px-6 py-4 text-center">
                                         @can('Branch edit')
                                         <a href="{{ route('admin.branch.edit', $branch->id) }}"
-                                            class="bg-blue-500 text-white font-bold px-4 py-1 rounded focus:outline-none shadow transition-colors mr-4">
-                                            Edit
+                                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark text-green-400">
+                                            <span class="material-icons-outlined">
+                                                border_color
+                                            </span>
                                         </a>
                                         @endcan
 
@@ -67,8 +69,11 @@
                                                 class="inline">
                                                 @csrf
                                                 @method('delete')
-                                                <button
-                                                    class="bg-red-500 text-white font-bold px-4 py-1 rounded focus:outline-none shadow transition-colors">Delete</button>
+                                                <button class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark text-red-400">
+                                                    <span class="material-icons-outlined">
+                                                        delete
+                                                    </span>
+                                                </button>
                                             </form>
                                         @endcan
                                     </td>
@@ -82,8 +87,4 @@
         </main>
     </div>
     </div>
-<<<<<<< HEAD
 </x-app-layout>
-=======
-</x-app-layout>
->>>>>>> user_feedback
