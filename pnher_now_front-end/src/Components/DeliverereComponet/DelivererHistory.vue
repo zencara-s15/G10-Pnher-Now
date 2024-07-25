@@ -17,13 +17,13 @@
       </div>
       <!-- Popup -->
       <div v-if="isPopupVisible" class="popup" @click.self="closePopup">
-        <div class="popup-content">
+        <div class="popup-content text-dark">
           <header class="popup-header">
             <h3><strong>Information Details</strong></h3>
             <button class="close-button" @click="closePopup">&times;</button>
           </header>
           <section class="popup-body">
-            <p><strong>Phone Receiver:</strong> {{ phone_receiver }}</p>
+            <p><strong>Phone Receiver:</strong> {{ receiver_phone }}</p>
             <p><strong>Type:</strong> {{ type }}</p>
             <p><strong>Weight:</strong> {{ weight }} kg</p>
             <p><strong>Company:</strong> {{ companies }}</p>

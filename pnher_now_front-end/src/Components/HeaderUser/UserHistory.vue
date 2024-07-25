@@ -8,7 +8,7 @@
         <span class="type"><i class="bi bi-geo-alt text-danger me-2"></i>{{ sender }}</span>
       </div>
       <div class="trip-header">
-        <span class="type"><i class="bi bi-geo text-danger me-2"></i>{{ receiver }}</span>
+        <span class="type"><i class="bi bi-geo text-success me-2"></i>{{ receiver }}</span>
         <div class="details d-flex">
           <div class="">
             <button class="bg-orange-500 hover:bg-orange-700" @click="showDetails">Detail</button>
@@ -17,7 +17,7 @@
       </div>
       <!-- Popup -->
       <div v-if="isPopupVisible" class="popup" @click.self="closePopup">
-        <div class="popup-content">
+        <div class="popup-content text-dark">
           <header class="popup-header">
             <h3><strong>Information Details</strong></h3>
             <button class="close-button" @click="closePopup">&times;</button>

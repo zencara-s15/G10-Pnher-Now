@@ -28,20 +28,18 @@ function logOut() {
 }
 
 const tabs = [
-  {id: 1, name: 'Dashboard', path: '/deliverer_dashboard' },
-  {id: 2, name: 'Feedback', path: '/feedback' },
-  {id: 3, name: 'History', path: '/history_deliverer' },
-  {id: 4, name: 'Delivering', path: '/delivering' },
+  { id: 1, name: 'Dashboard', path: '/deliverer_dashboard' },
+  { id: 2, name: 'Delivering', path: '/delivering' },
+  { id: 3, name: 'History', path: '/history_deliverer' },
+  { id: 4, name: 'Feedback', path: '/feedback' }
 ]
 
 const activeTab = computed(() => {
-  return (
-    tabs.findIndex((tab) => route.path.includes(tab.path))
-    // user,
-    // roles,
-    // permissions,
-    // isAuthenticated
-  )
+  return tabs.findIndex((tab) => route.path.includes(tab.path))
+  // user,
+  // roles,
+  // permissions,
+  // isAuthenticated
 })
 
 watchEffect(() => {
@@ -77,14 +75,14 @@ watchEffect(() => {
           <router-link class="tab_label" to="/deliverer_dashboard">Dashboard</router-link>
 
           <input type="radio" name="tab" id="tab2" class="tab tab--2" :checked="activeTab === 1" />
-          <router-link class="tab_label" to="/feedback">Feedback</router-link>
+          <router-link class="tab_label" to="/delivering">Delivering</router-link>
 
           <input type="radio" name="tab" id="tab3" class="tab tab--3" :checked="activeTab === 2" />
           <router-link class="tab_label" to="/history_deliverer">History</router-link>
 
           <input type="radio" name="tab" id="tab4" class="tab tab--4" :checked="activeTab === 3" />
-          <router-link class="tab_label" to="/delivering">Delivering</router-link>
-          
+          <router-link class="tab_label" to="/feedback">Feedback </router-link>
+
           <div class="indicator" :style="{ left: `${10 + activeTab * 150}px` }"></div>
         </div>
       </div>
@@ -124,7 +122,7 @@ watchEffect(() => {
             </span>
             <span
               class="absolute -mt-8 ms-3.5 rounded-full bg-danger px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-white"
-              >1</span
+              >0</span
             >
           </a>
         </div>

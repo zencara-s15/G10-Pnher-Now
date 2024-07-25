@@ -39,8 +39,13 @@
         </div>
 
         <div class="w-30% filter-container gap-20px">
-          <button class="btn bg-red-500 hover:bg-red-600 text-white me-2" @click="showModal = true">
-            Add Baggage
+          <button class="btn btn-addBaggage me-2" @click="showModal = true">
+            <span class="c-main">
+              <span class="c-ico"
+                ><span class="c-blur"></span> <span class="ico-text">+</span></span
+              >
+              Add Baggage
+            </span>
           </button>
         </div>
       </div>
@@ -59,21 +64,21 @@
         <div class="modal-wrapper">
           <div class="modal-container">
             <div class="modal-header d-flex justify-content-between align-items-center">
-              <h5 class="modal-title text-white">Add New Baggage</h5>
+              <h1 class="ml-25px modal-title font-bold text-2xl text-dark">Create New Baggage</h1>
               <button
                 type="button"
-                class="close btn bg-danger"
+                class="close btn bg-red-600 hover:bg-red-700"
                 @click="showModal = false"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-4">
               <form @submit.prevent="addItem">
                 <div class="row">
                   <!-- Form inputs for adding a new baggage -->
-                  <div class="col-md-12 flex flex-col gap-10px">
+                  <div class="col-md-12 flex flex-col gap-4">
                     <div class="form-group">
                       <label for="receiver_phone" class="text-dark">Receiver Phone</label>
                       <input
@@ -106,13 +111,12 @@
                     </div>
                     <div class="form-group">
                       <label for="type" class="text-dark">Type</label>
-                      <input
-                        type="text"
-                        v-model="formData.type"
-                        class="form-control"
-                        id="type"
-                        required
-                      />
+                      <select v-model="formData.type" class="form-control" id="type" required>
+                        <option disabled value="">Please select a type</option>
+                        <option value="Documents">Documents</option>
+                        <option value="Parcel">Parcel</option>
+                        <option value="Package">Package</option>
+                      </select>
                     </div>
                     <div class="form-group">
                       <label for="weight" class="text-dark">Weight</label>
@@ -126,26 +130,26 @@
                     </div>
                     <div class="form-group">
                       <label for="company" class="text-dark">Company</label>
-                      <input
-                        type="text"
-                        v-model="formData.company"
-                        class="form-control"
-                        id="company"
-                        required
-                      />
+                      <select v-model="formData.company" class="form-control" id="company" required>
+                        <option disabled value="">Please select a company</option>
+                        <option value="DHL">DHL</option>
+                        <option value="FedEx">FedEx</option>
+                        <option value="UPS">UPS</option>
+                        <option value="USPS">USPS</option>
+                      </select>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="d-flex justify-content-between mt-4">
-                    <button type="submit" class="btn bg-primary text-white">Confirm</button>
-                    <button
+                    <button type="submit" class="btn  w-100% bg-primary text-white">Confirm</button>
+                    <!-- <button
                       type="button"
                       class="btn bg-danger text-white"
                       @click="showModal = false"
                     >
                       Cancel
-                    </button>
+                    </button> -->
                   </div>
                 </div>
               </form>
@@ -162,6 +166,7 @@ import { ref, onMounted, computed } from 'vue'
 import { usePostBaggageStore } from '@/stores/post_baggage-list'
 import UserLayout from '@/Components/Layouts/UserLayout.vue'
 import BaggagePostCard from '@/Components/Card/BaggagePostCard.vue'
+import Swal from 'sweetalert2';
 
 export default {
   components: {
@@ -233,6 +238,13 @@ export default {
           latitude: '',
           longitude: ''
         }
+        Swal.fire({
+          icon: 'success',
+          title: 'Created Successfully',
+          text: 'You have created new a baggage successfully!',
+          timer: 3000,
+          showConfirmButton: false
+        })
         showModal.value = false
       } catch (error) {
         console.error('Error adding new baggage:', error)
@@ -358,6 +370,9 @@ export default {
   /* max-width: 100%; */
   padding: 20px;
 }
+.form-group{
+  width: 100%;
+}
 
 /* tab  */
 .radio-inputs {
@@ -365,7 +380,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   border-radius: 0.5rem;
-  background-color: #EEE;
+  background-color: #eee;
   box-sizing: border-box;
   box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
   padding: 0.25rem;
@@ -389,9 +404,9 @@ export default {
   justify-content: center;
   border-radius: 0.5rem;
   border: none;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   color: rgba(51, 65, 85, 1);
-  transition: all .15s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .radio-inputs .radio input:checked + .name {
@@ -399,4 +414,59 @@ export default {
   font-weight: 600;
 }
 
+/* style addd btn  */
+
+button {
+  border: none;
+}
+
+.btn-addBaggage {
+  background: linear-gradient(140deg, rgb(239, 35, 35) 0%, rgb(246, 83, 7) 100%);
+  border-radius: 35px;
+  font-size: 15px;
+  text-align: left;
+  padding: 8px 0px 8px 0px;
+  border: 2px solid rgb(211, 89, 8) !important;
+  border-style: outset;
+  box-shadow: -6px -5px 18px rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.btn-addBaggage .c-main {
+  border-radius: 45px;
+  color: rgba(255, 255, 255, 1);
+  padding: 11px 25px 11px 2px;
+  box-shadow: inset 0px 0px 5px rgba(17, 17, 17, 0);
+  transition: all 0.5s ease-in-out;
+  border: 1px solid transparent;
+}
+
+.btn-addBaggage .c-ico .c-blur {
+  background: linear-gradient(318deg, rgb(238, 54, 54) 0%, rgb(145, 31, 31) 100%);
+  border-radius: 100%;
+  margin-left: 0;
+  padding: 8px 20px;
+  filter: blur(1px);
+  text-align: center;
+}
+
+.btn-addBaggage .c-ico {
+  position: relative;
+  margin-right: 20px;
+}
+
+.btn-addBaggage .c-ico .ico-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Hovering */
+
+.btn-addBaggage .c-main:hover {
+  box-shadow: inset 0px 0px 5px rgba(17, 17, 17, 0.6);
+  border: 1px solid rgba(26, 26, 26, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+}
 </style>

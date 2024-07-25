@@ -1,7 +1,7 @@
 <template>
   <div class="map-wrap">
     <div class="map" ref="mapContainer"></div>
-    <button class="btn bg-orange-500" @click="getCurrentLocation">Get Direction</button>
+    <button class="btn bg-orange-500 hover:bg-orange-600 hover:text-white" @click="getCurrentLocation">Get Direction</button>
     <div v-if="distance !== null" class="distance">
       Distance: {{ distance.toFixed(2) }} km
     </div>
@@ -229,11 +229,6 @@ button {
   cursor: pointer;
   z-index: 1;
   margin-top: 40px;
-}
-
-button:hover {
-  background-color: #e00404;
-  color: white;
 }
 
 .distance {

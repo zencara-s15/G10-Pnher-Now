@@ -11,14 +11,14 @@
           </p>
         </div>
         <div class="d-flex gap-1 mb-2 align-items-center">
-          <i class="bi bi-geo text-danger me-2"></i>
+          <i class="bi bi-geo text-success me-2"></i>
           <p class="card-text m-0">
             To: <strong>{{ item.receiving_address }}</strong>
           </p>
         </div>
       </div>
       <div class="card-actions">
-        <button type="button" class="btn bg-orange-500 w-100% text-white hover:bg-orange-700 " @click="showPostDetails(item)">Detail</button>
+        <button type="button" class="btn bg-orange-500 w-100% text-white hover:bg-orange-600 " @click="showPostDetails(item)">Detail</button>
       </div>
     </div>
   </div>

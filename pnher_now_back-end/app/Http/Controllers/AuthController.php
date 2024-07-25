@@ -91,7 +91,8 @@ class AuthController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $profilePath = null;
+        $profilePath = 'defualtProfile.png';
+        // $profilePath = 'public\images\DefualtProfile\defualtProfile.png';
         if ($request->hasFile('profile')) {
             $profilePath = $this->saveImage($request->profile);
             // $profilePath = $request->file('profile')->store('profiles', 'public');

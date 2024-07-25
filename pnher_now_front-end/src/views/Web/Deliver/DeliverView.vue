@@ -18,7 +18,7 @@
           :key="item.id"
         >
           <div class="information" v-if="item.delivery_status_id === 2">
-            <div class="p-3">
+            <div class="p-3 text-dark">
               <p>
                 Phone Receiver: <strong>{{ item.phone_receiver }}</strong>
               </p>
@@ -62,7 +62,6 @@
         <div class="text-white d-flex justify-content-center p-2 bg-orange-600 radius1">
           <h1>Tracking Map</h1>
         </div>
-        <GoogleMap />
       </div>
     </div>
   </div>
@@ -72,7 +71,7 @@
 import DelivererLayout from '@/Components/Layouts/DelivererLayout.vue'
 import { ref, onMounted } from 'vue'
 import { usePostBaggageStore } from '@/stores/post_baggage-list'
-import GoogleMap from '@/Components/Layouts/GoogleMap.vue'
+import GoogleMap from '@/Components/Map/'
 
 export default {
   components: {

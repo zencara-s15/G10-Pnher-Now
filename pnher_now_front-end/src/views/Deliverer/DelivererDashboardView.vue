@@ -1,6 +1,12 @@
 <!-- Dashboard.vue -->
 <template>
   <DelivererLayout>
+    <div class="mx-43% pt-14px w-50% text-gray-900">
+      <span class="text-2xl font-bold w-40% text-dark border-b-2 border-red-500 pb-1">
+        Available Baggages
+      </span>
+      <p class="mt-5px">Pick up any baggage your want</p>
+    </div>
     <div class="row m-4">
       <div class="col-md-4 mb-4" v-for="(item, index) in pendingBaggages" :key="item.id">
         <DeliveryManCard :item="item" :user="users[index]" @show-details="showPostDetails" />
@@ -9,7 +15,9 @@
       <div v-if="isAlertVisible" class="alert-card">
         <div class="alert-card-body card-deliverer mb-5">
           <div class="information">
-            <div class="text-white d-flex justify-content-center p-0 m-0 rounded-t-lg bg-red-500 radius1">
+            <div
+              class="text-white d-flex justify-content-center p-0 m-0 rounded-t-lg bg-red-500 radius1"
+            >
               <h2 class="p-10px">Information</h2>
             </div>
             <div class="card-body flex flex-col text-dark p-20px">
@@ -52,7 +60,8 @@
               <div class="d-flex gap-1 mb-2 align-items-center">
                 <i class="bi bi-currency-exchange text-success me-2"></i>
                 <p class="card-text m-0">
-                  Total Price: <strong>{{ calculateTotalCost(selectedBaggage.weight) }} Riel</strong>
+                  Total Price:
+                  <strong>{{ calculateTotalCost(selectedBaggage.weight) }} Riel</strong>
                 </p>
               </div>
               <div class="d-flex gap-20px justify-between mt-10px">
@@ -77,8 +86,6 @@
               <p>Total Cost: {{ calculateTotalCost(selectedBaggage.weight) }} Real</p>
               <p>Company: {{ selectedBaggage.company }}</p>
             </div> -->
-
-           
           </div>
         </div>
       </div>
